@@ -305,29 +305,26 @@ def run_rulebook_contract_audit():
 
 def main():
     required = [
-        ROOT / "rules-canon-v1.md",
         ROOT / "rules-canon-v1.1.md",
         ROOT / "rulebook-source-v1.1.md",
-        ROOT / "system-config-v1.json",
-        ROOT / "foundry-schema-v1.md",
+        ROOT / "system-config-v1.1.json",
+        ROOT / "foundry-schema-v1.1.md",
         ROOT / "core-tables-v1.csv",
-        ROOT / "content-validation-rules-v1.md",
-        ROOT / "phase1-test-matrix-v1.md",
+        ROOT / "content-validation-rules-v1.1.md",
         ROOT / "phase1-test-matrix-v1.1.md",
-        ROOT / "decision-log-v1.md",
         ROOT / "decision-log-v1.1.md",
-        ROOT / "schemas" / "actor.system.schema.v1.json",
-        ROOT / "schemas" / "item.system.schema.v1.json",
-        ROOT / "schemas" / "effect.schema.v1.json",
+        ROOT / "schemas" / "actor.system.schema.v1_1.json",
+        ROOT / "schemas" / "item.system.schema.v1_1.json",
+        ROOT / "schemas" / "effect.schema.v1_1.json",
     ]
     missing = [str(p) for p in required if not p.exists()]
     if missing:
         fail(f"Missing required artifact files: {missing}")
 
-    config = json.loads((ROOT / "system-config-v1.json").read_text(encoding="utf-8"))
-    json.loads((ROOT / "schemas" / "actor.system.schema.v1.json").read_text(encoding="utf-8"))
-    json.loads((ROOT / "schemas" / "item.system.schema.v1.json").read_text(encoding="utf-8"))
-    json.loads((ROOT / "schemas" / "effect.schema.v1.json").read_text(encoding="utf-8"))
+    config = json.loads((ROOT / "system-config-v1.1.json").read_text(encoding="utf-8"))
+    json.loads((ROOT / "schemas" / "actor.system.schema.v1_1.json").read_text(encoding="utf-8"))
+    json.loads((ROOT / "schemas" / "item.system.schema.v1_1.json").read_text(encoding="utf-8"))
+    json.loads((ROOT / "schemas" / "effect.schema.v1_1.json").read_text(encoding="utf-8"))
 
     rows = load_core_tables()
     tables = {r["table"] for r in rows}
