@@ -6,12 +6,22 @@ from pathlib import Path
 
 REQUIRED_PATTERNS = [
     r"FinalTarget\s*=\s*clamp\([^)]*1\s*,\s*95\)",
+    r"AttackTarget\s*=\s*clamp\(",
+    r"FinalDamage\s*=\s*max\(1\s*,\s*floor\(",
     r"no universal Bonus Action",
     r"SkillTarget\s*=\s*clamp\(\s*25\s*\+\s*floor\(LinkedAttribute\s*/\s*3\)\s*\+\s*ProficiencyBonus\s*\+\s*floor\(LUCK\s*/\s*10\)",
-    r"CorruptionPenalty\s*=\s*max\(\s*-6\s*,\s*-1\s*\*\s*floor\(CurrentCorruptionPct\s*/\s*10\)\s*\)",
+    r"CorruptionPenalty\s*=\s*lookupBandPenalty\(CurrentCorruptionPct\)",
+    r"70-79\s*=>\s*-7",
+    r"90-100\s*=>\s*-10",
+    r"Corruption is tracked in integer points from\s*`?0`?\s*to\s*`?100`?",
+    r"DeathTarget\s*=\s*clamp\(50\s*\+\s*floor\(CON\s*/\s*2\)\s*-\s*min\(6\s*,\s*floor\(CorruptionPct\s*/\s*10\)\)\s*,\s*1\s*,\s*95\)",
+    r"channeling:\s*`willpower`\s*by default,\s*or\s*`endurance`\s*if declared before rolling",
     r"RitualTarget\s*=\s*clamp\([\s\S]*?\+\s*CorruptionPenalty",
+    r"RitualTarget\s*=\s*clamp\([\s\S]*?floor\(\(WIL\s*\+\s*INT\s*\+\s*LUCK\)\s*/\s*9\)",
     r"ability\.minSequence\s*<=\s*ability\.sequence",
     r"sourceCategory[\s`]*is required",
+    r"target[\s`]*is required",
+    r"trigger[\s`]*is required",
     r"\"type\"\s*:\s*\"ability\"",
     r"\"schemaVersion\"\s*:\s*1",
 ]
@@ -21,8 +31,12 @@ BANNED_PATTERNS = [
     r"\b1\s+Bonus\s+Action\b",
     r"clamp\([^)]*,\s*1\s*,\s*100\)",
     r"30\s*\+\s*floor\(\s*Linked\s*Attribute\s*/\s*2\)",
-    r"Corruption[^\\n]{0,120}-(?:7|8|9|10)",
+    r"CorruptionPenalty\s*=\s*max\(",
+    r"Corruption[^\\n]{0,180}-(?:1[1-9]|[2-9][0-9])",
     r"RitualTarget[^\\n]{0,180}-\s*CorruptionPenalty",
+    r"floor\(\(WIL\s*\+\s*INT\s*\+\s*LUCK\)\s*/\s*3\)",
+    r"corruptionGainPctOfMaxSanity",
+    r"willpower_or_endurance",
 ]
 
 

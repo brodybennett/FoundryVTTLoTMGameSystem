@@ -1,0 +1,52 @@
+{
+  "Actor": {
+    "types": ["character", "npc"],
+    "templates": {
+      "base": {
+        "identity": {},
+        "attributes": {},
+        "skills": {},
+        "derived": {},
+        "resources": {}
+      }
+    },
+    "character": {
+      "templates": ["base"]
+    },
+    "npc": {
+      "templates": ["base"]
+    }
+  },
+  "Item": {
+    "types": ["ability", "ritual", "artifact", "weapon", "armor", "consumable", "ingredient", "background"],
+    "templates": {
+      "base": {
+        "description": ""
+      }
+    },
+    "ability": {
+      "templates": ["base"]
+    },
+    "ritual": {
+      "templates": ["base"]
+    },
+    "artifact": {
+      "templates": ["base"]
+    },
+    "weapon": {
+      "templates": ["base"]
+    },
+    "armor": {
+      "templates": ["base"]
+    },
+    "consumable": {
+      "templates": ["base"]
+    },
+    "ingredient": {
+      "templates": ["base"]
+    },
+    "background": {
+      "templates": ["base"]
+    }
+  }
+}

@@ -7,6 +7,8 @@
     "id",
     "op",
     "sourceCategory",
+    "target",
+    "trigger",
     "applyPhase",
     "tickPhase",
     "durationRounds",
@@ -38,6 +40,14 @@
     "sourceCategory": {
       "type": "string",
       "enum": ["ability", "ritual", "artifact", "condition", "item", "environment", "other"]
+    },
+    "target": {
+      "type": "string",
+      "enum": ["self", "source", "ally", "enemy", "target", "area", "scene", "special"]
+    },
+    "trigger": {
+      "type": "string",
+      "enum": ["onUse", "onHit", "onDamaged", "onApply", "startOfTurn", "endOfTurn", "manual", "special"]
     },
     "stackGroup": {
       "type": "string",

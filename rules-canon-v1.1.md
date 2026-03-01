@@ -25,17 +25,44 @@ those files are authoritative for v1.1 implementation.
 3. Corruption penalty is:
 
 ```text
-CorruptionPenalty = max(-6, -1 * floor(CurrentCorruptionPct / 10))
+CorruptionPenalty = lookupBandPenalty(CurrentCorruptionPct)
 ```
 
-4. Action economy is:
+with locked penalty bands:
+- `0-9 => 0`
+- `10-19 => -1`
+- `20-29 => -2`
+- `30-39 => -3`
+- `40-49 => -4`
+- `50-59 => -5`
+- `60-69 => -6`
+- `70-79 => -7`
+- `80-89 => -8`
+- `90-100 => -10`
+
+4. Combat attack and damage pipeline is:
+
+```text
+AttackTarget = clamp(35 + floor(AttackAttribute / 3) + ProficiencyBonus + OffenseModifiers + WeaponAccuracy - TargetDefenseShift - TargetCoverPenalty, 1, 95)
+FinalDamage = max(1, floor((BaseDamage + FlatDamageBonus) * DamageOutMultiplier) - TargetDamageReduction)
+```
+
+5. Action economy is:
 - `1 Action`
 - `1 Move`
 - `1 Reaction` per round
 - no universal bonus action
 
-5. Advancement remains 3-stage with natural 1 margin bonus and natural 100 backlash flag.
-6. Ritual checks apply corruption as a penalty term:
+6. Downed/death track uses:
+- `check.death.v1`
+- `resources.deathMarks` and `resources.deathSaves`
+- 3 marks = death, 3 saves = stabilize
+
+7. Advancement remains 3-stage with natural 1 margin bonus and natural 100 backlash flag.
+- Channeling uses `willpower` by default, or `endurance` if declared before rolling.
+- Failure penalties apply flat corruption points on the `0..100` track.
+
+8. Ritual checks apply corruption as a penalty term:
 
 ```text
 RitualTarget = ... + CorruptionPenalty ...
@@ -49,6 +76,11 @@ where `CorruptionPenalty <= 0`.
 - `tracks.threatClocks`
 - `tracks.influence`
 - `tracks.leverage`
+- `combat.armor`
+- `combat.cover`
+- `combat.encumbrancePenalty`
+- `combat.damageReduction`
+- `combat.actionBudget`
 - `tracks.actionLock`
 - `tracks.movementCheckPenalty`
 - `tracks.damageOutMultiplier`
@@ -60,11 +92,20 @@ where `CorruptionPenalty <= 0`.
 - `ritual.instability`
 - `artifacts.sceneUsesById`
 
+### Actor.system Required Resource Additions
+- `resources.deathSaves`
+
 ### Item.system Optional
 - `allowedPathwayIds`
 - `usageLimit.{scope,maxUses}`
 - `complexityClass`
 - `sourceSequence`
+- type payload blocks:
+  - `abilityData`
+  - `weaponData`
+  - `armorData`
+  - `ritualData`
+  - `artifactData`
 
 ### Item.system Required Hardening
 - `dependencies.minSystemVersion`
@@ -76,6 +117,8 @@ where `CorruptionPenalty <= 0`.
 
 ### Effect Hardening
 - `sourceCategory` required
+- `target` required
+- `trigger` required
 - `stackGroup`
 - `oncePerTurn`
 - `saveType = none` requires `saveTarget = 0` and forbids `removeOn: saveSuccess`

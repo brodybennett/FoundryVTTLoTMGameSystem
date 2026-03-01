@@ -1,6 +1,6 @@
 # Foundry Schema Contract v1.1
 
-This document defines additive v1.1 contract extensions over v1, plus anti-exploit hardening rules.
+This document defines additive v1.1 contract extensions over v1, plus Phase 1 blocker hardening required for a prototype-ready rules engine.
 
 ## Scope
 
@@ -18,6 +18,11 @@ This document defines additive v1.1 contract extensions over v1, plus anti-explo
 ## Additive Actor.system Fields
 
 Optional:
+- `combat.armor`
+- `combat.cover`
+- `combat.encumbrancePenalty`
+- `combat.damageReduction`
+- `combat.actionBudget.{actions,moves,reactions,bonusActions}`
 - `tracks.threatClocks[]`
 - `tracks.influence`
 - `tracks.leverage`
@@ -32,6 +37,9 @@ Optional:
 - `ritual.instability`
 - `artifacts.sceneUsesById`
 
+Required resource additions:
+- `resources.deathSaves`
+
 ## Item.system Hardening Rules
 
 Optional:
@@ -39,6 +47,12 @@ Optional:
 - `usageLimit.{scope,maxUses}`
 - `complexityClass`
 - `sourceSequence`
+- typed payload blocks:
+  - `abilityData`
+  - `weaponData`
+  - `armorData`
+  - `ritualData`
+  - `artifactData`
 
 Required on all item entries:
 - `dependencies.minSystemVersion`
@@ -48,11 +62,18 @@ Semantic constraints:
 - For `type: ability`, `minSequence <= sequence`.
 - If both `pathwayId` and `allowedPathwayIds[]` are present, `allowedPathwayIds[]` must include `pathwayId`.
 - `formulaKey` is registry-driven and validated against `system-config-v1.1.json.formulaRegistry`.
+- `type: ability` requires `abilityData`.
+- `type: weapon` requires `weaponData`.
+- `type: armor` requires `armorData`.
+- `type: ritual` requires `ritualData`.
+- `type: artifact` requires `artifactData`.
 
 ## Effect Hardening Rules
 
 Required:
 - `sourceCategory`
+- `target`
+- `trigger`
 
 Optional:
 - `stackGroup`
@@ -67,6 +88,10 @@ Semantic constraints:
 
 - `data/skills.registry.v1.1.json`
 - `data/conditions.library.v1.1.json`
+
+Registry policy:
+- canonical required IDs are mandatory
+- additional IDs are allowed when schema-valid and unique
 
 ## Manifest Requirement
 
@@ -84,3 +109,14 @@ Manifest hardening rules:
 - v1 and v1.1 objects may coexist.
 - Major incompatibility remains a hard reject.
 - Migration scripts must be one-way and idempotent.
+- Semver ordering is enforced for `minSystemVersion` and `maxTestedSystemVersion`.
+- Dependency graphs for published manifests must be acyclic and fully resolvable.
+
+## Phase 2 Balance Calibration Gate
+
+- Derived HP/Spirit calibration is validated against baseline midpoint targets per sequence.
+- Gate mode is configured by `system-config-v1.1.json.validation.gates.balanceGateMode`.
+- Supported modes:
+  - `warn`
+  - `strict`
+  - `off`

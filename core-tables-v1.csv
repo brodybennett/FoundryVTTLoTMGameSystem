@@ -17,21 +17,21 @@ corruption_threshold,corr_30,,,,,,,,30,39,-3,major_trigger_social_and_ritual_fal
 corruption_threshold,corr_40,,,,,,,,40,49,-4,heightened_complications,,,,,,,,,,,,,,,,,
 corruption_threshold,corr_50,,,,,,,,50,59,-5,involuntary_manifestations_under_stress,,,,,,,,,,,,,,,,,
 corruption_threshold,corr_60,,,,,,,,60,69,-6,major_trigger_persistent_instability_each_session,,,,,,,,,,,,,,,,,
-corruption_threshold,corr_70,,,,,,,,70,79,-6,faction_exploitation_pressure,,,,,,,,,,,,,,,,,
-corruption_threshold,corr_80,,,,,,,,80,89,-6,mandatory_instability_complications,,,,,,,,,,,,,,,,,
-corruption_threshold,corr_90,,,,,,,,90,99,-6,major_trigger_irreversible_fork_warning,,,,,,,,,,,,,,,,,
-corruption_threshold,corr_100,,,,,,,,100,100,-6,terminal_corruption_event,,,,,,,,,,,,,,,,,
-ritual_complexity,rit_01,,,,,,,,,,,advancement_prerequisite,seq_5_to_4,10,,,,,,,,,,,,,Prereq ritual complexity baseline
-ritual_complexity,rit_02,,,,,,,,,,,advancement_prerequisite,seq_3_to_2,20,,,,,,,,,,,,,Prereq ritual complexity baseline
-ritual_complexity,rit_03,,,,,,,,,,,advancement_prerequisite,seq_1_to_0,30,,,,,,,,,,,,,Prereq ritual complexity baseline
-ritual_complexity,rit_04,,,,,,,,,,,invocation,minor_scope,10,,,,,,,,,,,,,Invocation baseline
-ritual_complexity,rit_05,,,,,,,,,,,invocation,standard_scope,20,,,,,,,,,,,,,Invocation baseline
-ritual_complexity,rit_06,,,,,,,,,,,invocation,major_scope,30,,,,,,,,,,,,,Invocation baseline
-ritual_complexity,rit_07,,,,,,,,,,,invocation,extreme_scope,35,,,,,,,,,,,,,Invocation baseline
-ritual_complexity,rit_08,,,,,,,,,,,transit,mental_realm,15,,,,,,,,,,,,,Transit baseline
-ritual_complexity,rit_09,,,,,,,,,,,transit,astral_realm,25,,,,,,,,,,,,,Transit baseline
-ritual_complexity,rit_10,,,,,,,,,,,transit,spiritual_realm,30,,,,,,,,,,,,,Transit baseline
-ritual_complexity,rit_11,,,,,,,,,,,universal,missing_mandatory_component,10,,,,,,,,,,,,,Apply per missing component
+corruption_threshold,corr_70,,,,,,,,70,79,-7,faction_exploitation_pressure,,,,,,,,,,,,,,,,,
+corruption_threshold,corr_80,,,,,,,,80,89,-8,mandatory_instability_complications,,,,,,,,,,,,,,,,,
+corruption_threshold,corr_90,,,,,,,,90,99,-10,major_trigger_irreversible_fork_warning,,,,,,,,,,,,,,,,,
+corruption_threshold,corr_100,,,,,,,,100,100,-10,terminal_corruption_event,,,,,,,,,,,,,,,,,
+ritual_complexity,rit_01,,,,,,,,,,,advancement_prerequisite,seq_5_to_4,18,,,,,,,,,,,,,Phase 1 rebalance baseline
+ritual_complexity,rit_02,,,,,,,,,,,advancement_prerequisite,seq_3_to_2,28,,,,,,,,,,,,,Phase 1 rebalance baseline
+ritual_complexity,rit_03,,,,,,,,,,,advancement_prerequisite,seq_1_to_0,38,,,,,,,,,,,,,Phase 1 rebalance baseline
+ritual_complexity,rit_04,,,,,,,,,,,invocation,minor_scope,12,,,,,,,,,,,,,Phase 1 rebalance baseline
+ritual_complexity,rit_05,,,,,,,,,,,invocation,standard_scope,22,,,,,,,,,,,,,Phase 1 rebalance baseline
+ritual_complexity,rit_06,,,,,,,,,,,invocation,major_scope,32,,,,,,,,,,,,,Phase 1 rebalance baseline
+ritual_complexity,rit_07,,,,,,,,,,,invocation,extreme_scope,42,,,,,,,,,,,,,Phase 1 rebalance baseline
+ritual_complexity,rit_08,,,,,,,,,,,transit,mental_realm,18,,,,,,,,,,,,,Phase 1 rebalance baseline
+ritual_complexity,rit_09,,,,,,,,,,,transit,astral_realm,28,,,,,,,,,,,,,Phase 1 rebalance baseline
+ritual_complexity,rit_10,,,,,,,,,,,transit,spiritual_realm,36,,,,,,,,,,,,,Phase 1 rebalance baseline
+ritual_complexity,rit_11,,,,,,,,,,,universal,missing_mandatory_component,12,,,,,,,,,,,,,Apply per missing component
 sequence_advancement,adv_9_8,,,,,,,,,,,,,,9,8,1,false,0,C1,common,,,,,,,Low tier micro-step
 sequence_advancement,adv_8_7,,,,,,,,,,,,,,8,7,0,false,-5,C2,common_plus,,,,,,,Tier transition to mid
 sequence_advancement,adv_7_6,,,,,,,,,,,,,,7,6,1,false,-5,C3,uncommon,,,,,,,Mid tier micro-step

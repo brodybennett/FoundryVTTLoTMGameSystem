@@ -63,7 +63,7 @@
     },
     "activation": {
       "type": "string",
-      "enum": ["action", "reaction", "passive", "special"]
+      "enum": ["action", "bonusAction", "reaction", "passive", "special"]
     },
     "resource": {
       "type": "string",
@@ -150,6 +150,125 @@
       },
       "required": ["minSystemVersion", "maxTestedSystemVersion"],
       "additionalProperties": false
+    },
+    "abilityData": {
+      "type": "object",
+      "required": ["targetMode"],
+      "properties": {
+        "targetMode": {
+          "type": "string",
+          "enum": ["self", "ally", "enemy", "area", "special"]
+        },
+        "rangeFt": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "attackAttribute": {
+          "type": "string",
+          "enum": ["str", "dex", "wil", "con", "cha", "int", "luck"]
+        },
+        "linkedSkillId": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]*$"
+        },
+        "weaponAccuracy": {
+          "type": "integer",
+          "minimum": -50,
+          "maximum": 50
+        }
+      },
+      "additionalProperties": false
+    },
+    "weaponData": {
+      "type": "object",
+      "required": ["baseDamage", "damageType", "rangeFt", "accuracyBonus"],
+      "properties": {
+        "baseDamage": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 999
+        },
+        "damageType": {
+          "type": "string",
+          "enum": ["physical", "fire", "cold", "lightning", "poison", "spirit", "occult"]
+        },
+        "rangeFt": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "accuracyBonus": {
+          "type": "integer",
+          "minimum": -50,
+          "maximum": 50
+        }
+      },
+      "additionalProperties": false
+    },
+    "armorData": {
+      "type": "object",
+      "required": ["defenseShift", "damageReduction", "encumbrancePenalty"],
+      "properties": {
+        "defenseShift": {
+          "type": "integer",
+          "minimum": -20,
+          "maximum": 25
+        },
+        "damageReduction": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 999
+        },
+        "encumbrancePenalty": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 60
+        }
+      },
+      "additionalProperties": false
+    },
+    "ritualData": {
+      "type": "object",
+      "required": ["targetMode", "mandatoryComponents"],
+      "properties": {
+        "targetMode": {
+          "type": "string",
+          "enum": ["self", "ally", "enemy", "area", "scene", "special"]
+        },
+        "mandatoryComponents": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "baseCastMinutes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100000
+        }
+      },
+      "additionalProperties": false
+    },
+    "artifactData": {
+      "type": "object",
+      "required": ["riskClass"],
+      "properties": {
+        "riskClass": {
+          "type": "string",
+          "enum": ["stable", "volatile", "catastrophic"]
+        },
+        "charges": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 999
+        },
+        "misuseCorruptionGain": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "additionalProperties": false
     }
   },
   "allOf": [
@@ -171,7 +290,8 @@
           "cost",
           "cooldown",
           "formulaKey",
-          "effects"
+          "effects",
+          "abilityData"
         ]
       }
     },
@@ -379,12 +499,36 @@
       "if": {
         "properties": {
           "type": {
+            "const": "weapon"
+          }
+        }
+      },
+      "then": {
+        "required": ["weaponData"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "armor"
+          }
+        }
+      },
+      "then": {
+        "required": ["armorData"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
             "const": "ritual"
           }
         }
       },
       "then": {
-        "required": ["complexityClass", "formulaKey", "effects"]
+        "required": ["complexityClass", "formulaKey", "effects", "ritualData"]
       }
     },
     {
@@ -396,7 +540,7 @@
         }
       },
       "then": {
-        "required": ["sourceSequence"]
+        "required": ["sourceSequence", "artifactData"]
       }
     },
     {

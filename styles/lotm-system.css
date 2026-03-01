@@ -1,0 +1,5 @@
+/* Minimal boot-safe stylesheet for the LoTM system scaffold. */
+
+:root {
+  --lotm-accent: #4a3f35;
+}

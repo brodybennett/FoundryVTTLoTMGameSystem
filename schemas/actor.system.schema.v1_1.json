@@ -75,12 +75,35 @@
     },
     "resources": {
       "type": "object",
-      "required": ["hp", "spirit", "corruption", "deathMarks"],
+      "required": ["hp", "spirit", "corruption", "deathMarks", "deathSaves"],
       "properties": {
         "hp": { "type": "integer", "minimum": -99999, "maximum": 99999 },
         "spirit": { "type": "integer", "minimum": 0, "maximum": 99999 },
         "corruption": { "type": "number", "minimum": 0, "maximum": 100 },
-        "deathMarks": { "type": "integer", "minimum": 0, "maximum": 3 }
+        "deathMarks": { "type": "integer", "minimum": 0, "maximum": 3 },
+        "deathSaves": { "type": "integer", "minimum": 0, "maximum": 3 }
+      },
+      "additionalProperties": false
+    },
+    "combat": {
+      "type": "object",
+      "required": ["armor", "cover", "encumbrancePenalty", "damageReduction", "actionBudget"],
+      "properties": {
+        "armor": { "type": "integer", "minimum": -20, "maximum": 40 },
+        "cover": { "type": "integer", "minimum": 0, "maximum": 25 },
+        "encumbrancePenalty": { "type": "integer", "minimum": 0, "maximum": 60 },
+        "damageReduction": { "type": "integer", "minimum": 0, "maximum": 999 },
+        "actionBudget": {
+          "type": "object",
+          "required": ["actions", "moves", "reactions", "bonusActions"],
+          "properties": {
+            "actions": { "type": "integer", "minimum": 0, "maximum": 5 },
+            "moves": { "type": "integer", "minimum": 0, "maximum": 5 },
+            "reactions": { "type": "integer", "minimum": 0, "maximum": 5 },
+            "bonusActions": { "type": "integer", "minimum": 0, "maximum": 5 }
+          },
+          "additionalProperties": false
+        }
       },
       "additionalProperties": false
     },

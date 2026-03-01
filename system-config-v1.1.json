@@ -160,7 +160,24 @@
   "corruption": {
     "penaltyPerBand": -1,
     "bandSizePct": 10,
-    "maxUniversalPenalty": -6,
+    "maxUniversalPenalty": -10,
+    "penaltyBands": [
+      { "startPct": 0, "endPct": 9, "penalty": 0 },
+      { "startPct": 10, "endPct": 19, "penalty": -1 },
+      { "startPct": 20, "endPct": 29, "penalty": -2 },
+      { "startPct": 30, "endPct": 39, "penalty": -3 },
+      { "startPct": 40, "endPct": 49, "penalty": -4 },
+      { "startPct": 50, "endPct": 59, "penalty": -5 },
+      { "startPct": 60, "endPct": 69, "penalty": -6 },
+      { "startPct": 70, "endPct": 79, "penalty": -7 },
+      { "startPct": 80, "endPct": 89, "penalty": -8 },
+      { "startPct": 90, "endPct": 100, "penalty": -10 }
+    ],
+    "trackScale": {
+      "min": 0,
+      "max": 100,
+      "unit": "points"
+    },
     "eventTriggersPct": [30, 60, 90, 100],
     "resistanceFormula": "floor((wil + con + floor(luck / 2)) / 20)",
     "gainFormula": "baseRisk + tierGapRisk + overdrawRisk - resistance"
@@ -169,8 +186,13 @@
     "stages": ["preparation", "channeling", "integration"],
     "checksByStage": {
       "preparation": "ritualism",
-      "channeling": "willpower_or_endurance",
+      "channeling": "willpower",
       "integration": "ritualism"
+    },
+    "channelingSelection": {
+      "alternateSkill": "endurance",
+      "declareBeforeRoll": true,
+      "defaultSkill": "willpower"
     },
     "requiredPasses": 2,
     "riskModifierByTargetTier": {
@@ -191,16 +213,16 @@
     "failureConsequences": {
       "onePass": {
         "ingredientConsumptionPct": 50,
-        "corruptionGainPctOfMaxSanity": 8
+        "corruptionGainFlat": 8
       },
       "zeroPass": {
         "ingredientConsumptionPct": 100,
-        "corruptionGainPctOfMaxSanity": 15
+        "corruptionGainFlat": 15
       },
       "criticalBacklash": {
         "ingredientConsumptionPct": 100,
         "extraRarestIngredientEquivalent": 1,
-        "corruptionGainPctOfMaxSanity": 25,
+        "corruptionGainFlat": 25,
         "triggerCorruptionEvent": true
       }
     }
@@ -215,6 +237,36 @@
     "movement": {
       "baseSpeedFt": 30,
       "defaultMeleeReachFt": 5
+    },
+    "attack": {
+      "formula": "clamp(35 + floor(attackAttribute / 3) + proficiencyBonus + offenseModifiers + weaponAccuracy - targetDefenseShift - targetCoverPenalty, 1, 95)",
+      "criticalHitRule": "natural1_doubles_baseDamage",
+      "criticalMissRule": "natural100_auto_miss"
+    },
+    "damage": {
+      "formula": "max(1, floor((baseDamage + flatDamageBonus) * damageOutMultiplier) - targetDamageReduction)",
+      "minimumDamageOnHit": 1
+    },
+    "deathTrack": {
+      "checkFormulaKey": "check.death.v1",
+      "maxMarks": 3,
+      "maxSaves": 3,
+      "resetSavesOnDowned": true,
+      "damageWhileDownedAddsMarks": 1,
+      "healingAboveZeroRemovesDowned": true,
+      "healingAboveZeroResetsCounters": true
+    },
+    "actorFields": {
+      "armorDefault": 0,
+      "coverDefault": 0,
+      "damageReductionDefault": 0,
+      "encumbrancePenaltyDefault": 0,
+      "actionBudgetDefaults": {
+        "actions": 1,
+        "moves": 1,
+        "reactions": 1,
+        "bonusActions": 0
+      }
     },
     "opportunityReaction": {
       "trigger": "leavesThreatenedMeleeRangeWithoutDisengage",
@@ -241,12 +293,16 @@
     "conditionsFile": "data/conditions.library.v1.1.json"
   },
   "validation": {
+    "gates": {
+      "balanceGateMode": "warn"
+    },
     "effectPathWhitelist": [
       "system.attributes.",
       "system.skills.",
       "system.derived.",
       "system.resources.",
       "system.progression.",
+      "system.combat.",
       "system.tracks.",
       "system.ritual.",
       "system.artifacts."
@@ -258,11 +314,13 @@
   "formulaRegistry": {
     "check.attribute.v1": "finalTarget = clamp(baseTarget + mods - penalties, 1, 95); success if roll <= finalTarget",
     "check.skill.v1": "baseTarget = 25 + floor(linkedAttribute/3) + proficiencyBonus + floor(luck/10)",
-    "check.ritual.v1": "ritualTarget = clamp(35 + floor((wil + int + luck)/3) + ritualProficiency - complexity + corruptionPenalty + circleBonuses, 1, 95)",
+    "check.attack.v1": "attackTarget = clamp(35 + floor(attackAttribute/3) + proficiencyBonus + offenseModifiers + weaponAccuracy - targetDefenseShift - targetCoverPenalty, 1, 95)",
+    "check.ritual.v1": "ritualTarget = clamp(35 + floor((wil + int + luck)/9) + ritualProficiency - complexity + corruptionPenalty + circleBonuses, 1, 95)",
     "check.death.v1": "deathTarget = clamp(50 + floor(con/2) - min(6, floor(corruptionPct/10)), 1, 95)",
+    "calc.damage.final.v1": "max(1, floor((baseDamage + flatDamageBonus) * damageOutMultiplier) - targetDamageReduction)",
     "calc.derived.hp.v1": "round((20 + (str*1.5) + (con*2.5)) * healthSeqMult)",
     "calc.derived.spirit.v1": "round((15 + (wil*2.2) + (int*1.2) + floor(luck/4)) * spiritSeqMult)",
     "calc.derived.sanity.v1": "round((30 + (wil*1.8) + (con*1.1) + floor(luck/5)) * sanitySeqMult)",
-    "calc.corruption.penalty.v1": "max(-6, -1 * floor(corruptionPct/10))"
+    "calc.corruption.penalty.v1": "lookupBandPenalty(corruptionPct, corruptionPenaltyBands)"
   }
 }

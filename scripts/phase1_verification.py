@@ -45,8 +45,45 @@ def resolve_advancement(rolls, targets):
     return {"passes": passes, "backlash": backlash, "outcome": outcome, "detail": detail}
 
 
-def corruption_penalty(pct: float) -> int:
-    return max(-6, -1 * int(pct // 10))
+def corruption_penalty(pct: float, bands=None) -> int:
+    table = bands or [
+        {"startPct": 0, "endPct": 9, "penalty": 0},
+        {"startPct": 10, "endPct": 19, "penalty": -1},
+        {"startPct": 20, "endPct": 29, "penalty": -2},
+        {"startPct": 30, "endPct": 39, "penalty": -3},
+        {"startPct": 40, "endPct": 49, "penalty": -4},
+        {"startPct": 50, "endPct": 59, "penalty": -5},
+        {"startPct": 60, "endPct": 69, "penalty": -6},
+        {"startPct": 70, "endPct": 79, "penalty": -7},
+        {"startPct": 80, "endPct": 89, "penalty": -8},
+        {"startPct": 90, "endPct": 100, "penalty": -10},
+    ]
+    value = float(pct)
+    for band in table:
+        if float(band["startPct"]) <= value <= float(band["endPct"]):
+            return int(band["penalty"])
+    fail(f"No corruption penalty band matched pct={pct}.")
+
+
+def resolve_death_check(roll: int, target: int, marks: int, saves: int):
+    target = clamp(int(target), 1, 95)
+    roll = int(roll)
+    marks = int(marks)
+    saves = int(saves)
+
+    if roll == 1:
+        saves += 2
+    elif roll == 100:
+        marks += 2
+    elif roll <= target:
+        saves += 1
+    else:
+        marks += 1
+
+    marks = min(3, marks)
+    saves = min(3, saves)
+    state = "dead" if marks >= 3 else ("stabilized" if saves >= 3 else "ongoing")
+    return {"roll": roll, "target": target, "marks": marks, "saves": saves, "state": state}
 
 
 def load_core_tables():
@@ -66,20 +103,67 @@ def run_unit_checks(config):
         fail("Short rest multiplier must be 0.45.")
     if config["corruption"]["penaltyPerBand"] != -1:
         fail("Corruption penalty per band must be -1.")
-    if config["corruption"]["maxUniversalPenalty"] != -6:
-        fail("Corruption max penalty cap must be -6.")
+    if config["corruption"]["maxUniversalPenalty"] != -10:
+        fail("Corruption max penalty cap must be -10.")
+    bands = config["corruption"].get("penaltyBands", [])
+    expected_bands = [
+        {"startPct": 0, "endPct": 9, "penalty": 0},
+        {"startPct": 10, "endPct": 19, "penalty": -1},
+        {"startPct": 20, "endPct": 29, "penalty": -2},
+        {"startPct": 30, "endPct": 39, "penalty": -3},
+        {"startPct": 40, "endPct": 49, "penalty": -4},
+        {"startPct": 50, "endPct": 59, "penalty": -5},
+        {"startPct": 60, "endPct": 69, "penalty": -6},
+        {"startPct": 70, "endPct": 79, "penalty": -7},
+        {"startPct": 80, "endPct": 89, "penalty": -8},
+        {"startPct": 90, "endPct": 100, "penalty": -10},
+    ]
+    if bands != expected_bands:
+        fail("Corruption penalty bands must match canonical Phase 2 band table.")
+    scale = config["corruption"].get("trackScale", {})
+    if scale.get("min") != 0 or scale.get("max") != 100 or scale.get("unit") != "points":
+        fail("Corruption track scale must be explicit 0..100 points.")
 
-    boundary_expectations = {
-        0: 0,
-        9: 0,
-        10: -1,
-        59: -5,
-        60: -6,
-        99: -6,
-        100: -6,
-    }
+    if config["combat"]["actionEconomy"]["universalBonusAction"]:
+        fail("Universal bonus action must remain disabled.")
+    attack_formula = config.get("formulaRegistry", {}).get("check.attack.v1", "")
+    if "attackAttribute/3" not in attack_formula:
+        fail("check.attack.v1 must include attackAttribute/3 scaling.")
+    damage_formula = config.get("formulaRegistry", {}).get("calc.damage.final.v1", "")
+    if "max(1" not in damage_formula:
+        fail("calc.damage.final.v1 must enforce minimum hit damage of 1.")
+
+    ritual_formula = config.get("formulaRegistry", {}).get("check.ritual.v1", "")
+    if "/9" not in ritual_formula or "/3" in ritual_formula:
+        fail("check.ritual.v1 must use attribute divisor /9 and not /3.")
+
+    adv = config.get("advancement", {})
+    if adv.get("checksByStage", {}).get("channeling") != "willpower":
+        fail("Advancement channeling default check must be willpower.")
+    channeling = adv.get("channelingSelection", {})
+    if channeling.get("alternateSkill") != "endurance" or channeling.get("declareBeforeRoll") is not True:
+        fail("Advancement channeling selection contract is invalid.")
+    one_pass = adv.get("failureConsequences", {}).get("onePass", {})
+    zero_pass = adv.get("failureConsequences", {}).get("zeroPass", {})
+    backlash = adv.get("failureConsequences", {}).get("criticalBacklash", {})
+    if one_pass.get("corruptionGainFlat") != 8:
+        fail("One-pass advancement failure must apply +8 flat corruption.")
+    if zero_pass.get("corruptionGainFlat") != 15:
+        fail("Zero-pass advancement failure must apply +15 flat corruption.")
+    if backlash.get("corruptionGainFlat") != 25:
+        fail("Critical backlash must apply +25 flat corruption.")
+    if any("corruptionGainPctOfMaxSanity" in bucket for bucket in [one_pass, zero_pass, backlash]):
+        fail("Percent-of-max-sanity corruption penalties are no longer allowed.")
+
+    death_track = config.get("combat", {}).get("deathTrack", {})
+    if death_track.get("maxMarks") != 3 or death_track.get("maxSaves") != 3:
+        fail("Death track must be configured to 3 marks and 3 saves.")
+    if death_track.get("damageWhileDownedAddsMarks") != 1:
+        fail("Damage while downed must add exactly 1 death mark.")
+
+    boundary_expectations = {0: 0, 9: 0, 10: -1, 59: -5, 60: -6, 69: -6, 70: -7, 89: -8, 90: -10, 100: -10}
     for pct, expected in boundary_expectations.items():
-        got = corruption_penalty(pct)
+        got = corruption_penalty(pct, bands)
         if got != expected:
             fail(f"Corruption penalty mismatch at {pct}%: got {got}, expected {expected}.")
 
@@ -93,6 +177,15 @@ def run_unit_checks(config):
         fail("Natural 1 margin bonus rule failed.")
     if not a["backlash"]:
         fail("Natural 100 must trigger backlash flag.")
+
+    if resolve_death_check(1, 50, 0, 0) != {"roll": 1, "target": 50, "marks": 0, "saves": 2, "state": "ongoing"}:
+        fail("Death resolver natural 1 behavior failed.")
+    if resolve_death_check(100, 50, 0, 0) != {"roll": 100, "target": 50, "marks": 2, "saves": 0, "state": "ongoing"}:
+        fail("Death resolver natural 100 behavior failed.")
+    if resolve_death_check(88, 60, 2, 0)["state"] != "dead":
+        fail("Death resolver death threshold behavior failed.")
+    if resolve_death_check(40, 50, 0, 2)["state"] != "stabilized":
+        fail("Death resolver stabilization behavior failed.")
 
 
 def run_combat_simulation(rows):
@@ -205,7 +298,7 @@ def validate_item(item, known_ids, formula_keys):
         errors.append("invalid_type")
 
     if item.get("type") == "ability":
-        required = ["pathwayId", "sequence", "minSequence", "activation", "resource", "cost", "cooldown", "formulaKey", "effects"]
+        required = ["pathwayId", "sequence", "minSequence", "activation", "resource", "cost", "cooldown", "formulaKey", "effects", "abilityData"]
         for field in required:
             if field not in item:
                 errors.append(f"missing_{field}")
@@ -241,7 +334,8 @@ def run_content_validation_checks(config):
         "resource": "spirit",
         "cost": 5,
         "cooldown": 1,
-        "effects": []
+        "effects": [],
+        "abilityData": {"targetMode": "enemy"}
     }
     errs = validate_item(missing_formula, known_ids, formula_keys)
     if "missing_formulaKey" not in errs:
@@ -261,6 +355,7 @@ def run_content_validation_checks(config):
         "cooldown": 1,
         "formulaKey": "check.skill.v1",
         "effects": [],
+        "abilityData": {"targetMode": "enemy"},
         "dependencies": {"requiresIds": ["pathway.unknown"]}
     }
     errs = validate_item(missing_dep, known_ids, formula_keys)
@@ -281,11 +376,23 @@ def run_content_validation_checks(config):
         migrated = json.loads(json.dumps(actor))
         migrated.setdefault("tracks", {})
         migrated["tracks"].setdefault("investigationIP", 0)
+        migrated.setdefault("resources", {})
+        migrated["resources"].setdefault("deathSaves", 0)
+        migrated.setdefault("combat", {})
+        migrated["combat"].setdefault("armor", 0)
+        migrated["combat"].setdefault("cover", 0)
+        migrated["combat"].setdefault("encumbrancePenalty", 0)
+        migrated["combat"].setdefault("damageReduction", 0)
+        migrated["combat"].setdefault("actionBudget", {"actions": 1, "moves": 1, "reactions": 1, "bonusActions": 0})
         return migrated
 
     migrated = migrate_v1_to_v1p1(v1_actor)
     if migrated["identity"]["pathwayId"] != v1_actor["identity"]["pathwayId"]:
         fail("Migration compatibility test failed to preserve required field.")
+    if migrated["resources"]["deathSaves"] != 0:
+        fail("Migration compatibility test failed to seed deathSaves.")
+    if migrated["combat"]["actionBudget"]["actions"] != 1:
+        fail("Migration compatibility test failed to seed combat action budget.")
 
 
 def run_rulebook_contract_audit():

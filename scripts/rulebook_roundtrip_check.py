@@ -8,9 +8,16 @@ from pathlib import Path
 
 REQUIRED_SNIPPETS = [
     "FinalTarget = clamp(BaseTarget + Modifiers - Penalties, 1, 95)",
+    "AttackTarget = clamp(",
+    "FinalDamage = max(1, floor((BaseDamage + FlatDamageBonus) * DamageOutMultiplier) - TargetDamageReduction)",
     "There is no universal Bonus Action",
     "SkillTarget = clamp(",
-    "CorruptionPenalty = max(-6, -1 * floor(CurrentCorruptionPct / 10))",
+    "CorruptionPenalty = lookupBandPenalty(CurrentCorruptionPct)",
+    "70-79 => -7",
+    "90-100 => -10",
+    "Corruption is tracked in integer points from 0 to 100.",
+    "DeathTarget = clamp(50 + floor(CON / 2) - min(6, floor(CorruptionPct / 10)), 1, 95)",
+    "floor((WIL + INT + LUCK) / 9)",
     "\"type\": \"ability\"",
 ]
 
@@ -18,7 +25,10 @@ BANNED_PATTERNS = [
     r"\b1\s+Bonus\s+Action\b",
     r"clamp\([^)]*,\s*1\s*,\s*100\)",
     r"30\s*\+\s*floor\(\s*Linked\s*Attribute\s*/\s*2\)",
-    r"Corruption[^\\n]{0,120}-(?:7|8|9|10)",
+    r"CorruptionPenalty\s*=\s*max\(",
+    r"Corruption[^\\n]{0,180}-(?:1[1-9]|[2-9][0-9])",
+    r"floor\(\(WIL\s*\+\s*INT\s*\+\s*LUCK\)\s*/\s*3\)",
+    r"corruptionGainPctOfMaxSanity",
 ]
 
 
@@ -64,4 +74,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

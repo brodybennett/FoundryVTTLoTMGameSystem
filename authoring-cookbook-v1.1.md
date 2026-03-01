@@ -15,6 +15,12 @@ Guide content authors to produce pack entries that validate under v1.1 without c
 5. Keep effect paths within whitelist prefixes.
 6. If `type: ability`, ensure `minSequence <= sequence`.
 7. If both `pathwayId` and `allowedPathwayIds` are present, include `pathwayId` in `allowedPathwayIds`.
+8. Use typed payload blocks by item type:
+- `abilityData` for abilities
+- `weaponData` for weapons
+- `armorData` for armor
+- `ritualData` for rituals
+- `artifactData` for artifacts
 
 ## Ability Example Checklist
 
@@ -28,6 +34,7 @@ Guide content authors to produce pack entries that validate under v1.1 without c
 - `cooldown`
 - `formulaKey`
 - `effects[]`
+- `abilityData`
 
 ## Condition Authoring
 
@@ -35,6 +42,8 @@ For every effect:
 - provide complete lifecycle fields
 - provide `path/value` for numeric mutations
 - always set `sourceCategory`
+- always set `target`
+- always set `trigger`
 - use `stackGroup` when stacking must be controlled
 - use `oncePerTurn` for periodic/tick safety
 - if `saveType: none`, set `saveTarget: 0` and do not use `removeOn: saveSuccess`

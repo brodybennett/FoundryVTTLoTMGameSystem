@@ -1,0 +1,54 @@
+name: Release Foundry System
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify Foundry Manifest
+        run: python scripts/verify_foundry_manifest.py
+
+      - name: Validate Tag Matches system.json Version
+        shell: bash
+        run: |
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          MANIFEST_VERSION=$(python - <<'PY'
+          import json
+          from pathlib import Path
+          manifest = json.loads(Path("system.json").read_text(encoding="utf-8"))
+          print(manifest["version"])
+          PY
+          )
+
+          if [ "$TAG_VERSION" != "$MANIFEST_VERSION" ]; then
+            echo "Tag version ($TAG_VERSION) does not match system.json version ($MANIFEST_VERSION)."
+            exit 1
+          fi
+
+      - name: Build Release Assets
+        run: python scripts/build_foundry_release.py
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          files: |
+            dist/system.json
+            dist/lotm-system-${{ github.ref_name }}.zip

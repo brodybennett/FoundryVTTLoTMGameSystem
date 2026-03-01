@@ -22,7 +22,17 @@ Date: 2026-03-01
 6. Skill formula remains:
 - `25 + floor(attr/3) + proficiency + floor(luck/10)`.
 
-7. Corruption penalty remains capped at `-6`.
+7. Corruption penalty uses locked band-table escalation to `-10`:
+- `0-9: 0`
+- `10-19: -1`
+- `20-29: -2`
+- `30-39: -3`
+- `40-49: -4`
+- `50-59: -5`
+- `60-69: -6`
+- `70-79: -7`
+- `80-89: -8`
+- `90-100: -10`
 
 8. Ability data contract must align with item schema:
 - no nested divergent `usage` block in canonical examples.
@@ -49,6 +59,30 @@ Date: 2026-03-01
 
 15. Source-category stack resolution is runtime-required:
 - `sourceCategory` is required for v1.1 effects.
+
+16. Combat pipeline is now explicit:
+- attack target formula and damage order are canonicalized in prose/config.
+
+17. Downed/death track is now explicit:
+- `deathMarks` and `deathSaves` are both canonical resources.
+- 3 marks = death, 3 saves = stabilize.
+
+18. Advancement channeling and failure units are fixed:
+- channeling defaults to `willpower`, with declared `endurance` alternative.
+- failure penalties use flat corruption points, not `% of max sanity`.
+
+19. Ritual scaling is corrected:
+- ritual attribute contribution uses `floor((WIL + INT + LUCK) / 9)`.
+
+20. Typed item contracts and effect target/trigger are required:
+- type payload blocks are mandatory by item type.
+- effect `target` and `trigger` are required fields.
+
+21. Phase 2 balance calibration and extensibility hardening:
+- derived HP/Spirit calibration checks run against baseline midpoint bands with gate mode support.
+- validation gate mode defaults to `warn` and may be promoted to strict later.
+- registry validation is open-extension with canonical required subset.
+- semver ordering and dependency graph checks are enforced for publish safety.
 
 ## Assumptions
 
