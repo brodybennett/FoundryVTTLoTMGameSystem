@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lotm/content.pack.manifest.schema.v1_1.json",
+  "title": "LoTM Content Pack Manifest Schema v1.1",
+  "type": "object",
+  "required": [
+    "packId",
+    "packVersion",
+    "schemaTarget",
+    "minSystemVersion",
+    "maxTestedSystemVersion",
+    "entries",
+    "dependencies"
+  ],
+  "properties": {
+    "packId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_.-]*$"
+    },
+    "packVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "schemaTarget": {
+      "type": "string",
+      "enum": ["v1", "v1.1"]
+    },
+    "minSystemVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "maxTestedSystemVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "path"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]*$"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "pathway",
+              "sequenceNode",
+              "ability",
+              "ritual",
+              "artifact",
+              "weapon",
+              "armor",
+              "consumable",
+              "ingredient",
+              "background",
+              "conditionTemplate"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^(?![A-Za-z]:)(?!/)(?!\\\\\\\\)(?!.*\\.\\.)[a-zA-Z0-9_./-]+$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_.-]*$"
+      },
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": false
+}

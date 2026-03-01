@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lotm/actor.system.schema.v1.json",
+  "title": "LoTM Actor.system Schema v1",
+  "type": "object",
+  "required": [
+    "identity",
+    "attributes",
+    "skills",
+    "derived",
+    "resources",
+    "progression",
+    "version"
+  ],
+  "properties": {
+    "identity": {
+      "type": "object",
+      "required": ["pathwayId", "sequence", "tier"],
+      "properties": {
+        "pathwayId": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]*$"
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9
+        },
+        "tier": {
+          "type": "string",
+          "enum": ["low", "mid", "high", "demigod", "angel", "god"]
+        },
+        "backgroundId": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]*$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "attributes": {
+      "type": "object",
+      "required": ["str", "dex", "wil", "con", "cha", "int", "luck"],
+      "properties": {
+        "str": { "$ref": "#/$defs/attributeStat" },
+        "dex": { "$ref": "#/$defs/attributeStat" },
+        "wil": { "$ref": "#/$defs/attributeStat" },
+        "con": { "$ref": "#/$defs/attributeStat" },
+        "cha": { "$ref": "#/$defs/attributeStat" },
+        "int": { "$ref": "#/$defs/attributeStat" },
+        "luck": { "$ref": "#/$defs/attributeStat" }
+      },
+      "additionalProperties": false
+    },
+    "skills": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z][a-z0-9_.-]*$": {
+          "$ref": "#/$defs/skillEntry"
+        }
+      },
+      "minProperties": 1,
+      "additionalProperties": false
+    },
+    "derived": {
+      "type": "object",
+      "required": ["hpMax", "spiritMax", "sanityMax", "defenseShift", "initiativeTarget"],
+      "properties": {
+        "hpMax": { "type": "integer", "minimum": 1 },
+        "spiritMax": { "type": "integer", "minimum": 0 },
+        "sanityMax": { "type": "integer", "minimum": 1 },
+        "defenseShift": { "type": "integer", "minimum": -20, "maximum": 25 },
+        "initiativeTarget": { "type": "integer", "minimum": 1, "maximum": 95 }
+      },
+      "additionalProperties": false
+    },
+    "resources": {
+      "type": "object",
+      "required": ["hp", "spirit", "corruption", "deathMarks"],
+      "properties": {
+        "hp": { "type": "integer", "minimum": -99999, "maximum": 99999 },
+        "spirit": { "type": "integer", "minimum": 0, "maximum": 99999 },
+        "corruption": { "type": "number", "minimum": 0, "maximum": 100 },
+        "deathMarks": { "type": "integer", "minimum": 0, "maximum": 3 }
+      },
+      "additionalProperties": false
+    },
+    "progression": {
+      "type": "object",
+      "required": ["gates"],
+      "properties": {
+        "gates": {
+          "type": "object",
+          "required": ["narrative", "economy", "stability"],
+          "properties": {
+            "narrative": { "type": "boolean" },
+            "economy": { "type": "boolean" },
+            "stability": { "type": "boolean" }
+          },
+          "additionalProperties": false
+        },
+        "attemptState": {
+          "type": "string",
+          "enum": ["idle", "preparing", "rolling", "resolved"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "tracks": {
+      "type": "object",
+      "properties": {
+        "investigationIP": { "type": "integer", "minimum": 0, "maximum": 99 },
+        "factions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": -100,
+            "maximum": 100
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "version": {
+      "type": "object",
+      "required": ["schemaVersion"],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "const": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "attributeStat": {
+      "type": "object",
+      "required": ["base", "temp"],
+      "properties": {
+        "base": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "temp": { "type": "integer", "minimum": -50, "maximum": 50 }
+      },
+      "additionalProperties": false
+    },
+    "skillEntry": {
+      "type": "object",
+      "required": ["linkedAttr", "rank", "misc"],
+      "properties": {
+        "linkedAttr": {
+          "type": "string",
+          "enum": ["str", "dex", "wil", "con", "cha", "int", "luck"]
+        },
+        "rank": {
+          "type": "string",
+          "enum": ["untrained", "familiar", "trained", "expert", "master", "legendary"]
+        },
+        "misc": {
+          "type": "integer",
+          "minimum": -50,
+          "maximum": 50
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,416 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lotm/item.system.schema.v1_1.json",
+  "title": "LoTM Item.system Schema v1.1",
+  "type": "object",
+  "required": ["id", "schemaVersion", "name", "type", "dependencies"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_.-]*$"
+    },
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "pathway",
+        "sequenceNode",
+        "ability",
+        "ritual",
+        "artifact",
+        "weapon",
+        "armor",
+        "consumable",
+        "ingredient",
+        "background",
+        "conditionTemplate"
+      ]
+    },
+    "pathwayId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_.-]*$"
+    },
+    "allowedPathwayIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_.-]*$"
+      },
+      "uniqueItems": true
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9
+    },
+    "minSequence": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9
+    },
+    "sourceSequence": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9
+    },
+    "activation": {
+      "type": "string",
+      "enum": ["action", "reaction", "passive", "special"]
+    },
+    "resource": {
+      "type": "string",
+      "enum": ["spirit", "hp", "none", "item"]
+    },
+    "cost": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 999
+    },
+    "cooldown": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 999
+    },
+    "usageLimit": {
+      "type": "object",
+      "required": ["scope", "maxUses"],
+      "properties": {
+        "scope": {
+          "type": "string",
+          "enum": ["perTurn", "perRound", "perScene", "perShortRest", "perLongRest"]
+        },
+        "maxUses": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 999
+        }
+      },
+      "additionalProperties": false
+    },
+    "complexityClass": {
+      "type": "string",
+      "enum": [
+        "advancement.seq_5_to_4",
+        "advancement.seq_3_to_2",
+        "advancement.seq_1_to_0",
+        "invocation.minor_scope",
+        "invocation.standard_scope",
+        "invocation.major_scope",
+        "invocation.extreme_scope",
+        "transit.mental_realm",
+        "transit.astral_realm",
+        "transit.spiritual_realm"
+      ]
+    },
+    "formulaKey": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_.-]*$"
+    },
+    "effects": {
+      "type": "array",
+      "items": {
+        "$ref": "effect.schema.v1_1.json"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_.-]*$"
+      },
+      "uniqueItems": true
+    },
+    "dependencies": {
+      "type": "object",
+      "properties": {
+        "minSystemVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "maxTestedSystemVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "requiresIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]*$"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": ["minSystemVersion", "maxTestedSystemVersion"],
+      "additionalProperties": false
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "ability"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "pathwayId",
+          "sequence",
+          "minSequence",
+          "activation",
+          "resource",
+          "cost",
+          "cooldown",
+          "formulaKey",
+          "effects"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "ability"
+          },
+          "sequence": {
+            "const": 0
+          }
+        },
+        "required": ["sequence", "minSequence"]
+      },
+      "then": {
+        "properties": {
+          "minSequence": {
+            "enum": [0]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "ability"
+          },
+          "sequence": {
+            "const": 1
+          }
+        },
+        "required": ["sequence", "minSequence"]
+      },
+      "then": {
+        "properties": {
+          "minSequence": {
+            "enum": [0, 1]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "ability"
+          },
+          "sequence": {
+            "const": 2
+          }
+        },
+        "required": ["sequence", "minSequence"]
+      },
+      "then": {
+        "properties": {
+          "minSequence": {
+            "enum": [0, 1, 2]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "ability"
+          },
+          "sequence": {
+            "const": 3
+          }
+        },
+        "required": ["sequence", "minSequence"]
+      },
+      "then": {
+        "properties": {
+          "minSequence": {
+            "enum": [0, 1, 2, 3]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "ability"
+          },
+          "sequence": {
+            "const": 4
+          }
+        },
+        "required": ["sequence", "minSequence"]
+      },
+      "then": {
+        "properties": {
+          "minSequence": {
+            "enum": [0, 1, 2, 3, 4]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "ability"
+          },
+          "sequence": {
+            "const": 5
+          }
+        },
+        "required": ["sequence", "minSequence"]
+      },
+      "then": {
+        "properties": {
+          "minSequence": {
+            "enum": [0, 1, 2, 3, 4, 5]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "ability"
+          },
+          "sequence": {
+            "const": 6
+          }
+        },
+        "required": ["sequence", "minSequence"]
+      },
+      "then": {
+        "properties": {
+          "minSequence": {
+            "enum": [0, 1, 2, 3, 4, 5, 6]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "ability"
+          },
+          "sequence": {
+            "const": 7
+          }
+        },
+        "required": ["sequence", "minSequence"]
+      },
+      "then": {
+        "properties": {
+          "minSequence": {
+            "enum": [0, 1, 2, 3, 4, 5, 6, 7]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "ability"
+          },
+          "sequence": {
+            "const": 8
+          }
+        },
+        "required": ["sequence", "minSequence"]
+      },
+      "then": {
+        "properties": {
+          "minSequence": {
+            "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "ability"
+          },
+          "sequence": {
+            "const": 9
+          }
+        },
+        "required": ["sequence", "minSequence"]
+      },
+      "then": {
+        "properties": {
+          "minSequence": {
+            "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "ritual"
+          }
+        }
+      },
+      "then": {
+        "required": ["complexityClass", "formulaKey", "effects"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "artifact"
+          }
+        }
+      },
+      "then": {
+        "required": ["sourceSequence"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "conditionTemplate"
+          }
+        }
+      },
+      "then": {
+        "required": ["effects"]
+      }
+    }
+  ],
+  "additionalProperties": false
+}

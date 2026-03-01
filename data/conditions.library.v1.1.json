@@ -1,0 +1,238 @@
+{
+  "libraryVersion": "1.1.0",
+  "id": "lotm.conditions.library.v1_1",
+  "conditions": [
+    {
+      "id": "condition.stunned",
+      "name": "Stunned",
+      "description": "Cannot take Actions, Moves, or Reactions.",
+      "effects": [
+        {
+          "id": "condition.stunned.action_lock",
+          "op": "set",
+          "path": "system.tracks.actionLock",
+          "value": 1,
+          "sourceCategory": "condition",
+          "stackGroup": "control.action_lock",
+          "oncePerTurn": false,
+          "applyPhase": "immediate",
+          "tickPhase": "none",
+          "durationRounds": 1,
+          "saveType": "none",
+          "saveTarget": 0,
+          "stackRule": "refresh",
+          "removeOn": ["durationEnd", "dispel"]
+        }
+      ]
+    },
+    {
+      "id": "condition.restrained",
+      "name": "Restrained",
+      "description": "Movement blocked and mobility-dependent checks penalized.",
+      "effects": [
+        {
+          "id": "condition.restrained.mobility_penalty",
+          "op": "add",
+          "path": "system.tracks.movementCheckPenalty",
+          "value": -20,
+          "sourceCategory": "condition",
+          "stackGroup": "mobility.restrained",
+          "oncePerTurn": false,
+          "applyPhase": "immediate",
+          "tickPhase": "none",
+          "durationRounds": 2,
+          "saveType": "none",
+          "saveTarget": 0,
+          "stackRule": "refresh",
+          "removeOn": ["durationEnd", "dispel"]
+        }
+      ]
+    },
+    {
+      "id": "condition.weakened",
+      "name": "Weakened",
+      "description": "Deal reduced final damage.",
+      "effects": [
+        {
+          "id": "condition.weakened.damage_mult",
+          "op": "mul",
+          "path": "system.tracks.damageOutMultiplier",
+          "value": 0.75,
+          "sourceCategory": "condition",
+          "stackGroup": "offense.damage_mult",
+          "oncePerTurn": false,
+          "applyPhase": "immediate",
+          "tickPhase": "none",
+          "durationRounds": 2,
+          "saveType": "none",
+          "saveTarget": 0,
+          "stackRule": "refresh",
+          "removeOn": ["durationEnd", "dispel"]
+        }
+      ]
+    },
+    {
+      "id": "condition.exposed",
+      "name": "Exposed",
+      "description": "Attackers gain offensive bonus against target.",
+      "effects": [
+        {
+          "id": "condition.exposed.incoming_bonus",
+          "op": "add",
+          "path": "system.tracks.incomingOffenseBonus",
+          "value": 15,
+          "sourceCategory": "condition",
+          "stackGroup": "defense.exposed",
+          "oncePerTurn": false,
+          "applyPhase": "immediate",
+          "tickPhase": "none",
+          "durationRounds": 1,
+          "saveType": "none",
+          "saveTarget": 0,
+          "stackRule": "refresh",
+          "removeOn": ["durationEnd", "dispel"]
+        }
+      ]
+    },
+    {
+      "id": "condition.frightened",
+      "name": "Frightened",
+      "description": "Cannot willingly close distance and suffers offensive penalties.",
+      "effects": [
+        {
+          "id": "condition.frightened.offense_penalty",
+          "op": "add",
+          "path": "system.tracks.offensePenaltyVsSource",
+          "value": -15,
+          "sourceCategory": "condition",
+          "stackGroup": "mind.frightened",
+          "oncePerTurn": false,
+          "applyPhase": "immediate",
+          "tickPhase": "none",
+          "durationRounds": 2,
+          "saveType": "none",
+          "saveTarget": 0,
+          "stackRule": "refresh",
+          "removeOn": ["durationEnd", "dispel"]
+        }
+      ]
+    },
+    {
+      "id": "condition.silenced",
+      "name": "Silenced",
+      "description": "Cannot use effects requiring verbal components.",
+      "effects": [
+        {
+          "id": "condition.silenced.verbal_lock",
+          "op": "set",
+          "path": "system.tracks.verbalLocked",
+          "value": 1,
+          "sourceCategory": "condition",
+          "stackGroup": "control.verbal_lock",
+          "oncePerTurn": false,
+          "applyPhase": "immediate",
+          "tickPhase": "none",
+          "durationRounds": 2,
+          "saveType": "none",
+          "saveTarget": 0,
+          "stackRule": "refresh",
+          "removeOn": ["durationEnd", "dispel"]
+        }
+      ]
+    },
+    {
+      "id": "condition.marked",
+      "name": "Marked",
+      "description": "Marker gains offensive bonus against target.",
+      "effects": [
+        {
+          "id": "condition.marked.source_bonus",
+          "op": "add",
+          "path": "system.tracks.markedBySourceBonus",
+          "value": 10,
+          "sourceCategory": "condition",
+          "stackGroup": "targeting.marked",
+          "oncePerTurn": false,
+          "applyPhase": "immediate",
+          "tickPhase": "none",
+          "durationRounds": 2,
+          "saveType": "none",
+          "saveTarget": 0,
+          "stackRule": "refresh",
+          "removeOn": ["durationEnd", "dispel"]
+        }
+      ]
+    },
+    {
+      "id": "condition.bleeding",
+      "name": "Bleeding",
+      "description": "Take ongoing damage at end of turn.",
+      "effects": [
+        {
+          "id": "condition.bleeding.tick_damage",
+          "op": "cost",
+          "path": "system.resources.hp",
+          "value": 5,
+          "sourceCategory": "condition",
+          "stackGroup": "dot.bleeding",
+          "oncePerTurn": true,
+          "applyPhase": "none",
+          "tickPhase": "endOfTurn",
+          "durationRounds": 99,
+          "saveType": "none",
+          "saveTarget": 0,
+          "stackRule": "stackLimited",
+          "maxStacks": 3,
+          "removeOn": ["dispel", "shortRest", "longRest"]
+        }
+      ]
+    },
+    {
+      "id": "condition.burning",
+      "name": "Burning",
+      "description": "Take ongoing damage at start of turn.",
+      "effects": [
+        {
+          "id": "condition.burning.tick_damage",
+          "op": "cost",
+          "path": "system.resources.hp",
+          "value": 6,
+          "sourceCategory": "condition",
+          "stackGroup": "dot.burning",
+          "oncePerTurn": true,
+          "applyPhase": "none",
+          "tickPhase": "startOfTurn",
+          "durationRounds": 99,
+          "saveType": "none",
+          "saveTarget": 0,
+          "stackRule": "stackLimited",
+          "maxStacks": 3,
+          "removeOn": ["dispel", "shortRest", "longRest"]
+        }
+      ]
+    },
+    {
+      "id": "condition.downed",
+      "name": "Downed",
+      "description": "At 0 HP and on death-track resolution flow.",
+      "effects": [
+        {
+          "id": "condition.downed.state_flag",
+          "op": "set",
+          "path": "system.tracks.isDowned",
+          "value": 1,
+          "sourceCategory": "condition",
+          "stackGroup": "state.downed",
+          "oncePerTurn": false,
+          "applyPhase": "immediate",
+          "tickPhase": "none",
+          "durationRounds": 99,
+          "saveType": "none",
+          "saveTarget": 0,
+          "stackRule": "replace",
+          "removeOn": ["dispel", "shortRest", "longRest"]
+        }
+      ]
+    }
+  ]
+}

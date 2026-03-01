@@ -1,0 +1,53 @@
+table,row_id,sequence,tier,score_min,score_max,modifier,band_start_pct,band_end_pct,universal_penalty,event_trigger,ritual_type,ritual_subtype,complexity_penalty,from_seq,to_seq,to_within_tier_index,ritual_prereq_required,base_risk_mod,cost_class,ingredient_rarity,dpr_min,dpr_max,hp_min,hp_max,spirit_min,spirit_max,notes
+attribute_modifier,attr_mod_01,,,,0,4,-30,,,,,,,,,,,,,,,,,,,
+attribute_modifier,attr_mod_02,,,,5,9,-20,,,,,,,,,,,,,,,,,,,
+attribute_modifier,attr_mod_03,,,,10,19,-10,,,,,,,,,,,,,,,,,,,
+attribute_modifier,attr_mod_04,,,,20,29,0,,,,,,,,,,,,,,,,,,,
+attribute_modifier,attr_mod_05,,,,30,39,5,,,,,,,,,,,,,,,,,,,
+attribute_modifier,attr_mod_06,,,,40,49,10,,,,,,,,,,,,,,,,,,,
+attribute_modifier,attr_mod_07,,,,50,59,15,,,,,,,,,,,,,,,,,,,
+attribute_modifier,attr_mod_08,,,,60,69,20,,,,,,,,,,,,,,,,,,,
+attribute_modifier,attr_mod_09,,,,70,79,25,,,,,,,,,,,,,,,,,,,
+attribute_modifier,attr_mod_10,,,,80,89,30,,,,,,,,,,,,,,,,,,,
+attribute_modifier,attr_mod_11,,,,90,100,35,,,,,,,,,,,,,,,,,,,
+corruption_threshold,corr_00,,,,,,,,0,9,0,none,,,,,,,,,,,,,,,,,
+corruption_threshold,corr_10,,,,,,,,10,19,-1,subtle_tells_and_omen_bleed,,,,,,,,,,,,,,,,,
+corruption_threshold,corr_20,,,,,,,,20,29,-2,minor_instability,,,,,,,,,,,,,,,,,
+corruption_threshold,corr_30,,,,,,,,30,39,-3,major_trigger_social_and_ritual_fallout,,,,,,,,,,,,,,,,,
+corruption_threshold,corr_40,,,,,,,,40,49,-4,heightened_complications,,,,,,,,,,,,,,,,,
+corruption_threshold,corr_50,,,,,,,,50,59,-5,involuntary_manifestations_under_stress,,,,,,,,,,,,,,,,,
+corruption_threshold,corr_60,,,,,,,,60,69,-6,major_trigger_persistent_instability_each_session,,,,,,,,,,,,,,,,,
+corruption_threshold,corr_70,,,,,,,,70,79,-6,faction_exploitation_pressure,,,,,,,,,,,,,,,,,
+corruption_threshold,corr_80,,,,,,,,80,89,-6,mandatory_instability_complications,,,,,,,,,,,,,,,,,
+corruption_threshold,corr_90,,,,,,,,90,99,-6,major_trigger_irreversible_fork_warning,,,,,,,,,,,,,,,,,
+corruption_threshold,corr_100,,,,,,,,100,100,-6,terminal_corruption_event,,,,,,,,,,,,,,,,,
+ritual_complexity,rit_01,,,,,,,,,,,advancement_prerequisite,seq_5_to_4,10,,,,,,,,,,,,,Prereq ritual complexity baseline
+ritual_complexity,rit_02,,,,,,,,,,,advancement_prerequisite,seq_3_to_2,20,,,,,,,,,,,,,Prereq ritual complexity baseline
+ritual_complexity,rit_03,,,,,,,,,,,advancement_prerequisite,seq_1_to_0,30,,,,,,,,,,,,,Prereq ritual complexity baseline
+ritual_complexity,rit_04,,,,,,,,,,,invocation,minor_scope,10,,,,,,,,,,,,,Invocation baseline
+ritual_complexity,rit_05,,,,,,,,,,,invocation,standard_scope,20,,,,,,,,,,,,,Invocation baseline
+ritual_complexity,rit_06,,,,,,,,,,,invocation,major_scope,30,,,,,,,,,,,,,Invocation baseline
+ritual_complexity,rit_07,,,,,,,,,,,invocation,extreme_scope,35,,,,,,,,,,,,,Invocation baseline
+ritual_complexity,rit_08,,,,,,,,,,,transit,mental_realm,15,,,,,,,,,,,,,Transit baseline
+ritual_complexity,rit_09,,,,,,,,,,,transit,astral_realm,25,,,,,,,,,,,,,Transit baseline
+ritual_complexity,rit_10,,,,,,,,,,,transit,spiritual_realm,30,,,,,,,,,,,,,Transit baseline
+ritual_complexity,rit_11,,,,,,,,,,,universal,missing_mandatory_component,10,,,,,,,,,,,,,Apply per missing component
+sequence_advancement,adv_9_8,,,,,,,,,,,,,,9,8,1,false,0,C1,common,,,,,,,Low tier micro-step
+sequence_advancement,adv_8_7,,,,,,,,,,,,,,8,7,0,false,-5,C2,common_plus,,,,,,,Tier transition to mid
+sequence_advancement,adv_7_6,,,,,,,,,,,,,,7,6,1,false,-5,C3,uncommon,,,,,,,Mid tier micro-step
+sequence_advancement,adv_6_5,,,,,,,,,,,,,,6,5,0,true,-10,C4,rare,,,,,,,Entry to high requires prereq ritual
+sequence_advancement,adv_5_4,,,,,,,,,,,,,,5,4,0,true,-15,C5,rare_plus,,,,,,,Entry to demigod
+sequence_advancement,adv_4_3,,,,,,,,,,,,,,4,3,1,true,-15,C6,very_rare,,,,,,,Demigod step
+sequence_advancement,adv_3_2,,,,,,,,,,,,,,3,2,2,true,-15,C7,very_rare_plus,,,,,,,Demigod step
+sequence_advancement,adv_2_1,,,,,,,,,,,,,,2,1,0,true,-20,C8,legendary,,,,,,,Entry to angel
+sequence_advancement,adv_1_0,,,,,,,,,,,,,,1,0,0,true,-30,C9,mythic,,,,,,,Apex advancement
+baseline_dpr_hp_spirit,baseline_9,9,low,,,,,,,,,,,,,,,,,,8,10,50,70,45,65,Parity target for sequence 9
+baseline_dpr_hp_spirit,baseline_8,8,low,,,,,,,,,,,,,,,,,,10,13,60,80,55,75,Parity target for sequence 8
+baseline_dpr_hp_spirit,baseline_7,7,mid,,,,,,,,,,,,,,,,,,12,16,80,110,75,105,Parity target for sequence 7
+baseline_dpr_hp_spirit,baseline_6,6,mid,,,,,,,,,,,,,,,,,,15,20,95,130,90,125,Parity target for sequence 6
+baseline_dpr_hp_spirit,baseline_5,5,high,,,,,,,,,,,,,,,,,,20,28,130,180,120,170,Parity target for sequence 5
+baseline_dpr_hp_spirit,baseline_4,4,demigod,,,,,,,,,,,,,,,,,,26,38,170,240,170,240,Parity target for sequence 4
+baseline_dpr_hp_spirit,baseline_3,3,demigod,,,,,,,,,,,,,,,,,,34,48,220,300,220,320,Parity target for sequence 3
+baseline_dpr_hp_spirit,baseline_2,2,demigod,,,,,,,,,,,,,,,,,,42,62,280,380,300,430,Parity target for sequence 2
+baseline_dpr_hp_spirit,baseline_1,1,angel,,,,,,,,,,,,,,,,,,55,80,360,500,420,620,Parity target for sequence 1
+baseline_dpr_hp_spirit,baseline_0,0,god,,,,,,,,,,,,,,,,,,80,120,550,800,700,1000,Parity target for sequence 0

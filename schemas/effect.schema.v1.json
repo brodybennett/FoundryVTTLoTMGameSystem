@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lotm/effect.schema.v1.json",
+  "title": "LoTM Effect Schema v1",
+  "type": "object",
+  "required": [
+    "id",
+    "op",
+    "applyPhase",
+    "tickPhase",
+    "durationRounds",
+    "saveType",
+    "saveTarget",
+    "stackRule",
+    "removeOn"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_.-]*$"
+    },
+    "op": {
+      "type": "string",
+      "enum": ["add", "mul", "set", "grantCondition", "cost"]
+    },
+    "path": {
+      "type": "string",
+      "pattern": "^system\\.[a-zA-Z0-9_.]+$"
+    },
+    "value": {
+      "type": "number"
+    },
+    "conditionId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_.-]*$"
+    },
+    "applyPhase": {
+      "type": "string",
+      "enum": ["immediate", "startOfTurn", "endOfTurn", "none"]
+    },
+    "tickPhase": {
+      "type": "string",
+      "enum": ["none", "startOfTurn", "endOfTurn"]
+    },
+    "durationRounds": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 999
+    },
+    "saveType": {
+      "type": "string",
+      "enum": ["none", "str", "dex", "wil", "con", "cha", "int", "luck", "skill", "ritual"]
+    },
+    "saveTarget": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 95
+    },
+    "stackRule": {
+      "type": "string",
+      "enum": ["replace", "refresh", "stackLimited", "ignore"]
+    },
+    "maxStacks": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10
+    },
+    "removeOn": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["durationEnd", "saveSuccess", "sourceEnd", "dispel", "shortRest", "longRest"]
+      },
+      "uniqueItems": true
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 500
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "op": {
+            "const": "grantCondition"
+          }
+        }
+      },
+      "then": {
+        "required": ["conditionId"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "op": {
+            "enum": ["add", "mul", "set", "cost"]
+          }
+        }
+      },
+      "then": {
+        "required": ["path", "value"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "saveType": {
+            "const": "none"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "saveTarget": {
+            "const": 0
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": false
+}

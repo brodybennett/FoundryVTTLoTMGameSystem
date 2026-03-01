@@ -1,0 +1,31 @@
+{
+  "registryVersion": "1.1.0",
+  "id": "lotm.skills.registry.v1_1",
+  "skills": [
+    { "id": "ritualism", "linkedAttr": "wil" },
+    { "id": "investigation", "linkedAttr": "int" },
+    { "id": "perception", "linkedAttr": "int" },
+    { "id": "insight", "linkedAttr": "wil" },
+
+    { "id": "persuasion", "linkedAttr": "cha" },
+    { "id": "deception", "linkedAttr": "cha" },
+    { "id": "intimidation", "linkedAttr": "cha" },
+    { "id": "etiquette", "linkedAttr": "cha" },
+
+    { "id": "willpower", "linkedAttr": "wil" },
+    { "id": "endurance", "linkedAttr": "con" },
+    { "id": "medicine", "linkedAttr": "int" },
+    { "id": "occult", "linkedAttr": "int" },
+
+    { "id": "athletics", "linkedAttr": "str" },
+    { "id": "melee", "linkedAttr": "str" },
+    { "id": "firearms", "linkedAttr": "dex" },
+    { "id": "stealth", "linkedAttr": "dex" },
+    { "id": "acrobatics", "linkedAttr": "dex" },
+
+    { "id": "streetwise", "linkedAttr": "int" },
+    { "id": "commerce", "linkedAttr": "int" },
+    { "id": "crafting", "linkedAttr": "int" }
+  ]
+}
+
