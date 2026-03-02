@@ -110,7 +110,7 @@ A package can be published only if all are true:
 - Every content entry must declare:
   - `id`
   - `pack`
-  - `documentType`
+  - `documentType` (`Item`, `RollTable`, `Actor`, `JournalEntry`)
   - `name`
   - `version`
   - `minSystemVersion`

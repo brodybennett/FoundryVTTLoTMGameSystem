@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.2.1
+
+- Reworked compendium architecture to target final browsing model:
+  - per-pathway pathway packs
+  - item packs by subtype
+  - global abilities, rituals, and sealed artifacts packs
+  - roll tables segmented by gameplay area
+  - actor packs split by factions, beyonder monsters, and civilians
+  - rules JournalEntry reference pack
+- Added actor and rules source domains under `content-src/actors` and `content-src/rules`.
+- Extended content validator and compendium builder for `Actor` and `JournalEntry` document generation.
+- Added structured grouping metadata on generated documents for pathway/sequence/segment browsing.
+- Updated manifest and verification checks to enforce the new pack layout.
+
 ## 1.2.0
 
 - Added full Foundry runtime bootstrap with actor/item document classes, default sheets, and `game.lotm` API.

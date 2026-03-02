@@ -12,15 +12,6 @@ import {
 } from "../module/rolls/roll-engine.mjs";
 import { runWorldMigrationV120 } from "../module/migrations/v1_2_0.mjs";
 
-const REQUIRED_PACKS = [
-  "pathways",
-  "seer-abilities",
-  "seer-items",
-  "seer-rituals",
-  "seer-artifacts",
-  "seer-rolltables"
-].map((name) => `${SYSTEM_ID}.${name}`);
-
 function registerSettings() {
   game.settings.register(SYSTEM_ID, "automationLevel", {
     name: "LOTM.Settings.AutomationLevel.Name",
@@ -100,7 +91,8 @@ function registerGameApi() {
 }
 
 function checkPackAvailability() {
-  const missing = REQUIRED_PACKS.filter((packId) => !game.packs?.get(packId));
+  const expected = (game.system?.packs ?? []).map((pack) => `${SYSTEM_ID}.${pack.name}`);
+  const missing = expected.filter((packId) => !game.packs?.get(packId));
   if (missing.length === 0) return;
 
   const msg = `LoTM missing expected packs: ${missing.join(", ")}. Rebuild system compendiums.`;

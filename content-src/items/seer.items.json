@@ -7,9 +7,9 @@
       "itemType": "weapon",
       "name": "Brass Revolver",
       "img": "icons/weapons/guns/gun-pistol-flintlock-gold.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": ["pathway.seer"],
       "system": {
         "id": "item.seer.brass_revolver",
@@ -30,8 +30,8 @@
           "accuracyBonus": 3
         },
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": ["pathway.seer"]
         }
       }
@@ -43,9 +43,9 @@
       "itemType": "weapon",
       "name": "Cane Sword",
       "img": "icons/weapons/swords/sword-cane-gold.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": [],
       "system": {
         "id": "item.seer.cane_sword",
@@ -66,8 +66,8 @@
           "accuracyBonus": 2
         },
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": []
         }
       }
@@ -79,9 +79,9 @@
       "itemType": "weapon",
       "name": "Ritual Dagger",
       "img": "icons/weapons/daggers/dagger-ornate-gold.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": [],
       "system": {
         "id": "item.seer.ritual_dagger",
@@ -102,8 +102,8 @@
           "accuracyBonus": 4
         },
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": []
         }
       }
@@ -115,9 +115,9 @@
       "itemType": "weapon",
       "name": "Hallowed Ammunition",
       "img": "icons/weapons/ammunition/shot-round-lead.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": ["item.seer.brass_revolver"],
       "system": {
         "id": "item.seer.hallowed_ammunition",
@@ -138,8 +138,8 @@
           "accuracyBonus": 1
         },
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": ["item.seer.brass_revolver"]
         }
       }
@@ -151,9 +151,9 @@
       "itemType": "armor",
       "name": "Reinforced Leather Coat",
       "img": "icons/equipment/chest/coat-leather-brown.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": [],
       "system": {
         "id": "item.seer.leather_coat",
@@ -173,8 +173,8 @@
           "encumbrancePenalty": 0
         },
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": []
         }
       }
@@ -186,9 +186,9 @@
       "itemType": "armor",
       "name": "Hidden Plate Vest",
       "img": "icons/equipment/chest/breastplate-layered-steel-gold.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": [],
       "system": {
         "id": "item.seer.hidden_plate",
@@ -208,8 +208,8 @@
           "encumbrancePenalty": 2
         },
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": []
         }
       }
@@ -221,9 +221,9 @@
       "itemType": "gear",
       "name": "Divination Deck",
       "img": "icons/sundries/gaming/playing-cards.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": [],
       "system": {
         "id": "item.seer.divination_deck",
@@ -238,8 +238,8 @@
         "effects": [],
         "tags": ["gear", "ritual", "tool"],
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": []
         }
       }
@@ -251,9 +251,9 @@
       "itemType": "gear",
       "name": "Sealed Journal",
       "img": "icons/sundries/books/book-worn-brown.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": [],
       "system": {
         "id": "item.seer.sealed_journal",
@@ -268,8 +268,8 @@
         "effects": [],
         "tags": ["gear", "investigation", "tool"],
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": []
         }
       }
@@ -281,9 +281,9 @@
       "itemType": "gear",
       "name": "Dream Incense",
       "img": "icons/commodities/materials/incense.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": [],
       "system": {
         "id": "item.seer.dream_incense",
@@ -298,8 +298,8 @@
         "effects": [],
         "tags": ["gear", "dream", "ritual"],
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": []
         }
       }
@@ -311,9 +311,9 @@
       "itemType": "gear",
       "name": "Spirit Lens",
       "img": "icons/tools/scribal/magnifying-glass.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": [],
       "system": {
         "id": "item.seer.spirit_lens",
@@ -328,8 +328,8 @@
         "effects": [],
         "tags": ["gear", "vision", "occult"],
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": []
         }
       }
@@ -341,9 +341,9 @@
       "itemType": "consumable",
       "name": "Focus Tonic",
       "img": "icons/consumables/potions/potion-bottle-blue.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": [],
       "system": {
         "id": "item.seer.focus_tonic",
@@ -358,8 +358,8 @@
         "effects": [],
         "tags": ["consumable", "spirit", "alchemical"],
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": []
         }
       }
@@ -371,9 +371,9 @@
       "itemType": "consumable",
       "name": "Salt Bullet",
       "img": "icons/weapons/ammunition/bullets-shell.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": ["item.seer.brass_revolver"],
       "system": {
         "id": "item.seer.salt_bullet",
@@ -388,8 +388,8 @@
         "effects": [],
         "tags": ["consumable", "ammo", "anti-spirit"],
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": ["item.seer.brass_revolver"]
         }
       }
@@ -401,9 +401,9 @@
       "itemType": "consumable",
       "name": "Mercury Vial",
       "img": "icons/consumables/potions/potion-bottle-corked-white.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": [],
       "system": {
         "id": "item.seer.mercury_vial",
@@ -418,8 +418,8 @@
         "effects": [],
         "tags": ["consumable", "ritual", "purification"],
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": []
         }
       }
@@ -431,9 +431,9 @@
       "itemType": "consumable",
       "name": "Lotus Tea",
       "img": "icons/consumables/drinks/tea-cup-steaming.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": [],
       "system": {
         "id": "item.seer.lotus_tea",
@@ -448,8 +448,8 @@
         "effects": [],
         "tags": ["consumable", "recovery"],
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": []
         }
       }
@@ -461,9 +461,9 @@
       "itemType": "ingredient",
       "name": "Ashen Root",
       "img": "icons/commodities/biological/root-brown.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": [],
       "system": {
         "id": "item.seer.ashen_root",
@@ -478,8 +478,8 @@
         "effects": [],
         "tags": ["ingredient", "earth"],
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": []
         }
       }
@@ -491,9 +491,9 @@
       "itemType": "ingredient",
       "name": "Moon Water",
       "img": "icons/commodities/materials/liquid-bottle-blue.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": [],
       "system": {
         "id": "item.seer.moon_water",
@@ -508,8 +508,8 @@
         "effects": [],
         "tags": ["ingredient", "lunar"],
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": []
         }
       }
@@ -521,9 +521,9 @@
       "itemType": "ingredient",
       "name": "Night Jasmine",
       "img": "icons/commodities/flowers/flowers-buds-white.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": [],
       "system": {
         "id": "item.seer.night_jasmine",
@@ -538,8 +538,8 @@
         "effects": [],
         "tags": ["ingredient", "fragrance"],
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": []
         }
       }
@@ -551,9 +551,9 @@
       "itemType": "ingredient",
       "name": "Ghost Mushroom",
       "img": "icons/commodities/biological/fungus-mushroom-white.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": [],
       "system": {
         "id": "item.seer.ghost_mushroom",
@@ -568,8 +568,8 @@
         "effects": [],
         "tags": ["ingredient", "spirit"],
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": []
         }
       }
@@ -581,9 +581,9 @@
       "itemType": "feature",
       "name": "Intelligence Contacts",
       "img": "icons/svg/group.svg",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": ["pathway.seer"],
       "system": {
         "id": "feature.seer.contacts",
@@ -599,8 +599,8 @@
         "effects": [],
         "tags": ["feature", "social", "network"],
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": ["pathway.seer"]
         }
       }
@@ -612,9 +612,9 @@
       "itemType": "feature",
       "name": "Gray Fog Notes",
       "img": "icons/svg/book.svg",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": ["pathway.seer"],
       "system": {
         "id": "feature.seer.gray_fog_notes",
@@ -630,8 +630,8 @@
         "effects": [],
         "tags": ["feature", "lore"],
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": ["pathway.seer"]
         }
       }

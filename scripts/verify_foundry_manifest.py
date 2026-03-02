@@ -15,14 +15,30 @@ SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
 PACK_PATH_RE = re.compile(r"^packs/[a-z0-9-]+\.db$")
 
 
-REQUIRED_PACK_NAMES = {
-    "pathways",
-    "seer-abilities",
-    "seer-items",
-    "seer-rituals",
-    "seer-artifacts",
-    "seer-rolltables",
+REQUIRED_EXACT_PACKS = {
+    "abilities",
+    "rituals",
+    "sealed-artifacts",
+    "items-weapons",
+    "items-armor",
+    "items-gear",
+    "items-consumables",
+    "items-ingredients",
+    "rolltables-resources",
+    "rolltables-abilities",
+    "rolltables-rituals",
+    "rolltables-artifacts",
+    "rolltables-corruption",
+    "rolltables-encounters",
+    "actors-factions",
+    "actors-beyonder-monsters",
+    "actors-civilians",
+    "rules-reference",
 }
+
+REQUIRED_PREFIX_PACKS = ["pathways-"]
+
+ALLOWED_PACK_TYPES = {"Item", "RollTable", "Actor", "JournalEntry"}
 
 
 def fail(msg: str) -> None:
@@ -65,6 +81,7 @@ def verify_local_paths(manifest: dict) -> None:
         "data",
         "schemas",
         "system-config-v1.1.json",
+        "packs",
     ]
     for rel in required:
         ensure((ROOT / rel).exists(), f"Missing required package asset: {rel}")
@@ -74,6 +91,7 @@ def verify_packs(manifest: dict) -> None:
     packs = manifest.get("packs", [])
     ensure(isinstance(packs, list) and packs, "system.packs must be a non-empty array")
 
+    names = []
     seen = set()
     for pack in packs:
         for key in ["name", "label", "type", "path"]:
@@ -82,14 +100,17 @@ def verify_packs(manifest: dict) -> None:
         name = pack["name"]
         ensure(name not in seen, f"Duplicate pack name: {name}")
         seen.add(name)
+        names.append(name)
 
-        ensure(name in REQUIRED_PACK_NAMES, f"Unexpected pack name in manifest: {name}")
-        ensure(pack["type"] in {"Item", "RollTable"}, f"Pack {name} has unsupported type {pack['type']}")
+        ensure(pack["type"] in ALLOWED_PACK_TYPES, f"Pack {name} has unsupported type {pack['type']}")
         ensure(PACK_PATH_RE.fullmatch(pack["path"]) is not None, f"Pack {name} has invalid path {pack['path']}")
         ensure((ROOT / pack["path"]).exists(), f"Pack file does not exist: {pack['path']}")
 
-    missing = sorted(REQUIRED_PACK_NAMES - seen)
-    ensure(not missing, f"Missing required packs in manifest: {missing}")
+    missing_exact = sorted(REQUIRED_EXACT_PACKS - set(names))
+    ensure(not missing_exact, f"Missing required packs in manifest: {missing_exact}")
+
+    for prefix in REQUIRED_PREFIX_PACKS:
+        ensure(any(name.startswith(prefix) for name in names), f"Expected at least one pack with prefix '{prefix}'")
 
 
 def main() -> None:

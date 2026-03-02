@@ -1,0 +1,556 @@
+{
+  "entries": [
+    {
+      "id": "actor.npc.faction.nighthawks.captain",
+      "pack": "actors-factions",
+      "documentType": "Actor",
+      "actorType": "npc",
+      "name": "Nighthawk Captain",
+      "img": "icons/svg/mystery-man.svg",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
+      "dependencies": ["pathway.seer"],
+      "system": {
+        "identity": {
+          "pathwayId": "pathway.seer",
+          "sequence": 7,
+          "tier": "mid",
+          "backgroundId": "background.nighthawks"
+        },
+        "attributes": {
+          "str": { "base": 14, "temp": 0 },
+          "dex": { "base": 15, "temp": 0 },
+          "wil": { "base": 17, "temp": 0 },
+          "con": { "base": 14, "temp": 0 },
+          "cha": { "base": 13, "temp": 0 },
+          "int": { "base": 16, "temp": 0 },
+          "luck": { "base": 12, "temp": 0 }
+        },
+        "skills": {
+          "investigation": { "linkedAttr": "int", "rank": "expert", "misc": 0 },
+          "occult": { "linkedAttr": "int", "rank": "expert", "misc": 0 },
+          "willpower": { "linkedAttr": "wil", "rank": "expert", "misc": 0 },
+          "firearms": { "linkedAttr": "dex", "rank": "trained", "misc": 0 }
+        },
+        "derived": {
+          "hpMax": 96,
+          "spiritMax": 88,
+          "sanityMax": 100,
+          "defenseShift": 4,
+          "initiativeTarget": 49
+        },
+        "resources": {
+          "hp": 96,
+          "spirit": 88,
+          "corruption": 12,
+          "deathMarks": 0,
+          "deathSaves": 0
+        },
+        "combat": {
+          "armor": 2,
+          "cover": 0,
+          "encumbrancePenalty": 0,
+          "damageReduction": 2,
+          "actionBudget": {
+            "actions": 1,
+            "moves": 1,
+            "reactions": 1,
+            "bonusActions": 0
+          }
+        },
+        "progression": {
+          "gates": {
+            "narrative": true,
+            "economy": true,
+            "stability": true
+          },
+          "attemptState": "idle"
+        },
+        "tracks": {
+          "investigationIP": 0,
+          "actionLock": 0,
+          "movementCheckPenalty": 0,
+          "damageOutMultiplier": 1,
+          "incomingOffenseBonus": 0,
+          "offensePenaltyVsSource": 0,
+          "verbalLocked": 0,
+          "markedBySourceBonus": 0,
+          "isDowned": 0,
+          "factions": { "faction.nighthawks": 45 },
+          "threatClocks": [],
+          "influence": {},
+          "leverage": {}
+        },
+        "ritual": {
+          "instability": 0
+        },
+        "artifacts": {
+          "sceneUsesById": {}
+        },
+        "version": {
+          "schemaVersion": 1
+        }
+      }
+    },
+    {
+      "id": "actor.npc.faction.church.priest",
+      "pack": "actors-factions",
+      "documentType": "Actor",
+      "actorType": "npc",
+      "name": "Church Priest",
+      "img": "icons/svg/mystery-man.svg",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
+      "dependencies": [],
+      "system": {
+        "identity": {
+          "pathwayId": "pathway.none",
+          "sequence": 9,
+          "tier": "low",
+          "backgroundId": "background.church"
+        },
+        "attributes": {
+          "str": { "base": 10, "temp": 0 },
+          "dex": { "base": 10, "temp": 0 },
+          "wil": { "base": 14, "temp": 0 },
+          "con": { "base": 11, "temp": 0 },
+          "cha": { "base": 14, "temp": 0 },
+          "int": { "base": 13, "temp": 0 },
+          "luck": { "base": 10, "temp": 0 }
+        },
+        "skills": {
+          "ritualism": { "linkedAttr": "wil", "rank": "trained", "misc": 0 },
+          "persuasion": { "linkedAttr": "cha", "rank": "trained", "misc": 0 },
+          "insight": { "linkedAttr": "wil", "rank": "trained", "misc": 0 }
+        },
+        "derived": {
+          "hpMax": 58,
+          "spiritMax": 60,
+          "sanityMax": 66,
+          "defenseShift": 1,
+          "initiativeTarget": 37
+        },
+        "resources": {
+          "hp": 58,
+          "spirit": 60,
+          "corruption": 4,
+          "deathMarks": 0,
+          "deathSaves": 0
+        },
+        "combat": {
+          "armor": 0,
+          "cover": 0,
+          "encumbrancePenalty": 0,
+          "damageReduction": 0,
+          "actionBudget": {
+            "actions": 1,
+            "moves": 1,
+            "reactions": 1,
+            "bonusActions": 0
+          }
+        },
+        "progression": {
+          "gates": {
+            "narrative": true,
+            "economy": false,
+            "stability": true
+          },
+          "attemptState": "idle"
+        },
+        "tracks": {
+          "investigationIP": 0,
+          "actionLock": 0,
+          "movementCheckPenalty": 0,
+          "damageOutMultiplier": 1,
+          "incomingOffenseBonus": 0,
+          "offensePenaltyVsSource": 0,
+          "verbalLocked": 0,
+          "markedBySourceBonus": 0,
+          "isDowned": 0,
+          "factions": { "faction.church": 40 },
+          "threatClocks": [],
+          "influence": {},
+          "leverage": {}
+        },
+        "ritual": {
+          "instability": 0
+        },
+        "artifacts": {
+          "sceneUsesById": {}
+        },
+        "version": {
+          "schemaVersion": 1
+        }
+      }
+    },
+    {
+      "id": "actor.monster.beyonder.wraith_hound",
+      "pack": "actors-beyonder-monsters",
+      "documentType": "Actor",
+      "actorType": "npc",
+      "name": "Wraith Hound",
+      "img": "icons/svg/monster.svg",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
+      "dependencies": [],
+      "system": {
+        "identity": {
+          "pathwayId": "pathway.none",
+          "sequence": 8,
+          "tier": "low",
+          "backgroundId": "background.monster"
+        },
+        "attributes": {
+          "str": { "base": 16, "temp": 0 },
+          "dex": { "base": 16, "temp": 0 },
+          "wil": { "base": 11, "temp": 0 },
+          "con": { "base": 15, "temp": 0 },
+          "cha": { "base": 6, "temp": 0 },
+          "int": { "base": 8, "temp": 0 },
+          "luck": { "base": 7, "temp": 0 }
+        },
+        "skills": {
+          "perception": { "linkedAttr": "int", "rank": "trained", "misc": 5 },
+          "athletics": { "linkedAttr": "str", "rank": "expert", "misc": 0 },
+          "melee": { "linkedAttr": "str", "rank": "expert", "misc": 3 }
+        },
+        "derived": {
+          "hpMax": 110,
+          "spiritMax": 40,
+          "sanityMax": 40,
+          "defenseShift": 3,
+          "initiativeTarget": 54
+        },
+        "resources": {
+          "hp": 110,
+          "spirit": 40,
+          "corruption": 28,
+          "deathMarks": 0,
+          "deathSaves": 0
+        },
+        "combat": {
+          "armor": 1,
+          "cover": 0,
+          "encumbrancePenalty": 0,
+          "damageReduction": 3,
+          "actionBudget": {
+            "actions": 1,
+            "moves": 1,
+            "reactions": 1,
+            "bonusActions": 0
+          }
+        },
+        "progression": {
+          "gates": {
+            "narrative": false,
+            "economy": false,
+            "stability": false
+          },
+          "attemptState": "idle"
+        },
+        "tracks": {
+          "investigationIP": 0,
+          "actionLock": 0,
+          "movementCheckPenalty": 0,
+          "damageOutMultiplier": 1,
+          "incomingOffenseBonus": 0,
+          "offensePenaltyVsSource": 0,
+          "verbalLocked": 1,
+          "markedBySourceBonus": 0,
+          "isDowned": 0,
+          "factions": {},
+          "threatClocks": [],
+          "influence": {},
+          "leverage": {}
+        },
+        "ritual": {
+          "instability": 0
+        },
+        "artifacts": {
+          "sceneUsesById": {}
+        },
+        "version": {
+          "schemaVersion": 1
+        }
+      }
+    },
+    {
+      "id": "actor.monster.beyonder.faceless_mimic",
+      "pack": "actors-beyonder-monsters",
+      "documentType": "Actor",
+      "actorType": "npc",
+      "name": "Faceless Mimic",
+      "img": "icons/svg/monster.svg",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
+      "dependencies": ["ability.seer.swap_stage"],
+      "system": {
+        "identity": {
+          "pathwayId": "pathway.none",
+          "sequence": 7,
+          "tier": "mid",
+          "backgroundId": "background.monster"
+        },
+        "attributes": {
+          "str": { "base": 13, "temp": 0 },
+          "dex": { "base": 17, "temp": 0 },
+          "wil": { "base": 13, "temp": 0 },
+          "con": { "base": 12, "temp": 0 },
+          "cha": { "base": 17, "temp": 0 },
+          "int": { "base": 13, "temp": 0 },
+          "luck": { "base": 11, "temp": 0 }
+        },
+        "skills": {
+          "deception": { "linkedAttr": "cha", "rank": "expert", "misc": 5 },
+          "stealth": { "linkedAttr": "dex", "rank": "expert", "misc": 0 },
+          "melee": { "linkedAttr": "str", "rank": "trained", "misc": 0 }
+        },
+        "derived": {
+          "hpMax": 84,
+          "spiritMax": 70,
+          "sanityMax": 72,
+          "defenseShift": 5,
+          "initiativeTarget": 56
+        },
+        "resources": {
+          "hp": 84,
+          "spirit": 70,
+          "corruption": 35,
+          "deathMarks": 0,
+          "deathSaves": 0
+        },
+        "combat": {
+          "armor": 0,
+          "cover": 0,
+          "encumbrancePenalty": 0,
+          "damageReduction": 1,
+          "actionBudget": {
+            "actions": 1,
+            "moves": 1,
+            "reactions": 1,
+            "bonusActions": 0
+          }
+        },
+        "progression": {
+          "gates": {
+            "narrative": false,
+            "economy": false,
+            "stability": false
+          },
+          "attemptState": "idle"
+        },
+        "tracks": {
+          "investigationIP": 0,
+          "actionLock": 0,
+          "movementCheckPenalty": 0,
+          "damageOutMultiplier": 1,
+          "incomingOffenseBonus": 0,
+          "offensePenaltyVsSource": 0,
+          "verbalLocked": 0,
+          "markedBySourceBonus": 0,
+          "isDowned": 0,
+          "factions": {},
+          "threatClocks": [],
+          "influence": {},
+          "leverage": {}
+        },
+        "ritual": {
+          "instability": 0
+        },
+        "artifacts": {
+          "sceneUsesById": {}
+        },
+        "version": {
+          "schemaVersion": 1
+        }
+      }
+    },
+    {
+      "id": "actor.npc.civilian.dockworker",
+      "pack": "actors-civilians",
+      "documentType": "Actor",
+      "actorType": "npc",
+      "name": "Dockworker",
+      "img": "icons/svg/mystery-man.svg",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
+      "dependencies": [],
+      "system": {
+        "identity": {
+          "pathwayId": "pathway.none",
+          "sequence": 9,
+          "tier": "low",
+          "backgroundId": "background.civilian"
+        },
+        "attributes": {
+          "str": { "base": 11, "temp": 0 },
+          "dex": { "base": 10, "temp": 0 },
+          "wil": { "base": 10, "temp": 0 },
+          "con": { "base": 11, "temp": 0 },
+          "cha": { "base": 9, "temp": 0 },
+          "int": { "base": 9, "temp": 0 },
+          "luck": { "base": 10, "temp": 0 }
+        },
+        "skills": {
+          "athletics": { "linkedAttr": "str", "rank": "familiar", "misc": 0 },
+          "streetwise": { "linkedAttr": "int", "rank": "familiar", "misc": 0 }
+        },
+        "derived": {
+          "hpMax": 54,
+          "spiritMax": 35,
+          "sanityMax": 48,
+          "defenseShift": 0,
+          "initiativeTarget": 31
+        },
+        "resources": {
+          "hp": 54,
+          "spirit": 35,
+          "corruption": 0,
+          "deathMarks": 0,
+          "deathSaves": 0
+        },
+        "combat": {
+          "armor": 0,
+          "cover": 0,
+          "encumbrancePenalty": 0,
+          "damageReduction": 0,
+          "actionBudget": {
+            "actions": 1,
+            "moves": 1,
+            "reactions": 1,
+            "bonusActions": 0
+          }
+        },
+        "progression": {
+          "gates": {
+            "narrative": false,
+            "economy": false,
+            "stability": true
+          },
+          "attemptState": "idle"
+        },
+        "tracks": {
+          "investigationIP": 0,
+          "actionLock": 0,
+          "movementCheckPenalty": 0,
+          "damageOutMultiplier": 1,
+          "incomingOffenseBonus": 0,
+          "offensePenaltyVsSource": 0,
+          "verbalLocked": 0,
+          "markedBySourceBonus": 0,
+          "isDowned": 0,
+          "factions": {},
+          "threatClocks": [],
+          "influence": {},
+          "leverage": {}
+        },
+        "ritual": {
+          "instability": 0
+        },
+        "artifacts": {
+          "sceneUsesById": {}
+        },
+        "version": {
+          "schemaVersion": 1
+        }
+      }
+    },
+    {
+      "id": "actor.npc.civilian.reporter",
+      "pack": "actors-civilians",
+      "documentType": "Actor",
+      "actorType": "npc",
+      "name": "Newspaper Reporter",
+      "img": "icons/svg/mystery-man.svg",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
+      "dependencies": [],
+      "system": {
+        "identity": {
+          "pathwayId": "pathway.none",
+          "sequence": 9,
+          "tier": "low",
+          "backgroundId": "background.civilian"
+        },
+        "attributes": {
+          "str": { "base": 8, "temp": 0 },
+          "dex": { "base": 10, "temp": 0 },
+          "wil": { "base": 12, "temp": 0 },
+          "con": { "base": 9, "temp": 0 },
+          "cha": { "base": 12, "temp": 0 },
+          "int": { "base": 13, "temp": 0 },
+          "luck": { "base": 11, "temp": 0 }
+        },
+        "skills": {
+          "investigation": { "linkedAttr": "int", "rank": "trained", "misc": 0 },
+          "persuasion": { "linkedAttr": "cha", "rank": "trained", "misc": 0 },
+          "streetwise": { "linkedAttr": "int", "rank": "familiar", "misc": 0 }
+        },
+        "derived": {
+          "hpMax": 48,
+          "spiritMax": 44,
+          "sanityMax": 54,
+          "defenseShift": 0,
+          "initiativeTarget": 35
+        },
+        "resources": {
+          "hp": 48,
+          "spirit": 44,
+          "corruption": 2,
+          "deathMarks": 0,
+          "deathSaves": 0
+        },
+        "combat": {
+          "armor": 0,
+          "cover": 0,
+          "encumbrancePenalty": 0,
+          "damageReduction": 0,
+          "actionBudget": {
+            "actions": 1,
+            "moves": 1,
+            "reactions": 1,
+            "bonusActions": 0
+          }
+        },
+        "progression": {
+          "gates": {
+            "narrative": false,
+            "economy": false,
+            "stability": true
+          },
+          "attemptState": "idle"
+        },
+        "tracks": {
+          "investigationIP": 0,
+          "actionLock": 0,
+          "movementCheckPenalty": 0,
+          "damageOutMultiplier": 1,
+          "incomingOffenseBonus": 0,
+          "offensePenaltyVsSource": 0,
+          "verbalLocked": 0,
+          "markedBySourceBonus": 0,
+          "isDowned": 0,
+          "factions": {},
+          "threatClocks": [],
+          "influence": {},
+          "leverage": {}
+        },
+        "ritual": {
+          "instability": 0
+        },
+        "artifacts": {
+          "sceneUsesById": {}
+        },
+        "version": {
+          "schemaVersion": 1
+        }
+      }
+    }
+  ]
+}

@@ -2,7 +2,7 @@
   "id": "lotm-system",
   "title": "LoTM Game System",
   "description": "Lord of the Mysteries-inspired tabletop roleplaying game system for Foundry Virtual Tabletop.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "authors": [
     {
       "name": "Brody Bennett",
@@ -28,46 +28,124 @@
   ],
   "packs": [
     {
-      "name": "pathways",
-      "label": "LoTM Pathways",
+      "name": "pathways-seer",
+      "label": "Pathways: Seer",
       "type": "Item",
-      "path": "packs/pathways.db"
+      "path": "packs/pathways-seer.db"
     },
     {
-      "name": "seer-abilities",
-      "label": "Seer Abilities",
+      "name": "abilities",
+      "label": "Abilities (All Pathways)",
       "type": "Item",
-      "path": "packs/seer-abilities.db"
+      "path": "packs/abilities.db"
     },
     {
-      "name": "seer-items",
-      "label": "Seer Items",
+      "name": "rituals",
+      "label": "Rituals (All Pathways)",
       "type": "Item",
-      "path": "packs/seer-items.db"
+      "path": "packs/rituals.db"
     },
     {
-      "name": "seer-rituals",
-      "label": "Seer Rituals",
+      "name": "sealed-artifacts",
+      "label": "Sealed Artifacts",
       "type": "Item",
-      "path": "packs/seer-rituals.db"
+      "path": "packs/sealed-artifacts.db"
     },
     {
-      "name": "seer-artifacts",
-      "label": "Seer Artifacts",
+      "name": "items-weapons",
+      "label": "Items: Weapons",
       "type": "Item",
-      "path": "packs/seer-artifacts.db"
+      "path": "packs/items-weapons.db"
     },
     {
-      "name": "seer-rolltables",
-      "label": "Seer Roll Tables",
+      "name": "items-armor",
+      "label": "Items: Armor",
+      "type": "Item",
+      "path": "packs/items-armor.db"
+    },
+    {
+      "name": "items-gear",
+      "label": "Items: Gear and Features",
+      "type": "Item",
+      "path": "packs/items-gear.db"
+    },
+    {
+      "name": "items-consumables",
+      "label": "Items: Consumables",
+      "type": "Item",
+      "path": "packs/items-consumables.db"
+    },
+    {
+      "name": "items-ingredients",
+      "label": "Items: Ingredients",
+      "type": "Item",
+      "path": "packs/items-ingredients.db"
+    },
+    {
+      "name": "rolltables-resources",
+      "label": "Roll Tables: Resources",
       "type": "RollTable",
-      "path": "packs/seer-rolltables.db"
+      "path": "packs/rolltables-resources.db"
+    },
+    {
+      "name": "rolltables-abilities",
+      "label": "Roll Tables: Abilities",
+      "type": "RollTable",
+      "path": "packs/rolltables-abilities.db"
+    },
+    {
+      "name": "rolltables-rituals",
+      "label": "Roll Tables: Rituals",
+      "type": "RollTable",
+      "path": "packs/rolltables-rituals.db"
+    },
+    {
+      "name": "rolltables-artifacts",
+      "label": "Roll Tables: Artifacts",
+      "type": "RollTable",
+      "path": "packs/rolltables-artifacts.db"
+    },
+    {
+      "name": "rolltables-corruption",
+      "label": "Roll Tables: Corruption",
+      "type": "RollTable",
+      "path": "packs/rolltables-corruption.db"
+    },
+    {
+      "name": "rolltables-encounters",
+      "label": "Roll Tables: Encounters",
+      "type": "RollTable",
+      "path": "packs/rolltables-encounters.db"
+    },
+    {
+      "name": "actors-factions",
+      "label": "Actors: Faction NPCs",
+      "type": "Actor",
+      "path": "packs/actors-factions.db"
+    },
+    {
+      "name": "actors-beyonder-monsters",
+      "label": "Actors: Beyonder Monsters",
+      "type": "Actor",
+      "path": "packs/actors-beyonder-monsters.db"
+    },
+    {
+      "name": "actors-civilians",
+      "label": "Actors: Civilians",
+      "type": "Actor",
+      "path": "packs/actors-civilians.db"
+    },
+    {
+      "name": "rules-reference",
+      "label": "Rules: Hyperlinked Reference",
+      "type": "JournalEntry",
+      "path": "packs/rules-reference.db"
     }
   ],
   "socket": false,
   "url": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem",
   "manifest": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem/releases/latest/download/system.json",
-  "download": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem/releases/download/v1.2.0/lotm-system-v1.2.0.zip",
+  "download": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem/releases/download/v1.2.1/lotm-system-v1.2.1.zip",
   "license": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem/blob/master/LICENSE.md",
   "readme": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem/blob/master/README.md",
   "changelog": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem/blob/master/CHANGELOG.md"

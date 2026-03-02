@@ -7,9 +7,9 @@
       "itemType": "ritual",
       "name": "Mirror Divination",
       "img": "icons/magic/perception/eye-ringed-glow-angry-large-teal.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": ["pathway.seer", "item.seer.divination_deck"],
       "system": {
         "id": "ritual.seer.mirror_divination",
@@ -33,8 +33,8 @@
           "baseCastMinutes": 10
         },
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": ["pathway.seer", "item.seer.divination_deck"]
         }
       }
@@ -46,9 +46,9 @@
       "itemType": "ritual",
       "name": "Blood Tracing",
       "img": "icons/magic/unholy/strike-body-blood-red.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": ["pathway.seer"],
       "system": {
         "id": "ritual.seer.blood_tracing",
@@ -72,8 +72,8 @@
           "baseCastMinutes": 20
         },
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": ["pathway.seer"]
         }
       }
@@ -85,9 +85,9 @@
       "itemType": "ritual",
       "name": "Echo of the Past",
       "img": "icons/magic/time/arrows-circling-green.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": ["pathway.seer"],
       "system": {
         "id": "ritual.seer.echo_of_past",
@@ -111,8 +111,8 @@
           "baseCastMinutes": 30
         },
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": ["pathway.seer"]
         }
       }
@@ -124,9 +124,9 @@
       "itemType": "ritual",
       "name": "Mind Lantern",
       "img": "icons/sundries/lights/lantern-iron-yellow.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": ["pathway.seer", "item.seer.dream_incense"],
       "system": {
         "id": "ritual.seer.mind_lantern",
@@ -150,8 +150,8 @@
           "baseCastMinutes": 45
         },
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": ["pathway.seer", "item.seer.dream_incense"]
         }
       }
@@ -163,9 +163,9 @@
       "itemType": "ritual",
       "name": "Shadow Projection",
       "img": "icons/magic/unholy/silhouette-light-fire-blue.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": ["pathway.seer"],
       "system": {
         "id": "ritual.seer.shadow_projection",
@@ -189,8 +189,8 @@
           "baseCastMinutes": 60
         },
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": ["pathway.seer"]
         }
       }
@@ -202,9 +202,9 @@
       "itemType": "ritual",
       "name": "Starlight Observatory",
       "img": "icons/magic/light/projectile-stars-salvo-blue.webp",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": ["pathway.seer", "item.seer.spirit_lens"],
       "system": {
         "id": "ritual.seer.starlight_observatory",
@@ -228,8 +228,8 @@
           "baseCastMinutes": 90
         },
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": ["pathway.seer", "item.seer.spirit_lens"]
         }
       }

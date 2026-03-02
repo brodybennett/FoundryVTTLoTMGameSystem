@@ -7,9 +7,9 @@
       "itemType": "pathway",
       "name": "Pathway: Seer",
       "img": "icons/svg/eye.svg",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": [],
       "system": {
         "id": "pathway.seer",
@@ -25,8 +25,8 @@
         "effects": [],
         "tags": ["pathway", "seer", "core"],
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": []
         }
       }
@@ -38,9 +38,9 @@
       "itemType": "sequenceNode",
       "name": "Seer Sequence 9: Apprentice Diviner",
       "img": "icons/svg/book.svg",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": ["pathway.seer"],
       "system": {
         "id": "sequence.seer.9",
@@ -58,8 +58,8 @@
         "effects": [],
         "tags": ["sequence", "seer", "s9"],
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": ["pathway.seer"]
         }
       }
@@ -71,9 +71,9 @@
       "itemType": "sequenceNode",
       "name": "Seer Sequence 8: Clown",
       "img": "icons/svg/mystery-man.svg",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": ["pathway.seer", "sequence.seer.9"],
       "system": {
         "id": "sequence.seer.8",
@@ -91,8 +91,8 @@
         "effects": [],
         "tags": ["sequence", "seer", "s8"],
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": ["pathway.seer", "sequence.seer.9"]
         }
       }
@@ -104,9 +104,9 @@
       "itemType": "sequenceNode",
       "name": "Seer Sequence 7: Magician",
       "img": "icons/svg/silhouette.svg",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": ["pathway.seer", "sequence.seer.8"],
       "system": {
         "id": "sequence.seer.7",
@@ -124,8 +124,8 @@
         "effects": [],
         "tags": ["sequence", "seer", "s7"],
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": ["pathway.seer", "sequence.seer.8"]
         }
       }

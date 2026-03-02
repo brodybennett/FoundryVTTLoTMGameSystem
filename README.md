@@ -12,18 +12,34 @@ In Foundry VTT:
 
 `https://github.com/brodybennett/FoundryVTTLoTMGameSystem/releases/latest/download/system.json`
 
-## Create a Playable World (v1.2.0 Vertical Slice)
+## Compendium Structure (v1.2.1)
+
+The system publishes compendiums in this access layout:
+
+- `Pathways: <PathwayName>` packs (example: `Pathways: Seer` with pathway and sequence nodes)
+- `Items` split by subtype:
+  - `Items: Weapons`
+  - `Items: Armor`
+  - `Items: Gear and Features`
+  - `Items: Consumables`
+  - `Items: Ingredients`
+- `Sealed Artifacts` (cross-pathway, grouped by sequence in naming/flags)
+- `Abilities (All Pathways)` (grouped by pathway + sequence in naming/flags)
+- `Rituals (All Pathways)` (pathway/universal grouping supported)
+- `Roll Tables` segmented by gameplay area:
+  - Resources, Abilities, Rituals, Artifacts, Corruption, Encounters
+- `Actors` grouped by category:
+  - Faction NPCs
+  - Beyonder Monsters
+  - Civilians
+- `Rules: Hyperlinked Reference` (JournalEntry rules compendium with table-of-contents links)
+
+## Create a Playable World
 
 1. Create a world using `LoTM Game System`.
 2. Open `Compendium Packs` in sidebar.
-3. Import from these system packs as needed:
-- `LoTM Pathways`
-- `Seer Abilities`
-- `Seer Items`
-- `Seer Rituals`
-- `Seer Artifacts`
-- `Seer Roll Tables`
-4. Create a `character` actor and drag pathway/abilities/items from packs onto the actor sheet.
+3. Import content from system packs as needed.
+4. Create a `character` actor and drag pathway/ability/item content onto the actor sheet.
 5. Use actor sheet actions for `Check`, `Ritual Risk`, `Artifact Backlash`, and corruption updates.
 
 ## Content Authoring Workflow
@@ -36,6 +52,8 @@ Source of truth is under `content-src/`:
 - `content-src/rituals/`
 - `content-src/artifacts/`
 - `content-src/rolltables/`
+- `content-src/actors/`
+- `content-src/rules/`
 - `content-src/configs/`
 
 Validate and build packs:
@@ -97,5 +115,5 @@ git push origin vX.Y.Z
 - If the repository is private, anonymous Foundry installs fail.
 - If tag and `system.json.version` do not match, release workflow fails.
 - If zip root folder is not `lotm-system/`, Foundry install/update fails.
-- If `packs/*.db` are missing, compendium lists will be empty.
+- If `packs/*.db` are missing, compendium lists remain empty.
 - If content semver/dependencies are invalid, content validation fails.

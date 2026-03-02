@@ -8,7 +8,25 @@ SYSTEM_PATH = ROOT / "system.json"
 
 ID_RE = re.compile(r"^[a-z][a-z0-9_.-]*$")
 PACK_RE = re.compile(r"^[a-z][a-z0-9-]*$")
+SEGMENT_RE = re.compile(r"^[a-z][a-z0-9-]*$")
 SEMVER_RE = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
+
+
+ACTOR_ALLOWED_TYPES = {"character", "npc"}
+JOURNAL_ALLOWED_FORMATS = {0, 1}
+
+
+ITEM_BUCKET_TYPES = {"weapon", "armor", "gear", "feature", "consumable", "ingredient", "background"}
+
+
+ACTOR_REQUIRED_PACKS = {
+    "actors-factions",
+    "actors-beyonder-monsters",
+    "actors-civilians",
+}
+
+
+RULES_REQUIRED_PACK = "rules-reference"
 
 
 def fail(message: str) -> None:
@@ -22,10 +40,6 @@ def parse_semver(value: str, label: str):
     if not match:
         fail(f"{label} must match X.Y.Z, got {value}")
     return tuple(int(part) for part in match.groups())
-
-
-def semver_compare(a, b):
-    return (a > b) - (a < b)
 
 
 def load_system_version():
@@ -55,7 +69,7 @@ def load_entries():
     return entries
 
 
-def validate_entry(entry, current_version, warnings):
+def validate_common_fields(entry, current_version, warnings):
     required = {
         "id",
         "pack",
@@ -99,68 +113,129 @@ def validate_entry(entry, current_version, warnings):
         if not isinstance(dep, str) or ID_RE.fullmatch(dep) is None:
             fail(f"{content_id} has invalid dependency id: {dep}")
 
-    doc_type = entry["documentType"]
-    if doc_type not in {"Item", "RollTable"}:
-        fail(f"{content_id} has unsupported documentType: {doc_type}")
 
+def validate_item_entry(entry):
+    content_id = entry["id"]
+    if "itemType" not in entry:
+        fail(f"{content_id} missing itemType")
+    if "system" not in entry or not isinstance(entry["system"], dict):
+        fail(f"{content_id} missing system object")
+
+    system = entry["system"]
+    if system.get("id") != content_id:
+        fail(f"{content_id} system.id must match content id")
+
+    if "dependencies" not in system or not isinstance(system["dependencies"], dict):
+        fail(f"{content_id} system.dependencies must exist")
+
+    dep_block = system["dependencies"]
+    parse_semver(dep_block.get("minSystemVersion", ""), f"{content_id}.system.dependencies.minSystemVersion")
+    parse_semver(dep_block.get("maxTestedSystemVersion", ""), f"{content_id}.system.dependencies.maxTestedSystemVersion")
+
+    requires_ids = dep_block.get("requiresIds", [])
+    if not isinstance(requires_ids, list):
+        fail(f"{content_id}.system.dependencies.requiresIds must be array")
+
+
+def validate_rolltable_entry(entry):
+    content_id = entry["id"]
+    results = entry.get("results")
+    if not isinstance(results, list) or not results:
+        fail(f"{content_id} rolltable must include non-empty results")
+
+    for idx, result in enumerate(results):
+        if not isinstance(result, dict):
+            fail(f"{content_id} result #{idx + 1} must be object")
+        if not isinstance(result.get("text"), str) or not result.get("text"):
+            fail(f"{content_id} result #{idx + 1} missing text")
+        weight = result.get("weight", 1)
+        if not isinstance(weight, int) or weight < 1:
+            fail(f"{content_id} result #{idx + 1} weight must be integer >=1")
+
+    segment = entry.get("segment")
+    if segment is not None and (not isinstance(segment, str) or SEGMENT_RE.fullmatch(segment) is None):
+        fail(f"{content_id}.segment must match {SEGMENT_RE.pattern}")
+
+
+def validate_actor_entry(entry):
+    content_id = entry["id"]
+    actor_type = entry.get("actorType")
+    if actor_type not in ACTOR_ALLOWED_TYPES:
+        fail(f"{content_id}.actorType must be one of {sorted(ACTOR_ALLOWED_TYPES)}")
+    if "system" not in entry or not isinstance(entry["system"], dict):
+        fail(f"{content_id} actor entry missing system object")
+
+
+def validate_journal_entry(entry):
+    content_id = entry["id"]
+    pages = entry.get("pages")
+    if not isinstance(pages, list) or not pages:
+        fail(f"{content_id} journal entry must include non-empty pages array")
+
+    for idx, page in enumerate(pages):
+        if not isinstance(page, dict):
+            fail(f"{content_id} page #{idx + 1} must be object")
+        title = page.get("title")
+        content = page.get("content")
+        if not isinstance(title, str) or not title.strip():
+            fail(f"{content_id} page #{idx + 1} missing title")
+        if not isinstance(content, str) or not content.strip():
+            fail(f"{content_id} page #{idx + 1} missing content")
+        fmt = page.get("format", 1)
+        if fmt not in JOURNAL_ALLOWED_FORMATS:
+            fail(f"{content_id} page #{idx + 1} has invalid format {fmt}")
+
+
+def validate_entry(entry, current_version, warnings):
+    validate_common_fields(entry, current_version, warnings)
+
+    doc_type = entry["documentType"]
     if doc_type == "Item":
-        if "itemType" not in entry:
-            fail(f"{content_id} missing itemType")
-        if "system" not in entry or not isinstance(entry["system"], dict):
-            fail(f"{content_id} missing system object")
-        system = entry["system"]
-        if system.get("id") != content_id:
-            fail(f"{content_id} system.id must match content id")
-        if "dependencies" not in system or not isinstance(system["dependencies"], dict):
-            fail(f"{content_id} system.dependencies must exist")
-        dep_block = system["dependencies"]
-        parse_semver(dep_block.get("minSystemVersion", ""), f"{content_id}.system.dependencies.minSystemVersion")
-        parse_semver(dep_block.get("maxTestedSystemVersion", ""), f"{content_id}.system.dependencies.maxTestedSystemVersion")
-        requires_ids = dep_block.get("requiresIds", [])
-        if not isinstance(requires_ids, list):
-            fail(f"{content_id}.system.dependencies.requiresIds must be array")
-    else:
-        results = entry.get("results")
-        if not isinstance(results, list) or not results:
-            fail(f"{content_id} rolltable must include non-empty results")
-        for idx, result in enumerate(results):
-            if not isinstance(result, dict):
-                fail(f"{content_id} result #{idx + 1} must be object")
-            if not isinstance(result.get("text"), str) or not result.get("text"):
-                fail(f"{content_id} result #{idx + 1} missing text")
-            weight = result.get("weight", 1)
-            if not isinstance(weight, int) or weight < 1:
-                fail(f"{content_id} result #{idx + 1} weight must be integer >=1")
+        validate_item_entry(entry)
+        return
+    if doc_type == "RollTable":
+        validate_rolltable_entry(entry)
+        return
+    if doc_type == "Actor":
+        validate_actor_entry(entry)
+        return
+    if doc_type == "JournalEntry":
+        validate_journal_entry(entry)
+        return
+
+    fail(f"{entry['id']} has unsupported documentType: {doc_type}")
 
 
 def enforce_counts(entries):
-    def count_items(pack, item_type=None):
-        filtered = [
-            e
-            for e in entries
-            if e["documentType"] == "Item" and e["pack"] == pack and (item_type is None or e.get("itemType") == item_type)
-        ]
-        return len(filtered)
+    item_entries = [entry for entry in entries if entry["documentType"] == "Item"]
 
-    ability_count = count_items("seer-abilities", "ability")
-    item_count = count_items("seer-items")
-    ritual_count = count_items("seer-rituals", "ritual")
-    artifact_count = count_items("seer-artifacts", "artifact")
-    rolltable_count = len([e for e in entries if e["documentType"] == "RollTable" and e["pack"] == "seer-rolltables"])
+    ability_count = len([entry for entry in item_entries if entry.get("itemType") == "ability"])
+    item_bucket_count = len([entry for entry in item_entries if entry.get("itemType") in ITEM_BUCKET_TYPES])
+    ritual_count = len([entry for entry in item_entries if entry.get("itemType") == "ritual"])
+    artifact_count = len([entry for entry in item_entries if entry.get("itemType") == "artifact"])
+    rolltable_count = len([entry for entry in entries if entry["documentType"] == "RollTable"])
 
     if ability_count < 12:
-        fail(f"Expected >=12 abilities in seer-abilities pack, found {ability_count}")
-    if item_count < 20:
-        fail(f"Expected >=20 items in seer-items pack, found {item_count}")
+        fail(f"Expected >=12 abilities, found {ability_count}")
+    if item_bucket_count < 20:
+        fail(f"Expected >=20 item bucket entries, found {item_bucket_count}")
     if ritual_count < 6:
-        fail(f"Expected >=6 rituals in seer-rituals pack, found {ritual_count}")
+        fail(f"Expected >=6 rituals, found {ritual_count}")
     if artifact_count < 4:
-        fail(f"Expected >=4 artifacts in seer-artifacts pack, found {artifact_count}")
+        fail(f"Expected >=4 artifacts, found {artifact_count}")
     if rolltable_count < 6:
-        fail(f"Expected >=6 roll tables in seer-rolltables pack, found {rolltable_count}")
+        fail(f"Expected >=6 roll tables, found {rolltable_count}")
 
     if not any(entry["id"] == "pathway.seer" for entry in entries):
         fail("Required pathway.seer entry is missing")
+
+    actor_packs = {entry["pack"] for entry in entries if entry["documentType"] == "Actor"}
+    missing_actor_packs = sorted(ACTOR_REQUIRED_PACKS - actor_packs)
+    if missing_actor_packs:
+        fail(f"Missing actor category packs: {missing_actor_packs}")
+
+    if not any(entry["documentType"] == "JournalEntry" and entry["pack"] == RULES_REQUIRED_PACK for entry in entries):
+        fail("Missing rules-reference JournalEntry content")
 
 
 def validate_dependencies(entries):

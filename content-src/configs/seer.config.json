@@ -7,9 +7,9 @@
       "itemType": "feature",
       "name": "Seer Content Pack Metadata",
       "img": "icons/svg/book.svg",
-      "version": "1.2.0",
-      "minSystemVersion": "1.2.0",
-      "maxTestedSystemVersion": "1.2.0",
+      "version": "1.2.1",
+      "minSystemVersion": "1.2.1",
+      "maxTestedSystemVersion": "1.2.1",
       "dependencies": ["pathway.seer"],
       "system": {
         "id": "config.pack.seer",
@@ -24,8 +24,8 @@
         "effects": [],
         "tags": ["config", "pack", "meta"],
         "dependencies": {
-          "minSystemVersion": "1.2.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "minSystemVersion": "1.2.1",
+          "maxTestedSystemVersion": "1.2.1",
           "requiresIds": ["pathway.seer"]
         }
       }
