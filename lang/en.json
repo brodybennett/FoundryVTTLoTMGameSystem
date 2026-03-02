@@ -1,4 +1,14 @@
 {
   "LOTM.SystemName": "LoTM Game System",
-  "LOTM.InitMessage": "LoTM system initialized."
+  "LOTM.InitMessage": "LoTM system initialized.",
+  "LOTM.Sheets.Actor": "LoTM Actor Sheet",
+  "LOTM.Sheets.Item": "LoTM Item Sheet",
+  "LOTM.Settings.AutomationLevel.Name": "Automation Level",
+  "LOTM.Settings.AutomationLevel.Hint": "Controls how aggressively rolls and resource/corruption effects are automated.",
+  "LOTM.Settings.AutomationLevel.Full": "Full",
+  "LOTM.Settings.AutomationLevel.Assisted": "Assisted",
+  "LOTM.Settings.AutomationLevel.Manual": "Manual",
+  "LOTM.Settings.ShowRollBreakdown.Name": "Show Roll Breakdown",
+  "LOTM.Settings.ShowRollBreakdown.Hint": "Show component-level roll details in LoTM chat cards.",
+  "LOTM.Settings.WorldSchemaVersion.Name": "LoTM World Schema Version"
 }

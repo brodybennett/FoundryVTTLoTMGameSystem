@@ -102,3 +102,19 @@ A package can be published only if all are true:
 5. Manifest checks pass.
 6. Version compatibility semantics pass.
 7. Verification vectors pass.
+
+## 13) Compendium-First Source Contract (v1.2+)
+
+- Canonical authoring source lives in `content-src/<domain>/*.json`.
+- Generated Foundry compendium databases in `packs/*.db` are build artifacts and must be deterministic.
+- Every content entry must declare:
+  - `id`
+  - `pack`
+  - `documentType`
+  - `name`
+  - `version`
+  - `minSystemVersion`
+  - `maxTestedSystemVersion`
+  - `dependencies[]`
+- Cross-entry dependencies must resolve to known IDs.
+- Pack generation must preserve stable document identity (`_id`) for update-safe migrations.

@@ -1,0 +1,124 @@
+{
+  "entries": [
+    {
+      "id": "table.seer.loot_occult_cache",
+      "pack": "seer-rolltables",
+      "documentType": "RollTable",
+      "name": "Occult Cache Loot",
+      "img": "icons/containers/chest/chest-wooden-oak.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "formula": "1d6",
+      "results": [
+        { "text": "1x Ashen Root", "weight": 1 },
+        { "text": "1x Moon Water", "weight": 1 },
+        { "text": "1x Focus Tonic", "weight": 1 },
+        { "text": "1x Dream Incense", "weight": 1 },
+        { "text": "1x Sealed Journal", "weight": 1 },
+        { "text": "1x Hallowed Ammunition", "weight": 1 }
+      ]
+    },
+    {
+      "id": "table.seer.ability_side_effects",
+      "pack": "seer-rolltables",
+      "documentType": "RollTable",
+      "name": "Ability Side Effects",
+      "img": "icons/magic/control/debuff-energy-hold-levitate-yellow.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "formula": "1d6",
+      "results": [
+        { "text": "Gain +2 corruption", "weight": 1 },
+        { "text": "Take 3 spirit recoil", "weight": 1 },
+        { "text": "Lose next reaction", "weight": 1 },
+        { "text": "Drop held item", "weight": 1 },
+        { "text": "Reveal occult signature", "weight": 1 },
+        { "text": "No side effect", "weight": 1 }
+      ]
+    },
+    {
+      "id": "table.seer.ritual_mishaps",
+      "pack": "seer-rolltables",
+      "documentType": "RollTable",
+      "name": "Ritual Mishaps",
+      "img": "icons/magic/symbols/runes-star-pentagon-magenta.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "formula": "1d6",
+      "results": [
+        { "text": "Chamber chills; +1 instability", "weight": 1 },
+        { "text": "Illusory voices; disadvantage next social check", "weight": 1 },
+        { "text": "Component consumed twice", "weight": 1 },
+        { "text": "Summons hostile echo", "weight": 1 },
+        { "text": "Corruption surge +5", "weight": 1 },
+        { "text": "Ritual fizzles cleanly", "weight": 1 }
+      ]
+    },
+    {
+      "id": "table.seer.artifact_backlash",
+      "pack": "seer-rolltables",
+      "documentType": "RollTable",
+      "name": "Artifact Backlash",
+      "img": "icons/magic/death/skull-flame-blue.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "formula": "1d6",
+      "results": [
+        { "text": "Minor feedback: 2 spirit damage", "weight": 1 },
+        { "text": "Sensory inversion for one round", "weight": 1 },
+        { "text": "Trigger random condition", "weight": 1 },
+        { "text": "Corruption +8", "weight": 1 },
+        { "text": "Artifact dormant until next scene", "weight": 1 },
+        { "text": "Catastrophic pulse: everyone rolls risk", "weight": 1 }
+      ]
+    },
+    {
+      "id": "table.seer.corruption_events",
+      "pack": "seer-rolltables",
+      "documentType": "RollTable",
+      "name": "Corruption Events",
+      "img": "icons/magic/unholy/hand-marked-pink.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "formula": "1d6",
+      "results": [
+        { "text": "Brief prophetic migraine", "weight": 1 },
+        { "text": "Compulsive omen-writing", "weight": 1 },
+        { "text": "Shadow moves independently", "weight": 1 },
+        { "text": "One NPC becomes suspicious", "weight": 1 },
+        { "text": "Lose 1 death save until long rest", "weight": 1 },
+        { "text": "Immediate GM corruption complication", "weight": 1 }
+      ]
+    },
+    {
+      "id": "table.seer.encounter_twists",
+      "pack": "seer-rolltables",
+      "documentType": "RollTable",
+      "name": "Encounter Twist Utility",
+      "img": "icons/magic/perception/third-eye-blue-red.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "formula": "1d6",
+      "results": [
+        { "text": "Unexpected ally intervenes", "weight": 1 },
+        { "text": "Environment grants high cover", "weight": 1 },
+        { "text": "Enemy exposed for one round", "weight": 1 },
+        { "text": "Hidden route appears", "weight": 1 },
+        { "text": "Target drops a clue item", "weight": 1 },
+        { "text": "Escalation clock advances", "weight": 1 }
+      ]
+    }
+  ]
+}

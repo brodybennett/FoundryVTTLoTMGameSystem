@@ -1,5 +1,7 @@
 import json
 import shutil
+import subprocess
+import sys
 import zipfile
 from pathlib import Path
 
@@ -17,6 +19,7 @@ REQUIRED_KEYS = [
     "esmodules",
     "styles",
     "languages",
+    "packs",
 ]
 
 
@@ -27,6 +30,13 @@ def fail(msg: str) -> None:
 def ensure(condition: bool, msg: str) -> None:
     if not condition:
         fail(msg)
+
+
+def run_step(label: str, command: list[str]) -> None:
+    print(f"[foundry-build] {label}")
+    proc = subprocess.run(command, cwd=str(ROOT))
+    if proc.returncode != 0:
+        fail(f"{label} failed with exit code {proc.returncode}")
 
 
 def load_manifest() -> dict:
@@ -47,11 +57,15 @@ def copy_required_payload(stage_dir: Path) -> None:
         "CHANGELOG.md",
         "LICENSE.md",
         "scripts",
+        "module",
         "lang",
         "styles",
         "templates",
         "data",
         "schemas",
+        "packs",
+        "content-src",
+        "docs",
         "system-config-v1.1.json",
     ]
     for rel in payload:
@@ -80,6 +94,9 @@ def build_zip(stage_root: Path, system_id: str, version: str) -> Path:
 
 
 def main() -> None:
+    run_step("Validate content source", [sys.executable, "scripts/validate_content_source.py"])
+    run_step("Build compendium packs", [sys.executable, "scripts/build_compendiums.py"])
+
     manifest = load_manifest()
     system_id = manifest["id"]
     version = manifest["version"]

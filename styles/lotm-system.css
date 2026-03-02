@@ -1,5 +1,191 @@
-/* Minimal boot-safe stylesheet for the LoTM system scaffold. */
-
 :root {
-  --lotm-accent: #4a3f35;
+  --lotm-bg: #f0eadf;
+  --lotm-card: #f8f3e8;
+  --lotm-text: #2a1f1a;
+  --lotm-border: #9b7f5f;
+  --lotm-accent: #5d3e2f;
+  --lotm-accent-2: #b16f39;
+}
+
+.lotm.sheet .window-content {
+  background: linear-gradient(140deg, var(--lotm-bg), #dfd0b6 55%, #f3ead9);
+  color: var(--lotm-text);
+}
+
+.lotm-sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.lotm-sheet .sheet-header {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 0.75rem;
+  align-items: center;
+  border-bottom: 1px solid var(--lotm-border);
+  padding-bottom: 0.5rem;
+}
+
+.lotm-sheet .profile-img {
+  width: 80px;
+  height: 80px;
+  border: 1px solid var(--lotm-border);
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.lotm-sheet .header-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.4rem;
+}
+
+.lotm-sheet .sheet-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  border-bottom: 1px solid var(--lotm-border);
+  padding-bottom: 0.4rem;
+}
+
+.lotm-sheet .sheet-tabs .item {
+  padding: 0.2rem 0.45rem;
+  border: 1px solid var(--lotm-border);
+  border-radius: 6px;
+  background: #efe4cf;
+}
+
+.lotm-sheet .sheet-tabs .item.active {
+  color: #fff;
+  background: var(--lotm-accent);
+}
+
+.lotm-sheet .sheet-body {
+  overflow-y: auto;
+  padding-right: 0.2rem;
+}
+
+.lotm-sheet .grid {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.lotm-sheet .grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.lotm-sheet .grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.lotm-sheet .grid-7 {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.lotm-sheet .compact label {
+  min-width: 0;
+}
+
+.lotm-sheet label {
+  display: grid;
+  gap: 0.15rem;
+  font-size: 0.85rem;
+}
+
+.lotm-sheet input,
+.lotm-sheet select,
+.lotm-sheet textarea,
+.lotm-sheet button {
+  border: 1px solid var(--lotm-border);
+  border-radius: 4px;
+}
+
+.lotm-sheet button {
+  background: #efe2cb;
+}
+
+.lotm-sheet .button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.5rem 0;
+}
+
+.lotm-sheet .item-list,
+.lotm-sheet .skill-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.lotm-sheet .item,
+.lotm-sheet .skill-row {
+  display: grid;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1px solid var(--lotm-border);
+  border-radius: 6px;
+  background: var(--lotm-card);
+  padding: 0.35rem;
+}
+
+.lotm-sheet .item {
+  grid-template-columns: 28px 1fr auto;
+}
+
+.lotm-sheet .item img {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+}
+
+.lotm-sheet .item-actions {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.lotm-sheet .skill-row {
+  grid-template-columns: 1fr 2fr;
+}
+
+.lotm-sheet .skill-controls {
+  display: flex;
+  gap: 0.35rem;
+  align-items: end;
+}
+
+.lotm-chat-card {
+  border: 1px solid var(--lotm-border);
+  border-radius: 8px;
+  background: linear-gradient(160deg, #fff8eb, #efe1ca);
+  padding: 0.45rem;
+}
+
+.lotm-chat-card h3 {
+  margin: 0;
+}
+
+.lotm-chat-card p {
+  margin: 0.2rem 0;
+}
+
+.lotm-chat-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.25rem 0.6rem;
+}
+
+@media (max-width: 780px) {
+  .lotm-sheet .grid-7,
+  .lotm-sheet .grid-3,
+  .lotm-sheet .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .lotm-sheet .skill-row {
+    grid-template-columns: 1fr;
+  }
 }

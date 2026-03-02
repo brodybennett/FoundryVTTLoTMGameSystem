@@ -21,6 +21,12 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Validate Content Source
+        run: python scripts/validate_content_source.py
+
+      - name: Build Compendium Packs
+        run: python scripts/build_compendiums.py
+
       - name: Verify Foundry Manifest
         run: python scripts/verify_foundry_manifest.py
 

@@ -1,0 +1,134 @@
+{
+  "entries": [
+    {
+      "id": "pathway.seer",
+      "pack": "pathways",
+      "documentType": "Item",
+      "itemType": "pathway",
+      "name": "Pathway: Seer",
+      "img": "icons/svg/eye.svg",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "system": {
+        "id": "pathway.seer",
+        "schemaVersion": 1,
+        "name": "Pathway: Seer",
+        "type": "pathway",
+        "pathwayId": "pathway.seer",
+        "activation": "passive",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "formulaKey": "check.skill.v1",
+        "effects": [],
+        "tags": ["pathway", "seer", "core"],
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": []
+        }
+      }
+    },
+    {
+      "id": "sequence.seer.9",
+      "pack": "pathways",
+      "documentType": "Item",
+      "itemType": "sequenceNode",
+      "name": "Seer Sequence 9: Apprentice Diviner",
+      "img": "icons/svg/book.svg",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": ["pathway.seer"],
+      "system": {
+        "id": "sequence.seer.9",
+        "schemaVersion": 1,
+        "name": "Seer Sequence 9: Apprentice Diviner",
+        "type": "sequenceNode",
+        "pathwayId": "pathway.seer",
+        "sequence": 9,
+        "minSequence": 9,
+        "activation": "passive",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "formulaKey": "check.skill.v1",
+        "effects": [],
+        "tags": ["sequence", "seer", "s9"],
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": ["pathway.seer"]
+        }
+      }
+    },
+    {
+      "id": "sequence.seer.8",
+      "pack": "pathways",
+      "documentType": "Item",
+      "itemType": "sequenceNode",
+      "name": "Seer Sequence 8: Clown",
+      "img": "icons/svg/mystery-man.svg",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": ["pathway.seer", "sequence.seer.9"],
+      "system": {
+        "id": "sequence.seer.8",
+        "schemaVersion": 1,
+        "name": "Seer Sequence 8: Clown",
+        "type": "sequenceNode",
+        "pathwayId": "pathway.seer",
+        "sequence": 8,
+        "minSequence": 8,
+        "activation": "passive",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "formulaKey": "check.skill.v1",
+        "effects": [],
+        "tags": ["sequence", "seer", "s8"],
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": ["pathway.seer", "sequence.seer.9"]
+        }
+      }
+    },
+    {
+      "id": "sequence.seer.7",
+      "pack": "pathways",
+      "documentType": "Item",
+      "itemType": "sequenceNode",
+      "name": "Seer Sequence 7: Magician",
+      "img": "icons/svg/silhouette.svg",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": ["pathway.seer", "sequence.seer.8"],
+      "system": {
+        "id": "sequence.seer.7",
+        "schemaVersion": 1,
+        "name": "Seer Sequence 7: Magician",
+        "type": "sequenceNode",
+        "pathwayId": "pathway.seer",
+        "sequence": 7,
+        "minSequence": 7,
+        "activation": "passive",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "formulaKey": "check.skill.v1",
+        "effects": [],
+        "tags": ["sequence", "seer", "s7"],
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": ["pathway.seer", "sequence.seer.8"]
+        }
+      }
+    }
+  ]
+}

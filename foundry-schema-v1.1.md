@@ -120,3 +120,14 @@ Manifest hardening rules:
   - `warn`
   - `strict`
   - `off`
+
+## Foundry Package Runtime and Packs (v1.2)
+
+- `system.json.packs[]` is required for published gameplay content.
+- Packs are system-owned (`lotm-system.<pack-name>`) and resolve to `packs/<pack-name>.db`.
+- Content is authored in `content-src/` and compiled into `packs/*.db`.
+- Pack and content IDs are immutable once published.
+- Semver compatibility is enforced per content entry:
+  - hard-fail when `minSystemVersion > current system version`
+  - hard-fail when `minSystemVersion > maxTestedSystemVersion`
+  - warning when `current system version > maxTestedSystemVersion`

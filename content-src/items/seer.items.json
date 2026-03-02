@@ -1,0 +1,640 @@
+{
+  "entries": [
+    {
+      "id": "item.seer.brass_revolver",
+      "pack": "seer-items",
+      "documentType": "Item",
+      "itemType": "weapon",
+      "name": "Brass Revolver",
+      "img": "icons/weapons/guns/gun-pistol-flintlock-gold.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": ["pathway.seer"],
+      "system": {
+        "id": "item.seer.brass_revolver",
+        "schemaVersion": 1,
+        "name": "Brass Revolver",
+        "type": "weapon",
+        "activation": "action",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "formulaKey": "check.attack.v1",
+        "effects": [],
+        "tags": ["gear", "weapon", "firearms"],
+        "weaponData": {
+          "baseDamage": 12,
+          "damageType": "physical",
+          "rangeFt": 80,
+          "accuracyBonus": 3
+        },
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": ["pathway.seer"]
+        }
+      }
+    },
+    {
+      "id": "item.seer.cane_sword",
+      "pack": "seer-items",
+      "documentType": "Item",
+      "itemType": "weapon",
+      "name": "Cane Sword",
+      "img": "icons/weapons/swords/sword-cane-gold.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "system": {
+        "id": "item.seer.cane_sword",
+        "schemaVersion": 1,
+        "name": "Cane Sword",
+        "type": "weapon",
+        "activation": "action",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "formulaKey": "check.attack.v1",
+        "effects": [],
+        "tags": ["gear", "weapon", "melee"],
+        "weaponData": {
+          "baseDamage": 10,
+          "damageType": "physical",
+          "rangeFt": 5,
+          "accuracyBonus": 2
+        },
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": []
+        }
+      }
+    },
+    {
+      "id": "item.seer.ritual_dagger",
+      "pack": "seer-items",
+      "documentType": "Item",
+      "itemType": "weapon",
+      "name": "Ritual Dagger",
+      "img": "icons/weapons/daggers/dagger-ornate-gold.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "system": {
+        "id": "item.seer.ritual_dagger",
+        "schemaVersion": 1,
+        "name": "Ritual Dagger",
+        "type": "weapon",
+        "activation": "action",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "formulaKey": "check.attack.v1",
+        "effects": [],
+        "tags": ["gear", "weapon", "ritual"],
+        "weaponData": {
+          "baseDamage": 8,
+          "damageType": "occult",
+          "rangeFt": 5,
+          "accuracyBonus": 4
+        },
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": []
+        }
+      }
+    },
+    {
+      "id": "item.seer.hallowed_ammunition",
+      "pack": "seer-items",
+      "documentType": "Item",
+      "itemType": "weapon",
+      "name": "Hallowed Ammunition",
+      "img": "icons/weapons/ammunition/shot-round-lead.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": ["item.seer.brass_revolver"],
+      "system": {
+        "id": "item.seer.hallowed_ammunition",
+        "schemaVersion": 1,
+        "name": "Hallowed Ammunition",
+        "type": "weapon",
+        "activation": "action",
+        "resource": "item",
+        "cost": 1,
+        "cooldown": 0,
+        "formulaKey": "check.attack.v1",
+        "effects": [],
+        "tags": ["gear", "weapon", "consumable"],
+        "weaponData": {
+          "baseDamage": 11,
+          "damageType": "spirit",
+          "rangeFt": 80,
+          "accuracyBonus": 1
+        },
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": ["item.seer.brass_revolver"]
+        }
+      }
+    },
+    {
+      "id": "item.seer.leather_coat",
+      "pack": "seer-items",
+      "documentType": "Item",
+      "itemType": "armor",
+      "name": "Reinforced Leather Coat",
+      "img": "icons/equipment/chest/coat-leather-brown.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "system": {
+        "id": "item.seer.leather_coat",
+        "schemaVersion": 1,
+        "name": "Reinforced Leather Coat",
+        "type": "armor",
+        "activation": "passive",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "formulaKey": "check.attribute.v1",
+        "effects": [],
+        "tags": ["gear", "armor", "light"],
+        "armorData": {
+          "defenseShift": 2,
+          "damageReduction": 2,
+          "encumbrancePenalty": 0
+        },
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": []
+        }
+      }
+    },
+    {
+      "id": "item.seer.hidden_plate",
+      "pack": "seer-items",
+      "documentType": "Item",
+      "itemType": "armor",
+      "name": "Hidden Plate Vest",
+      "img": "icons/equipment/chest/breastplate-layered-steel-gold.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "system": {
+        "id": "item.seer.hidden_plate",
+        "schemaVersion": 1,
+        "name": "Hidden Plate Vest",
+        "type": "armor",
+        "activation": "passive",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "formulaKey": "check.attribute.v1",
+        "effects": [],
+        "tags": ["gear", "armor", "medium"],
+        "armorData": {
+          "defenseShift": 4,
+          "damageReduction": 3,
+          "encumbrancePenalty": 2
+        },
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": []
+        }
+      }
+    },
+    {
+      "id": "item.seer.divination_deck",
+      "pack": "seer-items",
+      "documentType": "Item",
+      "itemType": "gear",
+      "name": "Divination Deck",
+      "img": "icons/sundries/gaming/playing-cards.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "system": {
+        "id": "item.seer.divination_deck",
+        "schemaVersion": 1,
+        "name": "Divination Deck",
+        "type": "gear",
+        "activation": "special",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "formulaKey": "check.ritual.v1",
+        "effects": [],
+        "tags": ["gear", "ritual", "tool"],
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": []
+        }
+      }
+    },
+    {
+      "id": "item.seer.sealed_journal",
+      "pack": "seer-items",
+      "documentType": "Item",
+      "itemType": "gear",
+      "name": "Sealed Journal",
+      "img": "icons/sundries/books/book-worn-brown.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "system": {
+        "id": "item.seer.sealed_journal",
+        "schemaVersion": 1,
+        "name": "Sealed Journal",
+        "type": "gear",
+        "activation": "special",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "formulaKey": "check.skill.v1",
+        "effects": [],
+        "tags": ["gear", "investigation", "tool"],
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": []
+        }
+      }
+    },
+    {
+      "id": "item.seer.dream_incense",
+      "pack": "seer-items",
+      "documentType": "Item",
+      "itemType": "gear",
+      "name": "Dream Incense",
+      "img": "icons/commodities/materials/incense.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "system": {
+        "id": "item.seer.dream_incense",
+        "schemaVersion": 1,
+        "name": "Dream Incense",
+        "type": "gear",
+        "activation": "special",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "formulaKey": "check.ritual.v1",
+        "effects": [],
+        "tags": ["gear", "dream", "ritual"],
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": []
+        }
+      }
+    },
+    {
+      "id": "item.seer.spirit_lens",
+      "pack": "seer-items",
+      "documentType": "Item",
+      "itemType": "gear",
+      "name": "Spirit Lens",
+      "img": "icons/tools/scribal/magnifying-glass.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "system": {
+        "id": "item.seer.spirit_lens",
+        "schemaVersion": 1,
+        "name": "Spirit Lens",
+        "type": "gear",
+        "activation": "special",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "formulaKey": "check.skill.v1",
+        "effects": [],
+        "tags": ["gear", "vision", "occult"],
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": []
+        }
+      }
+    },
+    {
+      "id": "item.seer.focus_tonic",
+      "pack": "seer-items",
+      "documentType": "Item",
+      "itemType": "consumable",
+      "name": "Focus Tonic",
+      "img": "icons/consumables/potions/potion-bottle-blue.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "system": {
+        "id": "item.seer.focus_tonic",
+        "schemaVersion": 1,
+        "name": "Focus Tonic",
+        "type": "consumable",
+        "activation": "bonusAction",
+        "resource": "item",
+        "cost": 1,
+        "cooldown": 0,
+        "formulaKey": "check.skill.v1",
+        "effects": [],
+        "tags": ["consumable", "spirit", "alchemical"],
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": []
+        }
+      }
+    },
+    {
+      "id": "item.seer.salt_bullet",
+      "pack": "seer-items",
+      "documentType": "Item",
+      "itemType": "consumable",
+      "name": "Salt Bullet",
+      "img": "icons/weapons/ammunition/bullets-shell.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": ["item.seer.brass_revolver"],
+      "system": {
+        "id": "item.seer.salt_bullet",
+        "schemaVersion": 1,
+        "name": "Salt Bullet",
+        "type": "consumable",
+        "activation": "action",
+        "resource": "item",
+        "cost": 1,
+        "cooldown": 0,
+        "formulaKey": "check.attack.v1",
+        "effects": [],
+        "tags": ["consumable", "ammo", "anti-spirit"],
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": ["item.seer.brass_revolver"]
+        }
+      }
+    },
+    {
+      "id": "item.seer.mercury_vial",
+      "pack": "seer-items",
+      "documentType": "Item",
+      "itemType": "consumable",
+      "name": "Mercury Vial",
+      "img": "icons/consumables/potions/potion-bottle-corked-white.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "system": {
+        "id": "item.seer.mercury_vial",
+        "schemaVersion": 1,
+        "name": "Mercury Vial",
+        "type": "consumable",
+        "activation": "action",
+        "resource": "item",
+        "cost": 1,
+        "cooldown": 0,
+        "formulaKey": "check.ritual.v1",
+        "effects": [],
+        "tags": ["consumable", "ritual", "purification"],
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": []
+        }
+      }
+    },
+    {
+      "id": "item.seer.lotus_tea",
+      "pack": "seer-items",
+      "documentType": "Item",
+      "itemType": "consumable",
+      "name": "Lotus Tea",
+      "img": "icons/consumables/drinks/tea-cup-steaming.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "system": {
+        "id": "item.seer.lotus_tea",
+        "schemaVersion": 1,
+        "name": "Lotus Tea",
+        "type": "consumable",
+        "activation": "bonusAction",
+        "resource": "item",
+        "cost": 1,
+        "cooldown": 0,
+        "formulaKey": "check.attribute.v1",
+        "effects": [],
+        "tags": ["consumable", "recovery"],
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": []
+        }
+      }
+    },
+    {
+      "id": "item.seer.ashen_root",
+      "pack": "seer-items",
+      "documentType": "Item",
+      "itemType": "ingredient",
+      "name": "Ashen Root",
+      "img": "icons/commodities/biological/root-brown.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "system": {
+        "id": "item.seer.ashen_root",
+        "schemaVersion": 1,
+        "name": "Ashen Root",
+        "type": "ingredient",
+        "activation": "special",
+        "resource": "item",
+        "cost": 1,
+        "cooldown": 0,
+        "formulaKey": "check.ritual.v1",
+        "effects": [],
+        "tags": ["ingredient", "earth"],
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": []
+        }
+      }
+    },
+    {
+      "id": "item.seer.moon_water",
+      "pack": "seer-items",
+      "documentType": "Item",
+      "itemType": "ingredient",
+      "name": "Moon Water",
+      "img": "icons/commodities/materials/liquid-bottle-blue.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "system": {
+        "id": "item.seer.moon_water",
+        "schemaVersion": 1,
+        "name": "Moon Water",
+        "type": "ingredient",
+        "activation": "special",
+        "resource": "item",
+        "cost": 1,
+        "cooldown": 0,
+        "formulaKey": "check.ritual.v1",
+        "effects": [],
+        "tags": ["ingredient", "lunar"],
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": []
+        }
+      }
+    },
+    {
+      "id": "item.seer.night_jasmine",
+      "pack": "seer-items",
+      "documentType": "Item",
+      "itemType": "ingredient",
+      "name": "Night Jasmine",
+      "img": "icons/commodities/flowers/flowers-buds-white.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "system": {
+        "id": "item.seer.night_jasmine",
+        "schemaVersion": 1,
+        "name": "Night Jasmine",
+        "type": "ingredient",
+        "activation": "special",
+        "resource": "item",
+        "cost": 1,
+        "cooldown": 0,
+        "formulaKey": "check.ritual.v1",
+        "effects": [],
+        "tags": ["ingredient", "fragrance"],
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": []
+        }
+      }
+    },
+    {
+      "id": "item.seer.ghost_mushroom",
+      "pack": "seer-items",
+      "documentType": "Item",
+      "itemType": "ingredient",
+      "name": "Ghost Mushroom",
+      "img": "icons/commodities/biological/fungus-mushroom-white.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "system": {
+        "id": "item.seer.ghost_mushroom",
+        "schemaVersion": 1,
+        "name": "Ghost Mushroom",
+        "type": "ingredient",
+        "activation": "special",
+        "resource": "item",
+        "cost": 1,
+        "cooldown": 0,
+        "formulaKey": "check.ritual.v1",
+        "effects": [],
+        "tags": ["ingredient", "spirit"],
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": []
+        }
+      }
+    },
+    {
+      "id": "feature.seer.contacts",
+      "pack": "seer-items",
+      "documentType": "Item",
+      "itemType": "feature",
+      "name": "Intelligence Contacts",
+      "img": "icons/svg/group.svg",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": ["pathway.seer"],
+      "system": {
+        "id": "feature.seer.contacts",
+        "schemaVersion": 1,
+        "name": "Intelligence Contacts",
+        "type": "feature",
+        "pathwayId": "pathway.seer",
+        "activation": "passive",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "formulaKey": "check.skill.v1",
+        "effects": [],
+        "tags": ["feature", "social", "network"],
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": ["pathway.seer"]
+        }
+      }
+    },
+    {
+      "id": "feature.seer.gray_fog_notes",
+      "pack": "seer-items",
+      "documentType": "Item",
+      "itemType": "feature",
+      "name": "Gray Fog Notes",
+      "img": "icons/svg/book.svg",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": ["pathway.seer"],
+      "system": {
+        "id": "feature.seer.gray_fog_notes",
+        "schemaVersion": 1,
+        "name": "Gray Fog Notes",
+        "type": "feature",
+        "pathwayId": "pathway.seer",
+        "activation": "passive",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "formulaKey": "check.skill.v1",
+        "effects": [],
+        "tags": ["feature", "lore"],
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": ["pathway.seer"]
+        }
+      }
+    }
+  ]
+}

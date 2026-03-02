@@ -287,6 +287,8 @@ def validate_item(item, known_ids, formula_keys):
         "ability",
         "ritual",
         "artifact",
+        "gear",
+        "feature",
         "weapon",
         "armor",
         "consumable",

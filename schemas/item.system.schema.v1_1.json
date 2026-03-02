@@ -26,6 +26,8 @@
         "ability",
         "ritual",
         "artifact",
+        "gear",
+        "feature",
         "weapon",
         "armor",
         "consumable",

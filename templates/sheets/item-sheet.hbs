@@ -1,0 +1,120 @@
+<form class="lotm-sheet lotm-item-sheet {{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <div class="header-fields">
+      <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+      <div class="header-meta">
+        <label>Type <input type="text" value="{{itemType}}" disabled /></label>
+        <label>ID <input type="text" name="system.id" value="{{system.id}}" /></label>
+        <label>Sequence <input type="number" min="0" max="9" name="system.sequence" value="{{system.sequence}}" /></label>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="details">Details</a>
+    <a class="item" data-tab="automation">Automation</a>
+    <a class="item" data-tab="metadata">Metadata</a>
+  </nav>
+
+  <section class="sheet-body">
+    <div class="tab" data-group="primary" data-tab="details">
+      <div class="grid grid-3">
+        <label>Pathway ID
+          <input type="text" name="system.pathwayId" value="{{system.pathwayId}}" />
+        </label>
+        <label>Activation
+          <select name="system.activation">
+            {{#select system.activation}}
+              {{#each activationTypes as |mode|}}
+                <option value="{{mode}}">{{mode}}</option>
+              {{/each}}
+            {{/select}}
+          </select>
+        </label>
+        <label>Resource
+          <select name="system.resource">
+            {{#select system.resource}}
+              {{#each resourceTypes as |mode|}}
+                <option value="{{mode}}">{{mode}}</option>
+              {{/each}}
+            {{/select}}
+          </select>
+        </label>
+        <label>Cost
+          <input type="number" min="0" name="system.cost" value="{{system.cost}}" />
+        </label>
+        <label>Cooldown
+          <input type="number" min="0" name="system.cooldown" value="{{system.cooldown}}" />
+        </label>
+        <label>Formula Key
+          <input type="text" name="system.formulaKey" value="{{system.formulaKey}}" />
+        </label>
+      </div>
+
+      <h3>Type Payload</h3>
+      <div class="grid grid-2">
+        <label>Target Mode
+          <select name="system.abilityData.targetMode">
+            {{#select system.abilityData.targetMode}}
+              {{#each targetModes as |mode|}}
+                <option value="{{mode}}">{{mode}}</option>
+              {{/each}}
+            {{/select}}
+          </select>
+        </label>
+        <label>Range (ft)
+          <input type="number" min="0" name="system.abilityData.rangeFt" value="{{system.abilityData.rangeFt}}" />
+        </label>
+        <label>Weapon Damage
+          <input type="number" min="0" name="system.weaponData.baseDamage" value="{{system.weaponData.baseDamage}}" />
+        </label>
+        <label>Armor Reduction
+          <input type="number" min="0" name="system.armorData.damageReduction" value="{{system.armorData.damageReduction}}" />
+        </label>
+        <label>Ritual Components
+          <input type="number" min="0" name="system.ritualData.mandatoryComponents" value="{{system.ritualData.mandatoryComponents}}" />
+        </label>
+        <label>Artifact Risk
+          <select name="system.artifactData.riskClass">
+            {{#select system.artifactData.riskClass}}
+              {{#each riskClasses as |risk|}}
+                <option value="{{risk}}">{{risk}}</option>
+              {{/each}}
+            {{/select}}
+          </select>
+        </label>
+      </div>
+
+      <h3>Description</h3>
+      {{editor item.system.description target="system.description" button=true editable=editable engine="prosemirror"}}
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="automation">
+      <label>Tags (comma separated)
+        <input type="text" value="{{system.tags}}" disabled />
+      </label>
+      <label>Allowed Pathway IDs (comma separated)
+        <input type="text" value="{{system.allowedPathwayIds}}" disabled />
+      </label>
+      <p>Automation uses `cost`, `resource`, `formulaKey`, and effect payload. Keep these fields structured for compendium import safety.</p>
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="metadata">
+      <div class="grid grid-2">
+        <label>Schema Version
+          <input type="number" name="system.schemaVersion" value="{{system.schemaVersion}}" />
+        </label>
+        <label>Min System Version
+          <input type="text" name="system.dependencies.minSystemVersion" value="{{system.dependencies.minSystemVersion}}" />
+        </label>
+        <label>Max Tested Version
+          <input type="text" name="system.dependencies.maxTestedSystemVersion" value="{{system.dependencies.maxTestedSystemVersion}}" />
+        </label>
+        <label>Requires IDs (comma separated)
+          <input type="text" value="{{system.dependencies.requiresIds}}" disabled />
+        </label>
+      </div>
+    </div>
+  </section>
+</form>

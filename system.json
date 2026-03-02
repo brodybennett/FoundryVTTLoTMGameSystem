@@ -2,7 +2,7 @@
   "id": "lotm-system",
   "title": "LoTM Game System",
   "description": "Lord of the Mysteries-inspired tabletop roleplaying game system for Foundry Virtual Tabletop.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "authors": [
     {
       "name": "Brody Bennett",
@@ -26,10 +26,48 @@
       "path": "lang/en.json"
     }
   ],
+  "packs": [
+    {
+      "name": "pathways",
+      "label": "LoTM Pathways",
+      "type": "Item",
+      "path": "packs/pathways.db"
+    },
+    {
+      "name": "seer-abilities",
+      "label": "Seer Abilities",
+      "type": "Item",
+      "path": "packs/seer-abilities.db"
+    },
+    {
+      "name": "seer-items",
+      "label": "Seer Items",
+      "type": "Item",
+      "path": "packs/seer-items.db"
+    },
+    {
+      "name": "seer-rituals",
+      "label": "Seer Rituals",
+      "type": "Item",
+      "path": "packs/seer-rituals.db"
+    },
+    {
+      "name": "seer-artifacts",
+      "label": "Seer Artifacts",
+      "type": "Item",
+      "path": "packs/seer-artifacts.db"
+    },
+    {
+      "name": "seer-rolltables",
+      "label": "Seer Roll Tables",
+      "type": "RollTable",
+      "path": "packs/seer-rolltables.db"
+    }
+  ],
   "socket": false,
   "url": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem",
   "manifest": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem/releases/latest/download/system.json",
-  "download": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem/releases/download/v1.1.0/lotm-system-v1.1.0.zip",
+  "download": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem/releases/download/v1.2.0/lotm-system-v1.2.0.zip",
   "license": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem/blob/master/LICENSE.md",
   "readme": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem/blob/master/README.md",
   "changelog": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem/blob/master/CHANGELOG.md"

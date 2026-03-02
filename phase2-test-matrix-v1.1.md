@@ -69,3 +69,6 @@
 
 1. `python scripts/phase2_verification.py` passes.
 2. `python scripts/phase1_verification.py` passes.
+3. `python scripts/validate_content_source.py` passes.
+4. `python scripts/build_compendiums.py` generates deterministic `packs/*.db`.
+5. `python scripts/verify_foundry_manifest.py` confirms declared packs and local assets.

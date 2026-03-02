@@ -1,0 +1,11 @@
+<section class="lotm-chat-card lotm-chat-info">
+  <header>
+    <h3>{{title}}</h3>
+    <p>{{summary}}</p>
+  </header>
+  <ul>
+    {{#each details as |value key|}}
+      <li><strong>{{key}}</strong>: {{value}}</li>
+    {{/each}}
+  </ul>
+</section>

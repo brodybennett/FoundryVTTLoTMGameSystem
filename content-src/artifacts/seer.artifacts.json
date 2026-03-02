@@ -1,0 +1,148 @@
+{
+  "entries": [
+    {
+      "id": "artifact.seer.mirror_of_hushed_fates",
+      "pack": "seer-artifacts",
+      "documentType": "Item",
+      "itemType": "artifact",
+      "name": "Mirror of Hushed Fates",
+      "img": "icons/sundries/misc/hand-mirror.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": ["pathway.seer"],
+      "system": {
+        "id": "artifact.seer.mirror_of_hushed_fates",
+        "schemaVersion": 1,
+        "name": "Mirror of Hushed Fates",
+        "type": "artifact",
+        "sourceSequence": 7,
+        "activation": "special",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "formulaKey": "check.skill.v1",
+        "effects": [],
+        "tags": ["artifact", "seer", "mirror"],
+        "artifactData": {
+          "riskClass": "volatile",
+          "charges": 3,
+          "misuseCorruptionGain": 8
+        },
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": ["pathway.seer"]
+        }
+      }
+    },
+    {
+      "id": "artifact.seer.clockwork_sphinx",
+      "pack": "seer-artifacts",
+      "documentType": "Item",
+      "itemType": "artifact",
+      "name": "Clockwork Sphinx",
+      "img": "icons/commodities/tech/gear-brass.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "system": {
+        "id": "artifact.seer.clockwork_sphinx",
+        "schemaVersion": 1,
+        "name": "Clockwork Sphinx",
+        "type": "artifact",
+        "sourceSequence": 8,
+        "activation": "special",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "formulaKey": "check.skill.v1",
+        "effects": [],
+        "tags": ["artifact", "seer", "analysis"],
+        "artifactData": {
+          "riskClass": "stable",
+          "charges": 5,
+          "misuseCorruptionGain": 5
+        },
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": []
+        }
+      }
+    },
+    {
+      "id": "artifact.seer.gallows_coin",
+      "pack": "seer-artifacts",
+      "documentType": "Item",
+      "itemType": "artifact",
+      "name": "Gallows Coin",
+      "img": "icons/commodities/currency/coin-engraved-oval-gold.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": [],
+      "system": {
+        "id": "artifact.seer.gallows_coin",
+        "schemaVersion": 1,
+        "name": "Gallows Coin",
+        "type": "artifact",
+        "sourceSequence": 8,
+        "activation": "reaction",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "formulaKey": "check.skill.v1",
+        "effects": [],
+        "tags": ["artifact", "luck", "coin"],
+        "artifactData": {
+          "riskClass": "volatile",
+          "charges": 2,
+          "misuseCorruptionGain": 12
+        },
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": []
+        }
+      }
+    },
+    {
+      "id": "artifact.seer.lamp_of_black_stars",
+      "pack": "seer-artifacts",
+      "documentType": "Item",
+      "itemType": "artifact",
+      "name": "Lamp of Black Stars",
+      "img": "icons/sundries/lights/lantern-bullseye-black.webp",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": ["pathway.seer"],
+      "system": {
+        "id": "artifact.seer.lamp_of_black_stars",
+        "schemaVersion": 1,
+        "name": "Lamp of Black Stars",
+        "type": "artifact",
+        "sourceSequence": 7,
+        "activation": "special",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "formulaKey": "check.skill.v1",
+        "effects": [],
+        "tags": ["artifact", "seer", "catastrophic"],
+        "artifactData": {
+          "riskClass": "catastrophic",
+          "charges": 1,
+          "misuseCorruptionGain": 20
+        },
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": ["pathway.seer"]
+        }
+      }
+    }
+  ]
+}

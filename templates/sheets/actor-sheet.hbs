@@ -1,0 +1,196 @@
+<form class="lotm-sheet lotm-actor-sheet {{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+    <div class="header-fields">
+      <h1><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
+      <div class="header-meta">
+        <label>Pathway <input type="text" name="system.identity.pathwayId" value="{{system.identity.pathwayId}}" /></label>
+        <label>Sequence <input type="number" min="0" max="9" name="system.identity.sequence" value="{{system.identity.sequence}}" /></label>
+        <label>Tier <input type="text" name="system.identity.tier" value="{{system.identity.tier}}" /></label>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="overview">Overview</a>
+    <a class="item" data-tab="stats">Attributes/Skills</a>
+    <a class="item" data-tab="abilities">Abilities</a>
+    <a class="item" data-tab="inventory">Inventory</a>
+    <a class="item" data-tab="corruption">Corruption/Resources</a>
+    <a class="item" data-tab="effects">Effects</a>
+  </nav>
+
+  <section class="sheet-body">
+    <div class="tab" data-group="primary" data-tab="overview">
+      <div class="grid grid-3">
+        <label>HP
+          <input type="number" name="system.resources.hp" value="{{system.resources.hp}}" />
+        </label>
+        <label>HP Max
+          <input type="number" name="system.derived.hpMax" value="{{system.derived.hpMax}}" />
+        </label>
+        <label>Spirit
+          <input type="number" name="system.resources.spirit" value="{{system.resources.spirit}}" />
+        </label>
+        <label>Spirit Max
+          <input type="number" name="system.derived.spiritMax" value="{{system.derived.spiritMax}}" />
+        </label>
+        <label>Sanity Max
+          <input type="number" name="system.derived.sanityMax" value="{{system.derived.sanityMax}}" />
+        </label>
+        <label>Initiative Target
+          <input type="number" name="system.derived.initiativeTarget" value="{{system.derived.initiativeTarget}}" />
+        </label>
+      </div>
+      <div class="button-row">
+        <button type="button" data-action="roll-check" data-attribute="wil" data-label="Willpower Check">Willpower Check</button>
+        <button type="button" data-action="roll-ritual-risk">Ritual Risk</button>
+        <button type="button" data-action="roll-artifact-backlash">Artifact Backlash</button>
+      </div>
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="stats">
+      <h3>Attributes</h3>
+      <div class="grid grid-7 compact">
+        {{#each attributeKeys as |attr|}}
+          <label>{{attr}}
+            <input type="number" name="system.attributes.{{attr}}.base" value="{{lookup (lookup ../system.attributes attr) 'base'}}" />
+          </label>
+        {{/each}}
+      </div>
+      <h3>Skills</h3>
+      <ol class="skill-list">
+        {{#each skillEntries as |entry|}}
+          <li class="skill-row">
+            <div class="skill-name">{{entry.[0]}}</div>
+            <div class="skill-controls">
+              <label>Rank
+                <input type="text" name="system.skills.{{entry.[0]}}.rank" value="{{entry.[1].rank}}" />
+              </label>
+              <label>Misc
+                <input type="number" name="system.skills.{{entry.[0]}}.misc" value="{{entry.[1].misc}}" />
+              </label>
+              <button type="button" data-action="roll-check" data-label="{{entry.[0]}}" data-attribute="{{entry.[1].linkedAttr}}" data-skill-id="{{entry.[0]}}">Roll</button>
+            </div>
+          </li>
+        {{/each}}
+      </ol>
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="abilities">
+      <ol class="item-list">
+        {{#each itemGroups.ability as |item|}}
+          <li class="item" data-item-id="{{item._id}}">
+            <img src="{{item.img}}" title="{{item.name}}" />
+            <span>{{item.name}}</span>
+            <div class="item-actions">
+              <button type="button" data-action="item-edit">Edit</button>
+              <button type="button" data-action="item-delete">Delete</button>
+            </div>
+          </li>
+        {{/each}}
+      </ol>
+      <h3>Pathway / Feature</h3>
+      <ol class="item-list">
+        {{#each itemGroups.pathway as |item|}}
+          <li class="item" data-item-id="{{item._id}}">
+            <img src="{{item.img}}" title="{{item.name}}" />
+            <span>{{item.name}}</span>
+            <div class="item-actions">
+              <button type="button" data-action="item-edit">Edit</button>
+              <button type="button" data-action="item-delete">Delete</button>
+            </div>
+          </li>
+        {{/each}}
+      </ol>
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="inventory">
+      <h3>Gear</h3>
+      <ol class="item-list">
+        {{#each itemGroups.gear as |item|}}
+          <li class="item" data-item-id="{{item._id}}">
+            <img src="{{item.img}}" title="{{item.name}}" />
+            <span>{{item.name}}</span>
+            <div class="item-actions">
+              <button type="button" data-action="item-edit">Edit</button>
+              <button type="button" data-action="item-delete">Delete</button>
+            </div>
+          </li>
+        {{/each}}
+      </ol>
+      <h3>Rituals</h3>
+      <ol class="item-list">
+        {{#each itemGroups.ritual as |item|}}
+          <li class="item" data-item-id="{{item._id}}">
+            <img src="{{item.img}}" title="{{item.name}}" />
+            <span>{{item.name}}</span>
+            <div class="item-actions">
+              <button type="button" data-action="item-edit">Edit</button>
+              <button type="button" data-action="item-delete">Delete</button>
+            </div>
+          </li>
+        {{/each}}
+      </ol>
+      <h3>Artifacts</h3>
+      <ol class="item-list">
+        {{#each itemGroups.artifact as |item|}}
+          <li class="item" data-item-id="{{item._id}}">
+            <img src="{{item.img}}" title="{{item.name}}" />
+            <span>{{item.name}}</span>
+            <div class="item-actions">
+              <button type="button" data-action="item-edit">Edit</button>
+              <button type="button" data-action="item-delete">Delete</button>
+            </div>
+          </li>
+        {{/each}}
+      </ol>
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="corruption">
+      <div class="grid grid-3">
+        <label>Corruption %
+          <input type="number" min="0" max="100" name="system.resources.corruption" value="{{system.resources.corruption}}" />
+        </label>
+        <label>Corruption Penalty
+          <input type="number" value="{{system.resources.corruptionPenalty}}" disabled />
+        </label>
+        <label>Delta
+          <input type="number" name="lotm-corruption-delta" value="0" />
+        </label>
+      </div>
+      <div class="button-row">
+        <button type="button" data-action="apply-corruption">Apply Corruption Delta</button>
+      </div>
+      <div class="grid grid-3">
+        <label>Death Marks
+          <input type="number" name="system.resources.deathMarks" value="{{system.resources.deathMarks}}" />
+        </label>
+        <label>Death Saves
+          <input type="number" name="system.resources.deathSaves" value="{{system.resources.deathSaves}}" />
+        </label>
+        <label>Ritual Instability
+          <input type="number" name="system.ritual.instability" value="{{system.ritual.instability}}" />
+        </label>
+      </div>
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="effects">
+      <p>Use Active Effects on the sidebar for condition state. This tab is reserved for LoTM automation diagnostics.</p>
+      <div class="grid grid-2">
+        <label>Action Lock
+          <input type="number" name="system.tracks.actionLock" value="{{system.tracks.actionLock}}" />
+        </label>
+        <label>Damage Multiplier
+          <input type="number" step="0.1" name="system.tracks.damageOutMultiplier" value="{{system.tracks.damageOutMultiplier}}" />
+        </label>
+        <label>Verbal Locked
+          <input type="number" name="system.tracks.verbalLocked" value="{{system.tracks.verbalLocked}}" />
+        </label>
+        <label>Is Downed
+          <input type="number" name="system.tracks.isDowned" value="{{system.tracks.isDowned}}" />
+        </label>
+      </div>
+    </div>
+  </section>
+</form>

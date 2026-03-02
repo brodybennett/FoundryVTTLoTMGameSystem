@@ -3,11 +3,101 @@
     "types": ["character", "npc"],
     "templates": {
       "base": {
-        "identity": {},
-        "attributes": {},
-        "skills": {},
-        "derived": {},
-        "resources": {}
+        "identity": {
+          "pathwayId": "pathway.seer",
+          "sequence": 9,
+          "tier": "low",
+          "backgroundId": "background.blank"
+        },
+        "attributes": {
+          "str": { "base": 10, "temp": 0 },
+          "dex": { "base": 10, "temp": 0 },
+          "wil": { "base": 10, "temp": 0 },
+          "con": { "base": 10, "temp": 0 },
+          "cha": { "base": 10, "temp": 0 },
+          "int": { "base": 10, "temp": 0 },
+          "luck": { "base": 10, "temp": 0 }
+        },
+        "skills": {
+          "ritualism": { "linkedAttr": "wil", "rank": "familiar", "misc": 0 },
+          "investigation": { "linkedAttr": "int", "rank": "familiar", "misc": 0 },
+          "perception": { "linkedAttr": "int", "rank": "familiar", "misc": 0 },
+          "insight": { "linkedAttr": "wil", "rank": "familiar", "misc": 0 },
+          "persuasion": { "linkedAttr": "cha", "rank": "familiar", "misc": 0 },
+          "deception": { "linkedAttr": "cha", "rank": "familiar", "misc": 0 },
+          "intimidation": { "linkedAttr": "cha", "rank": "familiar", "misc": 0 },
+          "etiquette": { "linkedAttr": "cha", "rank": "familiar", "misc": 0 },
+          "willpower": { "linkedAttr": "wil", "rank": "familiar", "misc": 0 },
+          "endurance": { "linkedAttr": "con", "rank": "familiar", "misc": 0 },
+          "medicine": { "linkedAttr": "int", "rank": "familiar", "misc": 0 },
+          "occult": { "linkedAttr": "int", "rank": "familiar", "misc": 0 },
+          "athletics": { "linkedAttr": "str", "rank": "familiar", "misc": 0 },
+          "melee": { "linkedAttr": "str", "rank": "familiar", "misc": 0 },
+          "firearms": { "linkedAttr": "dex", "rank": "familiar", "misc": 0 },
+          "stealth": { "linkedAttr": "dex", "rank": "familiar", "misc": 0 },
+          "acrobatics": { "linkedAttr": "dex", "rank": "familiar", "misc": 0 },
+          "streetwise": { "linkedAttr": "int", "rank": "familiar", "misc": 0 },
+          "commerce": { "linkedAttr": "int", "rank": "familiar", "misc": 0 },
+          "crafting": { "linkedAttr": "int", "rank": "familiar", "misc": 0 }
+        },
+        "derived": {
+          "hpMax": 60,
+          "spiritMax": 55,
+          "sanityMax": 64,
+          "defenseShift": 0,
+          "initiativeTarget": 35
+        },
+        "resources": {
+          "hp": 60,
+          "spirit": 55,
+          "corruption": 0,
+          "deathMarks": 0,
+          "deathSaves": 0
+        },
+        "combat": {
+          "armor": 0,
+          "cover": 0,
+          "encumbrancePenalty": 0,
+          "damageReduction": 0,
+          "actionBudget": {
+            "actions": 1,
+            "moves": 1,
+            "reactions": 1,
+            "bonusActions": 0
+          }
+        },
+        "progression": {
+          "gates": {
+            "narrative": false,
+            "economy": false,
+            "stability": true
+          },
+          "attemptState": "idle"
+        },
+        "tracks": {
+          "investigationIP": 0,
+          "actionLock": 0,
+          "movementCheckPenalty": 0,
+          "damageOutMultiplier": 1,
+          "incomingOffenseBonus": 0,
+          "offensePenaltyVsSource": 0,
+          "verbalLocked": 0,
+          "markedBySourceBonus": 0,
+          "isDowned": 0,
+          "factions": {},
+          "threatClocks": [],
+          "influence": {},
+          "leverage": {}
+        },
+        "ritual": {
+          "instability": 0
+        },
+        "artifacts": {
+          "sceneUsesById": {}
+        },
+        "version": {
+          "schemaVersion": 1
+        }
       }
     },
     "character": {
@@ -18,11 +108,83 @@
     }
   },
   "Item": {
-    "types": ["ability", "ritual", "artifact", "weapon", "armor", "consumable", "ingredient", "background"],
+    "types": [
+      "pathway",
+      "sequenceNode",
+      "ability",
+      "ritual",
+      "artifact",
+      "gear",
+      "feature",
+      "weapon",
+      "armor",
+      "consumable",
+      "ingredient",
+      "background",
+      "conditionTemplate"
+    ],
     "templates": {
       "base": {
-        "description": ""
+        "id": "",
+        "schemaVersion": 1,
+        "description": "",
+        "pathwayId": "",
+        "allowedPathwayIds": [],
+        "sequence": 9,
+        "minSequence": 9,
+        "sourceSequence": 9,
+        "activation": "special",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "usageLimit": {
+          "scope": "perScene",
+          "maxUses": 1
+        },
+        "complexityClass": "invocation.standard_scope",
+        "formulaKey": "check.skill.v1",
+        "effects": [],
+        "tags": [],
+        "dependencies": {
+          "minSystemVersion": "1.1.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": []
+        },
+        "abilityData": {
+          "targetMode": "special",
+          "rangeFt": 0,
+          "attackAttribute": "wil",
+          "linkedSkillId": "",
+          "weaponAccuracy": 0
+        },
+        "weaponData": {
+          "baseDamage": 1,
+          "damageType": "physical",
+          "rangeFt": 5,
+          "accuracyBonus": 0
+        },
+        "armorData": {
+          "defenseShift": 0,
+          "damageReduction": 0,
+          "encumbrancePenalty": 0
+        },
+        "ritualData": {
+          "targetMode": "scene",
+          "mandatoryComponents": 0,
+          "baseCastMinutes": 10
+        },
+        "artifactData": {
+          "riskClass": "stable",
+          "charges": 0,
+          "misuseCorruptionGain": 0
+        }
       }
+    },
+    "pathway": {
+      "templates": ["base"]
+    },
+    "sequenceNode": {
+      "templates": ["base"]
     },
     "ability": {
       "templates": ["base"]
@@ -31,6 +193,12 @@
       "templates": ["base"]
     },
     "artifact": {
+      "templates": ["base"]
+    },
+    "gear": {
+      "templates": ["base"]
+    },
+    "feature": {
       "templates": ["base"]
     },
     "weapon": {
@@ -46,6 +214,9 @@
       "templates": ["base"]
     },
     "background": {
+      "templates": ["base"]
+    },
+    "conditionTemplate": {
       "templates": ["base"]
     }
   }

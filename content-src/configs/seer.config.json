@@ -1,0 +1,34 @@
+{
+  "entries": [
+    {
+      "id": "config.pack.seer",
+      "pack": "pathways",
+      "documentType": "Item",
+      "itemType": "feature",
+      "name": "Seer Content Pack Metadata",
+      "img": "icons/svg/book.svg",
+      "version": "1.2.0",
+      "minSystemVersion": "1.2.0",
+      "maxTestedSystemVersion": "1.2.0",
+      "dependencies": ["pathway.seer"],
+      "system": {
+        "id": "config.pack.seer",
+        "schemaVersion": 1,
+        "name": "Seer Content Pack Metadata",
+        "type": "feature",
+        "activation": "passive",
+        "resource": "none",
+        "cost": 0,
+        "cooldown": 0,
+        "formulaKey": "check.attribute.v1",
+        "effects": [],
+        "tags": ["config", "pack", "meta"],
+        "dependencies": {
+          "minSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.0",
+          "requiresIds": ["pathway.seer"]
+        }
+      }
+    }
+  ]
+}

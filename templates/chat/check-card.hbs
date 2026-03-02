@@ -1,0 +1,20 @@
+<section class="lotm-chat-card lotm-chat-check">
+  <header>
+    <h3>{{label}}</h3>
+    <p><strong>{{actorName}}</strong></p>
+  </header>
+  <div class="lotm-chat-grid">
+    <div>Roll</div><div>{{roll}}</div>
+    <div>Target</div><div>{{finalTarget}}</div>
+    <div>Result</div><div>{{#if success}}Success{{else}}Failure{{/if}} ({{band}})</div>
+    <div>Margin</div><div>{{margin}}</div>
+  </div>
+  <details>
+    <summary>Breakdown</summary>
+    <ul>
+      {{#each components as |value key|}}
+        <li><strong>{{key}}</strong>: {{value}}</li>
+      {{/each}}
+    </ul>
+  </details>
+</section>
