@@ -1,5 +1,7 @@
 import { PROFICIENCY_BY_RANK, clamp, resolveCorruptionPenalty } from "../constants.mjs";
 import { createLotMCheckCard, createLotMInfoCard } from "../chat/chat-cards.mjs";
+import { rollOnSegment } from "./rolltable-engine.mjs";
+import { validateActorForPlay } from "../actor/validation.mjs";
 
 function getActorFromInput(actorOrId) {
   if (!actorOrId) return null;
@@ -15,6 +17,23 @@ function getLinkedSkill(actor, skillId) {
   return skills[skillId] ?? null;
 }
 
+function assertActorReadyForPlay(actor) {
+  const validation = validateActorForPlay(
+    actor.system ?? {},
+    actor.type ?? "character",
+    actor.items?.map((item) => item.toObject(false)) ?? []
+  );
+
+  const isIncompleteCharacter = actor.type === "character" && actor.system?.creation?.state !== "complete";
+  if (!validation.ok || isIncompleteCharacter) {
+    const parts = [];
+    if (validation.errors.length > 0) parts.push(validation.errors.join("; "));
+    if (isIncompleteCharacter) parts.push("character creation is not finalized");
+    const reason = parts.join("; ") || "actor validation failed";
+    throw new Error(`Actor ${actor.name} is not ready for play: ${reason}`);
+  }
+}
+
 function buildSuccessBand(roll, target, margin) {
   if (roll === 1) return "criticalSuccess";
   if (roll === 100) return "criticalFailure";
@@ -28,9 +47,22 @@ function buildSuccessBand(roll, target, margin) {
   return "success";
 }
 
+async function triggerHookedRollTable(hookName, context = {}) {
+  const hooks = CONFIG?.lotmSystem?.rolltableHooks ?? {};
+  const segment = hooks?.[hookName]?.segment;
+  if (!segment) return null;
+  try {
+    return await rollOnSegment(segment, { hookName, ...context });
+  } catch (err) {
+    console.warn(`LoTM roll-table hook failed for ${hookName}`, err);
+    return null;
+  }
+}
+
 export async function rollCheck({ actor: actorInput, attribute = "wil", skillId = null, situational = 0, status = 0, label = "Check" } = {}) {
   const actor = getActorFromInput(actorInput);
   if (!actor) throw new Error("LoTM rollCheck requires a valid actor");
+  assertActorReadyForPlay(actor);
 
   const attributes = actor.system?.attributes ?? {};
   const attrData = attributes[attribute] ?? { base: 10, temp: 0, total: 10 };
@@ -86,6 +118,7 @@ export async function rollCheck({ actor: actorInput, attribute = "wil", skillId 
 export async function rollDamage({ actor: actorInput, baseDamage = 1, flatBonus = 0, multiplier = null, targetDamageReduction = 0, label = "Damage" } = {}) {
   const actor = getActorFromInput(actorInput);
   if (!actor) throw new Error("LoTM rollDamage requires a valid actor");
+  assertActorReadyForPlay(actor);
 
   const computedMultiplier = multiplier == null
     ? Number(actor.system?.tracks?.damageOutMultiplier ?? 1)
@@ -121,6 +154,7 @@ export async function rollDamage({ actor: actorInput, baseDamage = 1, flatBonus 
 export async function applyCorruption({ actor: actorInput, delta = 0, source = "system" } = {}) {
   const actor = getActorFromInput(actorInput);
   if (!actor) throw new Error("LoTM applyCorruption requires a valid actor");
+  assertActorReadyForPlay(actor);
 
   const current = Number(actor.system?.resources?.corruption) || 0;
   const next = clamp(current + Number(delta || 0), 0, 100);
@@ -145,6 +179,16 @@ export async function applyCorruption({ actor: actorInput, delta = 0, source = "
     timestamp: Date.now()
   };
 
+  if (crossed.length > 0) {
+    await triggerHookedRollTable("corruptionThresholdCross", {
+      actorId: actor.id,
+      actorName: actor.name,
+      thresholds: crossed,
+      previous: current,
+      next
+    });
+  }
+
   await createLotMInfoCard({
     title: `Corruption Update (${actor.name})`,
     summary: `${current} -> ${next} (penalty ${oldPenalty} -> ${newPenalty})`,
@@ -157,6 +201,7 @@ export async function applyCorruption({ actor: actorInput, delta = 0, source = "
 export async function rollRitualRisk({ actor: actorInput, complexity = 0, circleBonus = 0, label = "Ritual Risk" } = {}) {
   const actor = getActorFromInput(actorInput);
   if (!actor) throw new Error("LoTM rollRitualRisk requires a valid actor");
+  assertActorReadyForPlay(actor);
 
   const attrs = actor.system?.attributes ?? {};
   const wil = Number(attrs.wil?.total ?? (Number(attrs.wil?.base || 0) + Number(attrs.wil?.temp || 0))) || 0;
@@ -191,6 +236,16 @@ export async function rollRitualRisk({ actor: actorInput, complexity = 0, circle
     timestamp: Date.now()
   };
 
+  if (!success) {
+    await triggerHookedRollTable("ritualFailure", {
+      actorId: actor.id,
+      actorName: actor.name,
+      roll: rolled,
+      target: finalTarget,
+      margin
+    });
+  }
+
   await createLotMCheckCard(payload);
   return payload;
 }
@@ -198,6 +253,7 @@ export async function rollRitualRisk({ actor: actorInput, complexity = 0, circle
 export async function rollArtifactBacklash({ actor: actorInput, riskClass = "volatile", misuse = false, label = "Artifact Backlash" } = {}) {
   const actor = getActorFromInput(actorInput);
   if (!actor) throw new Error("LoTM rollArtifactBacklash requires a valid actor");
+  assertActorReadyForPlay(actor);
 
   const baseByRisk = {
     stable: 20,
@@ -232,6 +288,17 @@ export async function rollArtifactBacklash({ actor: actorInput, riskClass = "vol
     },
     timestamp: Date.now()
   };
+
+  if (failure) {
+    await triggerHookedRollTable("artifactBacklash", {
+      actorId: actor.id,
+      actorName: actor.name,
+      riskClass,
+      severe,
+      roll: rolled,
+      target: finalTarget
+    });
+  }
 
   await createLotMInfoCard({
     title: `${label} (${actor.name})`,

@@ -11,6 +11,8 @@ SEMVER_RE = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
 MANIFEST_PATH_RE = re.compile(r"^(?![A-Za-z]:)(?!/)(?!\\\\)(?!.*\.\.)[a-zA-Z0-9_./-]+$")
 VALID_LINKED_ATTRS = {"str", "dex", "wil", "con", "cha", "int", "luck"}
 BALANCE_GATE_MODES = {"warn", "strict", "off"}
+ROLLTABLE_SEGMENTS = {"resources", "abilities", "rituals", "artifacts", "corruption", "encounters"}
+ROLLTABLE_FORMULA_RE = re.compile(r"^1d([1-9][0-9]*)$")
 
 
 def fail(msg: str) -> None:
@@ -52,6 +54,7 @@ def ensure_required_files():
         ROOT / "schemas" / "item.system.schema.v1_1.json",
         ROOT / "schemas" / "effect.schema.v1_1.json",
         ROOT / "schemas" / "content.pack.manifest.schema.v1_1.json",
+        ROOT / "schemas" / "content.rolltable.schema.v1_2.json",
         ROOT / "data" / "skills.registry.v1.1.json",
         ROOT / "data" / "conditions.library.v1.1.json",
     ]
@@ -125,6 +128,24 @@ def check_config_contract(cli_balance_mode):
     if channeling.get("declareBeforeRoll") is not True:
         fail("advancement.channelingSelection.declareBeforeRoll must be true")
 
+    rolltable_hooks = cfg.get("automation", {}).get("rolltableHooks", {})
+    expected_hooks = {
+        "ritualFailure": "rituals",
+        "artifactBacklash": "artifacts",
+        "corruptionThresholdCross": "corruption",
+    }
+    for hook_name, expected_segment in expected_hooks.items():
+        got_segment = rolltable_hooks.get(hook_name, {}).get("segment")
+        if got_segment != expected_segment:
+            fail(f"automation.rolltableHooks.{hook_name}.segment must be '{expected_segment}'")
+    unknown_segments = {
+        hook_name: hook_cfg.get("segment")
+        for hook_name, hook_cfg in rolltable_hooks.items()
+        if hook_cfg.get("segment") not in ROLLTABLE_SEGMENTS
+    }
+    if unknown_segments:
+        fail(f"automation.rolltableHooks contains invalid segments: {unknown_segments}")
+
     balance_mode = resolve_balance_gate_mode(cfg, cli_balance_mode)
     return cfg, current_version, balance_mode
 
@@ -183,6 +204,7 @@ def check_schema_ids_and_contracts():
     item = load_json(ROOT / "schemas" / "item.system.schema.v1_1.json")
     effect = load_json(ROOT / "schemas" / "effect.schema.v1_1.json")
     manifest = load_json(ROOT / "schemas" / "content.pack.manifest.schema.v1_1.json")
+    rolltable = load_json(ROOT / "schemas" / "content.rolltable.schema.v1_2.json")
 
     if actor.get("$id") != "lotm/actor.system.schema.v1_1.json":
         fail("actor v1.1 schema $id mismatch")
@@ -192,6 +214,8 @@ def check_schema_ids_and_contracts():
         fail("effect v1.1 schema $id mismatch")
     if manifest.get("$id") != "lotm/content.pack.manifest.schema.v1_1.json":
         fail("manifest v1.1 schema $id mismatch")
+    if rolltable.get("$id") != "lotm/content.rolltable.schema.v1_2.json":
+        fail("rolltable v1.2 schema $id mismatch")
 
     track_props = set(actor["properties"]["tracks"]["properties"].keys())
     required_track_props = {
@@ -211,6 +235,8 @@ def check_schema_ids_and_contracts():
     resource_required = set(actor["properties"]["resources"]["required"])
     if "deathSaves" not in resource_required:
         fail("actor schema resources must require deathSaves")
+    if "creation" not in set(actor.get("required", [])):
+        fail("actor schema must require creation contract")
 
     combat = actor["properties"].get("combat", {})
     combat_props = set(combat.get("properties", {}).keys())
@@ -235,6 +261,10 @@ def check_schema_ids_and_contracts():
     path_pattern = manifest["properties"]["entries"]["items"]["properties"]["path"].get("pattern", "")
     if r"\.\." not in path_pattern:
         fail("manifest path rule must block path traversal")
+
+    segment_enum = set(rolltable.get("properties", {}).get("segment", {}).get("enum", []))
+    if segment_enum != ROLLTABLE_SEGMENTS:
+        fail("rolltable schema segment enum must match canonical rolltable segments")
 
 
 def load_core_tables():
@@ -261,6 +291,65 @@ def run_corruption_boundary_checks(cfg):
         got = resolve_corruption_penalty(pct, bands)
         if got != expected:
             fail(f"Corruption boundary mismatch at {pct}%: got {got}, expected {expected}")
+
+
+def check_rolltable_source_contract():
+    path = ROOT / "content-src" / "rolltables" / "seer.tables.json"
+    data = load_json(path)
+    entries = data.get("entries", [])
+    if not isinstance(entries, list) or not entries:
+        fail("rolltable source must contain non-empty entries array")
+
+    segment_seen = set()
+    for entry in entries:
+        entry_id = entry.get("id", "<unknown>")
+        segment = entry.get("segment")
+        if segment not in ROLLTABLE_SEGMENTS:
+            fail(f"rolltable {entry_id} has invalid segment: {segment}")
+        segment_seen.add(segment)
+
+        formula = entry.get("formula", "")
+        m = ROLLTABLE_FORMULA_RE.fullmatch(formula)
+        if m is None:
+            fail(f"rolltable {entry_id} formula must match 1dN")
+        sides = int(m.group(1))
+
+        results = entry.get("results", [])
+        if not results:
+            fail(f"rolltable {entry_id} must include results")
+
+        weighted_total = 0
+        seen_text = set()
+        for result in results:
+            text = result.get("text")
+            if not isinstance(text, str) or not text.strip():
+                fail(f"rolltable {entry_id} includes result with empty text")
+            normalized = text.strip().lower()
+            if normalized in seen_text:
+                fail(f"rolltable {entry_id} contains duplicate result text: {text}")
+            seen_text.add(normalized)
+
+            weight = result.get("weight")
+            if not isinstance(weight, int) or weight < 1:
+                fail(f"rolltable {entry_id} has invalid result weight: {weight}")
+            weighted_total += weight
+
+        if sides != weighted_total:
+            fail(
+                f"rolltable {entry_id} formula/result mismatch: formula sides={sides}, weighted_total={weighted_total}"
+            )
+
+        trigger_tags = entry.get("triggerTags", [])
+        if not isinstance(trigger_tags, list):
+            fail(f"rolltable {entry_id} triggerTags must be array")
+        for tag in trigger_tags:
+            if not isinstance(tag, str) or ID_RE.fullmatch(tag) is None:
+                fail(f"rolltable {entry_id} has invalid trigger tag: {tag}")
+
+    if segment_seen != ROLLTABLE_SEGMENTS:
+        fail(
+            f"rolltable source must include all canonical segments; missing={sorted(ROLLTABLE_SEGMENTS - segment_seen)}"
+        )
 
 
 def compute_progressed_attributes(cfg):
@@ -847,6 +936,9 @@ def main():
 
     print("[phase2] checking corruption boundary table")
     run_corruption_boundary_checks(cfg)
+
+    print("[phase2] checking rolltable source contract")
+    check_rolltable_source_contract()
 
     print("[phase2] checking skills registry")
     check_skill_registry()

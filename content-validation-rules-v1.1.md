@@ -118,3 +118,25 @@ A package can be published only if all are true:
   - `dependencies[]`
 - Cross-entry dependencies must resolve to known IDs.
 - Pack generation must preserve stable document identity (`_id`) for update-safe migrations.
+
+## 14) Roll Table Source Contract (v1.2.2)
+
+- `RollTable` source entries must satisfy `schemas/content.rolltable.schema.v1_2.json`.
+- Required fields:
+  - `segment` in `{resources, abilities, rituals, artifacts, corruption, encounters}`
+  - `formula` in `1dN` format
+  - `results[]` with required `text` + `weight`
+- Formula coherence is mandatory:
+  - sum of all `weight` values must equal `N` from `formula`.
+- Result text values must be unique per table after trim/lowercase normalization.
+- `triggerTags[]` are optional but, when present, must contain ID-safe tags.
+
+## 15) Character Creation Contract (v1.2.2)
+
+- Actor schema includes `system.creation` with:
+  - `state`: `draft|identity|attributes|skills|pathway|equipment|complete`
+  - `completedSteps[]`
+  - `version`
+- `character` actors are considered ready-for-play only when:
+  - `creation.state = complete`
+  - validator returns no errors.

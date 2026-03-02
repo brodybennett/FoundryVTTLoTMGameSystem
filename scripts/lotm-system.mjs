@@ -10,6 +10,8 @@ import {
   rollRitualRisk,
   rollArtifactBacklash
 } from "../module/rolls/roll-engine.mjs";
+import { rollOnSegment, rollOnTableId } from "../module/rolls/rolltable-engine.mjs";
+import { deriveActorStats, validateActorForPlay } from "../module/actor/validation.mjs";
 import { runWorldMigrationV120 } from "../module/migrations/v1_2_0.mjs";
 
 function registerSettings() {
@@ -86,7 +88,11 @@ function registerGameApi() {
     rollDamage,
     applyCorruption,
     rollRitualRisk,
-    rollArtifactBacklash
+    rollArtifactBacklash,
+    rollOnSegment,
+    rollOnTableId,
+    validateActorForPlay,
+    deriveActorStats
   };
 }
 
@@ -117,7 +123,12 @@ Hooks.once("init", () => {
     id: SYSTEM_ID,
     title: game.system.title,
     version: game.system.version,
-    schemaVersion: WORLD_SCHEMA_VERSION
+    schemaVersion: WORLD_SCHEMA_VERSION,
+    rolltableHooks: {
+      ritualFailure: { segment: "rituals" },
+      artifactBacklash: { segment: "artifacts" },
+      corruptionThresholdCross: { segment: "corruption" }
+    }
   };
 });
 

@@ -17,23 +17,11 @@ def title_from_pathway(pathway_id: str | None) -> str:
     return pathway_id.split(".")[-1].replace("_", " ").title()
 
 
-def infer_rolltable_segment(entry: dict) -> str:
-    explicit = entry.get("segment")
-    if explicit:
-        return explicit
-
-    content_id = entry["id"]
-    if "loot" in content_id:
-        return "resources"
-    if "corruption" in content_id:
-        return "corruption"
-    if "artifact" in content_id:
-        return "artifacts"
-    if "ritual" in content_id:
-        return "rituals"
-    if "encounter" in content_id:
-        return "encounters"
-    return "abilities"
+def resolve_rolltable_segment(entry: dict) -> str:
+    segment = entry.get("segment")
+    if not isinstance(segment, str) or not segment:
+        raise AssertionError(f"RollTable entry missing required segment: {entry['id']}")
+    return segment
 
 
 def resolve_pack(entry: dict) -> str:
@@ -64,7 +52,7 @@ def resolve_pack(entry: dict) -> str:
         return "items-gear"
 
     if doc_type == "RollTable":
-        return f"rolltables-{infer_rolltable_segment(entry)}"
+        return f"rolltables-{resolve_rolltable_segment(entry)}"
 
     return entry["pack"]
 
@@ -155,7 +143,8 @@ def make_rolltable_doc(entry: dict) -> dict:
         current = next_value + 1
 
     formula = entry.get("formula", f"1d{current - 1}")
-    segment = infer_rolltable_segment(entry)
+    segment = resolve_rolltable_segment(entry)
+    trigger_tags = entry.get("triggerTags", [])
 
     return {
         "_id": stable_id(entry["id"]),
@@ -179,6 +168,7 @@ def make_rolltable_doc(entry: dict) -> dict:
                     "segment": segment,
                     "pack": resolve_pack(entry),
                 },
+                "triggerTags": trigger_tags,
             }
         },
     }

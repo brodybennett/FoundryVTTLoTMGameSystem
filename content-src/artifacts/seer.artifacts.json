@@ -7,9 +7,9 @@
       "itemType": "artifact",
       "name": "Mirror of Hushed Fates",
       "img": "icons/sundries/misc/hand-mirror.webp",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": ["pathway.seer"],
       "system": {
         "id": "artifact.seer.mirror_of_hushed_fates",
@@ -30,8 +30,8 @@
           "misuseCorruptionGain": 8
         },
         "dependencies": {
-          "minSystemVersion": "1.2.1",
-          "maxTestedSystemVersion": "1.2.1",
+          "minSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.2",
           "requiresIds": ["pathway.seer"]
         }
       }
@@ -43,9 +43,9 @@
       "itemType": "artifact",
       "name": "Clockwork Sphinx",
       "img": "icons/commodities/tech/gear-brass.webp",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": [],
       "system": {
         "id": "artifact.seer.clockwork_sphinx",
@@ -66,8 +66,8 @@
           "misuseCorruptionGain": 5
         },
         "dependencies": {
-          "minSystemVersion": "1.2.1",
-          "maxTestedSystemVersion": "1.2.1",
+          "minSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.2",
           "requiresIds": []
         }
       }
@@ -79,9 +79,9 @@
       "itemType": "artifact",
       "name": "Gallows Coin",
       "img": "icons/commodities/currency/coin-engraved-oval-gold.webp",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": [],
       "system": {
         "id": "artifact.seer.gallows_coin",
@@ -102,8 +102,8 @@
           "misuseCorruptionGain": 12
         },
         "dependencies": {
-          "minSystemVersion": "1.2.1",
-          "maxTestedSystemVersion": "1.2.1",
+          "minSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.2",
           "requiresIds": []
         }
       }
@@ -115,9 +115,9 @@
       "itemType": "artifact",
       "name": "Lamp of Black Stars",
       "img": "icons/sundries/lights/lantern-bullseye-black.webp",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": ["pathway.seer"],
       "system": {
         "id": "artifact.seer.lamp_of_black_stars",
@@ -138,8 +138,8 @@
           "misuseCorruptionGain": 20
         },
         "dependencies": {
-          "minSystemVersion": "1.2.1",
-          "maxTestedSystemVersion": "1.2.1",
+          "minSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.2",
           "requiresIds": ["pathway.seer"]
         }
       }

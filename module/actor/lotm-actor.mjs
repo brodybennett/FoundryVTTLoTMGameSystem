@@ -1,4 +1,5 @@
 import { ATTRIBUTE_KEYS, resolveCorruptionPenalty } from "../constants.mjs";
+import { deriveActorStats } from "./validation.mjs";
 
 export class LotMActor extends Actor {
   prepareDerivedData() {
@@ -19,6 +20,11 @@ export class LotMActor extends Actor {
     system.resources.corruption ??= 0;
     system.resources.corruptionPenalty = resolveCorruptionPenalty(system.resources.corruption);
 
+    system.creation ??= {};
+    system.creation.state ??= "draft";
+    system.creation.completedSteps ??= [];
+    system.creation.version ??= 1;
+
     system.tracks ??= {};
     system.tracks.damageOutMultiplier = Number(system.tracks.damageOutMultiplier ?? 1);
     if (!Number.isFinite(system.tracks.damageOutMultiplier) || system.tracks.damageOutMultiplier <= 0) {
@@ -27,6 +33,14 @@ export class LotMActor extends Actor {
 
     system.combat ??= {};
     system.combat.damageReduction = Number(system.combat.damageReduction ?? 0);
+
+    system.derived ??= {};
+    const derived = deriveActorStats(system);
+    system.derived.hpMax = derived.hpMax;
+    system.derived.spiritMax = derived.spiritMax;
+    system.derived.sanityMax = derived.sanityMax;
+    system.derived.defenseShift = derived.defenseShift;
+    system.derived.initiativeTarget = derived.initiativeTarget;
   }
 
   get linkedSkills() {

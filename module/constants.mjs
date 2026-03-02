@@ -1,7 +1,12 @@
 export const SYSTEM_ID = "lotm-system";
-export const WORLD_SCHEMA_VERSION = "1.2.0";
+export const WORLD_SCHEMA_VERSION = "1.2.2";
 
 export const ATTRIBUTE_KEYS = ["str", "dex", "wil", "con", "cha", "int", "luck"];
+export const SKILL_RANKS = ["untrained", "familiar", "trained", "expert", "master", "legendary"];
+
+export const CREATION_STEPS = ["identity", "attributes", "skills", "pathway", "equipment", "complete"];
+
+export const ROLLTABLE_SEGMENTS = ["resources", "abilities", "rituals", "artifacts", "corruption", "encounters"];
 
 export const PROFICIENCY_BY_RANK = {
   untrained: 0,

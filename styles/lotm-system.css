@@ -157,6 +157,80 @@
   align-items: end;
 }
 
+.lotm-sheet .creation-wizard {
+  border: 1px solid var(--lotm-border);
+  border-radius: 8px;
+  background: linear-gradient(165deg, #f6eddc, #e8d5b8);
+  padding: 0.5rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.lotm-sheet .wizard-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.lotm-sheet .wizard-head h2 {
+  margin: 0;
+}
+
+.lotm-sheet .wizard-head p {
+  margin: 0;
+}
+
+.lotm-sheet .wizard-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
+  gap: 0.3rem;
+}
+
+.lotm-sheet .wizard-step {
+  text-align: center;
+  padding: 0.25rem 0.35rem;
+  font-size: 0.82rem;
+}
+
+.lotm-sheet .wizard-step.active {
+  background: var(--lotm-accent);
+  color: #fff;
+}
+
+.lotm-sheet .wizard-step.complete {
+  border-color: #3f6a39;
+}
+
+.lotm-sheet .wizard-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.lotm-sheet .wizard-feedback h3 {
+  margin: 0;
+}
+
+.lotm-sheet .wizard-errors,
+.lotm-sheet .wizard-warnings {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.lotm-sheet .wizard-errors {
+  color: #7d2418;
+}
+
+.lotm-sheet .wizard-warnings {
+  color: #7d5400;
+}
+
+.lotm-sheet .wizard-ok {
+  color: #204f22;
+  margin: 0;
+}
+
 .lotm-chat-card {
   border: 1px solid var(--lotm-border);
   border-radius: 8px;
@@ -187,5 +261,10 @@
 
   .lotm-sheet .skill-row {
     grid-template-columns: 1fr;
+  }
+
+  .lotm-sheet .wizard-head {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

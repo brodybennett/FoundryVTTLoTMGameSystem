@@ -74,6 +74,11 @@
           },
           "attemptState": "idle"
         },
+        "creation": {
+          "state": "draft",
+          "completedSteps": [],
+          "version": 1
+        },
         "tracks": {
           "investigationIP": 0,
           "actionLock": 0,

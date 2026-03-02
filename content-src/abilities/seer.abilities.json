@@ -7,9 +7,9 @@
       "itemType": "ability",
       "name": "Hunch of Danger",
       "img": "icons/svg/hazard.svg",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": ["pathway.seer", "sequence.seer.9"],
       "system": {
         "id": "ability.seer.hunch_of_danger",
@@ -35,8 +35,8 @@
           "weaponAccuracy": 0
         },
         "dependencies": {
-          "minSystemVersion": "1.2.1",
-          "maxTestedSystemVersion": "1.2.1",
+          "minSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.2",
           "requiresIds": ["pathway.seer", "sequence.seer.9"]
         }
       }
@@ -48,9 +48,9 @@
       "itemType": "ability",
       "name": "Spirit Vision",
       "img": "icons/svg/eye.svg",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": ["pathway.seer", "sequence.seer.9"],
       "system": {
         "id": "ability.seer.spirit_vision",
@@ -76,8 +76,8 @@
           "weaponAccuracy": 0
         },
         "dependencies": {
-          "minSystemVersion": "1.2.1",
-          "maxTestedSystemVersion": "1.2.1",
+          "minSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.2",
           "requiresIds": ["pathway.seer", "sequence.seer.9"]
         }
       }
@@ -89,9 +89,9 @@
       "itemType": "ability",
       "name": "Arcane Sense",
       "img": "icons/svg/aura.svg",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": ["pathway.seer", "sequence.seer.9"],
       "system": {
         "id": "ability.seer.arcane_sense",
@@ -117,8 +117,8 @@
           "weaponAccuracy": 0
         },
         "dependencies": {
-          "minSystemVersion": "1.2.1",
-          "maxTestedSystemVersion": "1.2.1",
+          "minSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.2",
           "requiresIds": ["pathway.seer", "sequence.seer.9"]
         }
       }
@@ -130,9 +130,9 @@
       "itemType": "ability",
       "name": "Hypnotic Pulse",
       "img": "icons/svg/daze.svg",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": ["pathway.seer", "sequence.seer.9"],
       "system": {
         "id": "ability.seer.hypnotic_pulse",
@@ -158,8 +158,8 @@
           "weaponAccuracy": 0
         },
         "dependencies": {
-          "minSystemVersion": "1.2.1",
-          "maxTestedSystemVersion": "1.2.1",
+          "minSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.2",
           "requiresIds": ["pathway.seer", "sequence.seer.9"]
         }
       }
@@ -171,9 +171,9 @@
       "itemType": "ability",
       "name": "Clown's Balance",
       "img": "icons/svg/falling.svg",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": ["pathway.seer", "sequence.seer.8"],
       "system": {
         "id": "ability.seer.clown_balance",
@@ -199,8 +199,8 @@
           "weaponAccuracy": 5
         },
         "dependencies": {
-          "minSystemVersion": "1.2.1",
-          "maxTestedSystemVersion": "1.2.1",
+          "minSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.2",
           "requiresIds": ["pathway.seer", "sequence.seer.8"]
         }
       }
@@ -212,9 +212,9 @@
       "itemType": "ability",
       "name": "Paper Figurine Substitute",
       "img": "icons/svg/mystery-man.svg",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": ["pathway.seer", "sequence.seer.8"],
       "system": {
         "id": "ability.seer.paper_figurine_substitute",
@@ -240,8 +240,8 @@
           "weaponAccuracy": 0
         },
         "dependencies": {
-          "minSystemVersion": "1.2.1",
-          "maxTestedSystemVersion": "1.2.1",
+          "minSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.2",
           "requiresIds": ["pathway.seer", "sequence.seer.8"]
         }
       }
@@ -253,9 +253,9 @@
       "itemType": "ability",
       "name": "Raven Feint",
       "img": "icons/svg/wing.svg",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": ["pathway.seer", "sequence.seer.8"],
       "system": {
         "id": "ability.seer.raven_feint",
@@ -281,8 +281,8 @@
           "weaponAccuracy": 5
         },
         "dependencies": {
-          "minSystemVersion": "1.2.1",
-          "maxTestedSystemVersion": "1.2.1",
+          "minSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.2",
           "requiresIds": ["pathway.seer", "sequence.seer.8"]
         }
       }
@@ -294,9 +294,9 @@
       "itemType": "ability",
       "name": "Lucky Read",
       "img": "icons/svg/d20-highlight.svg",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": ["pathway.seer", "sequence.seer.8"],
       "system": {
         "id": "ability.seer.lucky_read",
@@ -322,8 +322,8 @@
           "weaponAccuracy": 0
         },
         "dependencies": {
-          "minSystemVersion": "1.2.1",
-          "maxTestedSystemVersion": "1.2.1",
+          "minSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.2",
           "requiresIds": ["pathway.seer", "sequence.seer.8"]
         }
       }
@@ -335,9 +335,9 @@
       "itemType": "ability",
       "name": "Flame Jump",
       "img": "icons/svg/fire.svg",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": ["pathway.seer", "sequence.seer.7"],
       "system": {
         "id": "ability.seer.flame_jump",
@@ -363,8 +363,8 @@
           "weaponAccuracy": 0
         },
         "dependencies": {
-          "minSystemVersion": "1.2.1",
-          "maxTestedSystemVersion": "1.2.1",
+          "minSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.2",
           "requiresIds": ["pathway.seer", "sequence.seer.7"]
         }
       }
@@ -376,9 +376,9 @@
       "itemType": "ability",
       "name": "Fate Thread Cut",
       "img": "icons/svg/net.svg",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": ["pathway.seer", "sequence.seer.7"],
       "system": {
         "id": "ability.seer.fate_thread_cut",
@@ -404,8 +404,8 @@
           "weaponAccuracy": 3
         },
         "dependencies": {
-          "minSystemVersion": "1.2.1",
-          "maxTestedSystemVersion": "1.2.1",
+          "minSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.2",
           "requiresIds": ["pathway.seer", "sequence.seer.7"]
         }
       }
@@ -417,9 +417,9 @@
       "itemType": "ability",
       "name": "Swap Stage",
       "img": "icons/svg/target.svg",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": ["pathway.seer", "sequence.seer.7"],
       "system": {
         "id": "ability.seer.swap_stage",
@@ -445,8 +445,8 @@
           "weaponAccuracy": 0
         },
         "dependencies": {
-          "minSystemVersion": "1.2.1",
-          "maxTestedSystemVersion": "1.2.1",
+          "minSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.2",
           "requiresIds": ["pathway.seer", "sequence.seer.7"]
         }
       }
@@ -458,9 +458,9 @@
       "itemType": "ability",
       "name": "Marionette Strings",
       "img": "icons/svg/anchor.svg",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": ["pathway.seer", "sequence.seer.7"],
       "system": {
         "id": "ability.seer.marionette_strings",
@@ -486,8 +486,8 @@
           "weaponAccuracy": 0
         },
         "dependencies": {
-          "minSystemVersion": "1.2.1",
-          "maxTestedSystemVersion": "1.2.1",
+          "minSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.2",
           "requiresIds": ["pathway.seer", "sequence.seer.7"]
         }
       }

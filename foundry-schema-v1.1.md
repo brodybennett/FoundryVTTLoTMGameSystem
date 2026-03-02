@@ -14,6 +14,7 @@ This document defines additive v1.1 contract extensions over v1, plus Phase 1 bl
 - `schemas/item.system.schema.v1_1.json`
 - `schemas/effect.schema.v1_1.json`
 - `schemas/content.pack.manifest.schema.v1_1.json`
+- `schemas/content.rolltable.schema.v1_2.json`
 
 ## Additive Actor.system Fields
 
@@ -39,6 +40,11 @@ Optional:
 
 Required resource additions:
 - `resources.deathSaves`
+
+Required creation contract:
+- `creation.state`
+- `creation.completedSteps[]`
+- `creation.version`
 
 ## Item.system Hardening Rules
 
@@ -131,3 +137,21 @@ Manifest hardening rules:
   - hard-fail when `minSystemVersion > current system version`
   - hard-fail when `minSystemVersion > maxTestedSystemVersion`
   - warning when `current system version > maxTestedSystemVersion`
+
+## RollTable Runtime Contract (v1.2.2)
+
+- Roll table source content conforms to `schemas/content.rolltable.schema.v1_2.json`.
+- Segment enum is locked to:
+  - `resources`
+  - `abilities`
+  - `rituals`
+  - `artifacts`
+  - `corruption`
+  - `encounters`
+- Runtime API exposes:
+  - `game.lotm.rollOnSegment(segment, context={})`
+  - `game.lotm.rollOnTableId(contentId, context={})`
+- Hook routing comes from automation mapping:
+  - ritual failure -> `rituals`
+  - artifact backlash -> `artifacts`
+  - corruption threshold cross -> `corruption`

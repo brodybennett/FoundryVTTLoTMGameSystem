@@ -1,7 +1,8 @@
 import { SYSTEM_ID, WORLD_SCHEMA_VERSION, semverCompare } from "../constants.mjs";
+import { buildActorRepairUpdate } from "../actor/validation.mjs";
 
 function ensureActorShape(actorData) {
-  const update = {};
+  const update = buildActorRepairUpdate(actorData.system ?? {}, actorData.type ?? "character");
   const system = actorData.system ?? {};
 
   if (system.resources?.deathSaves == null) update["system.resources.deathSaves"] = 0;

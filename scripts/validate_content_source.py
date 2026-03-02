@@ -8,8 +8,10 @@ SYSTEM_PATH = ROOT / "system.json"
 
 ID_RE = re.compile(r"^[a-z][a-z0-9_.-]*$")
 PACK_RE = re.compile(r"^[a-z][a-z0-9-]*$")
-SEGMENT_RE = re.compile(r"^[a-z][a-z0-9-]*$")
+TAG_RE = re.compile(r"^[a-z][a-z0-9_.-]*$")
 SEMVER_RE = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
+ROLLTABLE_SEGMENTS = {"resources", "abilities", "rituals", "artifacts", "corruption", "encounters"}
+FORMULA_RE = re.compile(r"^1d([1-9][0-9]*)$")
 
 
 ACTOR_ALLOWED_TYPES = {"character", "npc"}
@@ -139,22 +141,48 @@ def validate_item_entry(entry):
 
 def validate_rolltable_entry(entry):
     content_id = entry["id"]
+    segment = entry.get("segment")
+    if not isinstance(segment, str) or segment not in ROLLTABLE_SEGMENTS:
+        fail(f"{content_id}.segment must be one of {sorted(ROLLTABLE_SEGMENTS)}")
+
+    formula = entry.get("formula")
+    if not isinstance(formula, str):
+        fail(f"{content_id}.formula is required and must be string")
+    m = FORMULA_RE.fullmatch(formula)
+    if m is None:
+        fail(f"{content_id}.formula must match 1dN where N >= 1")
+
     results = entry.get("results")
     if not isinstance(results, list) or not results:
         fail(f"{content_id} rolltable must include non-empty results")
 
+    seen_text = set()
+    weighted_total = 0
     for idx, result in enumerate(results):
         if not isinstance(result, dict):
             fail(f"{content_id} result #{idx + 1} must be object")
         if not isinstance(result.get("text"), str) or not result.get("text"):
             fail(f"{content_id} result #{idx + 1} missing text")
+        normalized_text = result["text"].strip().lower()
+        if normalized_text in seen_text:
+            fail(f"{content_id} has duplicate result text at #{idx + 1}")
+        seen_text.add(normalized_text)
         weight = result.get("weight", 1)
         if not isinstance(weight, int) or weight < 1:
             fail(f"{content_id} result #{idx + 1} weight must be integer >=1")
+        weighted_total += weight
 
-    segment = entry.get("segment")
-    if segment is not None and (not isinstance(segment, str) or SEGMENT_RE.fullmatch(segment) is None):
-        fail(f"{content_id}.segment must match {SEGMENT_RE.pattern}")
+    formula_sides = int(m.group(1))
+    if formula_sides != weighted_total:
+        fail(f"{content_id} formula {formula} is incoherent with weighted result total {weighted_total}")
+
+    trigger_tags = entry.get("triggerTags", [])
+    if trigger_tags is not None:
+        if not isinstance(trigger_tags, list):
+            fail(f"{content_id}.triggerTags must be an array when provided")
+        for tag in trigger_tags:
+            if not isinstance(tag, str) or TAG_RE.fullmatch(tag) is None:
+                fail(f"{content_id} has invalid trigger tag: {tag}")
 
 
 def validate_actor_entry(entry):
@@ -164,6 +192,18 @@ def validate_actor_entry(entry):
         fail(f"{content_id}.actorType must be one of {sorted(ACTOR_ALLOWED_TYPES)}")
     if "system" not in entry or not isinstance(entry["system"], dict):
         fail(f"{content_id} actor entry missing system object")
+    creation = entry["system"].get("creation")
+    if not isinstance(creation, dict):
+        fail(f"{content_id}.system.creation is required")
+    state = creation.get("state")
+    allowed_states = {"draft", "identity", "attributes", "skills", "pathway", "equipment", "complete"}
+    if state not in allowed_states:
+        fail(f"{content_id}.system.creation.state must be one of {sorted(allowed_states)}")
+    completed = creation.get("completedSteps")
+    if not isinstance(completed, list):
+        fail(f"{content_id}.system.creation.completedSteps must be array")
+    if creation.get("version") is None:
+        fail(f"{content_id}.system.creation.version is required")
 
 
 def validate_journal_entry(entry):
@@ -259,6 +299,9 @@ def validate_dependencies(entries):
 def load_and_validate_content():
     warnings = []
     current_version = load_system_version()
+    rolltable_schema = ROOT / "schemas" / "content.rolltable.schema.v1_2.json"
+    if not rolltable_schema.exists():
+        fail("Missing rolltable source schema: schemas/content.rolltable.schema.v1_2.json")
     entries = load_entries()
 
     if not entries:

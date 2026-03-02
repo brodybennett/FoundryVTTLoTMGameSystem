@@ -7,9 +7,9 @@
       "actorType": "npc",
       "name": "Nighthawk Captain",
       "img": "icons/svg/mystery-man.svg",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": ["pathway.seer"],
       "system": {
         "identity": {
@@ -67,6 +67,11 @@
           },
           "attemptState": "idle"
         },
+        "creation": {
+          "state": "complete",
+          "completedSteps": ["identity", "attributes", "skills", "pathway", "equipment"],
+          "version": 1
+        },
         "tracks": {
           "investigationIP": 0,
           "actionLock": 0,
@@ -100,9 +105,9 @@
       "actorType": "npc",
       "name": "Church Priest",
       "img": "icons/svg/mystery-man.svg",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": [],
       "system": {
         "identity": {
@@ -159,6 +164,11 @@
           },
           "attemptState": "idle"
         },
+        "creation": {
+          "state": "complete",
+          "completedSteps": ["identity", "attributes", "skills", "pathway", "equipment"],
+          "version": 1
+        },
         "tracks": {
           "investigationIP": 0,
           "actionLock": 0,
@@ -192,9 +202,9 @@
       "actorType": "npc",
       "name": "Wraith Hound",
       "img": "icons/svg/monster.svg",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": [],
       "system": {
         "identity": {
@@ -251,6 +261,11 @@
           },
           "attemptState": "idle"
         },
+        "creation": {
+          "state": "complete",
+          "completedSteps": ["identity", "attributes", "skills", "pathway", "equipment"],
+          "version": 1
+        },
         "tracks": {
           "investigationIP": 0,
           "actionLock": 0,
@@ -284,9 +299,9 @@
       "actorType": "npc",
       "name": "Faceless Mimic",
       "img": "icons/svg/monster.svg",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": ["ability.seer.swap_stage"],
       "system": {
         "identity": {
@@ -343,6 +358,11 @@
           },
           "attemptState": "idle"
         },
+        "creation": {
+          "state": "complete",
+          "completedSteps": ["identity", "attributes", "skills", "pathway", "equipment"],
+          "version": 1
+        },
         "tracks": {
           "investigationIP": 0,
           "actionLock": 0,
@@ -376,9 +396,9 @@
       "actorType": "npc",
       "name": "Dockworker",
       "img": "icons/svg/mystery-man.svg",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": [],
       "system": {
         "identity": {
@@ -434,6 +454,11 @@
           },
           "attemptState": "idle"
         },
+        "creation": {
+          "state": "complete",
+          "completedSteps": ["identity", "attributes", "skills", "pathway", "equipment"],
+          "version": 1
+        },
         "tracks": {
           "investigationIP": 0,
           "actionLock": 0,
@@ -467,9 +492,9 @@
       "actorType": "npc",
       "name": "Newspaper Reporter",
       "img": "icons/svg/mystery-man.svg",
-      "version": "1.2.1",
-      "minSystemVersion": "1.2.1",
-      "maxTestedSystemVersion": "1.2.1",
+      "version": "1.2.2",
+      "minSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.2",
       "dependencies": [],
       "system": {
         "identity": {
@@ -525,6 +550,11 @@
             "stability": true
           },
           "attemptState": "idle"
+        },
+        "creation": {
+          "state": "complete",
+          "completedSteps": ["identity", "attributes", "skills", "pathway", "equipment"],
+          "version": 1
         },
         "tracks": {
           "investigationIP": 0,

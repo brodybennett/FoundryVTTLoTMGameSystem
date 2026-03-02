@@ -65,6 +65,28 @@
    - `strict`: fails on out-of-band findings
    - `off`: skips calibration
 
+## Roll Table Contract and Hook Tests
+
+1. Roll-table source entry missing `segment` fails.
+2. Invalid `segment` value fails.
+3. Roll-table `formula` must match `1dN`; malformed formulas fail.
+4. Sum of result weights must equal `N` from formula; mismatch fails.
+5. Duplicate result text in one table fails.
+6. Runtime hook mapping in config is fixed:
+   - `ritualFailure -> rituals`
+   - `artifactBacklash -> artifacts`
+   - `corruptionThresholdCross -> corruption`
+7. Corruption threshold crossing triggers only on crossing boundaries, not on non-crossing updates.
+
+## Character Creation Flow Tests
+
+1. New `character` actor initializes with `system.creation.state = draft`.
+2. Wizard step transitions update `system.creation.state` and `completedSteps`.
+3. Skill ranks are constrained to canonical enum values.
+4. Finalize action refuses actors with validation errors.
+5. Finalize action persists derived stats and sets `state = complete`.
+6. Repair action backfills missing creation/default fields on legacy actors.
+
 ## Acceptance
 
 1. `python scripts/phase2_verification.py` passes.

@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.2.2
+
+- Added strict roll-table source schema contract (`schemas/content.rolltable.schema.v1_2.json`).
+- Enforced roll-table segment/formula/weight coherence and trigger-tag validation in content verifier.
+- Added runtime roll-table APIs:
+  - `game.lotm.rollOnSegment(segment, context={})`
+  - `game.lotm.rollOnTableId(contentId, context={})`
+- Wired automation hook routing for:
+  - ritual failure -> `rituals`
+  - artifact backlash -> `artifacts`
+  - corruption threshold crossing -> `corruption`
+- Added guided character creation wizard flow in actor sheet with step state tracking.
+- Added actor ready validation and derived-stat finalization/repair utilities.
+- Enforced ready-for-play gating for character roll automation when creation is incomplete.
+
 ## 1.2.1
 
 - Reworked compendium architecture to target final browsing model:

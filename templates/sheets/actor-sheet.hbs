@@ -4,12 +4,64 @@
     <div class="header-fields">
       <h1><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
       <div class="header-meta">
-        <label>Pathway <input type="text" name="system.identity.pathwayId" value="{{system.identity.pathwayId}}" /></label>
-        <label>Sequence <input type="number" min="0" max="9" name="system.identity.sequence" value="{{system.identity.sequence}}" /></label>
-        <label>Tier <input type="text" name="system.identity.tier" value="{{system.identity.tier}}" /></label>
+        <label>Pathway *
+          <input type="text" name="system.identity.pathwayId" value="{{system.identity.pathwayId}}" placeholder="pathway.seer" />
+        </label>
+        <label>Sequence *
+          <input type="number" min="0" max="9" name="system.identity.sequence" value="{{system.identity.sequence}}" />
+        </label>
+        <label>Tier
+          <input type="text" name="system.identity.tier" value="{{system.identity.tier}}" />
+        </label>
       </div>
     </div>
   </header>
+
+  {{#if isCharacter}}
+  <section class="creation-wizard">
+    <div class="wizard-head">
+      <h2>Character Creation Wizard</h2>
+      <p>Current state: <strong>{{creation.state}}</strong></p>
+    </div>
+
+    <div class="wizard-steps">
+      {{#each creationSteps as |step|}}
+        <button type="button" class="wizard-step {{#if step.active}}active{{/if}} {{#if step.complete}}complete{{/if}}" data-action="wizard-step" data-step="{{step.key}}">
+          {{step.label}}
+        </button>
+      {{/each}}
+    </div>
+
+    <div class="wizard-actions">
+      <button type="button" data-action="wizard-prev">Previous Step</button>
+      <button type="button" data-action="wizard-next">Next Step</button>
+      <button type="button" data-action="import-pathway">Import Pathway Package</button>
+      <button type="button" data-action="wizard-finalize">Finalize Character</button>
+      <button type="button" data-action="wizard-repair">Repair Legacy Data</button>
+    </div>
+
+    <div class="wizard-feedback">
+      <h3>Validation</h3>
+      {{#if validation.errors.length}}
+      <ul class="wizard-errors">
+        {{#each validation.errors as |err|}}
+          <li>{{err}}</li>
+        {{/each}}
+      </ul>
+      {{else}}
+      <p class="wizard-ok">No blocking validation errors.</p>
+      {{/if}}
+
+      {{#if validation.warnings.length}}
+      <ul class="wizard-warnings">
+        {{#each validation.warnings as |warn|}}
+          <li>{{warn}}</li>
+        {{/each}}
+      </ul>
+      {{/if}}
+    </div>
+  </section>
+  {{/if}}
 
   <nav class="sheet-tabs tabs" data-group="primary">
     <a class="item" data-tab="overview">Overview</a>
@@ -27,19 +79,19 @@
           <input type="number" name="system.resources.hp" value="{{system.resources.hp}}" />
         </label>
         <label>HP Max
-          <input type="number" name="system.derived.hpMax" value="{{system.derived.hpMax}}" />
+          <input type="number" name="system.derived.hpMax" value="{{derivedPreview.hpMax}}" disabled />
         </label>
         <label>Spirit
-          <input type="number" name="system.resources.spirit" value="{{system.resources.spirit}}" />
+          <input type="number" min="0" name="system.resources.spirit" value="{{system.resources.spirit}}" />
         </label>
         <label>Spirit Max
-          <input type="number" name="system.derived.spiritMax" value="{{system.derived.spiritMax}}" />
+          <input type="number" name="system.derived.spiritMax" value="{{derivedPreview.spiritMax}}" disabled />
         </label>
         <label>Sanity Max
-          <input type="number" name="system.derived.sanityMax" value="{{system.derived.sanityMax}}" />
+          <input type="number" name="system.derived.sanityMax" value="{{derivedPreview.sanityMax}}" disabled />
         </label>
         <label>Initiative Target
-          <input type="number" name="system.derived.initiativeTarget" value="{{system.derived.initiativeTarget}}" />
+          <input type="number" name="system.derived.initiativeTarget" value="{{derivedPreview.initiativeTarget}}" disabled />
         </label>
       </div>
       <div class="button-row">
@@ -50,11 +102,11 @@
     </div>
 
     <div class="tab" data-group="primary" data-tab="stats">
-      <h3>Attributes</h3>
+      <h3>Attributes (0-100)</h3>
       <div class="grid grid-7 compact">
         {{#each attributeKeys as |attr|}}
-          <label>{{attr}}
-            <input type="number" name="system.attributes.{{attr}}.base" value="{{lookup (lookup ../system.attributes attr) 'base'}}" />
+          <label>{{attr}} *
+            <input type="number" min="0" max="100" name="system.attributes.{{attr}}.base" value="{{lookup (lookup ../system.attributes attr) 'base'}}" />
           </label>
         {{/each}}
       </div>
@@ -64,11 +116,17 @@
           <li class="skill-row">
             <div class="skill-name">{{entry.[0]}}</div>
             <div class="skill-controls">
-              <label>Rank
-                <input type="text" name="system.skills.{{entry.[0]}}.rank" value="{{entry.[1].rank}}" />
+              <label>Rank *
+                <select name="system.skills.{{entry.[0]}}.rank">
+                  {{#select entry.[1].rank}}
+                    {{#each @root.skillRanks as |rank|}}
+                      <option value="{{rank}}">{{rank}}</option>
+                    {{/each}}
+                  {{/select}}
+                </select>
               </label>
               <label>Misc
-                <input type="number" name="system.skills.{{entry.[0]}}.misc" value="{{entry.[1].misc}}" />
+                <input type="number" min="-50" max="50" name="system.skills.{{entry.[0]}}.misc" value="{{entry.[1].misc}}" />
               </label>
               <button type="button" data-action="roll-check" data-label="{{entry.[0]}}" data-attribute="{{entry.[1].linkedAttr}}" data-skill-id="{{entry.[0]}}">Roll</button>
             </div>
@@ -164,13 +222,13 @@
       </div>
       <div class="grid grid-3">
         <label>Death Marks
-          <input type="number" name="system.resources.deathMarks" value="{{system.resources.deathMarks}}" />
+          <input type="number" min="0" max="3" name="system.resources.deathMarks" value="{{system.resources.deathMarks}}" />
         </label>
         <label>Death Saves
-          <input type="number" name="system.resources.deathSaves" value="{{system.resources.deathSaves}}" />
+          <input type="number" min="0" max="3" name="system.resources.deathSaves" value="{{system.resources.deathSaves}}" />
         </label>
         <label>Ritual Instability
-          <input type="number" name="system.ritual.instability" value="{{system.ritual.instability}}" />
+          <input type="number" min="0" max="99" name="system.ritual.instability" value="{{system.ritual.instability}}" />
         </label>
       </div>
     </div>
@@ -179,16 +237,16 @@
       <p>Use Active Effects on the sidebar for condition state. This tab is reserved for LoTM automation diagnostics.</p>
       <div class="grid grid-2">
         <label>Action Lock
-          <input type="number" name="system.tracks.actionLock" value="{{system.tracks.actionLock}}" />
+          <input type="number" min="0" max="1" name="system.tracks.actionLock" value="{{system.tracks.actionLock}}" />
         </label>
         <label>Damage Multiplier
-          <input type="number" step="0.1" name="system.tracks.damageOutMultiplier" value="{{system.tracks.damageOutMultiplier}}" />
+          <input type="number" min="0" max="10" step="0.1" name="system.tracks.damageOutMultiplier" value="{{system.tracks.damageOutMultiplier}}" />
         </label>
         <label>Verbal Locked
-          <input type="number" name="system.tracks.verbalLocked" value="{{system.tracks.verbalLocked}}" />
+          <input type="number" min="0" max="1" name="system.tracks.verbalLocked" value="{{system.tracks.verbalLocked}}" />
         </label>
         <label>Is Downed
-          <input type="number" name="system.tracks.isDowned" value="{{system.tracks.isDowned}}" />
+          <input type="number" min="0" max="1" name="system.tracks.isDowned" value="{{system.tracks.isDowned}}" />
         </label>
       </div>
     </div>

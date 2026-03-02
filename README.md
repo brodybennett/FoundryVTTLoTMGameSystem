@@ -12,7 +12,7 @@ In Foundry VTT:
 
 `https://github.com/brodybennett/FoundryVTTLoTMGameSystem/releases/latest/download/system.json`
 
-## Compendium Structure (v1.2.1)
+## Compendium Structure (v1.2.2)
 
 The system publishes compendiums in this access layout:
 
@@ -41,6 +41,40 @@ The system publishes compendiums in this access layout:
 3. Import content from system packs as needed.
 4. Create a `character` actor and drag pathway/ability/item content onto the actor sheet.
 5. Use actor sheet actions for `Check`, `Ritual Risk`, `Artifact Backlash`, and corruption updates.
+
+## Character Creation Flow
+
+For `character` actors, use the guided wizard panel on top of the sheet:
+
+1. `Identity` (pathway/sequence)
+2. `Attributes` (bounded numeric allocation)
+3. `Skills` (rank dropdowns only)
+4. `Pathway` import (pulls pathway + sequence nodes from compendium)
+5. `Equipment` selection
+6. `Finalize` (sets `creation.state=complete`, validates, and persists derived stats)
+
+Notes:
+- Roll automation blocks incomplete characters (`creation.state != complete`).
+- `Repair Legacy Data` seeds missing creation/default fields on migrated actors.
+
+## Roll Table Automation
+
+Roll table source entries require strict `segment` and `formula` contracts. Runtime hooks map:
+
+- `ritualFailure -> rituals`
+- `artifactBacklash -> artifacts`
+- `corruptionThresholdCross -> corruption`
+
+Runtime APIs:
+
+- `game.lotm.rollOnSegment(segment, context={})`
+- `game.lotm.rollOnTableId(contentId, context={})`
+
+Automation behavior by world setting:
+
+- `full`: auto-draw table
+- `assisted`: prompt before draw
+- `manual`: resolve target table without drawing
 
 ## Content Authoring Workflow
 

@@ -1,5 +1,5 @@
 {
-  "configVersion": "1.1.0",
+  "configVersion": "1.2.2",
   "contractVersion": "1.1.0",
   "canonVersion": "lotm-canon-v1.1",
   "profile": {
@@ -307,6 +307,19 @@
       "system.ritual.",
       "system.artifacts."
     ]
+  },
+  "automation": {
+    "rolltableHooks": {
+      "ritualFailure": {
+        "segment": "rituals"
+      },
+      "artifactBacklash": {
+        "segment": "artifacts"
+      },
+      "corruptionThresholdCross": {
+        "segment": "corruption"
+      }
+    }
   },
   "usageLimits": {
     "defaultScopes": ["perTurn", "perRound", "perScene", "perShortRest", "perLongRest"]

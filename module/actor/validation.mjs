@@ -1,0 +1,176 @@
+import { ATTRIBUTE_KEYS, CREATION_STEPS, SKILL_RANKS, clamp, resolveCorruptionPenalty } from "../constants.mjs";
+
+function numberOr(value, fallback = 0) {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : fallback;
+}
+
+function attrTotal(attributes, key) {
+  const entry = attributes?.[key] ?? {};
+  return numberOr(entry.total, numberOr(entry.base, 10) + numberOr(entry.temp, 0));
+}
+
+export function deriveActorStats(actorSystem = {}) {
+  const attributes = actorSystem.attributes ?? {};
+  const combat = actorSystem.combat ?? {};
+  const resources = actorSystem.resources ?? {};
+
+  const str = attrTotal(attributes, "str");
+  const dex = attrTotal(attributes, "dex");
+  const wil = attrTotal(attributes, "wil");
+  const con = attrTotal(attributes, "con");
+  const intScore = attrTotal(attributes, "int");
+  const luck = attrTotal(attributes, "luck");
+
+  const hpMax = Math.max(1, Math.round(20 + (str * 1.5) + (con * 2.5)));
+  const spiritMax = Math.max(0, Math.round(15 + (wil * 2.2) + (intScore * 1.2) + Math.floor(luck / 4)));
+  const sanityMax = Math.max(1, Math.round(30 + (wil * 1.8) + (con * 1.1) + Math.floor(luck / 5)));
+
+  const armor = numberOr(combat.armor, 0);
+  const cover = numberOr(combat.cover, 0);
+  const enc = Math.max(0, numberOr(combat.encumbrancePenalty, 0));
+
+  const defenseShift = clamp(Math.floor((dex + con - 20) / 8) + armor + cover, -20, 25);
+  const initiativeTarget = clamp(20 + Math.floor((dex * 0.5) + (intScore * 0.35) + (luck * 0.15)) - enc, 1, 95);
+
+  const corruptionPenalty = resolveCorruptionPenalty(numberOr(resources.corruption, 0));
+
+  return {
+    hpMax,
+    spiritMax,
+    sanityMax,
+    defenseShift,
+    initiativeTarget,
+    corruptionPenalty
+  };
+}
+
+export function validateActorForPlay(actorSystem = {}, actorType = "character", ownedItems = []) {
+  const errors = [];
+  const warnings = [];
+
+  if (actorType !== "character") {
+    return { ok: true, errors, warnings };
+  }
+
+  const identity = actorSystem.identity ?? {};
+  if (!identity.pathwayId || typeof identity.pathwayId !== "string") {
+    errors.push("identity.pathwayId is required");
+  }
+
+  const sequence = Number(identity.sequence);
+  if (!Number.isInteger(sequence) || sequence < 0 || sequence > 9) {
+    errors.push("identity.sequence must be an integer 0..9");
+  }
+
+  const attributes = actorSystem.attributes ?? {};
+  for (const key of ATTRIBUTE_KEYS) {
+    const base = numberOr(attributes?.[key]?.base, NaN);
+    if (!Number.isFinite(base)) {
+      errors.push(`attributes.${key}.base is required`);
+      continue;
+    }
+    if (base < 0 || base > 100) {
+      errors.push(`attributes.${key}.base must be 0..100`);
+    }
+  }
+
+  const skills = actorSystem.skills ?? {};
+  for (const [skillId, entry] of Object.entries(skills)) {
+    if (!SKILL_RANKS.includes(entry?.rank)) {
+      errors.push(`skills.${skillId}.rank must be one of ${SKILL_RANKS.join(", ")}`);
+    }
+    const misc = numberOr(entry?.misc, NaN);
+    if (!Number.isFinite(misc) || misc < -50 || misc > 50) {
+      errors.push(`skills.${skillId}.misc must be -50..50`);
+    }
+  }
+
+  const resources = actorSystem.resources ?? {};
+  const hp = numberOr(resources.hp, NaN);
+  const spirit = numberOr(resources.spirit, NaN);
+  const corruption = numberOr(resources.corruption, NaN);
+  if (!Number.isFinite(hp)) errors.push("resources.hp is required");
+  if (!Number.isFinite(spirit) || spirit < 0) errors.push("resources.spirit must be >= 0");
+  if (!Number.isFinite(corruption) || corruption < 0 || corruption > 100) {
+    errors.push("resources.corruption must be 0..100");
+  }
+
+  const creation = actorSystem.creation ?? {};
+  const state = creation.state ?? "draft";
+  if (!["draft", ...CREATION_STEPS].includes(state)) {
+    errors.push("creation.state is invalid");
+  }
+
+  if (state !== "complete") {
+    warnings.push("Character creation is not finalized (creation.state != complete)");
+  }
+
+  const completed = Array.isArray(creation.completedSteps) ? creation.completedSteps : [];
+  if (state === "complete") {
+    const needed = CREATION_STEPS.filter((step) => step !== "complete");
+    const missing = needed.filter((step) => !completed.includes(step));
+    if (missing.length > 0) {
+      errors.push(`creation.completedSteps missing: ${missing.join(", ")}`);
+    }
+  }
+
+  const pathwayId = identity.pathwayId;
+  if (pathwayId && Array.isArray(ownedItems) && ownedItems.length > 0) {
+    const sequenceNodes = ownedItems.filter((item) => item.type === "sequenceNode" && item.system?.pathwayId === pathwayId);
+    if (sequenceNodes.length === 0) {
+      warnings.push("No sequence node item found for selected pathway; import pathway package in wizard step.");
+    } else if (Number.isInteger(sequence)) {
+      const hasMatch = sequenceNodes.some((item) => Number(item.system?.sequence) === sequence);
+      if (!hasMatch) {
+        warnings.push("Pathway sequence node items do not include actor identity.sequence.");
+      }
+    }
+  }
+
+  return {
+    ok: errors.length === 0,
+    errors,
+    warnings
+  };
+}
+
+export function buildActorRepairUpdate(actorSystem = {}, actorType = "character") {
+  const patch = {};
+
+  if (actorType !== "character") {
+    return patch;
+  }
+
+  const creation = actorSystem.creation ?? {};
+  const completed = Array.isArray(creation.completedSteps) ? creation.completedSteps : [];
+  if (!creation.state) {
+    patch["system.creation.state"] = "draft";
+  }
+  if (!Array.isArray(creation.completedSteps)) {
+    patch["system.creation.completedSteps"] = completed;
+  }
+  if (creation.version == null) {
+    patch["system.creation.version"] = 1;
+  }
+
+  for (const key of ATTRIBUTE_KEYS) {
+    const base = numberOr(actorSystem.attributes?.[key]?.base, NaN);
+    if (!Number.isFinite(base)) {
+      patch[`system.attributes.${key}.base`] = 10;
+    }
+    const temp = numberOr(actorSystem.attributes?.[key]?.temp, NaN);
+    if (!Number.isFinite(temp)) {
+      patch[`system.attributes.${key}.temp`] = 0;
+    }
+  }
+
+  const derived = deriveActorStats(actorSystem);
+  patch["system.derived.hpMax"] = derived.hpMax;
+  patch["system.derived.spiritMax"] = derived.spiritMax;
+  patch["system.derived.sanityMax"] = derived.sanityMax;
+  patch["system.derived.defenseShift"] = derived.defenseShift;
+  patch["system.derived.initiativeTarget"] = derived.initiativeTarget;
+
+  return patch;
+}

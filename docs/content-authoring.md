@@ -31,10 +31,13 @@ Required additional fields:
 
 Required additional fields:
 
+- must satisfy `schemas/content.rolltable.schema.v1_2.json`
+- `segment` (required enum): `resources`, `abilities`, `rituals`, `artifacts`, `corruption`, `encounters`
+- `formula` (required): `1dN`
 - `results` array
-- each result requires `text`, optional `weight` (integer >= 1)
-- optional `formula` (defaults to weighted `1dN` range)
-- optional `segment` (`resources`, `abilities`, `rituals`, `artifacts`, `corruption`, `encounters`, etc.)
+- each result requires `text` and `weight` (integer >= 1)
+- weighted sum of results must match `N` from `formula`
+- optional `triggerTags[]` (for runtime automation traceability)
 
 ### For `Actor` entries
 
