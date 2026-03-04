@@ -2,338 +2,473 @@
   <header class="sheet-header">
     <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
     <div class="header-fields">
-      <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
-      <div class="header-meta">
-        <label>Type <input type="text" value="{{itemType}}" disabled /></label>
-        <label>ID <input type="text" name="system.id" value="{{system.id}}" /></label>
-        <label>Pathway ID <input type="text" name="system.pathwayId" value="{{system.pathwayId}}" /></label>
-        <label>Sequence <input type="number" min="0" max="9" name="system.sequence" value="{{system.sequence}}" /></label>
+      <div class="split-head">
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Item name" /></h1>
+        <div class="button-row compact">
+          <span class="pill">{{typeMeta.label}}</span>
+          <span class="pill">{{typeMeta.subtypeGroup}}</span>
+        </div>
       </div>
+      <p class="muted-note">{{typeMeta.summary}}</p>
     </div>
   </header>
 
   <nav class="sheet-tabs tabs" data-group="primary">
-    <a class="item" data-tab="details">Details</a>
-    <a class="item" data-tab="automation">Automation</a>
+    <a class="item" data-tab="overview">Overview</a>
+    <a class="item" data-tab="subtype">Subtype Data</a>
     <a class="item" data-tab="effects">Effects</a>
-    <a class="item" data-tab="metadata">Metadata</a>
+    <a class="item" data-tab="dependencies">Dependencies</a>
   </nav>
 
   <section class="sheet-body">
-    <div class="tab" data-group="primary" data-tab="details">
-      <div class="grid grid-3">
-        <label>Min Sequence
-          <input type="number" min="0" max="9" name="system.minSequence" value="{{system.minSequence}}" />
-        </label>
-        <label>Source Sequence
-          <input type="number" min="0" max="9" name="system.sourceSequence" value="{{system.sourceSequence}}" />
-        </label>
-        <label>Activation
-          <select name="system.activation">
-            {{#select system.activation}}
-              {{#each activationTypes as |mode|}}
-                <option value="{{mode}}">{{mode}}</option>
-              {{/each}}
-            {{/select}}
-          </select>
-        </label>
-        <label>Resource
-          <select name="system.resource">
-            {{#select system.resource}}
-              {{#each resourceTypes as |mode|}}
-                <option value="{{mode}}">{{mode}}</option>
-              {{/each}}
-            {{/select}}
-          </select>
-        </label>
-        <label>Cost
-          <input type="number" min="0" name="system.cost" value="{{system.cost}}" />
-        </label>
-        <label>Cooldown
-          <input type="number" min="0" name="system.cooldown" value="{{system.cooldown}}" />
-        </label>
-        <label>Formula Key
-          <input type="text" name="system.formulaKey" value="{{system.formulaKey}}" />
-        </label>
-        <label>Complexity Class
-          <input type="text" name="system.complexityClass" value="{{system.complexityClass}}" />
-        </label>
-        <label>Schema Version
-          <input type="number" name="system.schemaVersion" value="{{system.schemaVersion}}" />
-        </label>
-      </div>
+    <div class="tab" data-group="primary" data-tab="overview">
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">Identity & Sequence</h3>
+          <p class="sheet-panel-subtitle">IDs should remain stable once published.</p>
+        </div>
+        <div class="grid grid-3">
+          <label>
+            <span class="field-label">Type</span>
+            <input type="text" value="{{itemType}}" disabled />
+          </label>
+          <label>
+            <span class="field-label">System ID <span class="field-required">*</span></span>
+            <input type="text" name="system.id" value="{{system.id}}" />
+            <span class="field-help">Pattern: lowercase, dot/underscore/hyphen allowed.</span>
+          </label>
+          <label>
+            <span class="field-label">Pathway ID</span>
+            <input type="text" name="system.pathwayId" value="{{system.pathwayId}}" />
+          </label>
+          <label>
+            <span class="field-label">Sequence</span>
+            <input type="number" min="0" max="9" name="system.sequence" value="{{system.sequence}}" />
+          </label>
+          <label>
+            <span class="field-label">Min Sequence</span>
+            <input type="number" min="0" max="9" name="system.minSequence" value="{{system.minSequence}}" />
+          </label>
+          <label>
+            <span class="field-label">Source Sequence</span>
+            <input type="number" min="0" max="9" name="system.sourceSequence" value="{{system.sourceSequence}}" />
+          </label>
+          <label>
+            <span class="field-label">Schema Version</span>
+            <input type="number" name="system.schemaVersion" value="{{system.schemaVersion}}" />
+          </label>
+        </div>
+      </section>
 
-      {{#if typeFlags.isPathway}}
-      <h3>Pathway Data</h3>
-      <div class="grid grid-2">
-        <label>Display Name
-          <input type="text" name="system.pathwayData.displayName" value="{{system.pathwayData.displayName}}" />
-        </label>
-        <label>Theme
-          <input type="text" name="system.pathwayData.theme" value="{{system.pathwayData.theme}}" />
-        </label>
-      </div>
-      <label>Progression Note
-        <textarea rows="3" name="system.pathwayData.progressionNote">{{system.pathwayData.progressionNote}}</textarea>
-      </label>
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">Activation & Cost</h3>
+          <p class="sheet-panel-subtitle">Core runtime execution settings.</p>
+        </div>
+        <div class="grid grid-3">
+          <label>
+            <span class="field-label">Activation</span>
+            <select name="system.activation">
+              {{#select system.activation}}
+                {{#each activationTypes as |mode|}}
+                  <option value="{{mode}}">{{mode}}</option>
+                {{/each}}
+              {{/select}}
+            </select>
+          </label>
+          <label>
+            <span class="field-label">Resource</span>
+            <select name="system.resource">
+              {{#select system.resource}}
+                {{#each resourceTypes as |mode|}}
+                  <option value="{{mode}}">{{mode}}</option>
+                {{/each}}
+              {{/select}}
+            </select>
+          </label>
+          <label>
+            <span class="field-label">Cost</span>
+            <input type="number" min="0" name="system.cost" value="{{system.cost}}" />
+          </label>
+          <label>
+            <span class="field-label">Cooldown</span>
+            <input type="number" min="0" name="system.cooldown" value="{{system.cooldown}}" />
+          </label>
+          <label>
+            <span class="field-label">Formula Key</span>
+            <input type="text" name="system.formulaKey" value="{{system.formulaKey}}" />
+          </label>
+          <label>
+            <span class="field-label">Complexity Class</span>
+            <input type="text" name="system.complexityClass" value="{{system.complexityClass}}" />
+          </label>
+        </div>
+      </section>
+
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">Description</h3>
+          <p class="sheet-panel-subtitle">Player-facing text and rules reminder.</p>
+        </div>
+        {{editor item.system.description target="system.description" button=true editable=editable engine="prosemirror"}}
+      </section>
+
+      {{#if hasValidationErrors}}
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">Validation Issues</h3>
+          <span class="pill danger">{{validationErrors.length}}</span>
+        </div>
+        <ul class="wizard-errors">
+          {{#each validationErrors as |err|}}
+            <li>{{err}}</li>
+          {{/each}}
+        </ul>
+      </section>
       {{/if}}
-
-      {{#if typeFlags.isSequenceNode}}
-      <h3>Sequence Data</h3>
-      <div class="grid grid-2">
-        <label>Title
-          <input type="text" name="system.sequenceData.title" value="{{system.sequenceData.title}}" />
-        </label>
-        <label>Milestones (comma separated)
-          <input type="text" name="lotm.sequenceMilestonesCsv" value="{{sequenceMilestonesCsv}}" />
-        </label>
-      </div>
-      <label>Summary
-        <textarea rows="3" name="system.sequenceData.summary">{{system.sequenceData.summary}}</textarea>
-      </label>
-      {{/if}}
-
-      {{#if typeFlags.isAbility}}
-      <h3>Ability Data</h3>
-      <div class="grid grid-2">
-        <label>Target Mode
-          <select name="system.abilityData.targetMode">
-            {{#select system.abilityData.targetMode}}
-              {{#each targetModes as |mode|}}
-                <option value="{{mode}}">{{mode}}</option>
-              {{/each}}
-            {{/select}}
-          </select>
-        </label>
-        <label>Range (ft)
-          <input type="number" min="0" name="system.abilityData.rangeFt" value="{{system.abilityData.rangeFt}}" />
-        </label>
-        <label>Attack Attribute
-          <input type="text" name="system.abilityData.attackAttribute" value="{{system.abilityData.attackAttribute}}" />
-        </label>
-        <label>Linked Skill ID
-          <input type="text" name="system.abilityData.linkedSkillId" value="{{system.abilityData.linkedSkillId}}" />
-        </label>
-      </div>
-      {{/if}}
-
-      {{#if typeFlags.isWeapon}}
-      <h3>Weapon Data</h3>
-      <div class="grid grid-2">
-        <label>Base Damage
-          <input type="number" min="1" name="system.weaponData.baseDamage" value="{{system.weaponData.baseDamage}}" />
-        </label>
-        <label>Damage Type
-          <input type="text" name="system.weaponData.damageType" value="{{system.weaponData.damageType}}" />
-        </label>
-        <label>Range (ft)
-          <input type="number" min="0" name="system.weaponData.rangeFt" value="{{system.weaponData.rangeFt}}" />
-        </label>
-        <label>Accuracy Bonus
-          <input type="number" min="-50" max="50" name="system.weaponData.accuracyBonus" value="{{system.weaponData.accuracyBonus}}" />
-        </label>
-      </div>
-      {{/if}}
-
-      {{#if typeFlags.isArmor}}
-      <h3>Armor Data</h3>
-      <div class="grid grid-2">
-        <label>Defense Shift
-          <input type="number" min="-20" max="25" name="system.armorData.defenseShift" value="{{system.armorData.defenseShift}}" />
-        </label>
-        <label>Damage Reduction
-          <input type="number" min="0" name="system.armorData.damageReduction" value="{{system.armorData.damageReduction}}" />
-        </label>
-        <label>Encumbrance Penalty
-          <input type="number" min="0" name="system.armorData.encumbrancePenalty" value="{{system.armorData.encumbrancePenalty}}" />
-        </label>
-      </div>
-      {{/if}}
-
-      {{#if typeFlags.isRitual}}
-      <h3>Ritual Data</h3>
-      <div class="grid grid-2">
-        <label>Target Mode
-          <select name="system.ritualData.targetMode">
-            {{#select system.ritualData.targetMode}}
-              {{#each targetModes as |mode|}}
-                <option value="{{mode}}">{{mode}}</option>
-              {{/each}}
-            {{/select}}
-          </select>
-        </label>
-        <label>Mandatory Components
-          <input type="number" min="0" name="system.ritualData.mandatoryComponents" value="{{system.ritualData.mandatoryComponents}}" />
-        </label>
-        <label>Base Cast Minutes
-          <input type="number" min="0" name="system.ritualData.baseCastMinutes" value="{{system.ritualData.baseCastMinutes}}" />
-        </label>
-      </div>
-      {{/if}}
-
-      {{#if typeFlags.isArtifact}}
-      <h3>Artifact Data</h3>
-      <div class="grid grid-2">
-        <label>Risk Class
-          <select name="system.artifactData.riskClass">
-            {{#select system.artifactData.riskClass}}
-              {{#each riskClasses as |risk|}}
-                <option value="{{risk}}">{{risk}}</option>
-              {{/each}}
-            {{/select}}
-          </select>
-        </label>
-        <label>Charges
-          <input type="number" min="0" name="system.artifactData.charges" value="{{system.artifactData.charges}}" />
-        </label>
-        <label>Misuse Corruption Gain
-          <input type="number" min="0" max="100" name="system.artifactData.misuseCorruptionGain" value="{{system.artifactData.misuseCorruptionGain}}" />
-        </label>
-      </div>
-      {{/if}}
-
-      <h3>Description</h3>
-      {{editor item.system.description target="system.description" button=true editable=editable engine="prosemirror"}}
     </div>
 
-    <div class="tab" data-group="primary" data-tab="automation">
-      <div class="grid grid-2">
-        <label>Tags (comma separated)
-          <input type="text" name="lotm.tagsCsv" value="{{tagsCsv}}" />
+    <div class="tab" data-group="primary" data-tab="subtype">
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">Subtype Configuration</h3>
+          <p class="sheet-panel-subtitle">Only fields relevant to this subtype should be edited.</p>
+        </div>
+
+        {{#if typeFlags.isPathway}}
+        <div class="grid grid-2">
+          <label>
+            <span class="field-label">Display Name</span>
+            <input type="text" name="system.pathwayData.displayName" value="{{system.pathwayData.displayName}}" />
+          </label>
+          <label>
+            <span class="field-label">Theme</span>
+            <input type="text" name="system.pathwayData.theme" value="{{system.pathwayData.theme}}" />
+          </label>
+        </div>
+        <label>
+          <span class="field-label">Progression Note</span>
+          <textarea rows="3" name="system.pathwayData.progressionNote">{{system.pathwayData.progressionNote}}</textarea>
         </label>
-        <label>Allowed Pathway IDs (comma separated)
-          <input type="text" name="lotm.allowedPathwayIdsCsv" value="{{allowedPathwayIdsCsv}}" />
+        {{/if}}
+
+        {{#if typeFlags.isSequenceNode}}
+        <div class="grid grid-2">
+          <label>
+            <span class="field-label">Node Title</span>
+            <input type="text" name="system.sequenceData.title" value="{{system.sequenceData.title}}" />
+          </label>
+          <label>
+            <span class="field-label">Milestones (comma separated)</span>
+            <input type="text" name="lotm.sequenceMilestonesCsv" value="{{sequenceMilestonesCsv}}" />
+          </label>
+        </div>
+        <label>
+          <span class="field-label">Summary</span>
+          <textarea rows="3" name="system.sequenceData.summary">{{system.sequenceData.summary}}</textarea>
         </label>
-        <label>Requires IDs (comma separated)
-          <input type="text" name="lotm.requiresIdsCsv" value="{{requiresIdsCsv}}" />
-        </label>
-      </div>
-      <p>This tab controls authoring metadata and dependency arrays used by compendium import and validation.</p>
+        {{/if}}
+
+        {{#if typeFlags.isAbility}}
+        <div class="grid grid-2">
+          <label>
+            <span class="field-label">Target Mode</span>
+            <select name="system.abilityData.targetMode">
+              {{#select system.abilityData.targetMode}}
+                {{#each targetModes as |mode|}}
+                  <option value="{{mode}}">{{mode}}</option>
+                {{/each}}
+              {{/select}}
+            </select>
+          </label>
+          <label>
+            <span class="field-label">Range (ft)</span>
+            <input type="number" min="0" name="system.abilityData.rangeFt" value="{{system.abilityData.rangeFt}}" />
+          </label>
+          <label>
+            <span class="field-label">Attack Attribute</span>
+            <input type="text" name="system.abilityData.attackAttribute" value="{{system.abilityData.attackAttribute}}" />
+          </label>
+          <label>
+            <span class="field-label">Linked Skill ID</span>
+            <input type="text" name="system.abilityData.linkedSkillId" value="{{system.abilityData.linkedSkillId}}" />
+          </label>
+        </div>
+        {{/if}}
+
+        {{#if typeFlags.isWeapon}}
+        <div class="grid grid-2">
+          <label>
+            <span class="field-label">Base Damage</span>
+            <input type="number" min="1" name="system.weaponData.baseDamage" value="{{system.weaponData.baseDamage}}" />
+          </label>
+          <label>
+            <span class="field-label">Damage Type</span>
+            <input type="text" name="system.weaponData.damageType" value="{{system.weaponData.damageType}}" />
+          </label>
+          <label>
+            <span class="field-label">Range (ft)</span>
+            <input type="number" min="0" name="system.weaponData.rangeFt" value="{{system.weaponData.rangeFt}}" />
+          </label>
+          <label>
+            <span class="field-label">Accuracy Bonus</span>
+            <input type="number" min="-50" max="50" name="system.weaponData.accuracyBonus" value="{{system.weaponData.accuracyBonus}}" />
+          </label>
+        </div>
+        {{/if}}
+
+        {{#if typeFlags.isArmor}}
+        <div class="grid grid-2">
+          <label>
+            <span class="field-label">Defense Shift</span>
+            <input type="number" min="-20" max="25" name="system.armorData.defenseShift" value="{{system.armorData.defenseShift}}" />
+          </label>
+          <label>
+            <span class="field-label">Damage Reduction</span>
+            <input type="number" min="0" name="system.armorData.damageReduction" value="{{system.armorData.damageReduction}}" />
+          </label>
+          <label>
+            <span class="field-label">Encumbrance Penalty</span>
+            <input type="number" min="0" name="system.armorData.encumbrancePenalty" value="{{system.armorData.encumbrancePenalty}}" />
+          </label>
+        </div>
+        {{/if}}
+
+        {{#if typeFlags.isRitual}}
+        <div class="grid grid-2">
+          <label>
+            <span class="field-label">Target Mode</span>
+            <select name="system.ritualData.targetMode">
+              {{#select system.ritualData.targetMode}}
+                {{#each targetModes as |mode|}}
+                  <option value="{{mode}}">{{mode}}</option>
+                {{/each}}
+              {{/select}}
+            </select>
+          </label>
+          <label>
+            <span class="field-label">Mandatory Components</span>
+            <input type="number" min="0" name="system.ritualData.mandatoryComponents" value="{{system.ritualData.mandatoryComponents}}" />
+          </label>
+          <label>
+            <span class="field-label">Base Cast Minutes</span>
+            <input type="number" min="0" name="system.ritualData.baseCastMinutes" value="{{system.ritualData.baseCastMinutes}}" />
+          </label>
+        </div>
+        {{/if}}
+
+        {{#if typeFlags.isArtifact}}
+        <div class="grid grid-2">
+          <label>
+            <span class="field-label">Risk Class</span>
+            <select name="system.artifactData.riskClass">
+              {{#select system.artifactData.riskClass}}
+                {{#each riskClasses as |risk|}}
+                  <option value="{{risk}}">{{risk}}</option>
+                {{/each}}
+              {{/select}}
+            </select>
+          </label>
+          <label>
+            <span class="field-label">Charges</span>
+            <input type="number" min="0" name="system.artifactData.charges" value="{{system.artifactData.charges}}" />
+          </label>
+          <label>
+            <span class="field-label">Misuse Corruption Gain</span>
+            <input type="number" min="0" max="100" name="system.artifactData.misuseCorruptionGain" value="{{system.artifactData.misuseCorruptionGain}}" />
+          </label>
+        </div>
+        {{/if}}
+
+        {{#if typeFlags.isGear}}
+        <div class="empty-state">Gear uses generic item fields. Configure tags/dependencies to control availability and automation hooks.</div>
+        {{/if}}
+        {{#if typeFlags.isFeature}}
+        <div class="empty-state">Features usually rely on description + effects rows; use dependencies to connect prerequisite IDs.</div>
+        {{/if}}
+        {{#if typeFlags.isConsumable}}
+        <div class="empty-state">Consumables commonly use cost/cooldown and optional effects for one-shot behavior.</div>
+        {{/if}}
+        {{#if typeFlags.isIngredient}}
+        <div class="empty-state">Ingredients are generally metadata-driven; use tags and dependencies to link crafting/ritual pipelines.</div>
+        {{/if}}
+        {{#if typeFlags.isBackground}}
+        <div class="empty-state">Background entries should emphasize description and dependency linkage to actor identity setup.</div>
+        {{/if}}
+        {{#if typeFlags.isConditionTemplate}}
+        <div class="empty-state">Condition templates should prioritize effects rows and clear stack/remove semantics.</div>
+        {{/if}}
+      </section>
     </div>
 
     <div class="tab" data-group="primary" data-tab="effects">
-      <div class="button-row">
-        <button type="button" data-action="effect-add">Add Effect Row</button>
-      </div>
-      {{#if effects.length}}
-      <ol class="item-list">
-        {{#each effects as |effect|}}
-          <li class="skill-row">
-            <div class="grid grid-2">
-              <label>Effect ID
-                <input type="text" name="system.effects.{{effect.index}}.id" value="{{effect.id}}" />
-              </label>
-              <label>Operation
-                <select name="system.effects.{{effect.index}}.op">
-                  {{#select effect.op}}
-                    {{#each @root.effectOps as |mode|}}
-                      <option value="{{mode}}">{{mode}}</option>
-                    {{/each}}
-                  {{/select}}
-                </select>
-              </label>
-              <label>Path
-                <input type="text" name="system.effects.{{effect.index}}.path" value="{{effect.path}}" />
-              </label>
-              <label>Value
-                <input type="number" step="0.01" name="system.effects.{{effect.index}}.value" value="{{effect.value}}" />
-              </label>
-              <label>Source Category
-                <input type="text" name="system.effects.{{effect.index}}.sourceCategory" value="{{effect.sourceCategory}}" />
-              </label>
-              <label>Target
-                <select name="system.effects.{{effect.index}}.target">
-                  {{#select effect.target}}
-                    {{#each @root.effectTargets as |target|}}
-                      <option value="{{target}}">{{target}}</option>
-                    {{/each}}
-                  {{/select}}
-                </select>
-              </label>
-              <label>Trigger
-                <select name="system.effects.{{effect.index}}.trigger">
-                  {{#select effect.trigger}}
-                    {{#each @root.effectTriggers as |trigger|}}
-                      <option value="{{trigger}}">{{trigger}}</option>
-                    {{/each}}
-                  {{/select}}
-                </select>
-              </label>
-              <label>Apply Phase
-                <select name="system.effects.{{effect.index}}.applyPhase">
-                  {{#select effect.applyPhase}}
-                    {{#each @root.effectApplyPhases as |phase|}}
-                      <option value="{{phase}}">{{phase}}</option>
-                    {{/each}}
-                  {{/select}}
-                </select>
-              </label>
-              <label>Tick Phase
-                <select name="system.effects.{{effect.index}}.tickPhase">
-                  {{#select effect.tickPhase}}
-                    {{#each @root.effectTickPhases as |phase|}}
-                      <option value="{{phase}}">{{phase}}</option>
-                    {{/each}}
-                  {{/select}}
-                </select>
-              </label>
-              <label>Duration Rounds
-                <input type="number" min="0" name="system.effects.{{effect.index}}.durationRounds" value="{{effect.durationRounds}}" />
-              </label>
-              <label>Save Type
-                <select name="system.effects.{{effect.index}}.saveType">
-                  {{#select effect.saveType}}
-                    {{#each @root.effectSaveTypes as |save|}}
-                      <option value="{{save}}">{{save}}</option>
-                    {{/each}}
-                  {{/select}}
-                </select>
-              </label>
-              <label>Save Target
-                <input type="number" min="0" max="95" name="system.effects.{{effect.index}}.saveTarget" value="{{effect.saveTarget}}" />
-              </label>
-              <label>Stack Group
-                <input type="text" name="system.effects.{{effect.index}}.stackGroup" value="{{effect.stackGroup}}" />
-              </label>
-              <label>Stack Rule
-                <select name="system.effects.{{effect.index}}.stackRule">
-                  {{#select effect.stackRule}}
-                    {{#each @root.effectStackRules as |rule|}}
-                      <option value="{{rule}}">{{rule}}</option>
-                    {{/each}}
-                  {{/select}}
-                </select>
-              </label>
-              <label>Max Stacks
-                <input type="number" min="0" name="system.effects.{{effect.index}}.maxStacks" value="{{effect.maxStacks}}" />
-              </label>
-              <label>Remove On (comma separated)
-                <input type="text" name="system.effects.{{effect.index}}.removeOnCsv" value="{{effect.removeOnCsv}}" />
-              </label>
-              <label>Once Per Turn
-                <input type="checkbox" name="system.effects.{{effect.index}}.oncePerTurn" {{#if effect.oncePerTurn}}checked{{/if}} />
-              </label>
-            </div>
-            <div class="button-row">
-              <button type="button" data-action="effect-remove" data-index="{{effect.index}}">Remove Effect</button>
-            </div>
-          </li>
-        {{/each}}
-      </ol>
-      {{else}}
-      <p>No effects configured yet.</p>
-      {{/if}}
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">Effects</h3>
+          <div class="button-row compact">
+            <span class="pill">{{effectCount}} configured</span>
+            <button type="button" data-action="effect-add">Add Effect Row</button>
+          </div>
+        </div>
+
+        {{#if effects.length}}
+        <ol class="item-list">
+          {{#each effects as |effect|}}
+            <li class="effect-row">
+              <div class="effect-row-head">
+                <strong>Effect {{effect.index}}</strong>
+                <button type="button" class="button-danger" data-action="effect-remove" data-index="{{effect.index}}">Remove</button>
+              </div>
+              <div class="grid grid-2">
+                <label>
+                  <span class="field-label">Effect ID</span>
+                  <input type="text" name="system.effects.{{effect.index}}.id" value="{{effect.id}}" />
+                </label>
+                <label>
+                  <span class="field-label">Operation</span>
+                  <select name="system.effects.{{effect.index}}.op">
+                    {{#select effect.op}}
+                      {{#each @root.effectOps as |mode|}}
+                        <option value="{{mode}}">{{mode}}</option>
+                      {{/each}}
+                    {{/select}}
+                  </select>
+                </label>
+                <label>
+                  <span class="field-label">Path</span>
+                  <input type="text" name="system.effects.{{effect.index}}.path" value="{{effect.path}}" />
+                </label>
+                <label>
+                  <span class="field-label">Value</span>
+                  <input type="number" step="0.01" name="system.effects.{{effect.index}}.value" value="{{effect.value}}" />
+                </label>
+                <label>
+                  <span class="field-label">Source Category</span>
+                  <input type="text" name="system.effects.{{effect.index}}.sourceCategory" value="{{effect.sourceCategory}}" />
+                </label>
+                <label>
+                  <span class="field-label">Target</span>
+                  <select name="system.effects.{{effect.index}}.target">
+                    {{#select effect.target}}
+                      {{#each @root.effectTargets as |target|}}
+                        <option value="{{target}}">{{target}}</option>
+                      {{/each}}
+                    {{/select}}
+                  </select>
+                </label>
+                <label>
+                  <span class="field-label">Trigger</span>
+                  <select name="system.effects.{{effect.index}}.trigger">
+                    {{#select effect.trigger}}
+                      {{#each @root.effectTriggers as |trigger|}}
+                        <option value="{{trigger}}">{{trigger}}</option>
+                      {{/each}}
+                    {{/select}}
+                  </select>
+                </label>
+                <label>
+                  <span class="field-label">Apply Phase</span>
+                  <select name="system.effects.{{effect.index}}.applyPhase">
+                    {{#select effect.applyPhase}}
+                      {{#each @root.effectApplyPhases as |phase|}}
+                        <option value="{{phase}}">{{phase}}</option>
+                      {{/each}}
+                    {{/select}}
+                  </select>
+                </label>
+                <label>
+                  <span class="field-label">Tick Phase</span>
+                  <select name="system.effects.{{effect.index}}.tickPhase">
+                    {{#select effect.tickPhase}}
+                      {{#each @root.effectTickPhases as |phase|}}
+                        <option value="{{phase}}">{{phase}}</option>
+                      {{/each}}
+                    {{/select}}
+                  </select>
+                </label>
+                <label>
+                  <span class="field-label">Duration Rounds</span>
+                  <input type="number" min="0" name="system.effects.{{effect.index}}.durationRounds" value="{{effect.durationRounds}}" />
+                </label>
+                <label>
+                  <span class="field-label">Save Type</span>
+                  <select name="system.effects.{{effect.index}}.saveType">
+                    {{#select effect.saveType}}
+                      {{#each @root.effectSaveTypes as |save|}}
+                        <option value="{{save}}">{{save}}</option>
+                      {{/each}}
+                    {{/select}}
+                  </select>
+                </label>
+                <label>
+                  <span class="field-label">Save Target</span>
+                  <input type="number" min="0" max="95" name="system.effects.{{effect.index}}.saveTarget" value="{{effect.saveTarget}}" />
+                </label>
+                <label>
+                  <span class="field-label">Stack Group</span>
+                  <input type="text" name="system.effects.{{effect.index}}.stackGroup" value="{{effect.stackGroup}}" />
+                </label>
+                <label>
+                  <span class="field-label">Stack Rule</span>
+                  <select name="system.effects.{{effect.index}}.stackRule">
+                    {{#select effect.stackRule}}
+                      {{#each @root.effectStackRules as |rule|}}
+                        <option value="{{rule}}">{{rule}}</option>
+                      {{/each}}
+                    {{/select}}
+                  </select>
+                </label>
+                <label>
+                  <span class="field-label">Max Stacks</span>
+                  <input type="number" min="0" name="system.effects.{{effect.index}}.maxStacks" value="{{effect.maxStacks}}" />
+                </label>
+                <label>
+                  <span class="field-label">Remove On (comma separated)</span>
+                  <input type="text" name="system.effects.{{effect.index}}.removeOnCsv" value="{{effect.removeOnCsv}}" />
+                </label>
+                <label>
+                  <span class="field-label">Once Per Turn</span>
+                  <input type="checkbox" name="system.effects.{{effect.index}}.oncePerTurn" {{#if effect.oncePerTurn}}checked{{/if}} />
+                </label>
+              </div>
+            </li>
+          {{/each}}
+        </ol>
+        {{else}}
+        <div class="empty-state">No effects configured. Add a row to start building structured automation behavior.</div>
+        {{/if}}
+      </section>
     </div>
 
-    <div class="tab" data-group="primary" data-tab="metadata">
-      <div class="grid grid-2">
-        <label>Min System Version
-          <input type="text" name="system.dependencies.minSystemVersion" value="{{system.dependencies.minSystemVersion}}" />
-        </label>
-        <label>Max Tested Version
-          <input type="text" name="system.dependencies.maxTestedSystemVersion" value="{{system.dependencies.maxTestedSystemVersion}}" />
-        </label>
-      </div>
+    <div class="tab" data-group="primary" data-tab="dependencies">
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">Compatibility & Dependencies</h3>
+          <p class="sheet-panel-subtitle">Semver format required: X.Y.Z</p>
+        </div>
+        <div class="grid grid-2">
+          <label>
+            <span class="field-label">Min System Version</span>
+            <input type="text" name="system.dependencies.minSystemVersion" value="{{system.dependencies.minSystemVersion}}" />
+          </label>
+          <label>
+            <span class="field-label">Max Tested Version</span>
+            <input type="text" name="system.dependencies.maxTestedSystemVersion" value="{{system.dependencies.maxTestedSystemVersion}}" />
+          </label>
+          <label>
+            <span class="field-label">Requires IDs (comma separated)</span>
+            <input type="text" name="lotm.requiresIdsCsv" value="{{requiresIdsCsv}}" />
+          </label>
+          <label>
+            <span class="field-label">Allowed Pathway IDs (comma separated)</span>
+            <input type="text" name="lotm.allowedPathwayIdsCsv" value="{{allowedPathwayIdsCsv}}" />
+          </label>
+          <label>
+            <span class="field-label">Tags (comma separated)</span>
+            <input type="text" name="lotm.tagsCsv" value="{{tagsCsv}}" />
+          </label>
+        </div>
+      </section>
     </div>
   </section>
 </form>

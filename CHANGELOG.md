@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.11
+
+- Reworked item sheet framework with clearer section hierarchy:
+  - Overview
+  - Subtype Data
+  - Effects
+  - Dependencies
+- Added item subtype metadata context (labels/summaries) and inline validation issue display.
+- Hardened effect row add/remove UX with safer IDs and explicit failure notifications.
+
 ## 1.2.10
 
 - Added explicit NPC-focused sheet divergence while keeping a shared actor sheet base:
