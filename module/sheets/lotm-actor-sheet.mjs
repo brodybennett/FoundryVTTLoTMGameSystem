@@ -59,6 +59,10 @@ function groupItems(items) {
   return groups;
 }
 
+function sortByName(items = []) {
+  return [...items].sort((a, b) => String(a.name ?? "").localeCompare(String(b.name ?? "")));
+}
+
 function normalizeCreationState(system, actorType) {
   if (actorType !== "character") {
     return {
@@ -222,6 +226,14 @@ export class LotMActorSheet extends ActorSheet {
       features: context.itemGroups.feature.length,
       gear: context.itemGroups.gear.length
     };
+    context.npcLoadoutItems = sortByName([
+      ...context.itemGroups.gear,
+      ...context.itemGroups.ritual,
+      ...context.itemGroups.artifact,
+      ...context.itemGroups.feature,
+      ...context.itemGroups.pathway
+    ]);
+    context.itemCounts.npcLoadout = context.npcLoadoutItems.length;
     context.hasAnyInventory = (context.itemCounts.gear + context.itemCounts.rituals + context.itemCounts.artifacts) > 0;
 
     return context;

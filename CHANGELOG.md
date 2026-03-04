@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.10
+
+- Added explicit NPC-focused sheet divergence while keeping a shared actor sheet base:
+  - NPC-only snapshot section
+  - NPC combat profile editing panel
+  - consolidated NPC loadout view
+  - NPC-specific quick-action roll button
+- Reduced character-oriented clutter in NPC sheet flow.
+
 ## 1.2.9
 
 - Hardened actor sheet actions to avoid silent failures:

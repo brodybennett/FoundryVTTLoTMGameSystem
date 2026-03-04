@@ -48,6 +48,12 @@
           <span class="field-label">Tier</span>
           <input type="text" name="system.identity.tier" value="{{system.identity.tier}}" />
         </label>
+        {{#if isNpc}}
+        <label>
+          <span class="field-label">Background ID</span>
+          <input type="text" name="system.identity.backgroundId" value="{{system.identity.backgroundId}}" />
+        </label>
+        {{/if}}
       </div>
 
       {{#if isCharacter}}
@@ -191,6 +197,9 @@
         <div class="button-row">
           <button type="button" data-action="roll-check" data-attribute="wil" data-label="Willpower Check">Roll Willpower Check</button>
           <button type="button" data-action="roll-check" data-attribute="int" data-label="Perception" data-skill-id="perception">Roll Perception</button>
+          {{#if isNpc}}
+          <button type="button" data-action="roll-check" data-attribute="cha" data-label="Intimidation" data-skill-id="intimidation">Roll Intimidation</button>
+          {{/if}}
           <button type="button" data-action="roll-ritual-risk">Roll Ritual Risk</button>
           <button type="button" data-action="roll-artifact-backlash">Roll Artifact Backlash</button>
         </div>
@@ -444,6 +453,33 @@
     </div>
 
     <div class="tab" data-group="primary" data-tab="inventory">
+      {{#if isNpc}}
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">NPC Loadout</h3>
+          <span class="pill">{{itemCounts.npcLoadout}}</span>
+        </div>
+        {{#if npcLoadoutItems.length}}
+        <ol class="item-list">
+          {{#each npcLoadoutItems as |item|}}
+            <li class="item" data-item-id="{{item._id}}">
+              <img src="{{item.img}}" title="{{item.name}}" />
+              <div>
+                <div class="item-title">{{item.name}}</div>
+                <div class="item-meta">{{item.type}}</div>
+              </div>
+              <div class="item-actions">
+                <button type="button" data-action="item-edit">Edit</button>
+                <button type="button" data-action="item-delete">Delete</button>
+              </div>
+            </li>
+          {{/each}}
+        </ol>
+        {{else}}
+        <div class="empty-state">No loadout items yet. Drag from compendiums to build this NPC package.</div>
+        {{/if}}
+      </section>
+      {{else}}
       <section class="sheet-panel">
         <div class="sheet-panel-header">
           <h3 class="sheet-panel-title">Gear & Utility Items</h3>
@@ -517,6 +553,7 @@
           </div>
         </div>
       </section>
+      {{/if}}
     </div>
 
     <div class="tab" data-group="primary" data-tab="corruption">

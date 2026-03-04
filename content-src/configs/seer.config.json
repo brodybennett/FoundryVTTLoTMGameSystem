@@ -9,7 +9,7 @@
       "img": "icons/svg/book.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.9",
+      "maxTestedSystemVersion": "1.2.10",
       "dependencies": [
         "pathway.seer"
       ],
@@ -31,7 +31,7 @@
         ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.9",
+          "maxTestedSystemVersion": "1.2.10",
           "requiresIds": [
             "pathway.seer"
           ]
