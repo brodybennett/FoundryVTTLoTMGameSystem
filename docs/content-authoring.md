@@ -139,8 +139,8 @@ python scripts/content_tool.py new-pathway-bundle --pathway-id pathway.example -
 Metadata-only compatibility bump flow (no gameplay/content semantics change):
 
 ```bash
-python scripts/content_tool.py bump-max-tested --version 1.2.5
-python scripts/content_tool.py bump-max-tested --version 1.2.5 --write
+python scripts/content_tool.py bump-max-tested --version 1.2.6
+python scripts/content_tool.py bump-max-tested --version 1.2.6 --write
 ```
 
 ## Authoring Rules

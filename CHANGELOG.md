@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.6
+
+- Fixed actor/item/compendium sheet opening failures by switching to system-qualified template paths.
+- Added safe actor/item context fallback in sheet `getData()` for compatibility with open/render flows.
+
 ## 1.2.5
 
 - Added version-consistency gate (`scripts/check_version_consistency.py`) and wired it into verification + release workflow preflight.
