@@ -9,7 +9,7 @@
       "img": "icons/svg/eye.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.11",
+      "maxTestedSystemVersion": "1.2.12",
       "dependencies": [],
       "system": {
         "id": "pathway.seer",
@@ -30,7 +30,7 @@
         ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.11",
+          "maxTestedSystemVersion": "1.2.12",
           "requiresIds": []
         }
       }
@@ -44,7 +44,7 @@
       "img": "icons/svg/book.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.11",
+      "maxTestedSystemVersion": "1.2.12",
       "dependencies": [
         "pathway.seer"
       ],
@@ -69,7 +69,7 @@
         ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.11",
+          "maxTestedSystemVersion": "1.2.12",
           "requiresIds": [
             "pathway.seer"
           ]
@@ -85,7 +85,7 @@
       "img": "icons/svg/mystery-man.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.11",
+      "maxTestedSystemVersion": "1.2.12",
       "dependencies": [
         "pathway.seer",
         "sequence.seer.9"
@@ -111,7 +111,7 @@
         ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.11",
+          "maxTestedSystemVersion": "1.2.12",
           "requiresIds": [
             "pathway.seer",
             "sequence.seer.9"
@@ -128,7 +128,7 @@
       "img": "icons/svg/silhouette.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.11",
+      "maxTestedSystemVersion": "1.2.12",
       "dependencies": [
         "pathway.seer",
         "sequence.seer.8"
@@ -154,7 +154,7 @@
         ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.11",
+          "maxTestedSystemVersion": "1.2.12",
           "requiresIds": [
             "pathway.seer",
             "sequence.seer.8"

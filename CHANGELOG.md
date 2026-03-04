@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.12
+
+- Completed subtype-specific item authoring UX across all registered item types.
+- Added visibility gating so irrelevant identity/complexity controls are hidden by subtype.
+- Added subtype guidance tips to improve consistency and reduce authoring ambiguity.
+- Finalized item sheet labeling and spacing consistency pass.
+
 ## 1.2.11
 
 - Reworked item sheet framework with clearer section hierarchy:

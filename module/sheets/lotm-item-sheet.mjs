@@ -4,67 +4,119 @@ const ITEM_TYPE_META = {
   pathway: {
     label: "Pathway",
     summary: "Defines pathway identity and progression framing.",
-    subtypeGroup: "Pathway"
+    subtypeGroup: "Pathway",
+    guidance: [
+      "Set pathway display metadata and progression notes.",
+      "Keep pathwayId stable for downstream sequence references."
+    ]
   },
   sequenceNode: {
     label: "Sequence Node",
     summary: "Defines a progression node tied to a pathway and sequence value.",
-    subtypeGroup: "Pathway"
+    subtypeGroup: "Pathway",
+    guidance: [
+      "Sequence should match progression rung and remain immutable once published.",
+      "Use milestones to capture unlock expectations."
+    ]
   },
   ability: {
     label: "Ability",
     summary: "Core active/passive mechanics used by actors.",
-    subtypeGroup: "Power"
+    subtypeGroup: "Power",
+    guidance: [
+      "Align target mode/range with the intended gameplay verb.",
+      "Use effects rows for structured automation, not description text."
+    ]
   },
   ritual: {
     label: "Ritual",
     summary: "High-cost ceremonial actions with risk and component requirements.",
-    subtypeGroup: "Power"
+    subtypeGroup: "Power",
+    guidance: [
+      "Set mandatory components before balancing cast cost.",
+      "Use complexity/formula keys that match ritual automation expectations."
+    ]
   },
   artifact: {
     label: "Artifact",
     summary: "Sealed artifacts with risk profile and corruption implications.",
-    subtypeGroup: "Power"
+    subtypeGroup: "Power",
+    guidance: [
+      "Risk class should align with misuse corruption behavior.",
+      "Model artifact behavior through effects where possible."
+    ]
   },
   weapon: {
     label: "Weapon",
     summary: "Combat equipment with damage, range, and accuracy data.",
-    subtypeGroup: "Equipment"
+    subtypeGroup: "Equipment",
+    guidance: [
+      "Use weaponData for combat profile; avoid burying damage logic in description.",
+      "Keep accuracy bonus conservative and test against core formulas."
+    ]
   },
   armor: {
     label: "Armor",
     summary: "Defense profile and encumbrance data.",
-    subtypeGroup: "Equipment"
+    subtypeGroup: "Equipment",
+    guidance: [
+      "Balance defense shift against encumbrance penalties.",
+      "Use tags for gear taxonomy and automation hooks."
+    ]
   },
   gear: {
     label: "Gear",
     summary: "General utility equipment entry.",
-    subtypeGroup: "Equipment"
+    subtypeGroup: "Equipment",
+    guidance: [
+      "Prefer simple metadata and tags unless automation needs structured effects.",
+      "Keep dependencies explicit for pack ordering."
+    ]
   },
   feature: {
     label: "Feature",
     summary: "Narrative or mechanical feature tied to actor capabilities.",
-    subtypeGroup: "Generic"
+    subtypeGroup: "Generic",
+    guidance: [
+      "Feature entries are usually description + effects driven.",
+      "Use requiresIds to model prerequisite chains."
+    ]
   },
   consumable: {
     label: "Consumable",
     summary: "Single-use or limited-use utility item.",
-    subtypeGroup: "Equipment"
+    subtypeGroup: "Equipment",
+    guidance: [
+      "Model single-use behavior through cooldown/usage metadata and effects.",
+      "Keep naming clear for inventory readability."
+    ]
   },
   ingredient: {
     label: "Ingredient",
     summary: "Crafting or ritual input material.",
-    subtypeGroup: "Equipment"
+    subtypeGroup: "Equipment",
+    guidance: [
+      "Tag ingredients consistently for recipe and ritual lookups.",
+      "Use dependencies to link required companion IDs."
+    ]
   },
   background: {
     label: "Background",
     summary: "Character background or origin package.",
-    subtypeGroup: "Generic"
+    subtypeGroup: "Generic",
+    guidance: [
+      "Backgrounds should prioritize readable lore and clear prerequisite IDs.",
+      "Keep automation effects minimal unless explicitly required."
+    ]
   },
   conditionTemplate: {
     label: "Condition Template",
     summary: "Reusable condition/effect template entry.",
-    subtypeGroup: "Generic"
+    subtypeGroup: "Generic",
+    guidance: [
+      "Favor effects rows over free-text for deterministic behavior.",
+      "Set stack/remove semantics explicitly."
+    ]
   }
 };
 
@@ -173,7 +225,19 @@ function getItemTypeMeta(itemType) {
   return ITEM_TYPE_META[itemType] ?? {
     label: itemType,
     summary: "Generic item authoring entry.",
-    subtypeGroup: "Generic"
+    subtypeGroup: "Generic",
+    guidance: []
+  };
+}
+
+function buildIdentityVisibility(typeFlags) {
+  return {
+    showPathwayId: typeFlags.isPathway || typeFlags.isSequenceNode || typeFlags.isAbility || typeFlags.isRitual || typeFlags.isArtifact,
+    showSequence: !typeFlags.isPathway,
+    showMinSequence: !typeFlags.isPathway,
+    showSourceSequence: typeFlags.isAbility || typeFlags.isRitual || typeFlags.isArtifact || typeFlags.isWeapon || typeFlags.isArmor,
+    showComplexityClass: typeFlags.isAbility || typeFlags.isRitual || typeFlags.isArtifact,
+    showFormulaKey: typeFlags.isAbility || typeFlags.isRitual || typeFlags.isArtifact || typeFlags.isWeapon || typeFlags.isArmor
   };
 }
 
@@ -198,12 +262,15 @@ export class LotMItemSheet extends ItemSheet {
     const system = item.system;
     const effects = normalizeEffects(system.effects);
     const typeMeta = getItemTypeMeta(item.type);
+    const typeFlags = buildTypeFlags(context.itemType ?? item.type);
 
     context.item = item;
     context.system = system;
     context.itemType = item.type;
     context.typeMeta = typeMeta;
-    context.typeFlags = buildTypeFlags(context.itemType);
+    context.typeFlags = typeFlags;
+    context.identityVisibility = buildIdentityVisibility(typeFlags);
+    context.subtypeGuidance = Array.isArray(typeMeta.guidance) ? typeMeta.guidance : [];
     context.activationTypes = ["action", "bonusAction", "reaction", "passive", "special"];
     context.resourceTypes = ["spirit", "hp", "none", "item"];
     context.targetModes = ["self", "ally", "enemy", "area", "scene", "special"];

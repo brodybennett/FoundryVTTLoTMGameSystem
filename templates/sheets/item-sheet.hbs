@@ -37,22 +37,30 @@
             <input type="text" name="system.id" value="{{system.id}}" />
             <span class="field-help">Pattern: lowercase, dot/underscore/hyphen allowed.</span>
           </label>
+          {{#if identityVisibility.showPathwayId}}
           <label>
             <span class="field-label">Pathway ID</span>
             <input type="text" name="system.pathwayId" value="{{system.pathwayId}}" />
           </label>
+          {{/if}}
+          {{#if identityVisibility.showSequence}}
           <label>
             <span class="field-label">Sequence</span>
             <input type="number" min="0" max="9" name="system.sequence" value="{{system.sequence}}" />
           </label>
+          {{/if}}
+          {{#if identityVisibility.showMinSequence}}
           <label>
             <span class="field-label">Min Sequence</span>
             <input type="number" min="0" max="9" name="system.minSequence" value="{{system.minSequence}}" />
           </label>
+          {{/if}}
+          {{#if identityVisibility.showSourceSequence}}
           <label>
             <span class="field-label">Source Sequence</span>
             <input type="number" min="0" max="9" name="system.sourceSequence" value="{{system.sourceSequence}}" />
           </label>
+          {{/if}}
           <label>
             <span class="field-label">Schema Version</span>
             <input type="number" name="system.schemaVersion" value="{{system.schemaVersion}}" />
@@ -94,14 +102,18 @@
             <span class="field-label">Cooldown</span>
             <input type="number" min="0" name="system.cooldown" value="{{system.cooldown}}" />
           </label>
+          {{#if identityVisibility.showFormulaKey}}
           <label>
             <span class="field-label">Formula Key</span>
             <input type="text" name="system.formulaKey" value="{{system.formulaKey}}" />
           </label>
+          {{/if}}
+          {{#if identityVisibility.showComplexityClass}}
           <label>
             <span class="field-label">Complexity Class</span>
             <input type="text" name="system.complexityClass" value="{{system.complexityClass}}" />
           </label>
+          {{/if}}
         </div>
       </section>
 
@@ -134,6 +146,14 @@
           <h3 class="sheet-panel-title">Subtype Configuration</h3>
           <p class="sheet-panel-subtitle">Only fields relevant to this subtype should be edited.</p>
         </div>
+
+        {{#if subtypeGuidance.length}}
+        <ul class="wizard-warnings">
+          {{#each subtypeGuidance as |tip|}}
+            <li>{{tip}}</li>
+          {{/each}}
+        </ul>
+        {{/if}}
 
         {{#if typeFlags.isPathway}}
         <div class="grid grid-2">
