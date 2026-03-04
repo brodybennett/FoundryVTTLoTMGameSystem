@@ -9,7 +9,7 @@
       "img": "icons/svg/mystery-man.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [
         "pathway.seer"
       ],
@@ -154,7 +154,7 @@
       "img": "icons/svg/mystery-man.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [],
       "system": {
         "identity": {
@@ -292,7 +292,7 @@
       "img": "icons/svg/monster.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [],
       "system": {
         "identity": {
@@ -428,7 +428,7 @@
       "img": "icons/svg/monster.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [
         "ability.seer.swap_stage"
       ],
@@ -566,7 +566,7 @@
       "img": "icons/svg/mystery-man.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [],
       "system": {
         "identity": {
@@ -697,7 +697,7 @@
       "img": "icons/svg/mystery-man.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [],
       "system": {
         "identity": {

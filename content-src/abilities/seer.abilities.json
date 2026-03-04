@@ -9,7 +9,7 @@
       "img": "icons/svg/hazard.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [
         "pathway.seer",
         "sequence.seer.9"
@@ -45,7 +45,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.6",
+          "maxTestedSystemVersion": "1.2.7",
           "requiresIds": [
             "pathway.seer",
             "sequence.seer.9"
@@ -62,7 +62,7 @@
       "img": "icons/svg/eye.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [
         "pathway.seer",
         "sequence.seer.9"
@@ -98,7 +98,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.6",
+          "maxTestedSystemVersion": "1.2.7",
           "requiresIds": [
             "pathway.seer",
             "sequence.seer.9"
@@ -115,7 +115,7 @@
       "img": "icons/svg/aura.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [
         "pathway.seer",
         "sequence.seer.9"
@@ -151,7 +151,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.6",
+          "maxTestedSystemVersion": "1.2.7",
           "requiresIds": [
             "pathway.seer",
             "sequence.seer.9"
@@ -168,7 +168,7 @@
       "img": "icons/svg/daze.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [
         "pathway.seer",
         "sequence.seer.9"
@@ -204,7 +204,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.6",
+          "maxTestedSystemVersion": "1.2.7",
           "requiresIds": [
             "pathway.seer",
             "sequence.seer.9"
@@ -221,7 +221,7 @@
       "img": "icons/svg/falling.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [
         "pathway.seer",
         "sequence.seer.8"
@@ -257,7 +257,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.6",
+          "maxTestedSystemVersion": "1.2.7",
           "requiresIds": [
             "pathway.seer",
             "sequence.seer.8"
@@ -274,7 +274,7 @@
       "img": "icons/svg/mystery-man.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [
         "pathway.seer",
         "sequence.seer.8"
@@ -310,7 +310,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.6",
+          "maxTestedSystemVersion": "1.2.7",
           "requiresIds": [
             "pathway.seer",
             "sequence.seer.8"
@@ -327,7 +327,7 @@
       "img": "icons/svg/wing.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [
         "pathway.seer",
         "sequence.seer.8"
@@ -363,7 +363,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.6",
+          "maxTestedSystemVersion": "1.2.7",
           "requiresIds": [
             "pathway.seer",
             "sequence.seer.8"
@@ -380,7 +380,7 @@
       "img": "icons/svg/d20-highlight.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [
         "pathway.seer",
         "sequence.seer.8"
@@ -416,7 +416,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.6",
+          "maxTestedSystemVersion": "1.2.7",
           "requiresIds": [
             "pathway.seer",
             "sequence.seer.8"
@@ -433,7 +433,7 @@
       "img": "icons/svg/fire.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [
         "pathway.seer",
         "sequence.seer.7"
@@ -469,7 +469,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.6",
+          "maxTestedSystemVersion": "1.2.7",
           "requiresIds": [
             "pathway.seer",
             "sequence.seer.7"
@@ -486,7 +486,7 @@
       "img": "icons/svg/net.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [
         "pathway.seer",
         "sequence.seer.7"
@@ -522,7 +522,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.6",
+          "maxTestedSystemVersion": "1.2.7",
           "requiresIds": [
             "pathway.seer",
             "sequence.seer.7"
@@ -539,7 +539,7 @@
       "img": "icons/svg/target.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [
         "pathway.seer",
         "sequence.seer.7"
@@ -575,7 +575,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.6",
+          "maxTestedSystemVersion": "1.2.7",
           "requiresIds": [
             "pathway.seer",
             "sequence.seer.7"
@@ -592,7 +592,7 @@
       "img": "icons/svg/anchor.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [
         "pathway.seer",
         "sequence.seer.7"
@@ -628,7 +628,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.6",
+          "maxTestedSystemVersion": "1.2.7",
           "requiresIds": [
             "pathway.seer",
             "sequence.seer.7"

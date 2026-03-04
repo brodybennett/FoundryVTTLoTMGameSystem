@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.7
+
+- Added sheet UX baseline documentation:
+  - `docs/sheet-ux-rubric.md`
+  - `docs/sheet-review-checklist.md`
+- Introduced expanded sheet design tokens, layout utilities, and responsive behavior in `styles/lotm-system.css`.
+
 ## 1.2.6
 
 - Fixed actor/item/compendium sheet opening failures by switching to system-qualified template paths.

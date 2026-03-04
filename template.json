@@ -152,7 +152,7 @@
         "tags": [],
         "dependencies": {
           "minSystemVersion": "1.1.0",
-          "maxTestedSystemVersion": "1.2.6",
+          "maxTestedSystemVersion": "1.2.7",
           "requiresIds": []
         },
         "abilityData": {

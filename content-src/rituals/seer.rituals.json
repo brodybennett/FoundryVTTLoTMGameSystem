@@ -9,7 +9,7 @@
       "img": "icons/magic/perception/eye-ringed-glow-angry-large-teal.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [
         "pathway.seer",
         "item.seer.divination_deck"
@@ -40,7 +40,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.6",
+          "maxTestedSystemVersion": "1.2.7",
           "requiresIds": [
             "pathway.seer",
             "item.seer.divination_deck"
@@ -57,7 +57,7 @@
       "img": "icons/magic/unholy/strike-body-blood-red.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [
         "pathway.seer"
       ],
@@ -87,7 +87,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.6",
+          "maxTestedSystemVersion": "1.2.7",
           "requiresIds": [
             "pathway.seer"
           ]
@@ -103,7 +103,7 @@
       "img": "icons/magic/time/arrows-circling-green.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [
         "pathway.seer"
       ],
@@ -133,7 +133,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.6",
+          "maxTestedSystemVersion": "1.2.7",
           "requiresIds": [
             "pathway.seer"
           ]
@@ -149,7 +149,7 @@
       "img": "icons/sundries/lights/lantern-iron-yellow.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [
         "pathway.seer",
         "item.seer.dream_incense"
@@ -181,7 +181,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.6",
+          "maxTestedSystemVersion": "1.2.7",
           "requiresIds": [
             "pathway.seer",
             "item.seer.dream_incense"
@@ -198,7 +198,7 @@
       "img": "icons/magic/unholy/silhouette-light-fire-blue.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [
         "pathway.seer"
       ],
@@ -228,7 +228,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.6",
+          "maxTestedSystemVersion": "1.2.7",
           "requiresIds": [
             "pathway.seer"
           ]
@@ -244,7 +244,7 @@
       "img": "icons/magic/light/projectile-stars-salvo-blue.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.6",
+      "maxTestedSystemVersion": "1.2.7",
       "dependencies": [
         "pathway.seer",
         "item.seer.spirit_lens"
@@ -275,7 +275,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.6",
+          "maxTestedSystemVersion": "1.2.7",
           "requiresIds": [
             "pathway.seer",
             "item.seer.spirit_lens"
