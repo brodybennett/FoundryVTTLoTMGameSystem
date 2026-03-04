@@ -16,7 +16,7 @@ Capture and provide all of the following:
 2. Header and primary action area close-up.
 3. Each tab at least once.
 4. One invalid state (showing inline errors and blocker summary).
-5. One successful completion state (for example: finalize success or valid save).
+5. One successful interaction state (for example: valid roll/chat output or successful drag/drop tab placement).
 6. Narrow-width view screenshot.
 
 ## Manual Test Script
@@ -34,11 +34,13 @@ Run in this order:
 
 ## Character Actor Addendum
 
-1. Move through creation steps using `Previous` and `Next`.
-2. Confirm invalid step blocks progression.
-3. Confirm finalize is blocked with clear reason when invalid.
-4. Confirm finalize succeeds when valid.
-5. Confirm imported pathway package behavior is clear.
+1. Confirm no Character Creation wizard/finalize panel appears.
+2. Drag `pathway` item and confirm class/pathway presentation updates.
+3. Drag `sequenceNode` item and confirm sequence badge/identity sync updates.
+4. Delete pathway/sequence items and confirm identity auto-clears/syncs.
+5. Drag `ability` and `ritual` items and confirm both appear in `Spells`.
+6. Drag inventory item types and confirm section placement in `Inventory`.
+7. Add/remove favorites and confirm sidebar list updates.
 
 ## Item Sheet Addendum
 

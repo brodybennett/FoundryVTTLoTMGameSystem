@@ -1,0 +1,86 @@
+<section class="tab" data-tab="biography" data-group="primary">
+  <div class="top">
+    <ul class="unlist characteristics">
+      <li>
+        <label>
+          <span class="roboto-upper label">Alignment</span>
+          <input type="text" name="system.details.alignment" value="{{details.alignment}}" />
+        </label>
+      </li>
+      <li>
+        <label>
+          <span class="roboto-upper label">Eyes</span>
+          <input type="text" name="system.details.eyes" value="{{details.eyes}}" />
+        </label>
+      </li>
+      <li>
+        <label>
+          <span class="roboto-upper label">Height</span>
+          <input type="text" name="system.details.height" value="{{details.height}}" />
+        </label>
+      </li>
+      <li>
+        <label>
+          <span class="roboto-upper label">Faith</span>
+          <input type="text" name="system.details.faith" value="{{details.faith}}" />
+        </label>
+      </li>
+      <li>
+        <label>
+          <span class="roboto-upper label">Hair</span>
+          <input type="text" name="system.details.hair" value="{{details.hair}}" />
+        </label>
+      </li>
+      <li>
+        <label>
+          <span class="roboto-upper label">Weight</span>
+          <input type="text" name="system.details.weight" value="{{details.weight}}" />
+        </label>
+      </li>
+      <li>
+        <label>
+          <span class="roboto-upper label">Gender</span>
+          <input type="text" name="system.details.gender" value="{{details.gender}}" />
+        </label>
+      </li>
+      <li>
+        <label>
+          <span class="roboto-upper label">Skin</span>
+          <input type="text" name="system.details.skin" value="{{details.skin}}" />
+        </label>
+      </li>
+      <li>
+        <label>
+          <span class="roboto-upper label">Age</span>
+          <input type="text" name="system.details.age" value="{{details.age}}" />
+        </label>
+      </li>
+    </ul>
+  </div>
+
+  <div class="middle">
+    <div class="left">
+      {{> "systems/lotm-system/templates/sheets/character/shared/biography-textbox.hbs" name="system.details.ideal" value=details.ideal label="Ideals" icon="fas fa-seedling" class="textbox-half" }}
+      {{> "systems/lotm-system/templates/sheets/character/shared/biography-textbox.hbs" name="system.details.bond" value=details.bond label="Bonds" icon="fas fa-link" class="textbox-half" }}
+      {{> "systems/lotm-system/templates/sheets/character/shared/biography-textbox.hbs" name="system.details.flaw" value=details.flaw label="Flaws" icon="fas fa-heart-crack" class="textbox-half" }}
+    </div>
+    <div class="right">
+      {{> "systems/lotm-system/templates/sheets/character/shared/biography-textbox.hbs" name="system.details.trait" value=details.trait label="Personality Traits" icon="fas fa-puzzle-piece" class="textbox-half" }}
+      {{> "systems/lotm-system/templates/sheets/character/shared/biography-textbox.hbs" name="system.details.appearance" value=details.appearance label="Appearance" icon="fas fa-image-portrait" class="textbox-half" }}
+    </div>
+  </div>
+
+  <div class="bottom" data-target="system.details.biography.value">
+    <h3 class="icon">
+      <i class="fas fa-feather" inert></i>
+      <span class="roboto-upper">Biography</span>
+    </h3>
+    {{#if editable}}
+    <textarea name="system.details.biography.value" class="biography-editor">{{details.biography.value}}</textarea>
+    {{else}}
+    <div class="editor">
+      <div class="editor-content">{{details.biography.value}}</div>
+    </div>
+    {{/if}}
+  </div>
+</section>

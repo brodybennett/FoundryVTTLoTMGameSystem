@@ -1,0 +1,22 @@
+<form class="lotm-character-sheet {{cssClass}} {{#if sidebar.sidebarCollapsed}}sidebar-collapsed{{/if}}" autocomplete="off">
+  {{> "systems/lotm-system/templates/sheets/character/character-header.hbs" }}
+
+  <section class="sheet-body">
+    {{> "systems/lotm-system/templates/sheets/character/character-sidebar.hbs" }}
+
+    <section class="main-content">
+      {{> "systems/lotm-system/templates/sheets/character/shared/ability-scores.hbs" }}
+      {{> "systems/lotm-system/templates/sheets/character/shared/sidebar-tabs.hbs" }}
+
+      <section class="tab-body">
+        {{> "systems/lotm-system/templates/sheets/character/tabs/details.hbs" }}
+        {{> "systems/lotm-system/templates/sheets/character/tabs/inventory.hbs" }}
+        {{> "systems/lotm-system/templates/sheets/character/tabs/features.hbs" }}
+        {{> "systems/lotm-system/templates/sheets/character/tabs/spells.hbs" }}
+        {{> "systems/lotm-system/templates/sheets/character/tabs/effects.hbs" }}
+        {{> "systems/lotm-system/templates/sheets/character/tabs/biography.hbs" }}
+        {{> "systems/lotm-system/templates/sheets/character/tabs/special-traits.hbs" }}
+      </section>
+    </section>
+  </section>
+</form>

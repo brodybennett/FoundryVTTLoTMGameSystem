@@ -9,7 +9,7 @@
       "img": "icons/sundries/misc/hand-mirror.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.14",
+      "maxTestedSystemVersion": "1.2.15",
       "dependencies": [
         "pathway.seer"
       ],
@@ -37,7 +37,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.14",
+          "maxTestedSystemVersion": "1.2.15",
           "requiresIds": [
             "pathway.seer"
           ]
@@ -53,7 +53,7 @@
       "img": "icons/commodities/tech/gear-brass.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.14",
+      "maxTestedSystemVersion": "1.2.15",
       "dependencies": [],
       "system": {
         "id": "artifact.seer.clockwork_sphinx",
@@ -79,7 +79,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.14",
+          "maxTestedSystemVersion": "1.2.15",
           "requiresIds": []
         }
       }
@@ -93,7 +93,7 @@
       "img": "icons/commodities/currency/coin-engraved-oval-gold.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.14",
+      "maxTestedSystemVersion": "1.2.15",
       "dependencies": [],
       "system": {
         "id": "artifact.seer.gallows_coin",
@@ -119,7 +119,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.14",
+          "maxTestedSystemVersion": "1.2.15",
           "requiresIds": []
         }
       }
@@ -133,7 +133,7 @@
       "img": "icons/sundries/lights/lantern-bullseye-black.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.14",
+      "maxTestedSystemVersion": "1.2.15",
       "dependencies": [
         "pathway.seer"
       ],
@@ -161,7 +161,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.14",
+          "maxTestedSystemVersion": "1.2.15",
           "requiresIds": [
             "pathway.seer"
           ]

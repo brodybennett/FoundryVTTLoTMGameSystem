@@ -1,0 +1,58 @@
+<section class="tab" data-tab="effects" data-group="primary">
+  {{> "systems/lotm-system/templates/sheets/character/shared/list-controls.hbs" listId="effects" query=filters.effects.query sort=filters.effects.sort placeholder="Search effects"}}
+
+  <div class="effects-element">
+    <section class="conditions card">
+      <div class="header">
+        <h3 class="item-name">Conditions</h3>
+      </div>
+      <div class="condition-grid">
+        {{#if conditionGrid.length}}
+          {{#each conditionGrid as |condition|}}
+          <button type="button" class="condition-toggle {{#if condition.active}}active{{/if}}" data-action="toggle-condition" data-condition-id="{{condition.id}}" title="{{condition.description}}">
+            <span class="name">{{condition.name}}</span>
+            <i class="fas {{#if condition.active}}fa-toggle-on{{else}}fa-toggle-off{{/if}}" inert></i>
+          </button>
+          {{/each}}
+        {{else}}
+        <p class="notes">No conditions match the current filter.</p>
+        {{/if}}
+      </div>
+    </section>
+
+    <section class="effects-list card">
+      <div class="header">
+        <h3 class="item-name">Active Effects</h3>
+      </div>
+
+      <ol class="item-list unlist">
+        {{#if activeEffects.length}}
+          {{#each activeEffects as |effect|}}
+          <li class="item" data-effect-id="{{effect.id}}">
+            <div class="item-row draggable">
+              <div class="item-name">
+                <img class="item-image gold-icon" src="{{effect.icon}}" alt="{{effect.name}}" draggable="false" />
+                <div class="name name-stacked">
+                  <span class="title">{{effect.name}}</span>
+                  <span class="subtitle">
+                    {{#if effect.conditionId}}{{effect.conditionId}}{{else}}custom{{/if}}
+                    {{#if effect.disabled}} | disabled{{/if}}
+                  </span>
+                </div>
+              </div>
+              <div class="item-actions">
+                <button type="button" data-action="effect-toggle-disabled" title="Toggle Enabled">
+                  <i class="fas {{#if effect.disabled}}fa-toggle-off{{else}}fa-toggle-on{{/if}}" inert></i>
+                </button>
+                <button type="button" data-action="effect-delete" title="Delete Effect"><i class="fas fa-trash" inert></i></button>
+              </div>
+            </div>
+          </li>
+          {{/each}}
+        {{else}}
+          <li class="item empty"><p class="notes">No active effects.</p></li>
+        {{/if}}
+      </ol>
+    </section>
+  </div>
+</section>

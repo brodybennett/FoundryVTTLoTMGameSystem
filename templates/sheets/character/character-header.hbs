@@ -1,0 +1,34 @@
+<header class="sheet-header">
+  <div class="left optional-ability-1">
+    {{#if editable}}
+    <input type="text" name="name" class="document-name uninput" value="{{actor.name}}" />
+    {{else}}
+    <div class="document-name">{{actor.name}}</div>
+    {{/if}}
+    <div class="class roboto-upper">{{pathwayLabel}} | {{sequenceLabel}}</div>
+  </div>
+
+  <div class="right">
+    <div class="level-badge badge" aria-label="Corruption">
+      {{resources.corruption}}
+    </div>
+
+    <div>
+      <div class="sheet-header-buttons">
+        <button type="button" class="gold-button" data-action="roll-ritual-risk" title="Ritual Risk">
+          <i class="fa-solid fa-utensils" inert></i>
+        </button>
+        <button type="button" class="gold-button" data-action="roll-artifact-backlash" title="Artifact Backlash">
+          <i class="fa-solid fa-flask" inert></i>
+        </button>
+      </div>
+
+      <div class="xp-label roboto-upper">
+        <span class="value">{{header.spiritCurrent}}</span>
+        <span class="separator">/</span>
+        <span class="max">{{header.spiritMax}}</span>
+      </div>
+      <div class="xp-bar" role="meter" aria-valuemin="0" aria-valuenow="{{header.spiritCurrent}}" aria-valuemax="{{header.spiritMax}}" style="--bar-percentage: {{header.spiritPct}}%;"></div>
+    </div>
+  </div>
+</header>

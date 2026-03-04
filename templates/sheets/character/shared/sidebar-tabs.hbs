@@ -1,0 +1,7 @@
+<nav class="sheet-tabs tabs tabs-right" data-group="primary" aria-roledescription="Sheet Navigation">
+  {{#each tabNav as |tab|}}
+  <a class="item control" data-tab="{{tab.id}}" data-group="primary" data-tooltip="{{tab.label}}" aria-label="{{tab.label}}">
+    <i class="{{tab.icon}}" inert></i>
+  </a>
+  {{/each}}
+</nav>

@@ -1,0 +1,47 @@
+<section class="classes pills-lg">
+  {{#if classPills.length}}
+    {{#each classPills as |cls|}}
+    <div class="class pill-lg item" data-item-id="{{cls.id}}">
+      <div class="icons">
+        <img class="gold-icon" src="{{cls.img}}" alt="{{cls.name}}" />
+      </div>
+      <div class="name-stacked">
+        <div class="title">{{cls.name}}</div>
+        {{#if cls.pathwayId}}
+        <div class="subtitle">{{cls.pathwayId}}</div>
+        {{/if}}
+      </div>
+      <div class="item-actions">
+        <button type="button" data-action="item-edit" title="Edit"><i class="fas fa-edit" inert></i></button>
+        <button type="button" data-action="item-delete" title="Delete"><i class="fas fa-trash" inert></i></button>
+        <button type="button" data-action="toggle-favorite" title="Favorite">
+          <i class="{{#if cls.isFavorite}}fa-solid{{else}}fa-regular{{/if}} fa-star" inert></i>
+        </button>
+      </div>
+    </div>
+
+    {{#if cls.sequenceNodes.length}}
+    <ol class="sequence-list unlist">
+      {{#each cls.sequenceNodes as |seq|}}
+      <li class="item" data-item-id="{{seq.id}}">
+        <img class="gold-icon" src="{{seq.img}}" alt="{{seq.name}}" />
+        <div class="name-stacked">
+          <span class="title">{{seq.name}}</span>
+          <span class="subtitle">Sequence {{seq.sequence}}</span>
+        </div>
+        <div class="item-actions">
+          <button type="button" data-action="item-edit" title="Edit"><i class="fas fa-edit" inert></i></button>
+          <button type="button" data-action="item-delete" title="Delete"><i class="fas fa-trash" inert></i></button>
+          <button type="button" data-action="toggle-favorite" title="Favorite">
+            <i class="{{#if seq.isFavorite}}fa-solid{{else}}fa-regular{{/if}} fa-star" inert></i>
+          </button>
+        </div>
+      </li>
+      {{/each}}
+    </ol>
+    {{/if}}
+    {{/each}}
+  {{else}}
+  <div class="pill-lg empty roboto-upper" data-action="item-create" data-type="pathway">Add Pathway</div>
+  {{/if}}
+</section>

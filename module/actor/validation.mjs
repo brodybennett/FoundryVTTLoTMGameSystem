@@ -11,6 +11,12 @@ function normalizePathwayId(value) {
   return value.trim();
 }
 
+function creationCompletedSteps(pathwayId) {
+  return pathwayId
+    ? ["identity", "attributes", "skills", "pathway", "equipment"]
+    : ["identity", "attributes", "skills", "equipment"];
+}
+
 function hasExplicitSequence(value) {
   return !(value === "" || value == null);
 }
@@ -116,24 +122,10 @@ export function validateActorForPlay(actorSystem = {}, actorType = "character", 
     errors.push("creation.state is invalid");
   }
 
-  if (state !== "complete") {
-    warnings.push("Character creation is not finalized (creation.state != complete)");
-  }
-
-  const completed = Array.isArray(creation.completedSteps) ? creation.completedSteps : [];
-  if (state === "complete") {
-    const needed = CREATION_STEPS
-      .filter((step) => step !== "complete" && (pathwayId || step !== "pathway"));
-    const missing = needed.filter((step) => !completed.includes(step));
-    if (missing.length > 0) {
-      errors.push(`creation.completedSteps missing: ${missing.join(", ")}`);
-    }
-  }
-
   if (pathwayId && Array.isArray(ownedItems) && ownedItems.length > 0) {
     const sequenceNodes = ownedItems.filter((item) => item.type === "sequenceNode" && item.system?.pathwayId === pathwayId);
     if (sequenceNodes.length === 0) {
-      warnings.push("No sequence node item found for selected pathway; import pathway package in wizard step.");
+      warnings.push("No matching sequenceNode found for selected pathway. Drag and drop the required pathway/sequence items.");
     } else if (Number.isInteger(sequence)) {
       const hasMatch = sequenceNodes.some((item) => Number(item.system?.sequence) === sequence);
       if (!hasMatch) {
@@ -158,14 +150,78 @@ export function buildActorRepairUpdate(actorSystem = {}, actorType = "character"
 
   const creation = actorSystem.creation ?? {};
   const completed = Array.isArray(creation.completedSteps) ? creation.completedSteps : [];
+  const pathwayId = normalizePathwayId(actorSystem.identity?.pathwayId);
+  const canonicalCompleted = creationCompletedSteps(pathwayId);
   if (!creation.state) {
-    patch["system.creation.state"] = "draft";
+    patch["system.creation.state"] = "complete";
+  } else if (creation.state !== "complete") {
+    patch["system.creation.state"] = "complete";
   }
   if (!Array.isArray(creation.completedSteps)) {
-    patch["system.creation.completedSteps"] = completed;
+    patch["system.creation.completedSteps"] = canonicalCompleted;
+  } else {
+    const uniqueCompleted = [...new Set(completed.filter((step) => canonicalCompleted.includes(step)))];
+    const missing = canonicalCompleted.filter((step) => !uniqueCompleted.includes(step));
+    if (missing.length > 0 || uniqueCompleted.length !== completed.length) {
+      patch["system.creation.completedSteps"] = [...uniqueCompleted, ...missing];
+    }
   }
   if (creation.version == null) {
     patch["system.creation.version"] = 1;
+  }
+
+  if (!actorSystem.details || typeof actorSystem.details !== "object" || Array.isArray(actorSystem.details)) {
+    patch["system.details"] = {
+      alignment: "",
+      faith: "",
+      gender: "",
+      eyes: "",
+      hair: "",
+      skin: "",
+      height: "",
+      weight: "",
+      age: "",
+      ideal: "",
+      bond: "",
+      flaw: "",
+      trait: "",
+      appearance: "",
+      biography: {
+        value: "",
+        public: ""
+      }
+    };
+  } else {
+    const details = actorSystem.details;
+    const detailKeys = ["alignment", "faith", "gender", "eyes", "hair", "skin", "height", "weight", "age", "ideal", "bond", "flaw", "trait", "appearance"];
+    for (const key of detailKeys) {
+      if (typeof details[key] !== "string") {
+        patch[`system.details.${key}`] = "";
+      }
+    }
+    if (!details.biography || typeof details.biography !== "object" || Array.isArray(details.biography)) {
+      patch["system.details.biography"] = { value: "", public: "" };
+    } else {
+      if (typeof details.biography.value !== "string") patch["system.details.biography.value"] = "";
+      if (typeof details.biography.public !== "string") patch["system.details.biography.public"] = "";
+    }
+  }
+
+  if (!actorSystem.traits || typeof actorSystem.traits !== "object" || Array.isArray(actorSystem.traits)) {
+    patch["system.traits"] = {
+      senses: [],
+      resistances: [],
+      immunities: [],
+      conditionImmunities: [],
+      vulnerabilities: [],
+      damageModification: []
+    };
+  } else {
+    const traits = actorSystem.traits;
+    const traitKeys = ["senses", "resistances", "immunities", "conditionImmunities", "vulnerabilities", "damageModification"];
+    for (const key of traitKeys) {
+      if (!Array.isArray(traits[key])) patch[`system.traits.${key}`] = [];
+    }
   }
 
   for (const key of ATTRIBUTE_KEYS) {

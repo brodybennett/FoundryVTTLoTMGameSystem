@@ -1,0 +1,105 @@
+<div class="sidebar">
+  <div class="card">
+    <button type="button" class="sidebar-collapser collapser card-tab vertical unbutton" data-action="toggle-sidebar" title="Toggle Sidebar">
+      <i class="fas fa-caret-{{#if sidebar.sidebarCollapsed}}right{{else}}left{{/if}}" inert></i>
+    </button>
+
+    <div class="portrait">
+      <img src="{{actor.img}}" alt="{{actor.name}}" data-edit="img" data-action="editImage" />
+    </div>
+
+    <div class="stats">
+      <div class="top">
+        <div class="pips">
+          {{#each sidebar.deathMarks as |pip|}}
+          <button type="button" class="pip {{#if pip.filled}}filled{{/if}}" title="Death Mark {{pip.n}}"></button>
+          {{/each}}
+        </div>
+      </div>
+
+      <div class="lozenges">
+        <div class="lozenge">
+          <div class="value">{{derivedPreview.initiativeTarget}}</div>
+          <div class="label roboto-condensed-upper">Initiative</div>
+        </div>
+        <div class="lozenge">
+          <div class="value">{{sidebar.speed}}</div>
+          <div class="label roboto-condensed-upper">Speed</div>
+        </div>
+        <div class="lozenge">
+          <div class="value">+{{sidebar.proficiency}}</div>
+          <div class="label roboto-condensed-upper">Proficiency</div>
+        </div>
+      </div>
+
+      <div class="meter-group">
+        <div class="label roboto-condensed-upper"><span>Hit Points</span></div>
+        <div class="meter sectioned hit-points">
+          <div class="progress hit-points" role="meter" aria-valuemin="0" aria-valuenow="{{resources.hp}}" aria-valuemax="{{resources.hpMax}}" style="--bar-percentage: {{resources.hpPct}}%;">
+            <div class="label">
+              <span class="value">{{resources.hp}}</span>
+              <span class="separator">/</span>
+              <span class="max">{{resources.hpMax}}</span>
+            </div>
+          </div>
+          <div class="tmp">
+            <input type="text" name="system.resources.hp" value="{{resources.hp}}" data-dtype="Number" />
+          </div>
+        </div>
+      </div>
+
+      <div class="meter-group">
+        <div class="label roboto-condensed-upper"><span>Spirit</span></div>
+        <div class="meter sectioned spirit-points">
+          <div class="progress spirit" role="meter" aria-valuemin="0" aria-valuenow="{{resources.spirit}}" aria-valuemax="{{resources.spiritMax}}" style="--bar-percentage: {{header.spiritPct}}%;">
+            <div class="label">
+              <span class="value">{{resources.spirit}}</span>
+              <span class="separator">/</span>
+              <span class="max">{{resources.spiritMax}}</span>
+            </div>
+          </div>
+          <div class="tmp">
+            <input type="text" name="system.resources.spirit" value="{{resources.spirit}}" data-dtype="Number" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="death-tray open">
+      <div class="death-saves">
+        <div class="pips">
+          {{#each sidebar.deathSaves as |pip|}}
+          <button type="button" class="pip {{#if pip.filled}}filled{{/if}}" title="Death Save {{pip.n}}"></button>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="favorites">
+    <h3 class="icon">
+      <i class="fas fa-bookmark" inert></i>
+      <span class="roboto-upper">Favorites</span>
+    </h3>
+    <ul class="unlist">
+      {{#if favoriteItems.length}}
+      {{#each favoriteItems as |fav|}}
+      <li data-item-id="{{fav.id}}">
+        <figure>
+          <img class="gold-icon" src="{{fav.img}}" alt="{{fav.name}}" />
+          <button type="button" class="deletion-control unbutton" data-action="favorite-remove" title="Remove Favorite">
+            <i class="fas fa-circle-xmark" inert></i>
+          </button>
+        </figure>
+        <div class="name-stacked rollable" data-action="favorite-open" role="button">
+          <span class="title">{{fav.name}}</span>
+          <span class="subtitle">{{fav.type}}</span>
+        </div>
+      </li>
+      {{/each}}
+      {{else}}
+      <li class="drop roboto-upper">Favorite items appear here</li>
+      {{/if}}
+    </ul>
+  </div>
+</div>

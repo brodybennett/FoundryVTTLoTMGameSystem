@@ -45,23 +45,27 @@ Controls:
 4. Create a `character` actor and drag pathway/ability/item content onto the actor sheet.
 5. Use actor sheet actions for `Check`, `Ritual Risk`, `Artifact Backlash`, and corruption updates.
 
-## Character Creation Flow
+## Character Progression Workflow (Drag-and-Drop)
 
-For `character` actors, use the guided wizard panel on top of the sheet:
+For `character` actors, progression is drag/drop-first and mirrors DnD5e-style sheet flow:
 
-1. `Identity` (guided pathway selector + sequence selector constrained to chosen pathway)
-2. `Attributes` (bounded numeric allocation)
-3. `Skills` (rank dropdowns only)
-4. `Pathway` import (pulls pathway + sequence nodes from compendium)
-5. `Equipment` selection
-6. `Finalize` (sets `creation.state=complete`, validates, and persists derived stats)
+1. Open a character sheet and use the DnD5e-style tabs (`Details`, `Inventory`, `Features`, `Spells`, `Effects`, `Biography`, `Special Traits`).
+2. Drag compendium/world items onto the actor:
+   - `pathway`, `sequenceNode` -> class/sequence presentation in Features + header badge
+   - `ability`, `ritual` -> `Spells` tab
+   - `weapon`, `armor`, `gear`, `consumable`, `ingredient`, `artifact` -> `Inventory` tab
+   - `feature`, `background`, `conditionTemplate` -> `Features` tab
+3. Use roll controls directly from sidebar/header/details (`Check`, `Ritual Risk`, `Artifact Backlash`).
+4. Use basic item favorites from the sidebar (`flags.lotm-system.favorites.items`).
 
 Notes:
-- Roll automation blocks incomplete characters (`creation.state != complete`).
-- `Next Step` is blocked until current step validates.
-- `Finalize Character` is blocked until all required steps validate; sheet shows per-step errors and finalize blockers.
-- `Repair Legacy Data` seeds missing creation/default fields on migrated actors.
-- `Repair Legacy Data` also repopulates missing/invalid skill objects from `data/skills.registry.v1.1.json`.
+- Character sheet no longer exposes a creation wizard/finalize workflow.
+- Roll automation no longer blocks on visible creation workflow state.
+- `system.creation` metadata remains for compatibility and is normalized to hidden-complete state.
+- Dropping/removing `pathway` or `sequenceNode` items auto-syncs:
+  - `system.identity.pathwayId`
+  - `system.identity.sequence`
+- Repair/migration paths continue to seed missing defaults and legacy skill records.
 
 Runtime helper APIs:
 

@@ -1,0 +1,13 @@
+<div class="list-controls">
+  <label class="search-field">
+    <i class="fa-solid fa-magnifying-glass" inert></i>
+    <input type="text" value="{{query}}" data-list-search="{{listId}}" placeholder="{{placeholder}}" />
+  </label>
+  <label class="sort-field">
+    <span class="screen-reader-text">Sort</span>
+    <select data-list-sort="{{listId}}">
+      <option value="alpha" {{#if (eq sort "alpha")}}selected{{/if}}>A-Z</option>
+      <option value="type" {{#if (eq sort "type")}}selected{{/if}}>Type</option>
+    </select>
+  </label>
+</div>

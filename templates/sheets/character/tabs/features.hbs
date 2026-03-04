@@ -1,0 +1,55 @@
+<section class="tab" data-tab="features" data-group="primary">
+  {{> "systems/lotm-system/templates/sheets/character/shared/class-pills.hbs" }}
+
+  {{> "systems/lotm-system/templates/sheets/character/shared/list-controls.hbs" listId="features" query=filters.features.query sort=filters.features.sort placeholder="Search features"}}
+
+  <section class="items-list feature-list" data-item-list="features">
+    {{#each featureSections as |section|}}
+    <div class="items-section card" data-section="{{section.id}}">
+      <div class="items-header header">
+        <h3 class="item-name">{{section.label}}</h3>
+        <div class="item-controls">
+          <button type="button" class="item-control" data-action="item-create" data-type="{{section.createType}}" title="Create {{section.label}}">
+            <i class="fas fa-plus" inert></i>
+          </button>
+        </div>
+      </div>
+
+      <ol class="item-list unlist">
+        {{#if section.items.length}}
+          {{#each section.items as |item|}}
+          <li class="item {{#if item.expanded}}expanded{{else}}collapsed{{/if}}" data-item-id="{{item.id}}">
+            <div class="item-row draggable">
+              <div class="item-name item-tooltip" role="button" data-action="item-toggle-expand">
+                <img class="item-image gold-icon" src="{{item.img}}" alt="{{item.name}}" draggable="false" />
+                <div class="name name-stacked">
+                  <span class="title">{{item.name}}</span>
+                  <span class="subtitle">{{item.type}}</span>
+                </div>
+              </div>
+              <div class="item-actions">
+                <button type="button" data-action="toggle-favorite" title="Favorite">
+                  <i class="{{#if item.isFavorite}}fa-solid{{else}}fa-regular{{/if}} fa-star" inert></i>
+                </button>
+                <button type="button" data-action="item-edit" title="Edit"><i class="fas fa-edit" inert></i></button>
+                <button type="button" data-action="item-delete" title="Delete"><i class="fas fa-trash" inert></i></button>
+              </div>
+            </div>
+
+            {{#if item.expanded}}
+            <div class="item-description collapsible-content">
+              <div class="wrapper">
+                <p>{{item.summary}}</p>
+              </div>
+            </div>
+            {{/if}}
+          </li>
+          {{/each}}
+        {{else}}
+          <li class="item empty"><p class="notes">No {{section.label}}.</p></li>
+        {{/if}}
+      </ol>
+    </div>
+    {{/each}}
+  </section>
+</section>

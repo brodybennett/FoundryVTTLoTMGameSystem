@@ -237,6 +237,47 @@
       },
       "additionalProperties": false
     },
+    "details": {
+      "type": "object",
+      "properties": {
+        "alignment": { "type": "string", "maxLength": 120 },
+        "faith": { "type": "string", "maxLength": 120 },
+        "gender": { "type": "string", "maxLength": 120 },
+        "eyes": { "type": "string", "maxLength": 120 },
+        "hair": { "type": "string", "maxLength": 120 },
+        "skin": { "type": "string", "maxLength": 120 },
+        "height": { "type": "string", "maxLength": 120 },
+        "weight": { "type": "string", "maxLength": 120 },
+        "age": { "type": "string", "maxLength": 120 },
+        "ideal": { "type": "string", "maxLength": 1000 },
+        "bond": { "type": "string", "maxLength": 1000 },
+        "flaw": { "type": "string", "maxLength": 1000 },
+        "trait": { "type": "string", "maxLength": 1000 },
+        "appearance": { "type": "string", "maxLength": 2000 },
+        "biography": {
+          "type": "object",
+          "required": ["value", "public"],
+          "properties": {
+            "value": { "type": "string" },
+            "public": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "traits": {
+      "type": "object",
+      "properties": {
+        "senses": { "$ref": "#/$defs/stringList" },
+        "resistances": { "$ref": "#/$defs/stringList" },
+        "immunities": { "$ref": "#/$defs/stringList" },
+        "conditionImmunities": { "$ref": "#/$defs/stringList" },
+        "vulnerabilities": { "$ref": "#/$defs/stringList" },
+        "damageModification": { "$ref": "#/$defs/stringList" }
+      },
+      "additionalProperties": false
+    },
     "version": {
       "type": "object",
       "required": ["schemaVersion"],
@@ -304,6 +345,15 @@
         }
       },
       "additionalProperties": false
+    },
+    "stringList": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 120
+      },
+      "uniqueItems": true
     }
   },
   "additionalProperties": false

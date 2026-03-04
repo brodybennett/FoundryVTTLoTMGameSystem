@@ -1,0 +1,77 @@
+<section class="tab" data-tab="details" data-group="primary">
+  <div class="col-2">
+    <div class="left">
+      <filigree-box class="skills">
+        <h3>
+          <i class="fas fa-briefcase" inert></i>
+          <span class="roboto-upper">Skills</span>
+        </h3>
+        <ul class="unlist">
+          {{#each skillRows as |row|}}
+          <li data-skill-id="{{row.id}}">
+            <div class="proficiency">{{row.linkedAttrAbbr}}</div>
+            <a class="name skill-name" data-action="roll-check" data-attribute="{{row.linkedAttr}}" data-skill-id="{{row.id}}" data-label="{{row.label}}">{{row.label}}</a>
+            <div class="bonus">{{numberFormat row.display sign=true}}</div>
+            <div class="controls">
+              <select name="system.skills.{{row.id}}.rank">
+                {{#each @root.skillRanks as |rank|}}
+                <option value="{{rank}}" {{#if (eq rank row.rank)}}selected{{/if}}>{{rank}}</option>
+                {{/each}}
+              </select>
+              <input type="text" name="system.skills.{{row.id}}.misc" value="{{row.misc}}" data-dtype="Number" />
+            </div>
+          </li>
+          {{/each}}
+        </ul>
+      </filigree-box>
+    </div>
+
+    <div class="right">
+      <filigree-box class="saves">
+        <h3>
+          <i class="fas fa-shield-heart" inert></i>
+          <span class="roboto-upper">Saving Checks</span>
+        </h3>
+        <ul class="unlist">
+          {{#each saveRows as |row|}}
+          <li data-save="{{row.key}}">
+            <a class="name saving-throw" data-action="roll-check" data-attribute="{{row.key}}" data-label="{{row.label}}">{{row.abbr}}</a>
+            <div class="bonus">{{numberFormat row.bonus sign=true}}</div>
+          </li>
+          {{/each}}
+        </ul>
+      </filigree-box>
+
+      <div class="pills-lg">
+        <div class="pill-lg texture type">
+          <div class="name name-stacked">
+            <span class="title">Pathway</span>
+            <span class="subtitle">{{pathwayLabel}}</span>
+          </div>
+        </div>
+
+        {{#if primaryBackground}}
+        <div class="pill-lg texture background item" data-item-id="{{primaryBackground._id}}">
+          <div class="name name-stacked">
+            <span class="title">{{primaryBackground.name}}</span>
+            <span class="subtitle">Background</span>
+          </div>
+          <div class="item-actions">
+            <button type="button" data-action="item-edit" title="Edit"><i class="fas fa-edit" inert></i></button>
+            <button type="button" data-action="item-delete" title="Delete"><i class="fas fa-trash" inert></i></button>
+          </div>
+        </div>
+        {{else}}
+        <div class="pill-lg empty roboto-upper" data-action="item-create" data-type="background">Add Background</div>
+        {{/if}}
+      </div>
+
+      {{> "systems/lotm-system/templates/sheets/character/shared/trait-pills.hbs" title="Senses" icon="fas fa-eye" values=traits.senses csvName="sensesCsv" csvValue=traitsCsv.senses}}
+      {{> "systems/lotm-system/templates/sheets/character/shared/trait-pills.hbs" title="Resistances" icon="fas fa-shield-halved" values=traits.resistances csvName="resistancesCsv" csvValue=traitsCsv.resistances}}
+      {{> "systems/lotm-system/templates/sheets/character/shared/trait-pills.hbs" title="Immunities" icon="fas fa-shield" values=traits.immunities csvName="immunitiesCsv" csvValue=traitsCsv.immunities}}
+      {{> "systems/lotm-system/templates/sheets/character/shared/trait-pills.hbs" title="Condition Immunities" icon="fas fa-shield-virus" values=traits.conditionImmunities csvName="conditionImmunitiesCsv" csvValue=traitsCsv.conditionImmunities}}
+      {{> "systems/lotm-system/templates/sheets/character/shared/trait-pills.hbs" title="Vulnerabilities" icon="fas fa-heart-crack" values=traits.vulnerabilities csvName="vulnerabilitiesCsv" csvValue=traitsCsv.vulnerabilities}}
+      {{> "systems/lotm-system/templates/sheets/character/shared/trait-pills.hbs" title="Damage Modification" icon="fas fa-heart-circle-plus" values=traits.damageModification csvName="damageModificationCsv" csvValue=traitsCsv.damageModification}}
+    </div>
+  </div>
+</section>

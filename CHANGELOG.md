@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.2.15
+
+- Added a dedicated DnD5e-style `character` sheet class and template tree while keeping NPC sheet behavior separate.
+- Removed character-creation wizard UX/gating from the character play flow; progression is now drag/drop-first.
+- Added character tab surfaces for details, inventory, features, spells, effects, biography, and special traits.
+- Added pathway/sequence item drop/delete identity auto-sync (`system.identity.pathwayId`, `system.identity.sequence`).
+- Added basic character sidebar favorites using `flags.lotm-system.favorites.items`.
+- Vendored DnD5e-derived character visual assets/CSS and Modesto fonts into the LoTM package.
+- Added third-party attribution docs for vendored DnD5e resources.
+- Expanded actor defaults/schema/repair behavior for new character details and trait fields.
+
 ## 1.2.13
 
 - Completed the sheet gold-standard program scope:

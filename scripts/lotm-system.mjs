@@ -2,6 +2,7 @@ import { SYSTEM_ID, WORLD_SCHEMA_VERSION } from "../module/constants.mjs";
 import { LotMActor } from "../module/actor/lotm-actor.mjs";
 import { LotMItem } from "../module/item/lotm-item.mjs";
 import { LotMActorSheet } from "../module/sheets/lotm-actor-sheet.mjs";
+import { LotMCharacterSheet } from "../module/sheets/lotm-character-sheet.mjs";
 import { LotMItemSheet } from "../module/sheets/lotm-item-sheet.mjs";
 import {
   rollCheck,
@@ -67,10 +68,15 @@ function registerDocumentsAndSheets() {
   CONFIG.Item.documentClass = LotMItem;
 
   Actors.unregisterSheet("core", ActorSheet);
+  Actors.registerSheet(SYSTEM_ID, LotMCharacterSheet, {
+    makeDefault: true,
+    label: "LOTM.Sheets.Actor",
+    types: ["character"]
+  });
   Actors.registerSheet(SYSTEM_ID, LotMActorSheet, {
     makeDefault: true,
     label: "LOTM.Sheets.Actor",
-    types: ["character", "npc"]
+    types: ["npc"]
   });
 
   Items.unregisterSheet("core", ItemSheet);
@@ -93,6 +99,28 @@ function registerDocumentsAndSheets() {
       "conditionTemplate"
     ]
   });
+}
+
+async function preloadCharacterSheetTemplates() {
+  const base = `systems/${SYSTEM_ID}/templates/sheets/character`;
+  const partials = [
+    `${base}/character-header.hbs`,
+    `${base}/character-sidebar.hbs`,
+    `${base}/shared/sidebar-tabs.hbs`,
+    `${base}/shared/ability-scores.hbs`,
+    `${base}/shared/list-controls.hbs`,
+    `${base}/shared/trait-pills.hbs`,
+    `${base}/shared/biography-textbox.hbs`,
+    `${base}/shared/class-pills.hbs`,
+    `${base}/tabs/details.hbs`,
+    `${base}/tabs/inventory.hbs`,
+    `${base}/tabs/features.hbs`,
+    `${base}/tabs/spells.hbs`,
+    `${base}/tabs/effects.hbs`,
+    `${base}/tabs/biography.hbs`,
+    `${base}/tabs/special-traits.hbs`
+  ];
+  await loadTemplates(partials);
 }
 
 function registerGameApi() {
@@ -132,11 +160,12 @@ function checkSchemaVersionHints() {
   }
 }
 
-Hooks.once("init", () => {
+Hooks.once("init", async () => {
   console.log("LoTM | Initializing lotm-system v" + game.system.version);
   registerSettings();
   registerDocumentsAndSheets();
   registerGameApi();
+  await preloadCharacterSheetTemplates();
 
   CONFIG.lotmSystem = {
     id: SYSTEM_ID,

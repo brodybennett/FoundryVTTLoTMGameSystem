@@ -24,12 +24,8 @@ function assertActorReadyForPlay(actor) {
     actor.items?.map((item) => item.toObject(false)) ?? []
   );
 
-  const isIncompleteCharacter = actor.type === "character" && actor.system?.creation?.state !== "complete";
-  if (!validation.ok || isIncompleteCharacter) {
-    const parts = [];
-    if (validation.errors.length > 0) parts.push(validation.errors.join("; "));
-    if (isIncompleteCharacter) parts.push("character creation is not finalized");
-    const reason = parts.join("; ") || "actor validation failed";
+  if (!validation.ok) {
+    const reason = validation.errors.join("; ") || "actor validation failed";
     throw new Error(`Actor ${actor.name} is not ready for play: ${reason}`);
   }
 }

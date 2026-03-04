@@ -21,9 +21,39 @@ export class LotMActor extends Actor {
     system.resources.corruptionPenalty = resolveCorruptionPenalty(system.resources.corruption);
 
     system.creation ??= {};
-    system.creation.state ??= "draft";
-    system.creation.completedSteps ??= [];
+    system.creation.state ??= "complete";
+    const hasPathway = typeof system.identity?.pathwayId === "string" && system.identity.pathwayId.trim().length > 0;
+    system.creation.completedSteps ??= hasPathway
+      ? ["identity", "attributes", "skills", "pathway", "equipment"]
+      : ["identity", "attributes", "skills", "equipment"];
     system.creation.version ??= 1;
+
+    system.details ??= {};
+    system.details.alignment ??= "";
+    system.details.faith ??= "";
+    system.details.gender ??= "";
+    system.details.eyes ??= "";
+    system.details.hair ??= "";
+    system.details.skin ??= "";
+    system.details.height ??= "";
+    system.details.weight ??= "";
+    system.details.age ??= "";
+    system.details.ideal ??= "";
+    system.details.bond ??= "";
+    system.details.flaw ??= "";
+    system.details.trait ??= "";
+    system.details.appearance ??= "";
+    system.details.biography ??= {};
+    system.details.biography.value ??= "";
+    system.details.biography.public ??= "";
+
+    system.traits ??= {};
+    system.traits.senses ??= [];
+    system.traits.resistances ??= [];
+    system.traits.immunities ??= [];
+    system.traits.conditionImmunities ??= [];
+    system.traits.vulnerabilities ??= [];
+    system.traits.damageModification ??= [];
 
     system.tracks ??= {};
     system.tracks.damageOutMultiplier = Number(system.tracks.damageOutMultiplier ?? 1);

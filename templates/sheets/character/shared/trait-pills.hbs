@@ -1,0 +1,20 @@
+<div class="pills-group {{#unless values.length}}empty{{/unless}}">
+  <h3 class="icon">
+    <i class="{{icon}}" inert></i>
+    <span class="roboto-upper">{{title}}</span>
+  </h3>
+
+  {{#if @root.editable}}
+  <input type="text" name="lotm.traits.{{csvName}}" value="{{csvValue}}" placeholder="Comma separated" />
+  {{/if}}
+
+  <ul class="pills">
+    {{#if values.length}}
+      {{#each values as |entry|}}
+      <li class="pill"><span class="label">{{entry}}</span></li>
+      {{/each}}
+    {{else}}
+      <li class="pill empty"><span class="label">None</span></li>
+    {{/if}}
+  </ul>
+</div>

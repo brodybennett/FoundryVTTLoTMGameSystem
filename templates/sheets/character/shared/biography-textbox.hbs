@@ -1,0 +1,12 @@
+<div class="textbox {{class}}">
+  <h3 class="icon">
+    <i class="{{icon}}" inert></i>
+    <span class="roboto-upper">{{label}}</span>
+  </h3>
+
+  {{#if @root.editable}}
+  <textarea class="untext" name="{{name}}">{{value}}</textarea>
+  {{else}}
+  <p>{{value}}</p>
+  {{/if}}
+</div>

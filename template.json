@@ -75,9 +75,37 @@
           "attemptState": "idle"
         },
         "creation": {
-          "state": "draft",
-          "completedSteps": [],
+          "state": "complete",
+          "completedSteps": ["identity", "attributes", "skills", "equipment"],
           "version": 1
+        },
+        "details": {
+          "alignment": "",
+          "faith": "",
+          "gender": "",
+          "eyes": "",
+          "hair": "",
+          "skin": "",
+          "height": "",
+          "weight": "",
+          "age": "",
+          "ideal": "",
+          "bond": "",
+          "flaw": "",
+          "trait": "",
+          "appearance": "",
+          "biography": {
+            "value": "",
+            "public": ""
+          }
+        },
+        "traits": {
+          "senses": [],
+          "resistances": [],
+          "immunities": [],
+          "conditionImmunities": [],
+          "vulnerabilities": [],
+          "damageModification": []
         },
         "tracks": {
           "investigationIP": 0,
@@ -152,7 +180,7 @@
         "tags": [],
         "dependencies": {
           "minSystemVersion": "1.1.0",
-          "maxTestedSystemVersion": "1.2.14",
+          "maxTestedSystemVersion": "1.2.15",
           "requiresIds": []
         },
         "abilityData": {

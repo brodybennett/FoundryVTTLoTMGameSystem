@@ -260,7 +260,7 @@ export async function validateCreationStep(actorOrData, step, options = {}) {
     );
 
     if (!matchingSequence) {
-      errors.push("Import pathway package so owned sequence node matches identity.pathwayId and identity.sequence.");
+      errors.push("Drag/drop matching pathway and sequenceNode items so identity.pathwayId and identity.sequence stay aligned.");
     }
 
     return { ok: errors.length === 0, errors, warnings };

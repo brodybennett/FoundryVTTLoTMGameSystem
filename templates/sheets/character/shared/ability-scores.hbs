@@ -1,0 +1,26 @@
+<section class="ability-scores optional-ability-1">
+  <div class="rows">
+    <div class="top">
+      {{#each abilityRows.top as |ability|}}
+      <div class="ability-score" data-ability="{{ability.key}}">
+        <a class="label rollable" data-action="roll-check" data-attribute="{{ability.key}}" data-label="{{ability.label}}">{{ability.abbr}}</a>
+        <div class="mod">{{numberFormat ability.mod sign=true}}</div>
+        <div class="score">
+          <input type="text" name="system.attributes.{{ability.key}}.base" value="{{ability.base}}" data-dtype="Number" class="uninput" />
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    <div class="bottom">
+      {{#each abilityRows.bottom as |ability|}}
+      <div class="ability-score" data-ability="{{ability.key}}">
+        <a class="label rollable" data-action="roll-check" data-attribute="{{ability.key}}" data-label="{{ability.label}}">{{ability.abbr}}</a>
+        <div class="mod">{{numberFormat ability.mod sign=true}}</div>
+        <div class="score">
+          <input type="text" name="system.attributes.{{ability.key}}.base" value="{{ability.base}}" data-dtype="Number" class="uninput" />
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,229 @@
+@import url("./assets/dnd5e/dnd5e.vendor.css");
+
+.lotm-character-sheet.dnd5e2.sheet.actor.character {
+  --dnd5e-character-header-image: url("./assets/dnd5e/ui/official/banner-character-dark.webp");
+  --dnd5e-character-background-image: url("./assets/dnd5e/ui/official/banner-character-dark.webp");
+  --dnd5e-character-body-image: url("./assets/dnd5e/ui/official/dnd5e-background.webp") no-repeat center top / cover;
+  --dnd5e-ability-tab: url("./assets/dnd5e/ui/ability-score-tab-dark.svg");
+}
+
+.lotm-character-sheet.dnd5e2.sheet.actor.character .sheet-body .sidebar .card .stats .lozenges .lozenge {
+  background-image: url("./assets/dnd5e/ui/lozenge.svg");
+}
+
+.lotm-character-sheet.dnd5e2.sheet.actor.character .sheet-body .pill-lg.texture.type {
+  background-image: url("./assets/dnd5e/ui/official/pill-texture-type.webp");
+}
+
+.lotm-character-sheet.dnd5e2.sheet.actor.character .sheet-body .pill-lg.texture.background {
+  background-image: url("./assets/dnd5e/ui/official/pill-texture-background.webp");
+}
+
+.lotm-character-sheet.dnd5e2.sheet.actor.character .sheet-body .pill-lg.texture.race {
+  background-image: url("./assets/dnd5e/ui/official/pill-texture-race.webp");
+}
+
+.lotm-character-sheet filigree-box,
+.lotm-character-sheet .card,
+.lotm-character-sheet fieldset.card {
+  display: block;
+}
+
+.lotm-character-sheet .item-actions button,
+.lotm-character-sheet .sheet-header button,
+.lotm-character-sheet .sheet-body button {
+  border: none;
+  background: transparent;
+  color: inherit;
+}
+
+.lotm-character-sheet .item-actions button:hover,
+.lotm-character-sheet .sheet-header button:hover,
+.lotm-character-sheet .sheet-body button:hover {
+  text-shadow: 0 0 8px var(--color-shadow-primary);
+  box-shadow: none;
+}
+
+.lotm-character-sheet .list-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.lotm-character-sheet .list-controls .search-field {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--dnd5e-color-blue-gray-2);
+  color: var(--color-text-light-6);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+}
+
+.lotm-character-sheet .list-controls .search-field input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: inherit;
+}
+
+.lotm-character-sheet .list-controls .search-field input:focus {
+  box-shadow: none;
+}
+
+.lotm-character-sheet .list-controls .sort-field {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--dnd5e-color-blue-gray-2);
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+
+.lotm-character-sheet .list-controls .sort-field select {
+  border: none;
+  background: transparent;
+  color: var(--color-text-light-6);
+}
+
+.lotm-character-sheet .item .item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.lotm-character-sheet .item .item-name {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.lotm-character-sheet .item .item-name .name-stacked {
+  min-width: 0;
+}
+
+.lotm-character-sheet .item .item-name .title,
+.lotm-character-sheet .favorites .title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lotm-character-sheet .item .item-description {
+  margin: 0.4rem 0 0 2rem;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-12);
+}
+
+.lotm-character-sheet .condition-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.35rem;
+}
+
+.lotm-character-sheet .condition-grid .condition-toggle {
+  border: 1px solid var(--color-border-light-tertiary);
+  border-radius: 4px;
+  padding: 0.35rem 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0, 0, 0, 0.15);
+  color: var(--color-text-light-1);
+}
+
+.lotm-character-sheet .condition-grid .condition-toggle.active {
+  border-color: var(--dnd5e-color-gold);
+  box-shadow: 0 0 8px var(--dnd5e-shadow-45);
+}
+
+.lotm-character-sheet .effects-element {
+  display: grid;
+  gap: 1rem;
+}
+
+.lotm-character-sheet .tab.special-traits {
+  display: grid;
+  gap: 1rem;
+}
+
+.lotm-character-sheet .tab.special-traits fieldset.card {
+  border: 1px solid var(--color-border-light-tertiary);
+  border-radius: 6px;
+  padding: 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.lotm-character-sheet .tab.special-traits fieldset.card > legend {
+  color: var(--dnd5e-color-gold);
+  font-family: var(--dnd5e-font-roboto-slab);
+  font-size: var(--font-size-28);
+  padding: 0 0.35rem;
+}
+
+.lotm-character-sheet .tab.special-traits .form-group {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.lotm-character-sheet .tab.special-traits .form-group + .form-group {
+  margin-top: 0.65rem;
+}
+
+.lotm-character-sheet .tab.special-traits .form-group label {
+  font-size: var(--font-size-12);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--dnd5e-color-gold);
+}
+
+.lotm-character-sheet .tab.special-traits .form-group .form-fields {
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+}
+
+.lotm-character-sheet .tab.special-traits .form-group .hint {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-11);
+}
+
+.lotm-character-sheet .tab[data-tab="biography"] .biography-editor {
+  min-height: 280px;
+  resize: vertical;
+  border: 1px solid var(--color-border-light-tertiary);
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--color-text-light-1);
+}
+
+.lotm-character-sheet .screen-reader-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+@media (max-width: 1200px) {
+  .lotm-character-sheet .condition-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 820px) {
+  .lotm-character-sheet .condition-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lotm-character-sheet .list-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

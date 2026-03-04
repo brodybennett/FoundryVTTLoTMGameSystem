@@ -1,0 +1,74 @@
+<section class="tab special-traits" data-tab="special-traits" data-group="primary">
+  <fieldset class="card">
+    <legend>LoTM Survival</legend>
+    <div class="form-group split-group">
+      <label>Corruption</label>
+      <div class="form-fields">
+        <input type="number" name="system.resources.corruption" min="0" max="100" value="{{resources.corruption}}" data-dtype="Number" />
+        <input type="number" data-lotm-corruption-delta value="0" data-dtype="Number" />
+        <button type="button" data-action="apply-corruption">Apply Delta</button>
+      </div>
+      <p class="hint">Current penalty: {{resources.corruptionPenalty}}</p>
+    </div>
+
+    <div class="form-group split-group">
+      <label>Ritual Instability</label>
+      <div class="form-fields">
+        <input type="number" name="system.ritual.instability" min="0" max="99" value="{{system.ritual.instability}}" data-dtype="Number" />
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset class="card">
+    <legend>Combat Tuning</legend>
+    <div class="form-group split-group">
+      <label>Mitigation</label>
+      <div class="form-fields">
+        <input type="number" name="system.combat.armor" value="{{system.combat.armor}}" data-dtype="Number" placeholder="Armor" />
+        <input type="number" name="system.combat.cover" value="{{system.combat.cover}}" data-dtype="Number" placeholder="Cover" />
+        <input type="number" name="system.combat.damageReduction" value="{{system.combat.damageReduction}}" data-dtype="Number" placeholder="Damage Reduction" />
+      </div>
+    </div>
+
+    <div class="form-group split-group">
+      <label>Tempo</label>
+      <div class="form-fields">
+        <input type="number" name="system.combat.encumbrancePenalty" value="{{system.combat.encumbrancePenalty}}" data-dtype="Number" placeholder="Encumbrance" />
+        <input type="number" name="system.combat.actionBudget.actions" value="{{system.combat.actionBudget.actions}}" data-dtype="Number" placeholder="Actions" />
+        <input type="number" name="system.combat.actionBudget.moves" value="{{system.combat.actionBudget.moves}}" data-dtype="Number" placeholder="Moves" />
+        <input type="number" name="system.combat.actionBudget.reactions" value="{{system.combat.actionBudget.reactions}}" data-dtype="Number" placeholder="Reactions" />
+        <input type="number" name="system.combat.actionBudget.bonusActions" value="{{system.combat.actionBudget.bonusActions}}" data-dtype="Number" placeholder="Bonus" />
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset class="card">
+    <legend>Automation Tracks</legend>
+    <div class="form-group split-group">
+      <label>State Flags</label>
+      <div class="form-fields">
+        <input type="number" name="system.tracks.actionLock" value="{{system.tracks.actionLock}}" data-dtype="Number" placeholder="Action Lock" />
+        <input type="number" name="system.tracks.verbalLocked" value="{{system.tracks.verbalLocked}}" data-dtype="Number" placeholder="Verbal Lock" />
+        <input type="number" name="system.tracks.isDowned" value="{{system.tracks.isDowned}}" data-dtype="Number" placeholder="Downed" />
+      </div>
+    </div>
+
+    <div class="form-group split-group">
+      <label>Roll Modifiers</label>
+      <div class="form-fields">
+        <input type="number" name="system.tracks.movementCheckPenalty" value="{{system.tracks.movementCheckPenalty}}" data-dtype="Number" placeholder="Move Penalty" />
+        <input type="number" name="system.tracks.damageOutMultiplier" step="0.1" value="{{system.tracks.damageOutMultiplier}}" data-dtype="Number" placeholder="Damage x" />
+        <input type="number" name="system.tracks.incomingOffenseBonus" value="{{system.tracks.incomingOffenseBonus}}" data-dtype="Number" placeholder="Incoming Offense" />
+        <input type="number" name="system.tracks.offensePenaltyVsSource" value="{{system.tracks.offensePenaltyVsSource}}" data-dtype="Number" placeholder="Offense Penalty" />
+        <input type="number" name="system.tracks.markedBySourceBonus" value="{{system.tracks.markedBySourceBonus}}" data-dtype="Number" placeholder="Marked Bonus" />
+      </div>
+    </div>
+
+    <div class="form-group split-group">
+      <label>Meta Tracks</label>
+      <div class="form-fields">
+        <input type="number" name="system.tracks.investigationIP" value="{{system.tracks.investigationIP}}" data-dtype="Number" placeholder="Investigation IP" />
+      </div>
+    </div>
+  </fieldset>
+</section>
