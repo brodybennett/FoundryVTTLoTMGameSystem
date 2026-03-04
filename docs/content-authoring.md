@@ -26,6 +26,8 @@ Required additional fields:
   - `minSystemVersion`
   - `maxTestedSystemVersion`
   - optional `requiresIds`
+- optional `system.pathwayData` object
+- optional `system.sequenceData` object
 
 ### For `RollTable` entries
 
@@ -81,11 +83,21 @@ Required additional fields:
 - actors -> `actors` (source category retained in `flags.lotm.groups.category`)
 - journals -> source `pack` value (rules reference)
 
+At runtime, GM users get automatic native compendium folder organization (idempotent), controlled by world setting `lotm-system.autoOrganizeCompendiums` and manually callable with `game.lotm.organizeCompendiums()`.
+
+Folder groups:
+
+- pathways: folder per pathway (`flags.lotm.groups.pathwayId`)
+- rolltables: folder per segment (`flags.lotm.groups.segment`)
+- items: folder per item type group
+- actors: folder per category (`flags.lotm.groups.category`)
+
 ## Validation and Build
 
 Run:
 
 ```bash
+python scripts/check_version_consistency.py
 python scripts/validate_content_source.py
 python scripts/build_compendiums.py
 ```
@@ -113,6 +125,23 @@ python scripts/build_compendiums.py
   - `rules-reference`
 
 `build_compendiums.py` generates deterministic `packs/*.db` using stable hashed `_id` values.
+
+## Content Tool Scaffolding
+
+Generate typed skeleton entries:
+
+```bash
+python scripts/content_tool.py new --type ability --id ability.example.new --name "New Ability"
+python scripts/content_tool.py new --type weapon --id item.example.weapon --name "Example Weapon"
+python scripts/content_tool.py new-pathway-bundle --pathway-id pathway.example --pathway-name Example --top-sequence 9 --bottom-sequence 7
+```
+
+Metadata-only compatibility bump flow (no gameplay/content semantics change):
+
+```bash
+python scripts/content_tool.py bump-max-tested --version 1.2.5
+python scripts/content_tool.py bump-max-tested --version 1.2.5 --write
+```
 
 ## Authoring Rules
 

@@ -9,8 +9,10 @@
       "img": "icons/sundries/misc/hand-mirror.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer"
+      ],
       "system": {
         "id": "artifact.seer.mirror_of_hushed_fates",
         "schemaVersion": 1,
@@ -23,7 +25,11 @@
         "cooldown": 0,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["artifact", "seer", "mirror"],
+        "tags": [
+          "artifact",
+          "seer",
+          "mirror"
+        ],
         "artifactData": {
           "riskClass": "volatile",
           "charges": 3,
@@ -31,8 +37,10 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer"
+          ]
         }
       }
     },
@@ -45,7 +53,7 @@
       "img": "icons/commodities/tech/gear-brass.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "id": "artifact.seer.clockwork_sphinx",
@@ -59,7 +67,11 @@
         "cooldown": 0,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["artifact", "seer", "analysis"],
+        "tags": [
+          "artifact",
+          "seer",
+          "analysis"
+        ],
         "artifactData": {
           "riskClass": "stable",
           "charges": 5,
@@ -67,7 +79,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.5",
           "requiresIds": []
         }
       }
@@ -81,7 +93,7 @@
       "img": "icons/commodities/currency/coin-engraved-oval-gold.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "id": "artifact.seer.gallows_coin",
@@ -95,7 +107,11 @@
         "cooldown": 0,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["artifact", "luck", "coin"],
+        "tags": [
+          "artifact",
+          "luck",
+          "coin"
+        ],
         "artifactData": {
           "riskClass": "volatile",
           "charges": 2,
@@ -103,7 +119,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.5",
           "requiresIds": []
         }
       }
@@ -117,8 +133,10 @@
       "img": "icons/sundries/lights/lantern-bullseye-black.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer"
+      ],
       "system": {
         "id": "artifact.seer.lamp_of_black_stars",
         "schemaVersion": 1,
@@ -131,7 +149,11 @@
         "cooldown": 0,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["artifact", "seer", "catastrophic"],
+        "tags": [
+          "artifact",
+          "seer",
+          "catastrophic"
+        ],
         "artifactData": {
           "riskClass": "catastrophic",
           "charges": 1,
@@ -139,8 +161,10 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer"
+          ]
         }
       }
     }

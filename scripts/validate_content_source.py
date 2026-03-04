@@ -138,6 +138,15 @@ def validate_item_entry(entry):
     if not isinstance(requires_ids, list):
         fail(f"{content_id}.system.dependencies.requiresIds must be array")
 
+    pathway_data = system.get("pathwayData")
+    if pathway_data is not None and not isinstance(pathway_data, dict):
+        fail(f"{content_id}.system.pathwayData must be object when provided")
+
+    sequence_data = system.get("sequenceData")
+    if sequence_data is not None and not isinstance(sequence_data, dict):
+        fail(f"{content_id}.system.sequenceData must be object when provided")
+
+
 
 def validate_rolltable_entry(entry):
     content_id = entry["id"]

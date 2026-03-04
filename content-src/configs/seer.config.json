@@ -9,8 +9,10 @@
       "img": "icons/svg/book.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer"
+      ],
       "system": {
         "id": "config.pack.seer",
         "schemaVersion": 1,
@@ -22,11 +24,17 @@
         "cooldown": 0,
         "formulaKey": "check.attribute.v1",
         "effects": [],
-        "tags": ["config", "pack", "meta"],
+        "tags": [
+          "config",
+          "pack",
+          "meta"
+        ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer"
+          ]
         }
       }
     }

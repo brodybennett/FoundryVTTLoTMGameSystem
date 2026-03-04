@@ -202,6 +202,24 @@
   border-color: #3f6a39;
 }
 
+.lotm-sheet .wizard-step.invalid {
+  border-color: #7d2418;
+}
+
+.lotm-sheet .wizard-step-errors {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.1rem;
+  height: 1.1rem;
+  margin-left: 0.25rem;
+  padding: 0 0.2rem;
+  border-radius: 999px;
+  background: #7d2418;
+  color: #fff;
+  font-size: 0.72rem;
+}
+
 .lotm-sheet .wizard-actions {
   display: flex;
   flex-wrap: wrap;
@@ -229,6 +247,12 @@
 .lotm-sheet .wizard-ok {
   color: #204f22;
   margin: 0;
+}
+
+.lotm-sheet .inline-errors {
+  margin: 0.25rem 0;
+  padding-left: 1rem;
+  color: #7d2418;
 }
 
 .lotm-chat-card {

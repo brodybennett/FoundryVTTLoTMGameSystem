@@ -9,7 +9,7 @@
       "img": "icons/svg/eye.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "id": "pathway.seer",
@@ -23,10 +23,14 @@
         "cooldown": 0,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["pathway", "seer", "core"],
+        "tags": [
+          "pathway",
+          "seer",
+          "core"
+        ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.5",
           "requiresIds": []
         }
       }
@@ -40,8 +44,10 @@
       "img": "icons/svg/book.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer"
+      ],
       "system": {
         "id": "sequence.seer.9",
         "schemaVersion": 1,
@@ -56,11 +62,17 @@
         "cooldown": 0,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["sequence", "seer", "s9"],
+        "tags": [
+          "sequence",
+          "seer",
+          "s9"
+        ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer"
+          ]
         }
       }
     },
@@ -73,8 +85,11 @@
       "img": "icons/svg/mystery-man.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer", "sequence.seer.9"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer",
+        "sequence.seer.9"
+      ],
       "system": {
         "id": "sequence.seer.8",
         "schemaVersion": 1,
@@ -89,11 +104,18 @@
         "cooldown": 0,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["sequence", "seer", "s8"],
+        "tags": [
+          "sequence",
+          "seer",
+          "s8"
+        ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer", "sequence.seer.9"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer",
+            "sequence.seer.9"
+          ]
         }
       }
     },
@@ -106,8 +128,11 @@
       "img": "icons/svg/silhouette.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer", "sequence.seer.8"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer",
+        "sequence.seer.8"
+      ],
       "system": {
         "id": "sequence.seer.7",
         "schemaVersion": 1,
@@ -122,11 +147,18 @@
         "cooldown": 0,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["sequence", "seer", "s7"],
+        "tags": [
+          "sequence",
+          "seer",
+          "s7"
+        ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer", "sequence.seer.8"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer",
+            "sequence.seer.8"
+          ]
         }
       }
     }

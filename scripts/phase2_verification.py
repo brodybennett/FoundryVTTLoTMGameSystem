@@ -248,6 +248,12 @@ def check_schema_ids_and_contracts():
     if "dependencies" not in root_required:
         fail("item schema must require dependencies on all items")
 
+    item_props = set(item.get("properties", {}).keys())
+    if "pathwayData" not in item_props:
+        fail("item schema must include optional pathwayData payload")
+    if "sequenceData" not in item_props:
+        fail("item schema must include optional sequenceData payload")
+
     formula_key = item.get("properties", {}).get("formulaKey", {})
     if "enum" in formula_key:
         fail("item.schema formulaKey must be registry-driven, not enum-locked")

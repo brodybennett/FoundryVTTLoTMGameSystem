@@ -152,7 +152,7 @@
         "tags": [],
         "dependencies": {
           "minSystemVersion": "1.1.0",
-          "maxTestedSystemVersion": "1.2.0",
+          "maxTestedSystemVersion": "1.2.5",
           "requiresIds": []
         },
         "abilityData": {
@@ -182,6 +182,16 @@
           "riskClass": "stable",
           "charges": 0,
           "misuseCorruptionGain": 0
+        },
+        "pathwayData": {
+          "displayName": "",
+          "theme": "",
+          "progressionNote": ""
+        },
+        "sequenceData": {
+          "title": "",
+          "summary": "",
+          "milestones": []
         }
       }
     },

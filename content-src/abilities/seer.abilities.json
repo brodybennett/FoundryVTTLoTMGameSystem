@@ -9,15 +9,20 @@
       "img": "icons/svg/hazard.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer", "sequence.seer.9"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer",
+        "sequence.seer.9"
+      ],
       "system": {
         "id": "ability.seer.hunch_of_danger",
         "schemaVersion": 1,
         "name": "Hunch of Danger",
         "type": "ability",
         "pathwayId": "pathway.seer",
-        "allowedPathwayIds": ["pathway.seer"],
+        "allowedPathwayIds": [
+          "pathway.seer"
+        ],
         "sequence": 9,
         "minSequence": 9,
         "activation": "reaction",
@@ -26,7 +31,11 @@
         "cooldown": 0,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["seer", "defense", "precognition"],
+        "tags": [
+          "seer",
+          "defense",
+          "precognition"
+        ],
         "abilityData": {
           "targetMode": "self",
           "rangeFt": 0,
@@ -36,8 +45,11 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer", "sequence.seer.9"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer",
+            "sequence.seer.9"
+          ]
         }
       }
     },
@@ -50,15 +62,20 @@
       "img": "icons/svg/eye.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer", "sequence.seer.9"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer",
+        "sequence.seer.9"
+      ],
       "system": {
         "id": "ability.seer.spirit_vision",
         "schemaVersion": 1,
         "name": "Spirit Vision",
         "type": "ability",
         "pathwayId": "pathway.seer",
-        "allowedPathwayIds": ["pathway.seer"],
+        "allowedPathwayIds": [
+          "pathway.seer"
+        ],
         "sequence": 9,
         "minSequence": 9,
         "activation": "action",
@@ -67,7 +84,11 @@
         "cooldown": 0,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["seer", "utility", "detection"],
+        "tags": [
+          "seer",
+          "utility",
+          "detection"
+        ],
         "abilityData": {
           "targetMode": "special",
           "rangeFt": 60,
@@ -77,8 +98,11 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer", "sequence.seer.9"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer",
+            "sequence.seer.9"
+          ]
         }
       }
     },
@@ -91,15 +115,20 @@
       "img": "icons/svg/aura.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer", "sequence.seer.9"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer",
+        "sequence.seer.9"
+      ],
       "system": {
         "id": "ability.seer.arcane_sense",
         "schemaVersion": 1,
         "name": "Arcane Sense",
         "type": "ability",
         "pathwayId": "pathway.seer",
-        "allowedPathwayIds": ["pathway.seer"],
+        "allowedPathwayIds": [
+          "pathway.seer"
+        ],
         "sequence": 9,
         "minSequence": 9,
         "activation": "action",
@@ -108,7 +137,11 @@
         "cooldown": 0,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["seer", "utility", "ritual"],
+        "tags": [
+          "seer",
+          "utility",
+          "ritual"
+        ],
         "abilityData": {
           "targetMode": "area",
           "rangeFt": 30,
@@ -118,8 +151,11 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer", "sequence.seer.9"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer",
+            "sequence.seer.9"
+          ]
         }
       }
     },
@@ -132,15 +168,20 @@
       "img": "icons/svg/daze.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer", "sequence.seer.9"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer",
+        "sequence.seer.9"
+      ],
       "system": {
         "id": "ability.seer.hypnotic_pulse",
         "schemaVersion": 1,
         "name": "Hypnotic Pulse",
         "type": "ability",
         "pathwayId": "pathway.seer",
-        "allowedPathwayIds": ["pathway.seer"],
+        "allowedPathwayIds": [
+          "pathway.seer"
+        ],
         "sequence": 9,
         "minSequence": 9,
         "activation": "action",
@@ -149,7 +190,11 @@
         "cooldown": 1,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["seer", "control", "mind"],
+        "tags": [
+          "seer",
+          "control",
+          "mind"
+        ],
         "abilityData": {
           "targetMode": "enemy",
           "rangeFt": 30,
@@ -159,8 +204,11 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer", "sequence.seer.9"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer",
+            "sequence.seer.9"
+          ]
         }
       }
     },
@@ -173,15 +221,20 @@
       "img": "icons/svg/falling.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer", "sequence.seer.8"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer",
+        "sequence.seer.8"
+      ],
       "system": {
         "id": "ability.seer.clown_balance",
         "schemaVersion": 1,
         "name": "Clown's Balance",
         "type": "ability",
         "pathwayId": "pathway.seer",
-        "allowedPathwayIds": ["pathway.seer"],
+        "allowedPathwayIds": [
+          "pathway.seer"
+        ],
         "sequence": 8,
         "minSequence": 8,
         "activation": "passive",
@@ -190,7 +243,11 @@
         "cooldown": 0,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["seer", "mobility", "passive"],
+        "tags": [
+          "seer",
+          "mobility",
+          "passive"
+        ],
         "abilityData": {
           "targetMode": "self",
           "rangeFt": 0,
@@ -200,8 +257,11 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer", "sequence.seer.8"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer",
+            "sequence.seer.8"
+          ]
         }
       }
     },
@@ -214,15 +274,20 @@
       "img": "icons/svg/mystery-man.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer", "sequence.seer.8"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer",
+        "sequence.seer.8"
+      ],
       "system": {
         "id": "ability.seer.paper_figurine_substitute",
         "schemaVersion": 1,
         "name": "Paper Figurine Substitute",
         "type": "ability",
         "pathwayId": "pathway.seer",
-        "allowedPathwayIds": ["pathway.seer"],
+        "allowedPathwayIds": [
+          "pathway.seer"
+        ],
         "sequence": 8,
         "minSequence": 8,
         "activation": "reaction",
@@ -231,7 +296,11 @@
         "cooldown": 2,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["seer", "defense", "substitution"],
+        "tags": [
+          "seer",
+          "defense",
+          "substitution"
+        ],
         "abilityData": {
           "targetMode": "self",
           "rangeFt": 0,
@@ -241,8 +310,11 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer", "sequence.seer.8"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer",
+            "sequence.seer.8"
+          ]
         }
       }
     },
@@ -255,15 +327,20 @@
       "img": "icons/svg/wing.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer", "sequence.seer.8"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer",
+        "sequence.seer.8"
+      ],
       "system": {
         "id": "ability.seer.raven_feint",
         "schemaVersion": 1,
         "name": "Raven Feint",
         "type": "ability",
         "pathwayId": "pathway.seer",
-        "allowedPathwayIds": ["pathway.seer"],
+        "allowedPathwayIds": [
+          "pathway.seer"
+        ],
         "sequence": 8,
         "minSequence": 8,
         "activation": "bonusAction",
@@ -272,7 +349,11 @@
         "cooldown": 0,
         "formulaKey": "check.attack.v1",
         "effects": [],
-        "tags": ["seer", "combat", "mobility"],
+        "tags": [
+          "seer",
+          "combat",
+          "mobility"
+        ],
         "abilityData": {
           "targetMode": "enemy",
           "rangeFt": 20,
@@ -282,8 +363,11 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer", "sequence.seer.8"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer",
+            "sequence.seer.8"
+          ]
         }
       }
     },
@@ -296,15 +380,20 @@
       "img": "icons/svg/d20-highlight.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer", "sequence.seer.8"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer",
+        "sequence.seer.8"
+      ],
       "system": {
         "id": "ability.seer.lucky_read",
         "schemaVersion": 1,
         "name": "Lucky Read",
         "type": "ability",
         "pathwayId": "pathway.seer",
-        "allowedPathwayIds": ["pathway.seer"],
+        "allowedPathwayIds": [
+          "pathway.seer"
+        ],
         "sequence": 8,
         "minSequence": 8,
         "activation": "reaction",
@@ -313,7 +402,11 @@
         "cooldown": 1,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["seer", "luck", "support"],
+        "tags": [
+          "seer",
+          "luck",
+          "support"
+        ],
         "abilityData": {
           "targetMode": "ally",
           "rangeFt": 30,
@@ -323,8 +416,11 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer", "sequence.seer.8"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer",
+            "sequence.seer.8"
+          ]
         }
       }
     },
@@ -337,15 +433,20 @@
       "img": "icons/svg/fire.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer", "sequence.seer.7"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer",
+        "sequence.seer.7"
+      ],
       "system": {
         "id": "ability.seer.flame_jump",
         "schemaVersion": 1,
         "name": "Flame Jump",
         "type": "ability",
         "pathwayId": "pathway.seer",
-        "allowedPathwayIds": ["pathway.seer"],
+        "allowedPathwayIds": [
+          "pathway.seer"
+        ],
         "sequence": 7,
         "minSequence": 7,
         "activation": "action",
@@ -354,7 +455,11 @@
         "cooldown": 2,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["seer", "teleport", "fire"],
+        "tags": [
+          "seer",
+          "teleport",
+          "fire"
+        ],
         "abilityData": {
           "targetMode": "self",
           "rangeFt": 60,
@@ -364,8 +469,11 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer", "sequence.seer.7"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer",
+            "sequence.seer.7"
+          ]
         }
       }
     },
@@ -378,15 +486,20 @@
       "img": "icons/svg/net.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer", "sequence.seer.7"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer",
+        "sequence.seer.7"
+      ],
       "system": {
         "id": "ability.seer.fate_thread_cut",
         "schemaVersion": 1,
         "name": "Fate Thread Cut",
         "type": "ability",
         "pathwayId": "pathway.seer",
-        "allowedPathwayIds": ["pathway.seer"],
+        "allowedPathwayIds": [
+          "pathway.seer"
+        ],
         "sequence": 7,
         "minSequence": 7,
         "activation": "action",
@@ -395,7 +508,11 @@
         "cooldown": 1,
         "formulaKey": "check.attack.v1",
         "effects": [],
-        "tags": ["seer", "attack", "fate"],
+        "tags": [
+          "seer",
+          "attack",
+          "fate"
+        ],
         "abilityData": {
           "targetMode": "enemy",
           "rangeFt": 30,
@@ -405,8 +522,11 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer", "sequence.seer.7"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer",
+            "sequence.seer.7"
+          ]
         }
       }
     },
@@ -419,15 +539,20 @@
       "img": "icons/svg/target.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer", "sequence.seer.7"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer",
+        "sequence.seer.7"
+      ],
       "system": {
         "id": "ability.seer.swap_stage",
         "schemaVersion": 1,
         "name": "Swap Stage",
         "type": "ability",
         "pathwayId": "pathway.seer",
-        "allowedPathwayIds": ["pathway.seer"],
+        "allowedPathwayIds": [
+          "pathway.seer"
+        ],
         "sequence": 7,
         "minSequence": 7,
         "activation": "bonusAction",
@@ -436,7 +561,11 @@
         "cooldown": 1,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["seer", "position", "trick"],
+        "tags": [
+          "seer",
+          "position",
+          "trick"
+        ],
         "abilityData": {
           "targetMode": "ally",
           "rangeFt": 25,
@@ -446,8 +575,11 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer", "sequence.seer.7"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer",
+            "sequence.seer.7"
+          ]
         }
       }
     },
@@ -460,15 +592,20 @@
       "img": "icons/svg/anchor.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer", "sequence.seer.7"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer",
+        "sequence.seer.7"
+      ],
       "system": {
         "id": "ability.seer.marionette_strings",
         "schemaVersion": 1,
         "name": "Marionette Strings",
         "type": "ability",
         "pathwayId": "pathway.seer",
-        "allowedPathwayIds": ["pathway.seer"],
+        "allowedPathwayIds": [
+          "pathway.seer"
+        ],
         "sequence": 7,
         "minSequence": 7,
         "activation": "action",
@@ -477,7 +614,11 @@
         "cooldown": 2,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["seer", "control", "puppet"],
+        "tags": [
+          "seer",
+          "control",
+          "puppet"
+        ],
         "abilityData": {
           "targetMode": "enemy",
           "rangeFt": 40,
@@ -487,8 +628,11 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer", "sequence.seer.7"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer",
+            "sequence.seer.7"
+          ]
         }
       }
     }

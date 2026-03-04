@@ -30,6 +30,9 @@ jobs:
       - name: Verify Foundry Manifest
         run: python scripts/verify_foundry_manifest.py
 
+      - name: Check Version Consistency
+        run: python scripts/check_version_consistency.py
+
       - name: Validate Tag Matches system.json Version
         shell: bash
         run: |

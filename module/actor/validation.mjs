@@ -1,4 +1,5 @@
 import { ATTRIBUTE_KEYS, CREATION_STEPS, SKILL_RANKS, clamp, resolveCorruptionPenalty } from "../constants.mjs";
+import { buildDefaultSkills } from "../creation/creation-engine.mjs";
 
 function numberOr(value, fallback = 0) {
   const n = Number(value);
@@ -135,7 +136,7 @@ export function validateActorForPlay(actorSystem = {}, actorType = "character", 
   };
 }
 
-export function buildActorRepairUpdate(actorSystem = {}, actorType = "character") {
+export function buildActorRepairUpdate(actorSystem = {}, actorType = "character", skillRegistryEntries = []) {
   const patch = {};
 
   if (actorType !== "character") {
@@ -162,6 +163,30 @@ export function buildActorRepairUpdate(actorSystem = {}, actorType = "character"
     const temp = numberOr(actorSystem.attributes?.[key]?.temp, NaN);
     if (!Number.isFinite(temp)) {
       patch[`system.attributes.${key}.temp`] = 0;
+    }
+  }
+
+  const defaultSkills = buildDefaultSkills(skillRegistryEntries);
+  const existingSkills = actorSystem.skills;
+  if (!existingSkills || typeof existingSkills !== "object" || Array.isArray(existingSkills)) {
+    patch["system.skills"] = defaultSkills;
+  } else {
+    for (const [skillId, fallback] of Object.entries(defaultSkills)) {
+      const skill = existingSkills[skillId];
+      if (!skill || typeof skill !== "object" || Array.isArray(skill)) {
+        patch[`system.skills.${skillId}`] = fallback;
+        continue;
+      }
+      if (skill.linkedAttr !== fallback.linkedAttr) {
+        patch[`system.skills.${skillId}.linkedAttr`] = fallback.linkedAttr;
+      }
+      if (!SKILL_RANKS.includes(skill.rank)) {
+        patch[`system.skills.${skillId}.rank`] = fallback.rank;
+      }
+      const misc = numberOr(skill.misc, NaN);
+      if (!Number.isFinite(misc)) {
+        patch[`system.skills.${skillId}.misc`] = fallback.misc;
+      }
     }
   }
 

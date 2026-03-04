@@ -13,6 +13,12 @@ import {
 import { rollOnSegment, rollOnTableId } from "../module/rolls/rolltable-engine.mjs";
 import { deriveActorStats, validateActorForPlay } from "../module/actor/validation.mjs";
 import { runWorldMigrationV120 } from "../module/migrations/v1_2_0.mjs";
+import { organizeCompendiums } from "../module/compendium/organizer.mjs";
+import {
+  getPathwayOptions,
+  getSequenceOptions,
+  validateCreationStep
+} from "../module/creation/creation-engine.mjs";
 
 function registerSettings() {
   game.settings.register(SYSTEM_ID, "automationLevel", {
@@ -44,6 +50,15 @@ function registerSettings() {
     config: false,
     type: String,
     default: "0.0.0"
+  });
+
+  game.settings.register(SYSTEM_ID, "autoOrganizeCompendiums", {
+    name: "LOTM.Settings.AutoOrganizeCompendiums.Name",
+    hint: "LOTM.Settings.AutoOrganizeCompendiums.Hint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true
   });
 }
 
@@ -92,7 +107,11 @@ function registerGameApi() {
     rollOnSegment,
     rollOnTableId,
     validateActorForPlay,
-    deriveActorStats
+    deriveActorStats,
+    organizeCompendiums,
+    validateCreationStep,
+    getPathwayOptions,
+    getSequenceOptions
   };
 }
 
@@ -136,4 +155,13 @@ Hooks.once("ready", async () => {
   await runWorldMigrationV120();
   checkPackAvailability();
   checkSchemaVersionHints();
+
+  if (game.user?.isGM && game.settings.get(SYSTEM_ID, "autoOrganizeCompendiums")) {
+    try {
+      await organizeCompendiums({ notify: false });
+    } catch (err) {
+      console.warn("LoTM compendium auto-organization failed", err);
+      ui.notifications?.warn("LoTM could not auto-organize compendium folders. Use game.lotm.organizeCompendiums() to retry.");
+    }
+  }
 });

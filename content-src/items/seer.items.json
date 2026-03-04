@@ -9,8 +9,10 @@
       "img": "icons/weapons/guns/gun-pistol-flintlock-gold.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer"
+      ],
       "system": {
         "id": "item.seer.brass_revolver",
         "schemaVersion": 1,
@@ -22,7 +24,11 @@
         "cooldown": 0,
         "formulaKey": "check.attack.v1",
         "effects": [],
-        "tags": ["gear", "weapon", "firearms"],
+        "tags": [
+          "gear",
+          "weapon",
+          "firearms"
+        ],
         "weaponData": {
           "baseDamage": 12,
           "damageType": "physical",
@@ -31,8 +37,10 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer"
+          ]
         }
       }
     },
@@ -45,7 +53,7 @@
       "img": "icons/weapons/swords/sword-cane-gold.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "id": "item.seer.cane_sword",
@@ -58,7 +66,11 @@
         "cooldown": 0,
         "formulaKey": "check.attack.v1",
         "effects": [],
-        "tags": ["gear", "weapon", "melee"],
+        "tags": [
+          "gear",
+          "weapon",
+          "melee"
+        ],
         "weaponData": {
           "baseDamage": 10,
           "damageType": "physical",
@@ -67,7 +79,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.5",
           "requiresIds": []
         }
       }
@@ -81,7 +93,7 @@
       "img": "icons/weapons/daggers/dagger-ornate-gold.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "id": "item.seer.ritual_dagger",
@@ -94,7 +106,11 @@
         "cooldown": 0,
         "formulaKey": "check.attack.v1",
         "effects": [],
-        "tags": ["gear", "weapon", "ritual"],
+        "tags": [
+          "gear",
+          "weapon",
+          "ritual"
+        ],
         "weaponData": {
           "baseDamage": 8,
           "damageType": "occult",
@@ -103,7 +119,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.5",
           "requiresIds": []
         }
       }
@@ -117,8 +133,10 @@
       "img": "icons/weapons/ammunition/shot-round-lead.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["item.seer.brass_revolver"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "item.seer.brass_revolver"
+      ],
       "system": {
         "id": "item.seer.hallowed_ammunition",
         "schemaVersion": 1,
@@ -130,7 +148,11 @@
         "cooldown": 0,
         "formulaKey": "check.attack.v1",
         "effects": [],
-        "tags": ["gear", "weapon", "consumable"],
+        "tags": [
+          "gear",
+          "weapon",
+          "consumable"
+        ],
         "weaponData": {
           "baseDamage": 11,
           "damageType": "spirit",
@@ -139,8 +161,10 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["item.seer.brass_revolver"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "item.seer.brass_revolver"
+          ]
         }
       }
     },
@@ -153,7 +177,7 @@
       "img": "icons/equipment/chest/coat-leather-brown.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "id": "item.seer.leather_coat",
@@ -166,7 +190,11 @@
         "cooldown": 0,
         "formulaKey": "check.attribute.v1",
         "effects": [],
-        "tags": ["gear", "armor", "light"],
+        "tags": [
+          "gear",
+          "armor",
+          "light"
+        ],
         "armorData": {
           "defenseShift": 2,
           "damageReduction": 2,
@@ -174,7 +202,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.5",
           "requiresIds": []
         }
       }
@@ -188,7 +216,7 @@
       "img": "icons/equipment/chest/breastplate-layered-steel-gold.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "id": "item.seer.hidden_plate",
@@ -201,7 +229,11 @@
         "cooldown": 0,
         "formulaKey": "check.attribute.v1",
         "effects": [],
-        "tags": ["gear", "armor", "medium"],
+        "tags": [
+          "gear",
+          "armor",
+          "medium"
+        ],
         "armorData": {
           "defenseShift": 4,
           "damageReduction": 3,
@@ -209,7 +241,7 @@
         },
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.5",
           "requiresIds": []
         }
       }
@@ -223,7 +255,7 @@
       "img": "icons/sundries/gaming/playing-cards.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "id": "item.seer.divination_deck",
@@ -236,10 +268,14 @@
         "cooldown": 0,
         "formulaKey": "check.ritual.v1",
         "effects": [],
-        "tags": ["gear", "ritual", "tool"],
+        "tags": [
+          "gear",
+          "ritual",
+          "tool"
+        ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.5",
           "requiresIds": []
         }
       }
@@ -253,7 +289,7 @@
       "img": "icons/sundries/books/book-worn-brown.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "id": "item.seer.sealed_journal",
@@ -266,10 +302,14 @@
         "cooldown": 0,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["gear", "investigation", "tool"],
+        "tags": [
+          "gear",
+          "investigation",
+          "tool"
+        ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.5",
           "requiresIds": []
         }
       }
@@ -283,7 +323,7 @@
       "img": "icons/commodities/materials/incense.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "id": "item.seer.dream_incense",
@@ -296,10 +336,14 @@
         "cooldown": 0,
         "formulaKey": "check.ritual.v1",
         "effects": [],
-        "tags": ["gear", "dream", "ritual"],
+        "tags": [
+          "gear",
+          "dream",
+          "ritual"
+        ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.5",
           "requiresIds": []
         }
       }
@@ -313,7 +357,7 @@
       "img": "icons/tools/scribal/magnifying-glass.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "id": "item.seer.spirit_lens",
@@ -326,10 +370,14 @@
         "cooldown": 0,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["gear", "vision", "occult"],
+        "tags": [
+          "gear",
+          "vision",
+          "occult"
+        ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.5",
           "requiresIds": []
         }
       }
@@ -343,7 +391,7 @@
       "img": "icons/consumables/potions/potion-bottle-blue.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "id": "item.seer.focus_tonic",
@@ -356,10 +404,14 @@
         "cooldown": 0,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["consumable", "spirit", "alchemical"],
+        "tags": [
+          "consumable",
+          "spirit",
+          "alchemical"
+        ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.5",
           "requiresIds": []
         }
       }
@@ -373,8 +425,10 @@
       "img": "icons/weapons/ammunition/bullets-shell.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["item.seer.brass_revolver"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "item.seer.brass_revolver"
+      ],
       "system": {
         "id": "item.seer.salt_bullet",
         "schemaVersion": 1,
@@ -386,11 +440,17 @@
         "cooldown": 0,
         "formulaKey": "check.attack.v1",
         "effects": [],
-        "tags": ["consumable", "ammo", "anti-spirit"],
+        "tags": [
+          "consumable",
+          "ammo",
+          "anti-spirit"
+        ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["item.seer.brass_revolver"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "item.seer.brass_revolver"
+          ]
         }
       }
     },
@@ -403,7 +463,7 @@
       "img": "icons/consumables/potions/potion-bottle-corked-white.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "id": "item.seer.mercury_vial",
@@ -416,10 +476,14 @@
         "cooldown": 0,
         "formulaKey": "check.ritual.v1",
         "effects": [],
-        "tags": ["consumable", "ritual", "purification"],
+        "tags": [
+          "consumable",
+          "ritual",
+          "purification"
+        ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.5",
           "requiresIds": []
         }
       }
@@ -433,7 +497,7 @@
       "img": "icons/consumables/drinks/tea-cup-steaming.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "id": "item.seer.lotus_tea",
@@ -446,10 +510,13 @@
         "cooldown": 0,
         "formulaKey": "check.attribute.v1",
         "effects": [],
-        "tags": ["consumable", "recovery"],
+        "tags": [
+          "consumable",
+          "recovery"
+        ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.5",
           "requiresIds": []
         }
       }
@@ -463,7 +530,7 @@
       "img": "icons/commodities/biological/root-brown.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "id": "item.seer.ashen_root",
@@ -476,10 +543,13 @@
         "cooldown": 0,
         "formulaKey": "check.ritual.v1",
         "effects": [],
-        "tags": ["ingredient", "earth"],
+        "tags": [
+          "ingredient",
+          "earth"
+        ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.5",
           "requiresIds": []
         }
       }
@@ -493,7 +563,7 @@
       "img": "icons/commodities/materials/liquid-bottle-blue.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "id": "item.seer.moon_water",
@@ -506,10 +576,13 @@
         "cooldown": 0,
         "formulaKey": "check.ritual.v1",
         "effects": [],
-        "tags": ["ingredient", "lunar"],
+        "tags": [
+          "ingredient",
+          "lunar"
+        ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.5",
           "requiresIds": []
         }
       }
@@ -523,7 +596,7 @@
       "img": "icons/commodities/flowers/flowers-buds-white.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "id": "item.seer.night_jasmine",
@@ -536,10 +609,13 @@
         "cooldown": 0,
         "formulaKey": "check.ritual.v1",
         "effects": [],
-        "tags": ["ingredient", "fragrance"],
+        "tags": [
+          "ingredient",
+          "fragrance"
+        ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.5",
           "requiresIds": []
         }
       }
@@ -553,7 +629,7 @@
       "img": "icons/commodities/biological/fungus-mushroom-white.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "id": "item.seer.ghost_mushroom",
@@ -566,10 +642,13 @@
         "cooldown": 0,
         "formulaKey": "check.ritual.v1",
         "effects": [],
-        "tags": ["ingredient", "spirit"],
+        "tags": [
+          "ingredient",
+          "spirit"
+        ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
+          "maxTestedSystemVersion": "1.2.5",
           "requiresIds": []
         }
       }
@@ -583,8 +662,10 @@
       "img": "icons/svg/group.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer"
+      ],
       "system": {
         "id": "feature.seer.contacts",
         "schemaVersion": 1,
@@ -597,11 +678,17 @@
         "cooldown": 0,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["feature", "social", "network"],
+        "tags": [
+          "feature",
+          "social",
+          "network"
+        ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer"
+          ]
         }
       }
     },
@@ -614,8 +701,10 @@
       "img": "icons/svg/book.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer"
+      ],
       "system": {
         "id": "feature.seer.gray_fog_notes",
         "schemaVersion": 1,
@@ -628,11 +717,16 @@
         "cooldown": 0,
         "formulaKey": "check.skill.v1",
         "effects": [],
-        "tags": ["feature", "lore"],
+        "tags": [
+          "feature",
+          "lore"
+        ],
         "dependencies": {
           "minSystemVersion": "1.2.2",
-          "maxTestedSystemVersion": "1.2.2",
-          "requiresIds": ["pathway.seer"]
+          "maxTestedSystemVersion": "1.2.5",
+          "requiresIds": [
+            "pathway.seer"
+          ]
         }
       }
     }

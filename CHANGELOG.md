@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.5
+
+- Added version-consistency gate (`scripts/check_version_consistency.py`) and wired it into verification + release workflow preflight.
+- Added GM-ready compendium folder organizer (`game.lotm.organizeCompendiums()`) with world setting `lotm-system.autoOrganizeCompendiums`.
+- Hardened character creation with step validation/gating, guided pathway/sequence selectors, finalize blockers, and stronger repair behavior.
+- Added subtype-aware item authoring sheet sections, CSV array editors, effects row scaffold, and runtime item create/update validation.
+- Extended item schema/template contract with optional `system.pathwayData` and `system.sequenceData` authoring payload blocks.
+- Expanded content authoring helper with typed scaffolds, pathway-bundle scaffolds, and metadata-only max-tested bulk bumping.
+
 ## 1.2.4
 
 - Consolidated compendium packs for pathways, roll tables, items, and actors into unified top-level packs.

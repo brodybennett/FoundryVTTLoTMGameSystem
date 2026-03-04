@@ -12,9 +12,9 @@ In Foundry VTT:
 
 `https://github.com/brodybennett/FoundryVTTLoTMGameSystem/releases/latest/download/system.json`
 
-## Compendium Structure (v1.2.2)
+## Compendium Structure
 
-The system publishes compendiums in this access layout:
+The system publishes unified compendiums in this access layout:
 
 - `Pathways (All)` (all pathway roots and sequence nodes in one pack; filter by pathway)
 - `Items (All Types)` (weapons, armor, gear/features, consumables, ingredients, and other item subtypes in one pack)
@@ -24,6 +24,18 @@ The system publishes compendiums in this access layout:
 - `Roll Tables (All Segments)` (resources, abilities, rituals, artifacts, corruption, encounters in one pack)
 - `Actors (All Categories)` (factions, beyonder monsters, civilians in one pack)
 - `Rules: Hyperlinked Reference` (JournalEntry rules compendium with table-of-contents links)
+
+Compendium folder UX is native and auto-organized on world ready for GMs:
+
+- `Pathways (All)`: folder per pathway containing pathway root + its sequence nodes
+- `Roll Tables (All Segments)`: folder per segment (`Resources`, `Abilities`, `Rituals`, `Artifacts`, `Corruption`, `Encounters`)
+- `Items (All Types)`: folder per item group (`Weapons`, `Armor`, `Gear & Features`, `Consumables`, `Ingredients`, `Other`)
+- `Actors (All Categories)`: folder per category (`Faction NPCs`, `Beyonder Monsters`, `Civilians`, `Other`)
+
+Controls:
+
+- World setting: `lotm-system.autoOrganizeCompendiums` (default `true`)
+- Manual re-sync: `game.lotm.organizeCompendiums()`
 
 ## Create a Playable World
 
@@ -37,7 +49,7 @@ The system publishes compendiums in this access layout:
 
 For `character` actors, use the guided wizard panel on top of the sheet:
 
-1. `Identity` (pathway/sequence)
+1. `Identity` (guided pathway selector + sequence selector constrained to chosen pathway)
 2. `Attributes` (bounded numeric allocation)
 3. `Skills` (rank dropdowns only)
 4. `Pathway` import (pulls pathway + sequence nodes from compendium)
@@ -46,7 +58,16 @@ For `character` actors, use the guided wizard panel on top of the sheet:
 
 Notes:
 - Roll automation blocks incomplete characters (`creation.state != complete`).
+- `Next Step` is blocked until current step validates.
+- `Finalize Character` is blocked until all required steps validate; sheet shows per-step errors and finalize blockers.
 - `Repair Legacy Data` seeds missing creation/default fields on migrated actors.
+- `Repair Legacy Data` also repopulates missing/invalid skill objects from `data/skills.registry.v1.1.json`.
+
+Runtime helper APIs:
+
+- `game.lotm.validateCreationStep(actor, step)`
+- `game.lotm.getPathwayOptions()`
+- `game.lotm.getSequenceOptions(pathwayId)`
 
 ## Roll Table Automation
 
@@ -90,11 +111,27 @@ python scripts/build_compendiums.py
 
 Generated pack databases are written to `packs/*.db`.
 
+Typed scaffolding and metadata tooling:
+
+```bash
+python scripts/content_tool.py new --type ability --id ability.example.new --name "New Ability"
+python scripts/content_tool.py new-pathway-bundle --pathway-id pathway.example --pathway-name Example --top-sequence 9 --bottom-sequence 7
+python scripts/content_tool.py bump-max-tested --version 1.2.5
+python scripts/content_tool.py bump-max-tested --version 1.2.5 --write
+```
+
+Item authoring sheet is subtype-aware and exposes:
+
+- type-relevant payload editors only
+- CSV editors for `tags`, `allowedPathwayIds`, `requiresIds`, and sequence milestones
+- structured effects row add/remove scaffold
+
 ## Verification Pipeline
 
 ```bash
 python scripts/phase1_verification.py
 python scripts/phase2_verification.py
+python scripts/check_version_consistency.py
 python scripts/validate_content_source.py
 python scripts/build_compendiums.py
 python scripts/verify_foundry_manifest.py
@@ -141,4 +178,5 @@ git push origin vX.Y.Z
 - If tag and `system.json.version` do not match, release workflow fails.
 - If zip root folder is not `lotm-system/`, Foundry install/update fails.
 - If `packs/*.db` are missing, compendium lists remain empty.
+- If compendium folders are missing or stale, run `game.lotm.organizeCompendiums()` as GM.
 - If content semver/dependencies are invalid, content validation fails.

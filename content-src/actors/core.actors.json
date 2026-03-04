@@ -9,8 +9,10 @@
       "img": "icons/svg/mystery-man.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["pathway.seer"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "pathway.seer"
+      ],
       "system": {
         "identity": {
           "pathwayId": "pathway.seer",
@@ -19,19 +21,56 @@
           "backgroundId": "background.nighthawks"
         },
         "attributes": {
-          "str": { "base": 14, "temp": 0 },
-          "dex": { "base": 15, "temp": 0 },
-          "wil": { "base": 17, "temp": 0 },
-          "con": { "base": 14, "temp": 0 },
-          "cha": { "base": 13, "temp": 0 },
-          "int": { "base": 16, "temp": 0 },
-          "luck": { "base": 12, "temp": 0 }
+          "str": {
+            "base": 14,
+            "temp": 0
+          },
+          "dex": {
+            "base": 15,
+            "temp": 0
+          },
+          "wil": {
+            "base": 17,
+            "temp": 0
+          },
+          "con": {
+            "base": 14,
+            "temp": 0
+          },
+          "cha": {
+            "base": 13,
+            "temp": 0
+          },
+          "int": {
+            "base": 16,
+            "temp": 0
+          },
+          "luck": {
+            "base": 12,
+            "temp": 0
+          }
         },
         "skills": {
-          "investigation": { "linkedAttr": "int", "rank": "expert", "misc": 0 },
-          "occult": { "linkedAttr": "int", "rank": "expert", "misc": 0 },
-          "willpower": { "linkedAttr": "wil", "rank": "expert", "misc": 0 },
-          "firearms": { "linkedAttr": "dex", "rank": "trained", "misc": 0 }
+          "investigation": {
+            "linkedAttr": "int",
+            "rank": "expert",
+            "misc": 0
+          },
+          "occult": {
+            "linkedAttr": "int",
+            "rank": "expert",
+            "misc": 0
+          },
+          "willpower": {
+            "linkedAttr": "wil",
+            "rank": "expert",
+            "misc": 0
+          },
+          "firearms": {
+            "linkedAttr": "dex",
+            "rank": "trained",
+            "misc": 0
+          }
         },
         "derived": {
           "hpMax": 96,
@@ -69,7 +108,13 @@
         },
         "creation": {
           "state": "complete",
-          "completedSteps": ["identity", "attributes", "skills", "pathway", "equipment"],
+          "completedSteps": [
+            "identity",
+            "attributes",
+            "skills",
+            "pathway",
+            "equipment"
+          ],
           "version": 1
         },
         "tracks": {
@@ -82,7 +127,9 @@
           "verbalLocked": 0,
           "markedBySourceBonus": 0,
           "isDowned": 0,
-          "factions": { "faction.nighthawks": 45 },
+          "factions": {
+            "faction.nighthawks": 45
+          },
           "threatClocks": [],
           "influence": {},
           "leverage": {}
@@ -107,7 +154,7 @@
       "img": "icons/svg/mystery-man.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "identity": {
@@ -117,18 +164,51 @@
           "backgroundId": "background.church"
         },
         "attributes": {
-          "str": { "base": 10, "temp": 0 },
-          "dex": { "base": 10, "temp": 0 },
-          "wil": { "base": 14, "temp": 0 },
-          "con": { "base": 11, "temp": 0 },
-          "cha": { "base": 14, "temp": 0 },
-          "int": { "base": 13, "temp": 0 },
-          "luck": { "base": 10, "temp": 0 }
+          "str": {
+            "base": 10,
+            "temp": 0
+          },
+          "dex": {
+            "base": 10,
+            "temp": 0
+          },
+          "wil": {
+            "base": 14,
+            "temp": 0
+          },
+          "con": {
+            "base": 11,
+            "temp": 0
+          },
+          "cha": {
+            "base": 14,
+            "temp": 0
+          },
+          "int": {
+            "base": 13,
+            "temp": 0
+          },
+          "luck": {
+            "base": 10,
+            "temp": 0
+          }
         },
         "skills": {
-          "ritualism": { "linkedAttr": "wil", "rank": "trained", "misc": 0 },
-          "persuasion": { "linkedAttr": "cha", "rank": "trained", "misc": 0 },
-          "insight": { "linkedAttr": "wil", "rank": "trained", "misc": 0 }
+          "ritualism": {
+            "linkedAttr": "wil",
+            "rank": "trained",
+            "misc": 0
+          },
+          "persuasion": {
+            "linkedAttr": "cha",
+            "rank": "trained",
+            "misc": 0
+          },
+          "insight": {
+            "linkedAttr": "wil",
+            "rank": "trained",
+            "misc": 0
+          }
         },
         "derived": {
           "hpMax": 58,
@@ -166,7 +246,13 @@
         },
         "creation": {
           "state": "complete",
-          "completedSteps": ["identity", "attributes", "skills", "pathway", "equipment"],
+          "completedSteps": [
+            "identity",
+            "attributes",
+            "skills",
+            "pathway",
+            "equipment"
+          ],
           "version": 1
         },
         "tracks": {
@@ -179,7 +265,9 @@
           "verbalLocked": 0,
           "markedBySourceBonus": 0,
           "isDowned": 0,
-          "factions": { "faction.church": 40 },
+          "factions": {
+            "faction.church": 40
+          },
           "threatClocks": [],
           "influence": {},
           "leverage": {}
@@ -204,7 +292,7 @@
       "img": "icons/svg/monster.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "identity": {
@@ -214,18 +302,51 @@
           "backgroundId": "background.monster"
         },
         "attributes": {
-          "str": { "base": 16, "temp": 0 },
-          "dex": { "base": 16, "temp": 0 },
-          "wil": { "base": 11, "temp": 0 },
-          "con": { "base": 15, "temp": 0 },
-          "cha": { "base": 6, "temp": 0 },
-          "int": { "base": 8, "temp": 0 },
-          "luck": { "base": 7, "temp": 0 }
+          "str": {
+            "base": 16,
+            "temp": 0
+          },
+          "dex": {
+            "base": 16,
+            "temp": 0
+          },
+          "wil": {
+            "base": 11,
+            "temp": 0
+          },
+          "con": {
+            "base": 15,
+            "temp": 0
+          },
+          "cha": {
+            "base": 6,
+            "temp": 0
+          },
+          "int": {
+            "base": 8,
+            "temp": 0
+          },
+          "luck": {
+            "base": 7,
+            "temp": 0
+          }
         },
         "skills": {
-          "perception": { "linkedAttr": "int", "rank": "trained", "misc": 5 },
-          "athletics": { "linkedAttr": "str", "rank": "expert", "misc": 0 },
-          "melee": { "linkedAttr": "str", "rank": "expert", "misc": 3 }
+          "perception": {
+            "linkedAttr": "int",
+            "rank": "trained",
+            "misc": 5
+          },
+          "athletics": {
+            "linkedAttr": "str",
+            "rank": "expert",
+            "misc": 0
+          },
+          "melee": {
+            "linkedAttr": "str",
+            "rank": "expert",
+            "misc": 3
+          }
         },
         "derived": {
           "hpMax": 110,
@@ -263,7 +384,13 @@
         },
         "creation": {
           "state": "complete",
-          "completedSteps": ["identity", "attributes", "skills", "pathway", "equipment"],
+          "completedSteps": [
+            "identity",
+            "attributes",
+            "skills",
+            "pathway",
+            "equipment"
+          ],
           "version": 1
         },
         "tracks": {
@@ -301,8 +428,10 @@
       "img": "icons/svg/monster.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
-      "dependencies": ["ability.seer.swap_stage"],
+      "maxTestedSystemVersion": "1.2.5",
+      "dependencies": [
+        "ability.seer.swap_stage"
+      ],
       "system": {
         "identity": {
           "pathwayId": "pathway.none",
@@ -311,18 +440,51 @@
           "backgroundId": "background.monster"
         },
         "attributes": {
-          "str": { "base": 13, "temp": 0 },
-          "dex": { "base": 17, "temp": 0 },
-          "wil": { "base": 13, "temp": 0 },
-          "con": { "base": 12, "temp": 0 },
-          "cha": { "base": 17, "temp": 0 },
-          "int": { "base": 13, "temp": 0 },
-          "luck": { "base": 11, "temp": 0 }
+          "str": {
+            "base": 13,
+            "temp": 0
+          },
+          "dex": {
+            "base": 17,
+            "temp": 0
+          },
+          "wil": {
+            "base": 13,
+            "temp": 0
+          },
+          "con": {
+            "base": 12,
+            "temp": 0
+          },
+          "cha": {
+            "base": 17,
+            "temp": 0
+          },
+          "int": {
+            "base": 13,
+            "temp": 0
+          },
+          "luck": {
+            "base": 11,
+            "temp": 0
+          }
         },
         "skills": {
-          "deception": { "linkedAttr": "cha", "rank": "expert", "misc": 5 },
-          "stealth": { "linkedAttr": "dex", "rank": "expert", "misc": 0 },
-          "melee": { "linkedAttr": "str", "rank": "trained", "misc": 0 }
+          "deception": {
+            "linkedAttr": "cha",
+            "rank": "expert",
+            "misc": 5
+          },
+          "stealth": {
+            "linkedAttr": "dex",
+            "rank": "expert",
+            "misc": 0
+          },
+          "melee": {
+            "linkedAttr": "str",
+            "rank": "trained",
+            "misc": 0
+          }
         },
         "derived": {
           "hpMax": 84,
@@ -360,7 +522,13 @@
         },
         "creation": {
           "state": "complete",
-          "completedSteps": ["identity", "attributes", "skills", "pathway", "equipment"],
+          "completedSteps": [
+            "identity",
+            "attributes",
+            "skills",
+            "pathway",
+            "equipment"
+          ],
           "version": 1
         },
         "tracks": {
@@ -398,7 +566,7 @@
       "img": "icons/svg/mystery-man.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "identity": {
@@ -408,17 +576,46 @@
           "backgroundId": "background.civilian"
         },
         "attributes": {
-          "str": { "base": 11, "temp": 0 },
-          "dex": { "base": 10, "temp": 0 },
-          "wil": { "base": 10, "temp": 0 },
-          "con": { "base": 11, "temp": 0 },
-          "cha": { "base": 9, "temp": 0 },
-          "int": { "base": 9, "temp": 0 },
-          "luck": { "base": 10, "temp": 0 }
+          "str": {
+            "base": 11,
+            "temp": 0
+          },
+          "dex": {
+            "base": 10,
+            "temp": 0
+          },
+          "wil": {
+            "base": 10,
+            "temp": 0
+          },
+          "con": {
+            "base": 11,
+            "temp": 0
+          },
+          "cha": {
+            "base": 9,
+            "temp": 0
+          },
+          "int": {
+            "base": 9,
+            "temp": 0
+          },
+          "luck": {
+            "base": 10,
+            "temp": 0
+          }
         },
         "skills": {
-          "athletics": { "linkedAttr": "str", "rank": "familiar", "misc": 0 },
-          "streetwise": { "linkedAttr": "int", "rank": "familiar", "misc": 0 }
+          "athletics": {
+            "linkedAttr": "str",
+            "rank": "familiar",
+            "misc": 0
+          },
+          "streetwise": {
+            "linkedAttr": "int",
+            "rank": "familiar",
+            "misc": 0
+          }
         },
         "derived": {
           "hpMax": 54,
@@ -456,7 +653,13 @@
         },
         "creation": {
           "state": "complete",
-          "completedSteps": ["identity", "attributes", "skills", "pathway", "equipment"],
+          "completedSteps": [
+            "identity",
+            "attributes",
+            "skills",
+            "pathway",
+            "equipment"
+          ],
           "version": 1
         },
         "tracks": {
@@ -494,7 +697,7 @@
       "img": "icons/svg/mystery-man.svg",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "system": {
         "identity": {
@@ -504,18 +707,51 @@
           "backgroundId": "background.civilian"
         },
         "attributes": {
-          "str": { "base": 8, "temp": 0 },
-          "dex": { "base": 10, "temp": 0 },
-          "wil": { "base": 12, "temp": 0 },
-          "con": { "base": 9, "temp": 0 },
-          "cha": { "base": 12, "temp": 0 },
-          "int": { "base": 13, "temp": 0 },
-          "luck": { "base": 11, "temp": 0 }
+          "str": {
+            "base": 8,
+            "temp": 0
+          },
+          "dex": {
+            "base": 10,
+            "temp": 0
+          },
+          "wil": {
+            "base": 12,
+            "temp": 0
+          },
+          "con": {
+            "base": 9,
+            "temp": 0
+          },
+          "cha": {
+            "base": 12,
+            "temp": 0
+          },
+          "int": {
+            "base": 13,
+            "temp": 0
+          },
+          "luck": {
+            "base": 11,
+            "temp": 0
+          }
         },
         "skills": {
-          "investigation": { "linkedAttr": "int", "rank": "trained", "misc": 0 },
-          "persuasion": { "linkedAttr": "cha", "rank": "trained", "misc": 0 },
-          "streetwise": { "linkedAttr": "int", "rank": "familiar", "misc": 0 }
+          "investigation": {
+            "linkedAttr": "int",
+            "rank": "trained",
+            "misc": 0
+          },
+          "persuasion": {
+            "linkedAttr": "cha",
+            "rank": "trained",
+            "misc": 0
+          },
+          "streetwise": {
+            "linkedAttr": "int",
+            "rank": "familiar",
+            "misc": 0
+          }
         },
         "derived": {
           "hpMax": 48,
@@ -553,7 +789,13 @@
         },
         "creation": {
           "state": "complete",
-          "completedSteps": ["identity", "attributes", "skills", "pathway", "equipment"],
+          "completedSteps": [
+            "identity",
+            "attributes",
+            "skills",
+            "pathway",
+            "equipment"
+          ],
           "version": 1
         },
         "tracks": {

@@ -8,18 +8,39 @@
       "img": "icons/containers/chest/chest-wooden-oak.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "segment": "resources",
       "formula": "1d6",
-      "triggerTags": ["loot", "resources"],
+      "triggerTags": [
+        "loot",
+        "resources"
+      ],
       "results": [
-        { "text": "1x Ashen Root", "weight": 1 },
-        { "text": "1x Moon Water", "weight": 1 },
-        { "text": "1x Focus Tonic", "weight": 1 },
-        { "text": "1x Dream Incense", "weight": 1 },
-        { "text": "1x Sealed Journal", "weight": 1 },
-        { "text": "1x Hallowed Ammunition", "weight": 1 }
+        {
+          "text": "1x Ashen Root",
+          "weight": 1
+        },
+        {
+          "text": "1x Moon Water",
+          "weight": 1
+        },
+        {
+          "text": "1x Focus Tonic",
+          "weight": 1
+        },
+        {
+          "text": "1x Dream Incense",
+          "weight": 1
+        },
+        {
+          "text": "1x Sealed Journal",
+          "weight": 1
+        },
+        {
+          "text": "1x Hallowed Ammunition",
+          "weight": 1
+        }
       ]
     },
     {
@@ -30,18 +51,39 @@
       "img": "icons/magic/control/debuff-energy-hold-levitate-yellow.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "segment": "abilities",
       "formula": "1d6",
-      "triggerTags": ["ability", "side-effect"],
+      "triggerTags": [
+        "ability",
+        "side-effect"
+      ],
       "results": [
-        { "text": "Gain +2 corruption", "weight": 1 },
-        { "text": "Take 3 spirit recoil", "weight": 1 },
-        { "text": "Lose next reaction", "weight": 1 },
-        { "text": "Drop held item", "weight": 1 },
-        { "text": "Reveal occult signature", "weight": 1 },
-        { "text": "No side effect", "weight": 1 }
+        {
+          "text": "Gain +2 corruption",
+          "weight": 1
+        },
+        {
+          "text": "Take 3 spirit recoil",
+          "weight": 1
+        },
+        {
+          "text": "Lose next reaction",
+          "weight": 1
+        },
+        {
+          "text": "Drop held item",
+          "weight": 1
+        },
+        {
+          "text": "Reveal occult signature",
+          "weight": 1
+        },
+        {
+          "text": "No side effect",
+          "weight": 1
+        }
       ]
     },
     {
@@ -52,18 +94,39 @@
       "img": "icons/magic/symbols/runes-star-pentagon-magenta.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "segment": "rituals",
       "formula": "1d6",
-      "triggerTags": ["ritual", "failure"],
+      "triggerTags": [
+        "ritual",
+        "failure"
+      ],
       "results": [
-        { "text": "Chamber chills; +1 instability", "weight": 1 },
-        { "text": "Illusory voices; disadvantage next social check", "weight": 1 },
-        { "text": "Component consumed twice", "weight": 1 },
-        { "text": "Summons hostile echo", "weight": 1 },
-        { "text": "Corruption surge +5", "weight": 1 },
-        { "text": "Ritual fizzles cleanly", "weight": 1 }
+        {
+          "text": "Chamber chills; +1 instability",
+          "weight": 1
+        },
+        {
+          "text": "Illusory voices; disadvantage next social check",
+          "weight": 1
+        },
+        {
+          "text": "Component consumed twice",
+          "weight": 1
+        },
+        {
+          "text": "Summons hostile echo",
+          "weight": 1
+        },
+        {
+          "text": "Corruption surge +5",
+          "weight": 1
+        },
+        {
+          "text": "Ritual fizzles cleanly",
+          "weight": 1
+        }
       ]
     },
     {
@@ -74,18 +137,39 @@
       "img": "icons/magic/death/skull-flame-blue.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "segment": "artifacts",
       "formula": "1d6",
-      "triggerTags": ["artifact", "backlash"],
+      "triggerTags": [
+        "artifact",
+        "backlash"
+      ],
       "results": [
-        { "text": "Minor feedback: 2 spirit damage", "weight": 1 },
-        { "text": "Sensory inversion for one round", "weight": 1 },
-        { "text": "Trigger random condition", "weight": 1 },
-        { "text": "Corruption +8", "weight": 1 },
-        { "text": "Artifact dormant until next scene", "weight": 1 },
-        { "text": "Catastrophic pulse: everyone rolls risk", "weight": 1 }
+        {
+          "text": "Minor feedback: 2 spirit damage",
+          "weight": 1
+        },
+        {
+          "text": "Sensory inversion for one round",
+          "weight": 1
+        },
+        {
+          "text": "Trigger random condition",
+          "weight": 1
+        },
+        {
+          "text": "Corruption +8",
+          "weight": 1
+        },
+        {
+          "text": "Artifact dormant until next scene",
+          "weight": 1
+        },
+        {
+          "text": "Catastrophic pulse: everyone rolls risk",
+          "weight": 1
+        }
       ]
     },
     {
@@ -96,18 +180,39 @@
       "img": "icons/magic/unholy/hand-marked-pink.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "segment": "corruption",
       "formula": "1d6",
-      "triggerTags": ["corruption", "threshold"],
+      "triggerTags": [
+        "corruption",
+        "threshold"
+      ],
       "results": [
-        { "text": "Brief prophetic migraine", "weight": 1 },
-        { "text": "Compulsive omen-writing", "weight": 1 },
-        { "text": "Shadow moves independently", "weight": 1 },
-        { "text": "One NPC becomes suspicious", "weight": 1 },
-        { "text": "Lose 1 death save until long rest", "weight": 1 },
-        { "text": "Immediate GM corruption complication", "weight": 1 }
+        {
+          "text": "Brief prophetic migraine",
+          "weight": 1
+        },
+        {
+          "text": "Compulsive omen-writing",
+          "weight": 1
+        },
+        {
+          "text": "Shadow moves independently",
+          "weight": 1
+        },
+        {
+          "text": "One NPC becomes suspicious",
+          "weight": 1
+        },
+        {
+          "text": "Lose 1 death save until long rest",
+          "weight": 1
+        },
+        {
+          "text": "Immediate GM corruption complication",
+          "weight": 1
+        }
       ]
     },
     {
@@ -118,18 +223,39 @@
       "img": "icons/magic/perception/third-eye-blue-red.webp",
       "version": "1.2.2",
       "minSystemVersion": "1.2.2",
-      "maxTestedSystemVersion": "1.2.2",
+      "maxTestedSystemVersion": "1.2.5",
       "dependencies": [],
       "segment": "encounters",
       "formula": "1d6",
-      "triggerTags": ["encounter", "twist"],
+      "triggerTags": [
+        "encounter",
+        "twist"
+      ],
       "results": [
-        { "text": "Unexpected ally intervenes", "weight": 1 },
-        { "text": "Environment grants high cover", "weight": 1 },
-        { "text": "Enemy exposed for one round", "weight": 1 },
-        { "text": "Hidden route appears", "weight": 1 },
-        { "text": "Target drops a clue item", "weight": 1 },
-        { "text": "Escalation clock advances", "weight": 1 }
+        {
+          "text": "Unexpected ally intervenes",
+          "weight": 1
+        },
+        {
+          "text": "Environment grants high cover",
+          "weight": 1
+        },
+        {
+          "text": "Enemy exposed for one round",
+          "weight": 1
+        },
+        {
+          "text": "Hidden route appears",
+          "weight": 1
+        },
+        {
+          "text": "Target drops a clue item",
+          "weight": 1
+        },
+        {
+          "text": "Escalation clock advances",
+          "weight": 1
+        }
       ]
     }
   ]

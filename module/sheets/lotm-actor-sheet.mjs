@@ -1,5 +1,10 @@
 import { ATTRIBUTE_KEYS, CREATION_STEPS, SKILL_RANKS } from "../constants.mjs";
 import { buildActorRepairUpdate } from "../actor/validation.mjs";
+import {
+  evaluateCreationState,
+  getSkillRegistryEntries,
+  validateCreationStep
+} from "../creation/creation-engine.mjs";
 
 function groupItems(items) {
   const groups = {
@@ -109,6 +114,22 @@ export class LotMActorSheet extends ActorSheet {
       derivedPreview = game.lotm.deriveActorStats(system);
     }
 
+    let creationValidation = {
+      byStep: {},
+      canFinalize: true,
+      finalizeErrors: [],
+      finalizeWarnings: [],
+      pathwayOptions: [],
+      sequenceOptions: []
+    };
+    if (isCharacter) {
+      creationValidation = await evaluateCreationState({
+        type: context.actor.type,
+        system,
+        items
+      });
+    }
+
     context.system = system;
     context.isCharacter = isCharacter;
     context.attributeKeys = ATTRIBUTE_KEYS;
@@ -119,6 +140,9 @@ export class LotMActorSheet extends ActorSheet {
     context.creationSteps = buildStepView(creation.state, creation.completedSteps);
     context.validation = validation;
     context.derivedPreview = derivedPreview;
+    context.creationValidation = creationValidation;
+    context.pathwayOptions = creationValidation.pathwayOptions ?? [];
+    context.sequenceOptions = creationValidation.sequenceOptions ?? [];
 
     return context;
   }
@@ -223,6 +247,14 @@ export class LotMActorSheet extends ActorSheet {
     const nextStep = order[nextIndex];
 
     const completed = [...state.completedSteps];
+    if (direction > 0 && currentStep !== "draft" && currentStep !== "complete") {
+      const check = await validateCreationStep(this.actor, currentStep);
+      if (!check.ok) {
+        ui.notifications?.error(`Cannot advance from '${currentStep}': ${check.errors.join("; ")}`);
+        return;
+      }
+    }
+
     if (direction > 0 && currentStep !== "draft" && currentStep !== "complete" && !completed.includes(currentStep)) {
       completed.push(currentStep);
     }
@@ -236,6 +268,12 @@ export class LotMActorSheet extends ActorSheet {
 
   async _finalizeCreation() {
     if (this.actor.type !== "character") return;
+
+    const creationValidation = await evaluateCreationState(this.actor);
+    if (!creationValidation.canFinalize) {
+      ui.notifications?.error(`Cannot finalize character: ${creationValidation.finalizeErrors.join("; ")}`);
+      return;
+    }
 
     const derived = game.lotm.deriveActorStats(this.actor.system);
     const validation = game.lotm.validateActorForPlay(
@@ -269,7 +307,8 @@ export class LotMActorSheet extends ActorSheet {
   }
 
   async _repairActorData() {
-    const patch = buildActorRepairUpdate(this.actor.system, this.actor.type);
+    const skillRegistryEntries = await getSkillRegistryEntries();
+    const patch = buildActorRepairUpdate(this.actor.system, this.actor.type, skillRegistryEntries);
     if (Object.keys(patch).length === 0) {
       ui.notifications?.info("No repair actions required.");
       return;

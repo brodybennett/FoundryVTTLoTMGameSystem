@@ -10,5 +10,7 @@
   "LOTM.Settings.AutomationLevel.Manual": "Manual",
   "LOTM.Settings.ShowRollBreakdown.Name": "Show Roll Breakdown",
   "LOTM.Settings.ShowRollBreakdown.Hint": "Show component-level roll details in LoTM chat cards.",
-  "LOTM.Settings.WorldSchemaVersion.Name": "LoTM World Schema Version"
+  "LOTM.Settings.WorldSchemaVersion.Name": "LoTM World Schema Version",
+  "LOTM.Settings.AutoOrganizeCompendiums.Name": "Auto Organize Compendiums",
+  "LOTM.Settings.AutoOrganizeCompendiums.Hint": "Automatically organize system compendium entries into folders on world ready."
 }

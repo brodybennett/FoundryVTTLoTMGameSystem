@@ -14,6 +14,7 @@ function Run-Step {
 
 Run-Step "Phase 1 Verification" "python scripts/phase1_verification.py"
 Run-Step "Phase 2 Verification" "python scripts/phase2_verification.py"
+Run-Step "Version Consistency Check" "python scripts/check_version_consistency.py"
 Run-Step "Content Source Validation" "python scripts/validate_content_source.py"
 Run-Step "Compendium Build" "python scripts/build_compendiums.py"
 Run-Step "Foundry Manifest Verification" "python scripts/verify_foundry_manifest.py"
