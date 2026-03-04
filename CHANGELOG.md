@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.9
+
+- Hardened actor sheet actions to avoid silent failures:
+  - explicit API availability checks
+  - try/catch user notifications
+  - numeric input guardrails for corruption delta
+  - confirmation prompt for embedded item deletion
+- Improved creation/finalize feedback messaging to produce deterministic blocker output.
+- Added explicit empty-state messaging and interaction affordances across actor inventory/powers sections.
+
 ## 1.2.8
 
 - Reworked character actor sheet information architecture with clearer panel hierarchy and consolidated quick actions.

@@ -105,6 +105,34 @@ function clampResourcesToDerived(system, derived) {
   return patch;
 }
 
+function uniqueMessages(messages = []) {
+  return [...new Set((messages ?? []).filter((entry) => typeof entry === "string" && entry.trim().length > 0))];
+}
+
+function formatErrorList(messages = []) {
+  const unique = uniqueMessages(messages);
+  if (unique.length === 0) return "Unknown error.";
+  return unique.join("; ");
+}
+
+async function invokeLotmApi(method, payload, failureLabel) {
+  const apiFn = game.lotm?.[method];
+  if (typeof apiFn !== "function") {
+    const msg = `LoTM API '${method}' is unavailable.`;
+    ui.notifications?.error(msg);
+    console.error(msg);
+    return null;
+  }
+
+  try {
+    return await apiFn(payload);
+  } catch (err) {
+    console.error(`LoTM action failed (${method})`, err);
+    ui.notifications?.error(failureLabel ?? `LoTM action failed (${method}). Check console.`);
+    return null;
+  }
+}
+
 export class LotMActorSheet extends ActorSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -208,41 +236,84 @@ export class LotMActorSheet extends ActorSheet {
       const attribute = button.dataset.attribute || "wil";
       const skillId = button.dataset.skillId || null;
       const label = button.dataset.label || "Check";
-      await game.lotm.rollCheck({ actor: this.actor, attribute, skillId, label });
+      await invokeLotmApi("rollCheck", { actor: this.actor, attribute, skillId, label }, "Unable to roll check.");
     });
 
     html.find("[data-action='roll-ritual-risk']").on("click", async (event) => {
       event.preventDefault();
-      await game.lotm.rollRitualRisk({ actor: this.actor, label: "Ritual Risk" });
+      await invokeLotmApi("rollRitualRisk", { actor: this.actor, label: "Ritual Risk" }, "Unable to roll ritual risk.");
     });
 
     html.find("[data-action='roll-artifact-backlash']").on("click", async (event) => {
       event.preventDefault();
-      await game.lotm.rollArtifactBacklash({ actor: this.actor, label: "Artifact Backlash" });
+      await invokeLotmApi(
+        "rollArtifactBacklash",
+        { actor: this.actor, label: "Artifact Backlash" },
+        "Unable to roll artifact backlash."
+      );
     });
 
     html.find("[data-action='apply-corruption']").on("click", async (event) => {
       event.preventDefault();
-      const raw = html.find("[name='lotm-corruption-delta']").val();
-      const delta = Number(raw) || 0;
-      await game.lotm.applyCorruption({ actor: this.actor, delta, source: "sheet" });
+      const raw = html.find("[name='lotm-corruption-delta']").val()?.toString() ?? "0";
+      const delta = Number(raw);
+      if (!Number.isFinite(delta)) {
+        ui.notifications?.error("Corruption delta must be a number.");
+        return;
+      }
+      await invokeLotmApi(
+        "applyCorruption",
+        { actor: this.actor, delta, source: "sheet" },
+        "Unable to apply corruption delta."
+      );
     });
 
     html.find("[data-action='item-edit']").on("click", (event) => {
       event.preventDefault();
       const li = event.currentTarget.closest(".item");
       const itemId = li?.dataset?.itemId;
-      if (!itemId) return;
+      if (!itemId) {
+        ui.notifications?.warn("No item selected to edit.");
+        return;
+      }
       const item = this.actor.items.get(itemId);
-      item?.sheet?.render(true);
+      if (!item) {
+        ui.notifications?.warn("Selected item could not be found on actor.");
+        return;
+      }
+      item.sheet?.render(true);
     });
 
     html.find("[data-action='item-delete']").on("click", async (event) => {
       event.preventDefault();
       const li = event.currentTarget.closest(".item");
       const itemId = li?.dataset?.itemId;
-      if (!itemId) return;
-      await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+      if (!itemId) {
+        ui.notifications?.warn("No item selected to delete.");
+        return;
+      }
+
+      const item = this.actor.items.get(itemId);
+      if (!item) {
+        ui.notifications?.warn("Selected item could not be found on actor.");
+        return;
+      }
+
+      const confirmed = await Dialog.confirm({
+        title: "Delete Item",
+        content: `<p>Delete <strong>${item.name}</strong> from this actor?</p>`,
+        yes: () => true,
+        no: () => false,
+        defaultYes: false
+      });
+      if (!confirmed) return;
+
+      try {
+        await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+      } catch (err) {
+        console.error("Failed deleting embedded item", err);
+        ui.notifications?.error(`Unable to delete item '${item.name}'.`);
+      }
     });
 
     html.find("[data-action='wizard-step']").on("click", async (event) => {
@@ -283,9 +354,17 @@ export class LotMActorSheet extends ActorSheet {
   async _setWizardState(step) {
     if (this.actor.type !== "character") return;
     const allowed = ["draft", ...CREATION_STEPS];
-    if (!allowed.includes(step)) return;
+    if (!allowed.includes(step)) {
+      ui.notifications?.warn(`Invalid wizard step '${step}'.`);
+      return;
+    }
 
-    await this.actor.update({ "system.creation.state": step, "system.creation.version": 1 });
+    try {
+      await this.actor.update({ "system.creation.state": step, "system.creation.version": 1 });
+    } catch (err) {
+      console.error("Failed updating wizard step", err);
+      ui.notifications?.error("Unable to update creation step.");
+    }
   }
 
   async _stepWizard(direction) {
@@ -311,11 +390,16 @@ export class LotMActorSheet extends ActorSheet {
       completed.push(currentStep);
     }
 
-    await this.actor.update({
-      "system.creation.state": nextStep,
-      "system.creation.completedSteps": uniqueSteps(completed),
-      "system.creation.version": 1
-    });
+    try {
+      await this.actor.update({
+        "system.creation.state": nextStep,
+        "system.creation.completedSteps": uniqueSteps(completed),
+        "system.creation.version": 1
+      });
+    } catch (err) {
+      console.error("Failed advancing wizard step", err);
+      ui.notifications?.error("Unable to advance creation step.");
+    }
   }
 
   async _finalizeCreation() {
@@ -323,19 +407,33 @@ export class LotMActorSheet extends ActorSheet {
 
     const creationValidation = await evaluateCreationState(this.actor);
     if (!creationValidation.canFinalize) {
-      ui.notifications?.error(`Cannot finalize character: ${creationValidation.finalizeErrors.join("; ")}`);
+      ui.notifications?.error(`Cannot finalize character: ${formatErrorList(creationValidation.finalizeErrors)}`);
       return;
     }
 
-    const derived = game.lotm.deriveActorStats(this.actor.system);
-    const validation = game.lotm.validateActorForPlay(
-      this.actor.system,
-      this.actor.type,
-      this.actor.items.map((item) => item.toObject(false))
-    );
+    if (typeof game.lotm?.deriveActorStats !== "function" || typeof game.lotm?.validateActorForPlay !== "function") {
+      ui.notifications?.error("LoTM actor validation APIs are unavailable.");
+      return;
+    }
 
-    if (validation.errors.length > 0) {
-      ui.notifications?.error(`Cannot finalize character: ${validation.errors.join("; ")}`);
+    let derived = null;
+    let validation = null;
+    try {
+      derived = game.lotm.deriveActorStats(this.actor.system);
+      validation = game.lotm.validateActorForPlay(
+        this.actor.system,
+        this.actor.type,
+        this.actor.items.map((item) => item.toObject(false))
+      );
+    } catch (err) {
+      console.error("Failed deriving/validating actor during finalize", err);
+      ui.notifications?.error("Unable to finalize character due to a validation runtime failure.");
+      return;
+    }
+
+    const validationErrors = validation?.errors ?? [];
+    if (validationErrors.length > 0) {
+      ui.notifications?.error(`Cannot finalize character: ${formatErrorList(validationErrors)}`);
       return;
     }
 
@@ -354,8 +452,13 @@ export class LotMActorSheet extends ActorSheet {
 
     foundry.utils.mergeObject(patch, clampResourcesToDerived(this.actor.system, derived));
 
-    await this.actor.update(patch);
-    ui.notifications?.info("Character creation finalized.");
+    try {
+      await this.actor.update(patch);
+      ui.notifications?.info("Character creation finalized.");
+    } catch (err) {
+      console.error("Failed finalizing character", err);
+      ui.notifications?.error("Finalize failed while saving actor data.");
+    }
   }
 
   async _repairActorData() {
@@ -365,8 +468,13 @@ export class LotMActorSheet extends ActorSheet {
       ui.notifications?.info("No repair actions required.");
       return;
     }
-    await this.actor.update(patch);
-    ui.notifications?.info("Actor data repaired and normalized.");
+    try {
+      await this.actor.update(patch);
+      ui.notifications?.info("Actor data repaired and normalized.");
+    } catch (err) {
+      console.error("Failed repairing actor data", err);
+      ui.notifications?.error("Unable to repair actor data.");
+    }
   }
 
   async _importPathwayPackage() {
@@ -402,20 +510,25 @@ export class LotMActorSheet extends ActorSheet {
       .map((doc) => doc.toObject())
       .filter((item) => !existingSystemIds.has(item.system?.id));
 
-    if (toCreate.length === 0) {
-      ui.notifications?.info("Pathway package already imported on this actor.");
-    } else {
-      await this.actor.createEmbeddedDocuments("Item", toCreate);
-      ui.notifications?.info(`Imported ${toCreate.length} pathway entries.`);
-    }
+    try {
+      if (toCreate.length === 0) {
+        ui.notifications?.info("Pathway package already imported on this actor.");
+      } else {
+        await this.actor.createEmbeddedDocuments("Item", toCreate);
+        ui.notifications?.info(`Imported ${toCreate.length} pathway entries.`);
+      }
 
-    const creation = this._getCreationState();
-    const completed = uniqueSteps([...creation.completedSteps, "pathway"]);
-    await this.actor.update({
-      "system.creation.state": "pathway",
-      "system.creation.completedSteps": completed,
-      "system.creation.version": 1
-    });
+      const creation = this._getCreationState();
+      const completed = uniqueSteps([...creation.completedSteps, "pathway"]);
+      await this.actor.update({
+        "system.creation.state": "pathway",
+        "system.creation.completedSteps": completed,
+        "system.creation.version": 1
+      });
+    } catch (err) {
+      console.error("Failed importing pathway package", err);
+      ui.notifications?.error("Unable to import pathway package.");
+    }
   }
 
   async _onDropItemCreate(itemData) {

@@ -196,6 +196,33 @@
         </div>
       </section>
 
+      {{#if isNpc}}
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">NPC Snapshot</h3>
+          <p class="sheet-panel-subtitle">Compact control surface for running NPCs quickly.</p>
+        </div>
+        <div class="sheet-kpi-grid">
+          <div class="sheet-kpi-card">
+            <div class="sheet-kpi-label">Abilities</div>
+            <div class="sheet-kpi-value">{{itemCounts.abilities}}</div>
+          </div>
+          <div class="sheet-kpi-card">
+            <div class="sheet-kpi-label">Traits</div>
+            <div class="sheet-kpi-value">{{itemCounts.features}}</div>
+          </div>
+          <div class="sheet-kpi-card">
+            <div class="sheet-kpi-label">Gear</div>
+            <div class="sheet-kpi-value">{{itemCounts.gear}}</div>
+          </div>
+          <div class="sheet-kpi-card">
+            <div class="sheet-kpi-label">Tier</div>
+            <div class="sheet-kpi-value">{{system.identity.tier}}</div>
+          </div>
+        </div>
+      </section>
+      {{/if}}
+
       {{#if validation.errors.length}}
       <section class="sheet-panel">
         <div class="sheet-panel-header">
@@ -295,6 +322,49 @@
           {{/each}}
         </ol>
       </section>
+
+      {{#if isNpc}}
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">NPC Combat Profile</h3>
+          <p class="sheet-panel-subtitle">Tune armor, cover, and action budget directly for encounter pacing.</p>
+        </div>
+        <div class="grid grid-3">
+          <label>
+            <span class="field-label">Armor</span>
+            <input type="number" min="-20" max="40" name="system.combat.armor" value="{{system.combat.armor}}" />
+          </label>
+          <label>
+            <span class="field-label">Cover</span>
+            <input type="number" min="0" max="25" name="system.combat.cover" value="{{system.combat.cover}}" />
+          </label>
+          <label>
+            <span class="field-label">Encumbrance Penalty</span>
+            <input type="number" min="0" max="60" name="system.combat.encumbrancePenalty" value="{{system.combat.encumbrancePenalty}}" />
+          </label>
+          <label>
+            <span class="field-label">Damage Reduction</span>
+            <input type="number" min="0" max="999" name="system.combat.damageReduction" value="{{system.combat.damageReduction}}" />
+          </label>
+          <label>
+            <span class="field-label">Actions</span>
+            <input type="number" min="0" max="5" name="system.combat.actionBudget.actions" value="{{system.combat.actionBudget.actions}}" />
+          </label>
+          <label>
+            <span class="field-label">Moves</span>
+            <input type="number" min="0" max="5" name="system.combat.actionBudget.moves" value="{{system.combat.actionBudget.moves}}" />
+          </label>
+          <label>
+            <span class="field-label">Reactions</span>
+            <input type="number" min="0" max="5" name="system.combat.actionBudget.reactions" value="{{system.combat.actionBudget.reactions}}" />
+          </label>
+          <label>
+            <span class="field-label">Bonus Actions</span>
+            <input type="number" min="0" max="5" name="system.combat.actionBudget.bonusActions" value="{{system.combat.actionBudget.bonusActions}}" />
+          </label>
+        </div>
+      </section>
+      {{/if}}
     </div>
 
     <div class="tab" data-group="primary" data-tab="abilities">
@@ -326,9 +396,10 @@
 
       <section class="sheet-panel">
         <div class="sheet-panel-header">
-          <h3 class="sheet-panel-title">Pathway & Features</h3>
-          <span class="pill">{{itemCounts.pathway}}</span>
+          <h3 class="sheet-panel-title">{{#if isCharacter}}Pathway & Features{{else}}Traits & Templates{{/if}}</h3>
+          <span class="pill">{{#if isCharacter}}{{itemCounts.pathway}}{{else}}{{itemCounts.features}}{{/if}}</span>
         </div>
+        {{#if isCharacter}}
         {{#if itemGroups.pathway.length}}
         <ol class="item-list">
           {{#each itemGroups.pathway as |item|}}
@@ -347,6 +418,27 @@
         </ol>
         {{else}}
         <div class="empty-state">No pathway bundle imported yet.</div>
+        {{/if}}
+        {{else}}
+        {{#if itemGroups.feature.length}}
+        <ol class="item-list">
+          {{#each itemGroups.feature as |item|}}
+            <li class="item" data-item-id="{{item._id}}">
+              <img src="{{item.img}}" title="{{item.name}}" />
+              <div>
+                <div class="item-title">{{item.name}}</div>
+                <div class="item-meta">{{item.type}}</div>
+              </div>
+              <div class="item-actions">
+                <button type="button" data-action="item-edit">Edit</button>
+                <button type="button" data-action="item-delete">Delete</button>
+              </div>
+            </li>
+          {{/each}}
+        </ol>
+        {{else}}
+        <div class="empty-state">No trait or template items on this NPC yet.</div>
+        {{/if}}
         {{/if}}
       </section>
     </div>
