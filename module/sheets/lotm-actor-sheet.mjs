@@ -6,6 +6,47 @@ import {
   validateCreationStep
 } from "../creation/creation-engine.mjs";
 
+const WIZARD_STEP_PRIMARY_TAB = {
+  draft: "overview",
+  identity: "overview",
+  attributes: "stats",
+  skills: "stats",
+  pathway: "abilities",
+  equipment: "inventory",
+  complete: "overview"
+};
+
+const CREATION_STEP_DETAILS = {
+  draft: {
+    title: "Draft Setup",
+    description: "Start from baseline actor data before moving through required creation steps."
+  },
+  identity: {
+    title: "Identity Setup",
+    description: "Pathway and sequence are optional. Leave both blank for civilian characters."
+  },
+  attributes: {
+    title: "Attribute Tuning",
+    description: "Set base values for all seven attributes within allowed limits."
+  },
+  skills: {
+    title: "Skill Calibration",
+    description: "Validate every skill rank and misc modifier before finalization."
+  },
+  pathway: {
+    title: "Pathway Import",
+    description: "If a pathway is selected, import matching pathway and sequence-node entries."
+  },
+  equipment: {
+    title: "Equipment Pass",
+    description: "Assign loadout items and confirm essentials before finalization."
+  },
+  complete: {
+    title: "Finalize",
+    description: "Finalize persists derived stats and marks creation complete when blockers are cleared."
+  }
+};
+
 const ATTRIBUTE_LABELS = {
   str: "Strength",
   dex: "Dexterity",
@@ -16,13 +57,40 @@ const ATTRIBUTE_LABELS = {
   luck: "Luck"
 };
 
+function stringOrEmpty(value) {
+  return typeof value === "string" ? value.trim() : "";
+}
+
+function parseSequence(value) {
+  if (value === "" || value == null) return null;
+  const n = Number(value);
+  if (!Number.isInteger(n) || n < 0 || n > 9) return null;
+  return n;
+}
+
+function hasPathwaySelection(system = {}) {
+  return stringOrEmpty(system?.identity?.pathwayId).length > 0;
+}
+
+function hasSequenceSelection(system = {}) {
+  return parseSequence(system?.identity?.sequence) != null;
+}
+
 function titleCaseToken(value) {
   if (!value || typeof value !== "string") return "";
   return value
+    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
     .replace(/[_-]/g, " ")
     .split(" ")
     .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
     .join(" ");
+}
+
+function toSelectOptions(values = []) {
+  return values.map((value) => ({
+    value,
+    label: titleCaseToken(value)
+  }));
 }
 
 function buildSkillRows(skills = {}) {
@@ -82,10 +150,12 @@ function normalizeCreationState(system, actorType) {
   };
 }
 
-function buildStepView(state, completedSteps) {
+function buildStepView(state, completedSteps, { pathwayOptional = false } = {}) {
   const allSteps = ["draft", ...CREATION_STEPS];
   return allSteps.map((step, index) => {
-    const isComplete = step === "complete" ? state === "complete" : completedSteps.includes(step);
+    const isComplete = step === "complete"
+      ? state === "complete"
+      : completedSteps.includes(step) || (pathwayOptional && step === "pathway");
     return {
       key: step,
       label: step.charAt(0).toUpperCase() + step.slice(1),
@@ -98,6 +168,36 @@ function buildStepView(state, completedSteps) {
 
 function uniqueSteps(steps) {
   return [...new Set(steps.filter((step) => CREATION_STEPS.includes(step) && step !== "complete"))];
+}
+
+function getRequiredCreationSteps({ pathwaySelected = false } = {}) {
+  return CREATION_STEPS.filter((step) => step !== "complete" && (pathwaySelected || step !== "pathway"));
+}
+
+function getStepDetail(step, { pathwaySelected = false, stepValidation = {} } = {}) {
+  const detail = CREATION_STEP_DETAILS[step] ?? CREATION_STEP_DETAILS.draft;
+  const errors = stepValidation?.errors ?? [];
+  const warnings = stepValidation?.warnings ?? [];
+
+  if (step === "pathway" && !pathwaySelected) {
+    return {
+      ...detail,
+      badge: "Optional",
+      note: "No pathway selected. This step is skipped for civilian characters.",
+      errors: [],
+      warnings
+    };
+  }
+
+  return {
+    ...detail,
+    badge: errors.length > 0 ? "Blocked" : "Ready",
+    note: errors.length > 0
+      ? "Resolve blockers below before advancing."
+      : "Current step requirements are satisfied.",
+    errors,
+    warnings
+  };
 }
 
 function clampResourcesToDerived(system, derived) {
@@ -161,6 +261,8 @@ export class LotMActorSheet extends ActorSheet {
 
     const isCharacter = actor.type === "character";
     const creation = normalizeCreationState(system, actor.type);
+    const pathwaySelected = hasPathwaySelection(system);
+    const sequenceSelected = hasSequenceSelection(system);
 
     let validation = { ok: true, errors: [], warnings: [] };
     if (game.lotm?.validateActorForPlay) {
@@ -195,6 +297,17 @@ export class LotMActorSheet extends ActorSheet {
       });
     }
 
+    const requiredCreationSteps = getRequiredCreationSteps({ pathwaySelected });
+    const completedRequiredSteps = uniqueSteps(creation.completedSteps)
+      .filter((step) => requiredCreationSteps.includes(step));
+    const currentStepValidation = creationValidation.byStep?.[creation.state] ?? { ok: true, errors: [], warnings: [] };
+    const currentStepDetail = getStepDetail(creation.state, {
+      pathwaySelected,
+      stepValidation: currentStepValidation
+    });
+    const selectedPathwayLabel = (creationValidation.pathwayOptions ?? [])
+      .find((entry) => entry.id === system.identity?.pathwayId)?.label ?? "";
+
     context.actor = actor;
     context.system = system;
     context.isCharacter = isCharacter;
@@ -205,19 +318,34 @@ export class LotMActorSheet extends ActorSheet {
       label: ATTRIBUTE_LABELS[key] ?? key.toUpperCase()
     }));
     context.skillRanks = SKILL_RANKS;
+    context.skillRankOptions = toSelectOptions(SKILL_RANKS);
     context.itemGroups = groupItems(items);
     context.skillRows = buildSkillRows(system.skills ?? {});
     context.creation = creation;
-    context.creationSteps = buildStepView(creation.state, creation.completedSteps);
+    context.creationSteps = buildStepView(creation.state, creation.completedSteps, {
+      pathwayOptional: isCharacter && !pathwaySelected
+    });
     context.validation = validation;
     context.derivedPreview = derivedPreview;
     context.creationValidation = creationValidation;
     context.pathwayOptions = creationValidation.pathwayOptions ?? [];
+    context.pathwaySelectOptions = (creationValidation.pathwayOptions ?? []).map((pathway) => ({
+      value: pathway.id,
+      label: pathway.label
+    }));
     context.sequenceOptions = creationValidation.sequenceOptions ?? [];
-    context.creationCompletedCount = uniqueSteps(creation.completedSteps).length;
-    context.creationRequiredCount = CREATION_STEPS.filter((step) => step !== "complete").length;
+    context.sequenceSelectOptions = (creationValidation.sequenceOptions ?? []).map((seq) => ({
+      value: seq.sequence,
+      label: `S${seq.sequence} - ${seq.name}`
+    }));
+    context.creationCompletedCount = completedRequiredSteps.length;
+    context.creationRequiredCount = requiredCreationSteps.length;
     context.currentCreationStep = creation.state;
-    context.currentStepValidation = creationValidation.byStep?.[creation.state] ?? { ok: true, errors: [], warnings: [] };
+    context.currentStepValidation = currentStepValidation;
+    context.currentStepDetail = currentStepDetail;
+    context.hasPathwaySelection = pathwaySelected;
+    context.hasSequenceSelection = sequenceSelected;
+    context.selectedPathwayLabel = selectedPathwayLabel || system.identity?.pathwayId;
     context.itemCounts = {
       abilities: context.itemGroups.ability.length,
       rituals: context.itemGroups.ritual.length,
@@ -241,6 +369,10 @@ export class LotMActorSheet extends ActorSheet {
 
   activateListeners(html) {
     super.activateListeners(html);
+
+    html.find(".sheet-tabs .item").on("click", (event) => {
+      this._activePrimaryTab = event.currentTarget?.dataset?.tab || this._activePrimaryTab;
+    });
 
     html.find("[data-action='roll-check']").on("click", async (event) => {
       event.preventDefault();
@@ -357,10 +489,45 @@ export class LotMActorSheet extends ActorSheet {
       event.preventDefault();
       await this._importPathwayPackage();
     });
+
+    this._applyPrimaryTabSelection(html);
   }
 
   _getCreationState() {
     return normalizeCreationState(this.actor.system, this.actor.type);
+  }
+
+  _getTabForWizardStep(step) {
+    return WIZARD_STEP_PRIMARY_TAB[step] ?? "overview";
+  }
+
+  _queuePrimaryTab(tab) {
+    this._pendingPrimaryTab = tab ?? "overview";
+  }
+
+  _applyPrimaryTabSelection(html) {
+    const tab = this._pendingPrimaryTab ?? this._activePrimaryTab;
+    if (!tab) return;
+
+    const controller = this._tabs?.[0];
+    if (controller?.activate) {
+      try {
+        controller.activate(tab);
+      } catch (err) {
+        console.warn("LoTM failed to activate tab controller", err);
+      }
+    }
+
+    const root = html && typeof html.find === "function" ? html : this.element;
+    if (root && typeof root.find === "function") {
+      const tabLink = root.find(`.sheet-tabs .item[data-tab='${tab}']`);
+      if (tabLink.length > 0 && !tabLink.hasClass("active")) {
+        tabLink.trigger("click");
+      }
+    }
+
+    this._activePrimaryTab = tab;
+    this._pendingPrimaryTab = null;
   }
 
   async _setWizardState(step) {
@@ -371,6 +538,15 @@ export class LotMActorSheet extends ActorSheet {
       return;
     }
 
+    const targetTab = this._getTabForWizardStep(step);
+    const currentState = this._getCreationState().state;
+    if (currentState === step) {
+      this._queuePrimaryTab(targetTab);
+      this._applyPrimaryTabSelection(this.element);
+      return;
+    }
+
+    this._queuePrimaryTab(targetTab);
     try {
       await this.actor.update({ "system.creation.state": step, "system.creation.version": 1 });
     } catch (err) {
@@ -402,6 +578,7 @@ export class LotMActorSheet extends ActorSheet {
       completed.push(currentStep);
     }
 
+    this._queuePrimaryTab(this._getTabForWizardStep(nextStep));
     try {
       await this.actor.update({
         "system.creation.state": nextStep,
@@ -449,7 +626,14 @@ export class LotMActorSheet extends ActorSheet {
       return;
     }
 
-    const completed = uniqueSteps(["identity", "attributes", "skills", "pathway", "equipment"]);
+    const pathwaySelected = hasPathwaySelection(this.actor.system);
+    const completed = uniqueSteps([
+      "identity",
+      "attributes",
+      "skills",
+      ...(pathwaySelected ? ["pathway"] : []),
+      "equipment"
+    ]);
 
     const patch = {
       "system.creation.state": "complete",
@@ -464,6 +648,7 @@ export class LotMActorSheet extends ActorSheet {
 
     foundry.utils.mergeObject(patch, clampResourcesToDerived(this.actor.system, derived));
 
+    this._queuePrimaryTab(this._getTabForWizardStep("complete"));
     try {
       await this.actor.update(patch);
       ui.notifications?.info("Character creation finalized.");
@@ -492,8 +677,8 @@ export class LotMActorSheet extends ActorSheet {
   async _importPathwayPackage() {
     if (this.actor.type !== "character") return;
 
-    const pathwayId = this.actor.system?.identity?.pathwayId;
-    if (!pathwayId || typeof pathwayId !== "string") {
+    const pathwayId = stringOrEmpty(this.actor.system?.identity?.pathwayId);
+    if (!pathwayId) {
       ui.notifications?.warn("Set identity.pathwayId before importing pathway package.");
       return;
     }
@@ -532,6 +717,7 @@ export class LotMActorSheet extends ActorSheet {
 
       const creation = this._getCreationState();
       const completed = uniqueSteps([...creation.completedSteps, "pathway"]);
+      this._queuePrimaryTab(this._getTabForWizardStep("pathway"));
       await this.actor.update({
         "system.creation.state": "pathway",
         "system.creation.completedSteps": completed,
@@ -541,6 +727,28 @@ export class LotMActorSheet extends ActorSheet {
       console.error("Failed importing pathway package", err);
       ui.notifications?.error("Unable to import pathway package.");
     }
+  }
+
+  async _updateObject(event, formData) {
+    const expanded = foundry.utils.expandObject(formData);
+    expanded.system ??= {};
+    expanded.system.identity ??= {};
+
+    const pathwayId = stringOrEmpty(expanded.system.identity.pathwayId);
+    expanded.system.identity.pathwayId = pathwayId;
+    expanded.system.identity.sequence = parseSequence(expanded.system.identity.sequence);
+
+    if (!pathwayId) {
+      expanded.system.identity.sequence = null;
+      expanded.system.creation ??= {};
+      const existing = Array.isArray(this.actor.system?.creation?.completedSteps)
+        ? [...this.actor.system.creation.completedSteps]
+        : [];
+      expanded.system.creation.completedSteps = uniqueSteps(existing.filter((step) => step !== "pathway"));
+    }
+
+    const flattened = foundry.utils.flattenObject(expanded);
+    return super._updateObject(event, flattened);
   }
 
   async _onDropItemCreate(itemData) {

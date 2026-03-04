@@ -30,6 +30,15 @@ function ensureNumber(value, fallback = NaN) {
   return Number.isFinite(n) ? n : fallback;
 }
 
+function normalizePathwayId(value) {
+  if (typeof value !== "string") return "";
+  return value.trim();
+}
+
+function hasExplicitSequence(value) {
+  return !(value === "" || value == null);
+}
+
 function toOwnedItemObjects(items) {
   if (!Array.isArray(items)) return [];
   return items.map((item) => {
@@ -130,12 +139,15 @@ export async function getPathwayOptions() {
 }
 
 export async function getSequenceOptions(pathwayId) {
+  const normalizedPathwayId = normalizePathwayId(pathwayId);
+  if (!normalizedPathwayId) return [];
+
   const pack = await getPathwayPack();
   if (!pack) return [];
 
   const docs = await pack.getDocuments();
   return docs
-    .filter((doc) => doc.type === "sequenceNode" && doc.system?.pathwayId === pathwayId)
+    .filter((doc) => doc.type === "sequenceNode" && doc.system?.pathwayId === normalizedPathwayId)
     .map((doc) => ({
       id: doc.system?.id ?? doc.id,
       name: doc.name,
@@ -158,12 +170,14 @@ export async function validateCreationStep(actorOrData, step, options = {}) {
 
   if (stepKey === "identity") {
     const pathwayOptions = options.pathwayOptions ?? await getPathwayOptions();
-    const pathwayId = identity.pathwayId;
+    const pathwayId = normalizePathwayId(identity.pathwayId);
     const sequence = ensureNumber(identity.sequence);
 
-    if (!pathwayId || typeof pathwayId !== "string") {
-      errors.push("Select a pathway.");
-      return { ok: false, errors, warnings };
+    if (!pathwayId) {
+      if (hasExplicitSequence(identity.sequence)) {
+        errors.push("Sequence must be blank when no pathway is selected.");
+      }
+      return { ok: errors.length === 0, errors, warnings };
     }
 
     const knownPathway = pathwayOptions.some((entry) => entry.id === pathwayId);
@@ -225,12 +239,14 @@ export async function validateCreationStep(actorOrData, step, options = {}) {
   }
 
   if (stepKey === "pathway") {
-    const pathwayId = identity.pathwayId;
+    const pathwayId = normalizePathwayId(identity.pathwayId);
     const sequence = ensureNumber(identity.sequence);
 
-    if (!pathwayId || typeof pathwayId !== "string") {
-      errors.push("Set identity.pathwayId before validating pathway step.");
-      return { ok: false, errors, warnings };
+    if (!pathwayId) {
+      if (hasExplicitSequence(identity.sequence)) {
+        errors.push("Clear identity.sequence when no pathway is selected.");
+      }
+      return { ok: errors.length === 0, errors, warnings };
     }
     if (!Number.isInteger(sequence)) {
       errors.push("Set identity.sequence before validating pathway step.");
@@ -291,7 +307,7 @@ export async function evaluateCreationState(actorOrData, options = {}) {
     finalizeErrors,
     finalizeWarnings,
     pathwayOptions,
-    sequenceOptions: await getSequenceOptions(actor.system?.identity?.pathwayId),
+    sequenceOptions: await getSequenceOptions(normalizePathwayId(actor.system?.identity?.pathwayId)),
     skillRegistryEntries
   };
 }

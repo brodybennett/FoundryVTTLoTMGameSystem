@@ -6,6 +6,15 @@ function numberOr(value, fallback = 0) {
   return Number.isFinite(n) ? n : fallback;
 }
 
+function normalizePathwayId(value) {
+  if (typeof value !== "string") return "";
+  return value.trim();
+}
+
+function hasExplicitSequence(value) {
+  return !(value === "" || value == null);
+}
+
 function attrTotal(attributes, key) {
   const entry = attributes?.[key] ?? {};
   return numberOr(entry.total, numberOr(entry.base, 10) + numberOr(entry.temp, 0));
@@ -55,13 +64,17 @@ export function validateActorForPlay(actorSystem = {}, actorType = "character", 
   }
 
   const identity = actorSystem.identity ?? {};
-  if (!identity.pathwayId || typeof identity.pathwayId !== "string") {
-    errors.push("identity.pathwayId is required");
-  }
+  const pathwayId = normalizePathwayId(identity.pathwayId);
+  const rawSequence = identity.sequence;
+  const hasSequence = hasExplicitSequence(rawSequence);
+  const sequence = numberOr(rawSequence, NaN);
 
-  const sequence = Number(identity.sequence);
-  if (!Number.isInteger(sequence) || sequence < 0 || sequence > 9) {
-    errors.push("identity.sequence must be an integer 0..9");
+  if (!pathwayId && hasSequence) {
+    errors.push("identity.sequence cannot be set when identity.pathwayId is blank");
+  } else if (pathwayId) {
+    if (!Number.isInteger(sequence) || sequence < 0 || sequence > 9) {
+      errors.push("identity.sequence must be an integer 0..9 when identity.pathwayId is set");
+    }
   }
 
   const attributes = actorSystem.attributes ?? {};
@@ -109,14 +122,14 @@ export function validateActorForPlay(actorSystem = {}, actorType = "character", 
 
   const completed = Array.isArray(creation.completedSteps) ? creation.completedSteps : [];
   if (state === "complete") {
-    const needed = CREATION_STEPS.filter((step) => step !== "complete");
+    const needed = CREATION_STEPS
+      .filter((step) => step !== "complete" && (pathwayId || step !== "pathway"));
     const missing = needed.filter((step) => !completed.includes(step));
     if (missing.length > 0) {
       errors.push(`creation.completedSteps missing: ${missing.join(", ")}`);
     }
   }
 
-  const pathwayId = identity.pathwayId;
   if (pathwayId && Array.isArray(ownedItems) && ownedItems.length > 0) {
     const sequenceNodes = ownedItems.filter((item) => item.type === "sequenceNode" && item.system?.pathwayId === pathwayId);
     if (sequenceNodes.length === 0) {

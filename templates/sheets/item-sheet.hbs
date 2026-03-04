@@ -77,21 +77,13 @@
           <label>
             <span class="field-label">Activation</span>
             <select name="system.activation">
-              {{#select system.activation}}
-                {{#each activationTypes as |mode|}}
-                  <option value="{{mode}}">{{mode}}</option>
-                {{/each}}
-              {{/select}}
+              {{selectOptions activationTypeOptions selected=system.activation valueAttr="value" labelAttr="label"}}
             </select>
           </label>
           <label>
             <span class="field-label">Resource</span>
             <select name="system.resource">
-              {{#select system.resource}}
-                {{#each resourceTypes as |mode|}}
-                  <option value="{{mode}}">{{mode}}</option>
-                {{/each}}
-              {{/select}}
+              {{selectOptions resourceTypeOptions selected=system.resource valueAttr="value" labelAttr="label"}}
             </select>
           </label>
           <label>
@@ -194,11 +186,7 @@
           <label>
             <span class="field-label">Target Mode</span>
             <select name="system.abilityData.targetMode">
-              {{#select system.abilityData.targetMode}}
-                {{#each targetModes as |mode|}}
-                  <option value="{{mode}}">{{mode}}</option>
-                {{/each}}
-              {{/select}}
+              {{selectOptions targetModeOptions selected=system.abilityData.targetMode valueAttr="value" labelAttr="label"}}
             </select>
           </label>
           <label>
@@ -259,11 +247,7 @@
           <label>
             <span class="field-label">Target Mode</span>
             <select name="system.ritualData.targetMode">
-              {{#select system.ritualData.targetMode}}
-                {{#each targetModes as |mode|}}
-                  <option value="{{mode}}">{{mode}}</option>
-                {{/each}}
-              {{/select}}
+              {{selectOptions targetModeOptions selected=system.ritualData.targetMode valueAttr="value" labelAttr="label"}}
             </select>
           </label>
           <label>
@@ -282,11 +266,7 @@
           <label>
             <span class="field-label">Risk Class</span>
             <select name="system.artifactData.riskClass">
-              {{#select system.artifactData.riskClass}}
-                {{#each riskClasses as |risk|}}
-                  <option value="{{risk}}">{{risk}}</option>
-                {{/each}}
-              {{/select}}
+              {{selectOptions riskClassOptions selected=system.artifactData.riskClass valueAttr="value" labelAttr="label"}}
             </select>
           </label>
           <label>
@@ -347,11 +327,7 @@
                 <label>
                   <span class="field-label">Operation</span>
                   <select name="system.effects.{{effect.index}}.op">
-                    {{#select effect.op}}
-                      {{#each @root.effectOps as |mode|}}
-                        <option value="{{mode}}">{{mode}}</option>
-                      {{/each}}
-                    {{/select}}
+                    {{selectOptions @root.effectOpOptions selected=effect.op valueAttr="value" labelAttr="label"}}
                   </select>
                 </label>
                 <label>
@@ -369,41 +345,25 @@
                 <label>
                   <span class="field-label">Target</span>
                   <select name="system.effects.{{effect.index}}.target">
-                    {{#select effect.target}}
-                      {{#each @root.effectTargets as |target|}}
-                        <option value="{{target}}">{{target}}</option>
-                      {{/each}}
-                    {{/select}}
+                    {{selectOptions @root.effectTargetOptions selected=effect.target valueAttr="value" labelAttr="label"}}
                   </select>
                 </label>
                 <label>
                   <span class="field-label">Trigger</span>
                   <select name="system.effects.{{effect.index}}.trigger">
-                    {{#select effect.trigger}}
-                      {{#each @root.effectTriggers as |trigger|}}
-                        <option value="{{trigger}}">{{trigger}}</option>
-                      {{/each}}
-                    {{/select}}
+                    {{selectOptions @root.effectTriggerOptions selected=effect.trigger valueAttr="value" labelAttr="label"}}
                   </select>
                 </label>
                 <label>
                   <span class="field-label">Apply Phase</span>
                   <select name="system.effects.{{effect.index}}.applyPhase">
-                    {{#select effect.applyPhase}}
-                      {{#each @root.effectApplyPhases as |phase|}}
-                        <option value="{{phase}}">{{phase}}</option>
-                      {{/each}}
-                    {{/select}}
+                    {{selectOptions @root.effectApplyPhaseOptions selected=effect.applyPhase valueAttr="value" labelAttr="label"}}
                   </select>
                 </label>
                 <label>
                   <span class="field-label">Tick Phase</span>
                   <select name="system.effects.{{effect.index}}.tickPhase">
-                    {{#select effect.tickPhase}}
-                      {{#each @root.effectTickPhases as |phase|}}
-                        <option value="{{phase}}">{{phase}}</option>
-                      {{/each}}
-                    {{/select}}
+                    {{selectOptions @root.effectTickPhaseOptions selected=effect.tickPhase valueAttr="value" labelAttr="label"}}
                   </select>
                 </label>
                 <label>
@@ -413,11 +373,7 @@
                 <label>
                   <span class="field-label">Save Type</span>
                   <select name="system.effects.{{effect.index}}.saveType">
-                    {{#select effect.saveType}}
-                      {{#each @root.effectSaveTypes as |save|}}
-                        <option value="{{save}}">{{save}}</option>
-                      {{/each}}
-                    {{/select}}
+                    {{selectOptions @root.effectSaveTypeOptions selected=effect.saveType valueAttr="value" labelAttr="label"}}
                   </select>
                 </label>
                 <label>
@@ -431,11 +387,7 @@
                 <label>
                   <span class="field-label">Stack Rule</span>
                   <select name="system.effects.{{effect.index}}.stackRule">
-                    {{#select effect.stackRule}}
-                      {{#each @root.effectStackRules as |rule|}}
-                        <option value="{{rule}}">{{rule}}</option>
-                      {{/each}}
-                    {{/select}}
+                    {{selectOptions @root.effectStackRuleOptions selected=effect.stackRule valueAttr="value" labelAttr="label"}}
                   </select>
                 </label>
                 <label>

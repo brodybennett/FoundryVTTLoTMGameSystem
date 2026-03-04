@@ -120,6 +120,24 @@ const ITEM_TYPE_META = {
   }
 };
 
+function titleCaseToken(value) {
+  if (typeof value !== "string" || value.length === 0) return "";
+  return value
+    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+    .replace(/[_-]/g, " ")
+    .split(" ")
+    .filter((part) => part.length > 0)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+function toSelectOptions(values = []) {
+  return values.map((value) => ({
+    value,
+    label: titleCaseToken(String(value))
+  }));
+}
+
 function parseCsv(value) {
   if (typeof value !== "string") return [];
   return [...new Set(
@@ -275,6 +293,10 @@ export class LotMItemSheet extends ItemSheet {
     context.resourceTypes = ["spirit", "hp", "none", "item"];
     context.targetModes = ["self", "ally", "enemy", "area", "scene", "special"];
     context.riskClasses = ["stable", "volatile", "catastrophic"];
+    context.activationTypeOptions = toSelectOptions(context.activationTypes);
+    context.resourceTypeOptions = toSelectOptions(context.resourceTypes);
+    context.targetModeOptions = toSelectOptions(context.targetModes);
+    context.riskClassOptions = toSelectOptions(context.riskClasses);
     context.tagsCsv = (system.tags ?? []).join(", ");
     context.allowedPathwayIdsCsv = (system.allowedPathwayIds ?? []).join(", ");
     context.requiresIdsCsv = (system.dependencies?.requiresIds ?? []).join(", ");
@@ -292,6 +314,13 @@ export class LotMItemSheet extends ItemSheet {
     context.effectTickPhases = ["startOfTurn", "endOfTurn", "none"];
     context.effectSaveTypes = ["none", "str", "dex", "wil", "con", "cha", "int", "luck"];
     context.effectStackRules = ["refresh", "replace", "stackLimited"];
+    context.effectOpOptions = toSelectOptions(context.effectOps);
+    context.effectTargetOptions = toSelectOptions(context.effectTargets);
+    context.effectTriggerOptions = toSelectOptions(context.effectTriggers);
+    context.effectApplyPhaseOptions = toSelectOptions(context.effectApplyPhases);
+    context.effectTickPhaseOptions = toSelectOptions(context.effectTickPhases);
+    context.effectSaveTypeOptions = toSelectOptions(context.effectSaveTypes);
+    context.effectStackRuleOptions = toSelectOptions(context.effectStackRules);
 
     const validation = validateItemSystemForType(item.type, system);
     context.validationErrors = validation.errors ?? [];
@@ -354,6 +383,27 @@ export class LotMItemSheet extends ItemSheet {
     if (typeof lotm.sequenceMilestonesCsv === "string") {
       expanded.system.sequenceData ??= {};
       expanded.system.sequenceData.milestones = parseCsv(lotm.sequenceMilestonesCsv);
+    }
+
+    if (expanded.system.sequence === "" || expanded.system.sequence == null) {
+      expanded.system.sequence = null;
+    } else {
+      const sequence = Number(expanded.system.sequence);
+      expanded.system.sequence = Number.isInteger(sequence) ? sequence : null;
+    }
+
+    if (expanded.system.minSequence === "" || expanded.system.minSequence == null) {
+      expanded.system.minSequence = null;
+    } else {
+      const minSequence = Number(expanded.system.minSequence);
+      expanded.system.minSequence = Number.isInteger(minSequence) ? minSequence : null;
+    }
+
+    if (expanded.system.sourceSequence === "" || expanded.system.sourceSequence == null) {
+      expanded.system.sourceSequence = null;
+    } else {
+      const sourceSequence = Number(expanded.system.sourceSequence);
+      expanded.system.sourceSequence = Number.isInteger(sourceSequence) ? sourceSequence : null;
     }
 
     expanded.system.dependencies ??= {};

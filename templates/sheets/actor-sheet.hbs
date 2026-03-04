@@ -6,39 +6,39 @@
         <h1><input name="name" type="text" value="{{actor.name}}" placeholder="Actor name" /></h1>
         <div class="button-row compact">
           <span class="pill">{{#if isCharacter}}Character{{else}}NPC{{/if}}</span>
-          <span class="pill">Sequence {{system.identity.sequence}}</span>
-          <span class="pill">{{system.identity.pathwayId}}</span>
+          {{#if hasPathwaySelection}}
+            {{#if hasSequenceSelection}}
+              <span class="pill">Sequence {{system.identity.sequence}}</span>
+            {{/if}}
+            <span class="pill">{{selectedPathwayLabel}}</span>
+          {{else}}
+            <span class="pill">Civilian</span>
+          {{/if}}
         </div>
       </div>
 
       <div class="header-meta">
         <label>
-          <span class="field-label">Pathway {{#if isCharacter}}<span class="field-required">*</span>{{/if}}</span>
+          <span class="field-label">Pathway</span>
           {{#if isCharacter}}
           <select name="system.identity.pathwayId">
-            <option value="">Select pathway</option>
-            {{#select system.identity.pathwayId}}
-              {{#each pathwayOptions as |pathway|}}
-                <option value="{{pathway.id}}">{{pathway.label}}</option>
-              {{/each}}
-            {{/select}}
+            <option value="">Civilian (No Pathway)</option>
+            {{selectOptions pathwaySelectOptions selected=system.identity.pathwayId valueAttr="value" labelAttr="label"}}
           </select>
+          <span class="field-help">Optional. Leave blank for civilian characters.</span>
           {{else}}
           <input type="text" name="system.identity.pathwayId" value="{{system.identity.pathwayId}}" />
           {{/if}}
         </label>
 
         <label>
-          <span class="field-label">Sequence {{#if isCharacter}}<span class="field-required">*</span>{{/if}}</span>
+          <span class="field-label">Sequence</span>
           {{#if isCharacter}}
-          <select name="system.identity.sequence">
-            <option value="">Select sequence</option>
-            {{#select system.identity.sequence}}
-              {{#each sequenceOptions as |seq|}}
-                <option value="{{seq.sequence}}">S{{seq.sequence}} - {{seq.name}}</option>
-              {{/each}}
-            {{/select}}
+          <select name="system.identity.sequence" {{#unless hasPathwaySelection}}disabled{{/unless}}>
+            <option value="">{{#if hasPathwaySelection}}Select sequence{{else}}Select pathway first{{/if}}</option>
+            {{selectOptions sequenceSelectOptions selected=system.identity.sequence valueAttr="value" labelAttr="label"}}
           </select>
+          <span class="field-help">{{#if hasPathwaySelection}}Required only when a pathway is selected.{{else}}Not used for civilians.{{/if}}</span>
           {{else}}
           <input type="number" min="0" max="9" name="system.identity.sequence" value="{{system.identity.sequence}}" />
           {{/if}}
@@ -114,14 +114,31 @@
     </div>
 
     <div class="wizard-feedback">
-      {{#if currentStepValidation.errors.length}}
-      <h3>Current Step Blockers</h3>
-      <ul class="wizard-errors">
-        {{#each currentStepValidation.errors as |err|}}
-          <li>{{err}}</li>
-        {{/each}}
-      </ul>
-      {{/if}}
+      <section class="wizard-step-detail {{#if currentStepDetail.errors.length}}invalid{{/if}}">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">{{currentStepDetail.title}}</h3>
+          <span class="pill {{#if currentStepDetail.errors.length}}warn{{else}}good{{/if}}">{{currentStepDetail.badge}}</span>
+        </div>
+        <p class="muted-note">{{currentStepDetail.description}}</p>
+        <p class="field-help">{{currentStepDetail.note}}</p>
+
+        {{#if currentStepDetail.errors.length}}
+        <h4>Current Step Blockers</h4>
+        <ul class="wizard-errors">
+          {{#each currentStepDetail.errors as |err|}}
+            <li>{{err}}</li>
+          {{/each}}
+        </ul>
+        {{/if}}
+
+        {{#if currentStepDetail.warnings.length}}
+        <ul class="wizard-warnings">
+          {{#each currentStepDetail.warnings as |warn|}}
+            <li>{{warn}}</li>
+          {{/each}}
+        </ul>
+        {{/if}}
+      </section>
 
       {{#if creationValidation.finalizeErrors.length}}
       <h3>Finalize Blockers</h3>
@@ -314,11 +331,7 @@
                 <label>
                   <span class="field-label">Rank</span>
                   <select name="system.skills.{{row.id}}.rank">
-                    {{#select row.rank}}
-                      {{#each @root.skillRanks as |rank|}}
-                        <option value="{{rank}}">{{rank}}</option>
-                      {{/each}}
-                    {{/select}}
+                    {{selectOptions @root.skillRankOptions selected=row.rank valueAttr="value" labelAttr="label"}}
                   </select>
                 </label>
                 <label>

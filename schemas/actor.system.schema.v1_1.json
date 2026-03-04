@@ -16,16 +16,23 @@
   "properties": {
     "identity": {
       "type": "object",
-      "required": ["pathwayId", "sequence", "tier"],
+      "required": ["tier"],
       "properties": {
         "pathwayId": {
           "type": "string",
-          "pattern": "^[a-z][a-z0-9_.-]*$"
+          "pattern": "^$|^[a-z][a-z0-9_.-]*$"
         },
         "sequence": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 9
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "tier": {
           "type": "string",

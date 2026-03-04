@@ -85,11 +85,19 @@
 }
 
 .lotm-sheet .sheet-tabs .item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 1 auto;
   border: 1px solid var(--lotm-border);
   border-radius: 999px;
   background: #efe4cf;
   color: var(--lotm-accent);
-  padding: 0.24rem 0.58rem;
+  padding: 0.34rem 0.82rem;
+  min-height: 2rem;
+  line-height: 1.15;
+  white-space: nowrap;
+  text-align: center;
   font-weight: 600;
 }
 
@@ -423,6 +431,25 @@
   gap: 0.25rem;
 }
 
+.lotm-sheet .wizard-step-detail {
+  border: 1px solid var(--lotm-border-soft);
+  border-radius: var(--lotm-radius-sm);
+  background: #fff7e8;
+  padding: 0.45rem;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.lotm-sheet .wizard-step-detail.invalid {
+  border-color: #b46d61;
+  background: #fbece8;
+}
+
+.lotm-sheet .wizard-step-detail h4 {
+  margin: 0;
+  font-size: 0.86rem;
+}
+
 .lotm-sheet .wizard-errors,
 .lotm-sheet .wizard-warnings,
 .lotm-sheet .inline-errors {
@@ -534,5 +561,8 @@
 
   .lotm-sheet .sheet-tabs .item {
     font-size: 0.77rem;
+    min-height: 2.15rem;
+    white-space: normal;
+    padding: 0.35rem 0.65rem;
   }
 }

@@ -2,6 +2,12 @@
 
 Use this checklist for every sheet milestone review.
 
+## Test Preconditions
+
+Run visual QA only when Foundry reports a usable viewport of at least `1024x768`.
+If Foundry shows a minimum-dimensions warning due to browser/OS zoom, correct that first
+before logging sheet UX defects.
+
 ## Required Screenshot Bundle
 
 Capture and provide all of the following:
