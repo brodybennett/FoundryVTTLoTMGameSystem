@@ -87,20 +87,21 @@ export class LotMActorSheet extends ActorSheet {
   }
 
   get template() {
-    return "templates/sheets/actor-sheet.hbs";
+    return `systems/${game.system.id}/templates/sheets/actor-sheet.hbs`;
   }
 
   async getData(options = {}) {
     const context = await super.getData(options);
-    const system = context.actor.system;
-    const items = context.actor.items.map((entry) => entry.toObject(false));
+    const actor = context.actor ?? this.actor;
+    const system = actor.system;
+    const items = actor.items.map((entry) => entry.toObject(false));
 
-    const isCharacter = context.actor.type === "character";
-    const creation = normalizeCreationState(system, context.actor.type);
+    const isCharacter = actor.type === "character";
+    const creation = normalizeCreationState(system, actor.type);
 
     let validation = { ok: true, errors: [], warnings: [] };
     if (game.lotm?.validateActorForPlay) {
-      validation = game.lotm.validateActorForPlay(system, context.actor.type, items);
+      validation = game.lotm.validateActorForPlay(system, actor.type, items);
     }
 
     let derivedPreview = {
@@ -124,12 +125,13 @@ export class LotMActorSheet extends ActorSheet {
     };
     if (isCharacter) {
       creationValidation = await evaluateCreationState({
-        type: context.actor.type,
+        type: actor.type,
         system,
         items
       });
     }
 
+    context.actor = actor;
     context.system = system;
     context.isCharacter = isCharacter;
     context.attributeKeys = ATTRIBUTE_KEYS;

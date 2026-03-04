@@ -7,7 +7,7 @@ async function renderFallbackContent({ title, summary, details }) {
 }
 
 export async function createLotMCheckCard(payload) {
-  const templatePath = "templates/chat/check-card.hbs";
+  const templatePath = `systems/${game.system.id}/templates/chat/check-card.hbs`;
   const content = await renderTemplate(templatePath, payload).catch(() => {
     const summary = `${payload.success ? "Success" : "Failure"} | Roll ${payload.roll} vs ${payload.finalTarget}`;
     return renderFallbackContent({ title: payload.label ?? "Check", summary, details: payload.components ?? {} });
@@ -27,7 +27,7 @@ export async function createLotMCheckCard(payload) {
 }
 
 export async function createLotMInfoCard({ title, summary, details = {} }) {
-  const templatePath = "templates/chat/info-card.hbs";
+  const templatePath = `systems/${game.system.id}/templates/chat/info-card.hbs`;
   const content = await renderTemplate(templatePath, { title, summary, details }).catch(() => {
     return renderFallbackContent({ title, summary, details });
   });

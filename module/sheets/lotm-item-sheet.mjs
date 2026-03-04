@@ -82,16 +82,18 @@ export class LotMItemSheet extends ItemSheet {
   }
 
   get template() {
-    return "templates/sheets/item-sheet.hbs";
+    return `systems/${game.system.id}/templates/sheets/item-sheet.hbs`;
   }
 
   async getData(options = {}) {
     const context = await super.getData(options);
-    const system = context.item.system;
+    const item = context.item ?? this.item;
+    const system = item.system;
     const effects = normalizeEffects(system.effects);
 
+    context.item = item;
     context.system = system;
-    context.itemType = context.item.type;
+    context.itemType = item.type;
     context.typeFlags = buildTypeFlags(context.itemType);
     context.activationTypes = ["action", "bonusAction", "reaction", "passive", "special"];
     context.resourceTypes = ["spirit", "hp", "none", "item"];
