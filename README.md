@@ -116,8 +116,8 @@ Typed scaffolding and metadata tooling:
 ```bash
 python scripts/content_tool.py new --type ability --id ability.example.new --name "New Ability"
 python scripts/content_tool.py new-pathway-bundle --pathway-id pathway.example --pathway-name Example --top-sequence 9 --bottom-sequence 7
-python scripts/content_tool.py bump-max-tested --version 1.2.7
-python scripts/content_tool.py bump-max-tested --version 1.2.7 --write
+python scripts/content_tool.py bump-max-tested --version 1.2.8
+python scripts/content_tool.py bump-max-tested --version 1.2.8 --write
 ```
 
 Item authoring sheet is subtype-aware and exposes:

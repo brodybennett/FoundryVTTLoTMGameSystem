@@ -2,7 +2,7 @@
   "id": "lotm-system",
   "title": "LoTM Game System",
   "description": "Lord of the Mysteries-inspired tabletop roleplaying game system for Foundry Virtual Tabletop.",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "authors": [
     {
       "name": "Brody Bennett",
@@ -79,7 +79,7 @@
   "socket": false,
   "url": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem",
   "manifest": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem/releases/latest/download/system.json",
-  "download": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem/releases/download/v1.2.7/lotm-system-v1.2.7.zip",
+  "download": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem/releases/download/v1.2.8/lotm-system-v1.2.8.zip",
   "license": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem/blob/master/LICENSE.md",
   "readme": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem/blob/master/README.md",
   "changelog": "https://github.com/brodybennett/FoundryVTTLoTMGameSystem/blob/master/CHANGELOG.md"

@@ -2,9 +2,18 @@
   <header class="sheet-header">
     <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
     <div class="header-fields">
-      <h1><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
+      <div class="split-head">
+        <h1><input name="name" type="text" value="{{actor.name}}" placeholder="Actor name" /></h1>
+        <div class="button-row compact">
+          <span class="pill">{{#if isCharacter}}Character{{else}}NPC{{/if}}</span>
+          <span class="pill">Sequence {{system.identity.sequence}}</span>
+          <span class="pill">{{system.identity.pathwayId}}</span>
+        </div>
+      </div>
+
       <div class="header-meta">
-        <label>Pathway *
+        <label>
+          <span class="field-label">Pathway {{#if isCharacter}}<span class="field-required">*</span>{{/if}}</span>
           {{#if isCharacter}}
           <select name="system.identity.pathwayId">
             <option value="">Select pathway</option>
@@ -18,7 +27,9 @@
           <input type="text" name="system.identity.pathwayId" value="{{system.identity.pathwayId}}" />
           {{/if}}
         </label>
-        <label>Sequence *
+
+        <label>
+          <span class="field-label">Sequence {{#if isCharacter}}<span class="field-required">*</span>{{/if}}</span>
           {{#if isCharacter}}
           <select name="system.identity.sequence">
             <option value="">Select sequence</option>
@@ -32,10 +43,13 @@
           <input type="number" min="0" max="9" name="system.identity.sequence" value="{{system.identity.sequence}}" />
           {{/if}}
         </label>
-        <label>Tier
+
+        <label>
+          <span class="field-label">Tier</span>
           <input type="text" name="system.identity.tier" value="{{system.identity.tier}}" />
         </label>
       </div>
+
       {{#if isCharacter}}
         {{#with creationValidation.byStep.identity as |identityCheck|}}
           {{#if identityCheck.errors.length}}
@@ -53,8 +67,19 @@
   {{#if isCharacter}}
   <section class="creation-wizard">
     <div class="wizard-head">
-      <h2>Character Creation Wizard</h2>
-      <p>Current state: <strong>{{creation.state}}</strong></p>
+      <div>
+        <h2>Character Creation</h2>
+        <p class="muted-note">Complete each step in order. Blockers are listed below.</p>
+      </div>
+      <div class="button-row compact">
+        <span class="pill">State: {{creation.state}}</span>
+        <span class="pill">Steps: {{creationCompletedCount}} / {{creationRequiredCount}}</span>
+        {{#if creationValidation.canFinalize}}
+          <span class="pill good">Ready to Finalize</span>
+        {{else}}
+          <span class="pill warn">Finalize Blocked</span>
+        {{/if}}
+      </div>
     </div>
 
     <div class="wizard-steps">
@@ -78,40 +103,31 @@
       <button type="button" data-action="wizard-prev">Previous Step</button>
       <button type="button" data-action="wizard-next">Next Step</button>
       <button type="button" data-action="import-pathway">Import Pathway Package</button>
-      <button type="button" data-action="wizard-finalize">Finalize Character</button>
       <button type="button" data-action="wizard-repair">Repair Legacy Data</button>
+      <button type="button" class="button-primary" data-action="wizard-finalize">Finalize Character</button>
     </div>
 
     <div class="wizard-feedback">
-      <h3>Validation</h3>
-      {{#if validation.errors.length}}
+      {{#if currentStepValidation.errors.length}}
+      <h3>Current Step Blockers</h3>
       <ul class="wizard-errors">
-        {{#each validation.errors as |err|}}
+        {{#each currentStepValidation.errors as |err|}}
           <li>{{err}}</li>
         {{/each}}
       </ul>
-      {{else}}
-      <p class="wizard-ok">No blocking validation errors.</p>
       {{/if}}
 
-      {{#if validation.warnings.length}}
-      <ul class="wizard-warnings">
-        {{#each validation.warnings as |warn|}}
-          <li>{{warn}}</li>
-        {{/each}}
-      </ul>
-      {{/if}}
-
-      <h3>Finalize Readiness</h3>
-      {{#if creationValidation.canFinalize}}
-      <p class="wizard-ok">Character can be finalized once all intended selections are complete.</p>
-      {{else}}
+      {{#if creationValidation.finalizeErrors.length}}
+      <h3>Finalize Blockers</h3>
       <ul class="wizard-errors">
         {{#each creationValidation.finalizeErrors as |err|}}
           <li>{{err}}</li>
         {{/each}}
       </ul>
+      {{else}}
+      <p class="wizard-ok">No finalize blockers detected.</p>
       {{/if}}
+
       {{#if creationValidation.finalizeWarnings.length}}
       <ul class="wizard-warnings">
         {{#each creationValidation.finalizeWarnings as |warn|}}
@@ -125,208 +141,380 @@
 
   <nav class="sheet-tabs tabs" data-group="primary">
     <a class="item" data-tab="overview">Overview</a>
-    <a class="item" data-tab="stats">Attributes/Skills</a>
-    <a class="item" data-tab="abilities">Abilities</a>
-    <a class="item" data-tab="inventory">Inventory</a>
-    <a class="item" data-tab="corruption">Corruption/Resources</a>
-    <a class="item" data-tab="effects">Effects</a>
+    <a class="item" data-tab="stats">{{#if isCharacter}}Build{{else}}Stats{{/if}}</a>
+    <a class="item" data-tab="abilities">{{#if isCharacter}}Powers{{else}}Abilities{{/if}}</a>
+    <a class="item" data-tab="inventory">{{#if isCharacter}}Inventory{{else}}Loadout{{/if}}</a>
+    <a class="item" data-tab="corruption">Survival</a>
+    <a class="item" data-tab="effects">Diagnostics</a>
   </nav>
 
   <section class="sheet-body">
     <div class="tab" data-group="primary" data-tab="overview">
-      <div class="grid grid-3">
-        <label>HP
-          <input type="number" name="system.resources.hp" value="{{system.resources.hp}}" />
-        </label>
-        <label>HP Max
-          <input type="number" name="system.derived.hpMax" value="{{derivedPreview.hpMax}}" disabled />
-        </label>
-        <label>Spirit
-          <input type="number" min="0" name="system.resources.spirit" value="{{system.resources.spirit}}" />
-        </label>
-        <label>Spirit Max
-          <input type="number" name="system.derived.spiritMax" value="{{derivedPreview.spiritMax}}" disabled />
-        </label>
-        <label>Sanity Max
-          <input type="number" name="system.derived.sanityMax" value="{{derivedPreview.sanityMax}}" disabled />
-        </label>
-        <label>Initiative Target
-          <input type="number" name="system.derived.initiativeTarget" value="{{derivedPreview.initiativeTarget}}" disabled />
-        </label>
-      </div>
-      <div class="button-row">
-        <button type="button" data-action="roll-check" data-attribute="wil" data-label="Willpower Check">Willpower Check</button>
-        <button type="button" data-action="roll-ritual-risk">Ritual Risk</button>
-        <button type="button" data-action="roll-artifact-backlash">Artifact Backlash</button>
-      </div>
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">Vitals Snapshot</h3>
+          <span class="pill {{#if validation.errors.length}}danger{{else}}good{{/if}}">{{#if validation.errors.length}}Validation Issues{{else}}Ready for Play{{/if}}</span>
+        </div>
+        <div class="sheet-kpi-grid">
+          <div class="sheet-kpi-card">
+            <div class="sheet-kpi-label">HP</div>
+            <div class="sheet-kpi-value">{{system.resources.hp}} / {{derivedPreview.hpMax}}</div>
+          </div>
+          <div class="sheet-kpi-card">
+            <div class="sheet-kpi-label">Spirit</div>
+            <div class="sheet-kpi-value">{{system.resources.spirit}} / {{derivedPreview.spiritMax}}</div>
+          </div>
+          <div class="sheet-kpi-card">
+            <div class="sheet-kpi-label">Sanity Max</div>
+            <div class="sheet-kpi-value">{{derivedPreview.sanityMax}}</div>
+          </div>
+          <div class="sheet-kpi-card">
+            <div class="sheet-kpi-label">Defense Shift</div>
+            <div class="sheet-kpi-value">{{derivedPreview.defenseShift}}</div>
+          </div>
+          <div class="sheet-kpi-card">
+            <div class="sheet-kpi-label">Initiative Target</div>
+            <div class="sheet-kpi-value">{{derivedPreview.initiativeTarget}}</div>
+          </div>
+          <div class="sheet-kpi-card">
+            <div class="sheet-kpi-label">Corruption Penalty</div>
+            <div class="sheet-kpi-value">{{derivedPreview.corruptionPenalty}}</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">Quick Actions</h3>
+          <p class="sheet-panel-subtitle">Core checks and risk rolls used most often in play.</p>
+        </div>
+        <div class="button-row">
+          <button type="button" data-action="roll-check" data-attribute="wil" data-label="Willpower Check">Roll Willpower Check</button>
+          <button type="button" data-action="roll-check" data-attribute="int" data-label="Perception" data-skill-id="perception">Roll Perception</button>
+          <button type="button" data-action="roll-ritual-risk">Roll Ritual Risk</button>
+          <button type="button" data-action="roll-artifact-backlash">Roll Artifact Backlash</button>
+        </div>
+      </section>
+
+      {{#if validation.errors.length}}
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">Validation Errors</h3>
+        </div>
+        <ul class="wizard-errors">
+          {{#each validation.errors as |err|}}
+            <li>{{err}}</li>
+          {{/each}}
+        </ul>
+      </section>
+      {{/if}}
+
+      {{#if validation.warnings.length}}
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">Warnings</h3>
+        </div>
+        <ul class="wizard-warnings">
+          {{#each validation.warnings as |warn|}}
+            <li>{{warn}}</li>
+          {{/each}}
+        </ul>
+      </section>
+      {{/if}}
     </div>
 
     <div class="tab" data-group="primary" data-tab="stats">
-      {{#with creationValidation.byStep.attributes as |attrCheck|}}
-        {{#if attrCheck.errors.length}}
-          <ul class="inline-errors">
-            {{#each attrCheck.errors as |err|}}
-              <li>{{err}}</li>
-            {{/each}}
-          </ul>
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">Attributes</h3>
+          <p class="sheet-panel-subtitle">Base values should remain within 0-100.</p>
+        </div>
+
+        {{#if isCharacter}}
+          {{#with creationValidation.byStep.attributes as |attrCheck|}}
+            {{#if attrCheck.errors.length}}
+              <ul class="inline-errors">
+                {{#each attrCheck.errors as |err|}}
+                  <li>{{err}}</li>
+                {{/each}}
+              </ul>
+            {{/if}}
+          {{/with}}
         {{/if}}
-      {{/with}}
-      <h3>Attributes (0-100)</h3>
-      <div class="grid grid-7 compact">
-        {{#each attributeKeys as |attr|}}
-          <label>{{attr}} *
-            <input type="number" min="0" max="100" name="system.attributes.{{attr}}.base" value="{{lookup (lookup ../system.attributes attr) 'base'}}" />
-          </label>
-        {{/each}}
-      </div>
-      <h3>Skills</h3>
-      {{#with creationValidation.byStep.skills as |skillCheck|}}
-        {{#if skillCheck.errors.length}}
-          <ul class="inline-errors">
-            {{#each skillCheck.errors as |err|}}
-              <li>{{err}}</li>
-            {{/each}}
-          </ul>
+
+        <div class="grid grid-7 compact">
+          {{#each attributeOptions as |attr|}}
+            <label>
+              <span class="field-label">{{attr.label}} <span class="field-required">*</span></span>
+              <input type="number" min="0" max="100" name="system.attributes.{{attr.key}}.base" value="{{lookup (lookup ../system.attributes attr.key) 'base'}}" />
+            </label>
+          {{/each}}
+        </div>
+      </section>
+
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">Skills</h3>
+          <p class="sheet-panel-subtitle">Rank and misc modifiers drive most checks.</p>
+        </div>
+
+        {{#if isCharacter}}
+          {{#with creationValidation.byStep.skills as |skillCheck|}}
+            {{#if skillCheck.errors.length}}
+              <ul class="inline-errors">
+                {{#each skillCheck.errors as |err|}}
+                  <li>{{err}}</li>
+                {{/each}}
+              </ul>
+            {{/if}}
+          {{/with}}
         {{/if}}
-      {{/with}}
-      <ol class="skill-list">
-        {{#each skillEntries as |entry|}}
-          <li class="skill-row">
-            <div class="skill-name">{{entry.[0]}}</div>
-            <div class="skill-controls">
-              <label>Rank *
-                <select name="system.skills.{{entry.[0]}}.rank">
-                  {{#select entry.[1].rank}}
-                    {{#each @root.skillRanks as |rank|}}
-                      <option value="{{rank}}">{{rank}}</option>
-                    {{/each}}
-                  {{/select}}
-                </select>
-              </label>
-              <label>Misc
-                <input type="number" min="-50" max="50" name="system.skills.{{entry.[0]}}.misc" value="{{entry.[1].misc}}" />
-              </label>
-              <button type="button" data-action="roll-check" data-label="{{entry.[0]}}" data-attribute="{{entry.[1].linkedAttr}}" data-skill-id="{{entry.[0]}}">Roll</button>
-            </div>
-          </li>
-        {{/each}}
-      </ol>
+
+        <ol class="skill-list">
+          {{#each skillRows as |row|}}
+            <li class="skill-row">
+              <div class="skill-name">{{row.label}}</div>
+              <div class="skill-controls">
+                <label>
+                  <span class="field-label">Rank</span>
+                  <select name="system.skills.{{row.id}}.rank">
+                    {{#select row.rank}}
+                      {{#each @root.skillRanks as |rank|}}
+                        <option value="{{rank}}">{{rank}}</option>
+                      {{/each}}
+                    {{/select}}
+                  </select>
+                </label>
+                <label>
+                  <span class="field-label">Misc</span>
+                  <input type="number" min="-50" max="50" name="system.skills.{{row.id}}.misc" value="{{row.misc}}" />
+                </label>
+                <button type="button" data-action="roll-check" data-label="{{row.label}}" data-attribute="{{row.linkedAttr}}" data-skill-id="{{row.id}}">Roll</button>
+              </div>
+            </li>
+          {{/each}}
+        </ol>
+      </section>
     </div>
 
     <div class="tab" data-group="primary" data-tab="abilities">
-      <ol class="item-list">
-        {{#each itemGroups.ability as |item|}}
-          <li class="item" data-item-id="{{item._id}}">
-            <img src="{{item.img}}" title="{{item.name}}" />
-            <span>{{item.name}}</span>
-            <div class="item-actions">
-              <button type="button" data-action="item-edit">Edit</button>
-              <button type="button" data-action="item-delete">Delete</button>
-            </div>
-          </li>
-        {{/each}}
-      </ol>
-      <h3>Pathway / Feature</h3>
-      <ol class="item-list">
-        {{#each itemGroups.pathway as |item|}}
-          <li class="item" data-item-id="{{item._id}}">
-            <img src="{{item.img}}" title="{{item.name}}" />
-            <span>{{item.name}}</span>
-            <div class="item-actions">
-              <button type="button" data-action="item-edit">Edit</button>
-              <button type="button" data-action="item-delete">Delete</button>
-            </div>
-          </li>
-        {{/each}}
-      </ol>
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">Abilities</h3>
+          <span class="pill">{{itemCounts.abilities}}</span>
+        </div>
+        {{#if itemGroups.ability.length}}
+        <ol class="item-list">
+          {{#each itemGroups.ability as |item|}}
+            <li class="item" data-item-id="{{item._id}}">
+              <img src="{{item.img}}" title="{{item.name}}" />
+              <div>
+                <div class="item-title">{{item.name}}</div>
+                <div class="item-meta">{{item.system.id}}</div>
+              </div>
+              <div class="item-actions">
+                <button type="button" data-action="item-edit">Edit</button>
+                <button type="button" data-action="item-delete">Delete</button>
+              </div>
+            </li>
+          {{/each}}
+        </ol>
+        {{else}}
+        <div class="empty-state">No abilities yet. Drag abilities from compendiums onto this actor.</div>
+        {{/if}}
+      </section>
+
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">Pathway & Features</h3>
+          <span class="pill">{{itemCounts.pathway}}</span>
+        </div>
+        {{#if itemGroups.pathway.length}}
+        <ol class="item-list">
+          {{#each itemGroups.pathway as |item|}}
+            <li class="item" data-item-id="{{item._id}}">
+              <img src="{{item.img}}" title="{{item.name}}" />
+              <div>
+                <div class="item-title">{{item.name}}</div>
+                <div class="item-meta">{{item.type}}</div>
+              </div>
+              <div class="item-actions">
+                <button type="button" data-action="item-edit">Edit</button>
+                <button type="button" data-action="item-delete">Delete</button>
+              </div>
+            </li>
+          {{/each}}
+        </ol>
+        {{else}}
+        <div class="empty-state">No pathway bundle imported yet.</div>
+        {{/if}}
+      </section>
     </div>
 
     <div class="tab" data-group="primary" data-tab="inventory">
-      <h3>Gear</h3>
-      <ol class="item-list">
-        {{#each itemGroups.gear as |item|}}
-          <li class="item" data-item-id="{{item._id}}">
-            <img src="{{item.img}}" title="{{item.name}}" />
-            <span>{{item.name}}</span>
-            <div class="item-actions">
-              <button type="button" data-action="item-edit">Edit</button>
-              <button type="button" data-action="item-delete">Delete</button>
-            </div>
-          </li>
-        {{/each}}
-      </ol>
-      <h3>Rituals</h3>
-      <ol class="item-list">
-        {{#each itemGroups.ritual as |item|}}
-          <li class="item" data-item-id="{{item._id}}">
-            <img src="{{item.img}}" title="{{item.name}}" />
-            <span>{{item.name}}</span>
-            <div class="item-actions">
-              <button type="button" data-action="item-edit">Edit</button>
-              <button type="button" data-action="item-delete">Delete</button>
-            </div>
-          </li>
-        {{/each}}
-      </ol>
-      <h3>Artifacts</h3>
-      <ol class="item-list">
-        {{#each itemGroups.artifact as |item|}}
-          <li class="item" data-item-id="{{item._id}}">
-            <img src="{{item.img}}" title="{{item.name}}" />
-            <span>{{item.name}}</span>
-            <div class="item-actions">
-              <button type="button" data-action="item-edit">Edit</button>
-              <button type="button" data-action="item-delete">Delete</button>
-            </div>
-          </li>
-        {{/each}}
-      </ol>
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">Gear & Utility Items</h3>
+          <span class="pill">{{itemCounts.gear}}</span>
+        </div>
+        {{#if itemGroups.gear.length}}
+        <ol class="item-list">
+          {{#each itemGroups.gear as |item|}}
+            <li class="item" data-item-id="{{item._id}}">
+              <img src="{{item.img}}" title="{{item.name}}" />
+              <div>
+                <div class="item-title">{{item.name}}</div>
+                <div class="item-meta">{{item.type}}</div>
+              </div>
+              <div class="item-actions">
+                <button type="button" data-action="item-edit">Edit</button>
+                <button type="button" data-action="item-delete">Delete</button>
+              </div>
+            </li>
+          {{/each}}
+        </ol>
+        {{else}}
+        <div class="empty-state">No gear assigned. Drag items from compendiums to populate loadout.</div>
+        {{/if}}
+      </section>
+
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">Rituals & Artifacts</h3>
+          <span class="pill">{{itemCounts.rituals}} / {{itemCounts.artifacts}}</span>
+        </div>
+        <div class="grid grid-2">
+          <div>
+            <p class="muted-note">Rituals</p>
+            {{#if itemGroups.ritual.length}}
+            <ol class="item-list">
+              {{#each itemGroups.ritual as |item|}}
+                <li class="item" data-item-id="{{item._id}}">
+                  <img src="{{item.img}}" title="{{item.name}}" />
+                  <div class="item-title">{{item.name}}</div>
+                  <div class="item-actions">
+                    <button type="button" data-action="item-edit">Edit</button>
+                    <button type="button" data-action="item-delete">Delete</button>
+                  </div>
+                </li>
+              {{/each}}
+            </ol>
+            {{else}}
+            <div class="empty-state">No rituals owned.</div>
+            {{/if}}
+          </div>
+
+          <div>
+            <p class="muted-note">Artifacts</p>
+            {{#if itemGroups.artifact.length}}
+            <ol class="item-list">
+              {{#each itemGroups.artifact as |item|}}
+                <li class="item" data-item-id="{{item._id}}">
+                  <img src="{{item.img}}" title="{{item.name}}" />
+                  <div class="item-title">{{item.name}}</div>
+                  <div class="item-actions">
+                    <button type="button" data-action="item-edit">Edit</button>
+                    <button type="button" data-action="item-delete">Delete</button>
+                  </div>
+                </li>
+              {{/each}}
+            </ol>
+            {{else}}
+            <div class="empty-state">No artifacts owned.</div>
+            {{/if}}
+          </div>
+        </div>
+      </section>
     </div>
 
     <div class="tab" data-group="primary" data-tab="corruption">
-      <div class="grid grid-3">
-        <label>Corruption %
-          <input type="number" min="0" max="100" name="system.resources.corruption" value="{{system.resources.corruption}}" />
-        </label>
-        <label>Corruption Penalty
-          <input type="number" value="{{system.resources.corruptionPenalty}}" disabled />
-        </label>
-        <label>Delta
-          <input type="number" name="lotm-corruption-delta" value="0" />
-        </label>
-      </div>
-      <div class="button-row">
-        <button type="button" data-action="apply-corruption">Apply Corruption Delta</button>
-      </div>
-      <div class="grid grid-3">
-        <label>Death Marks
-          <input type="number" min="0" max="3" name="system.resources.deathMarks" value="{{system.resources.deathMarks}}" />
-        </label>
-        <label>Death Saves
-          <input type="number" min="0" max="3" name="system.resources.deathSaves" value="{{system.resources.deathSaves}}" />
-        </label>
-        <label>Ritual Instability
-          <input type="number" min="0" max="99" name="system.ritual.instability" value="{{system.ritual.instability}}" />
-        </label>
-      </div>
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">Resources & Corruption</h3>
+          <p class="sheet-panel-subtitle">Track attrition and corruption pressure during play.</p>
+        </div>
+        <div class="grid grid-3">
+          <label>
+            <span class="field-label">HP</span>
+            <input type="number" name="system.resources.hp" value="{{system.resources.hp}}" />
+          </label>
+          <label>
+            <span class="field-label">HP Max</span>
+            <input type="number" name="system.derived.hpMax" value="{{derivedPreview.hpMax}}" disabled />
+          </label>
+          <label>
+            <span class="field-label">Spirit</span>
+            <input type="number" min="0" name="system.resources.spirit" value="{{system.resources.spirit}}" />
+          </label>
+          <label>
+            <span class="field-label">Spirit Max</span>
+            <input type="number" name="system.derived.spiritMax" value="{{derivedPreview.spiritMax}}" disabled />
+          </label>
+          <label>
+            <span class="field-label">Corruption %</span>
+            <input type="number" min="0" max="100" name="system.resources.corruption" value="{{system.resources.corruption}}" />
+          </label>
+          <label>
+            <span class="field-label">Corruption Penalty</span>
+            <input type="number" value="{{derivedPreview.corruptionPenalty}}" disabled />
+          </label>
+        </div>
+
+        <div class="button-row">
+          <label>
+            <span class="field-label">Corruption Delta</span>
+            <input type="number" name="lotm-corruption-delta" value="0" />
+          </label>
+          <button type="button" data-action="apply-corruption">Apply Corruption Delta</button>
+        </div>
+      </section>
+
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">Critical State Trackers</h3>
+        </div>
+        <div class="grid grid-3">
+          <label>
+            <span class="field-label">Death Marks</span>
+            <input type="number" min="0" max="3" name="system.resources.deathMarks" value="{{system.resources.deathMarks}}" />
+          </label>
+          <label>
+            <span class="field-label">Death Saves</span>
+            <input type="number" min="0" max="3" name="system.resources.deathSaves" value="{{system.resources.deathSaves}}" />
+          </label>
+          <label>
+            <span class="field-label">Ritual Instability</span>
+            <input type="number" min="0" max="99" name="system.ritual.instability" value="{{system.ritual.instability}}" />
+          </label>
+        </div>
+      </section>
     </div>
 
     <div class="tab" data-group="primary" data-tab="effects">
-      <p>Use Active Effects on the sidebar for condition state. This tab is reserved for LoTM automation diagnostics.</p>
-      <div class="grid grid-2">
-        <label>Action Lock
-          <input type="number" min="0" max="1" name="system.tracks.actionLock" value="{{system.tracks.actionLock}}" />
-        </label>
-        <label>Damage Multiplier
-          <input type="number" min="0" max="10" step="0.1" name="system.tracks.damageOutMultiplier" value="{{system.tracks.damageOutMultiplier}}" />
-        </label>
-        <label>Verbal Locked
-          <input type="number" min="0" max="1" name="system.tracks.verbalLocked" value="{{system.tracks.verbalLocked}}" />
-        </label>
-        <label>Is Downed
-          <input type="number" min="0" max="1" name="system.tracks.isDowned" value="{{system.tracks.isDowned}}" />
-        </label>
-      </div>
+      <section class="sheet-panel">
+        <div class="sheet-panel-header">
+          <h3 class="sheet-panel-title">Automation Diagnostics</h3>
+          <p class="sheet-panel-subtitle">Use sidebar Active Effects for standard condition management.</p>
+        </div>
+        <div class="grid grid-2">
+          <label>
+            <span class="field-label">Action Lock</span>
+            <input type="number" min="0" max="1" name="system.tracks.actionLock" value="{{system.tracks.actionLock}}" />
+          </label>
+          <label>
+            <span class="field-label">Damage Multiplier</span>
+            <input type="number" min="0" max="10" step="0.1" name="system.tracks.damageOutMultiplier" value="{{system.tracks.damageOutMultiplier}}" />
+          </label>
+          <label>
+            <span class="field-label">Verbal Locked</span>
+            <input type="number" min="0" max="1" name="system.tracks.verbalLocked" value="{{system.tracks.verbalLocked}}" />
+          </label>
+          <label>
+            <span class="field-label">Is Downed</span>
+            <input type="number" min="0" max="1" name="system.tracks.isDowned" value="{{system.tracks.isDowned}}" />
+          </label>
+        </div>
+      </section>
     </div>
   </section>
 </form>

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.8
+
+- Reworked character actor sheet information architecture with clearer panel hierarchy and consolidated quick actions.
+- Improved tab naming and section framing for readability and workflow clarity.
+- Improved actor sheet responsiveness for narrow widths and high-zoom layouts.
+
 ## 1.2.7
 
 - Added sheet UX baseline documentation:

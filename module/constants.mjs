@@ -1,5 +1,5 @@
 export const SYSTEM_ID = "lotm-system";
-export const WORLD_SCHEMA_VERSION = "1.2.7";
+export const WORLD_SCHEMA_VERSION = "1.2.8";
 
 export const ATTRIBUTE_KEYS = ["str", "dex", "wil", "con", "cha", "int", "luck"];
 export const SKILL_RANKS = ["untrained", "familiar", "trained", "expert", "master", "legendary"];

@@ -6,6 +6,37 @@ import {
   validateCreationStep
 } from "../creation/creation-engine.mjs";
 
+const ATTRIBUTE_LABELS = {
+  str: "Strength",
+  dex: "Dexterity",
+  wil: "Willpower",
+  con: "Constitution",
+  cha: "Charisma",
+  int: "Intellect",
+  luck: "Luck"
+};
+
+function titleCaseToken(value) {
+  if (!value || typeof value !== "string") return "";
+  return value
+    .replace(/[_-]/g, " ")
+    .split(" ")
+    .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
+    .join(" ");
+}
+
+function buildSkillRows(skills = {}) {
+  return Object.entries(skills)
+    .map(([id, entry]) => ({
+      id,
+      label: titleCaseToken(id),
+      linkedAttr: entry?.linkedAttr ?? "wil",
+      rank: entry?.rank ?? "familiar",
+      misc: Number(entry?.misc ?? 0) || 0
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+}
+
 function groupItems(items) {
   const groups = {
     ability: [],
@@ -109,7 +140,8 @@ export class LotMActorSheet extends ActorSheet {
       spiritMax: system.derived?.spiritMax,
       sanityMax: system.derived?.sanityMax,
       defenseShift: system.derived?.defenseShift,
-      initiativeTarget: system.derived?.initiativeTarget
+      initiativeTarget: system.derived?.initiativeTarget,
+      corruptionPenalty: system.resources?.corruptionPenalty ?? 0
     };
     if (game.lotm?.deriveActorStats) {
       derivedPreview = game.lotm.deriveActorStats(system);
@@ -134,10 +166,15 @@ export class LotMActorSheet extends ActorSheet {
     context.actor = actor;
     context.system = system;
     context.isCharacter = isCharacter;
+    context.isNpc = !isCharacter;
     context.attributeKeys = ATTRIBUTE_KEYS;
+    context.attributeOptions = ATTRIBUTE_KEYS.map((key) => ({
+      key,
+      label: ATTRIBUTE_LABELS[key] ?? key.toUpperCase()
+    }));
     context.skillRanks = SKILL_RANKS;
     context.itemGroups = groupItems(items);
-    context.skillEntries = Object.entries(system.skills ?? {}).sort(([a], [b]) => a.localeCompare(b));
+    context.skillRows = buildSkillRows(system.skills ?? {});
     context.creation = creation;
     context.creationSteps = buildStepView(creation.state, creation.completedSteps);
     context.validation = validation;
@@ -145,6 +182,19 @@ export class LotMActorSheet extends ActorSheet {
     context.creationValidation = creationValidation;
     context.pathwayOptions = creationValidation.pathwayOptions ?? [];
     context.sequenceOptions = creationValidation.sequenceOptions ?? [];
+    context.creationCompletedCount = uniqueSteps(creation.completedSteps).length;
+    context.creationRequiredCount = CREATION_STEPS.filter((step) => step !== "complete").length;
+    context.currentCreationStep = creation.state;
+    context.currentStepValidation = creationValidation.byStep?.[creation.state] ?? { ok: true, errors: [], warnings: [] };
+    context.itemCounts = {
+      abilities: context.itemGroups.ability.length,
+      rituals: context.itemGroups.ritual.length,
+      artifacts: context.itemGroups.artifact.length,
+      pathway: context.itemGroups.pathway.length,
+      features: context.itemGroups.feature.length,
+      gear: context.itemGroups.gear.length
+    };
+    context.hasAnyInventory = (context.itemCounts.gear + context.itemCounts.rituals + context.itemCounts.artifacts) > 0;
 
     return context;
   }
