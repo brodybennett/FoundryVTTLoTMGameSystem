@@ -16,22 +16,13 @@ In Foundry VTT:
 
 The system publishes compendiums in this access layout:
 
-- `Pathways: <PathwayName>` packs (example: `Pathways: Seer` with pathway and sequence nodes)
-- `Items` split by subtype:
-  - `Items: Weapons`
-  - `Items: Armor`
-  - `Items: Gear and Features`
-  - `Items: Consumables`
-  - `Items: Ingredients`
+- `Pathways (All)` (all pathway roots and sequence nodes in one pack; filter by pathway)
+- `Items (All Types)` (weapons, armor, gear/features, consumables, ingredients, and other item subtypes in one pack)
 - `Sealed Artifacts` (cross-pathway, grouped by sequence in naming/flags)
 - `Abilities (All Pathways)` (grouped by pathway + sequence in naming/flags)
 - `Rituals (All Pathways)` (pathway/universal grouping supported)
-- `Roll Tables` segmented by gameplay area:
-  - Resources, Abilities, Rituals, Artifacts, Corruption, Encounters
-- `Actors` grouped by category:
-  - Faction NPCs
-  - Beyonder Monsters
-  - Civilians
+- `Roll Tables (All Segments)` (resources, abilities, rituals, artifacts, corruption, encounters in one pack)
+- `Actors (All Categories)` (factions, beyonder monsters, civilians in one pack)
 - `Rules: Hyperlinked Reference` (JournalEntry rules compendium with table-of-contents links)
 
 ## Create a Playable World

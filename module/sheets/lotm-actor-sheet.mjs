@@ -287,16 +287,21 @@ export class LotMActorSheet extends ActorSheet {
       return;
     }
 
-    const slug = pathwayId.split(".").pop();
-    const packId = `lotm-system.pathways-${slug}`;
+    const packId = "lotm-system.pathways";
     const pack = game.packs?.get(packId);
     if (!pack) {
-      ui.notifications?.warn(`No pathway pack found: ${packId}`);
+      ui.notifications?.warn(`No pathway pack found: ${packId}. Rebuild compendiums.`);
       return;
     }
 
     const docs = await pack.getDocuments();
-    const pathwayDocs = docs.filter((doc) => ["pathway", "sequenceNode"].includes(doc.type));
+    const pathwayDocs = docs.filter((doc) => (
+      ["pathway", "sequenceNode"].includes(doc.type) && doc.system?.pathwayId === pathwayId
+    ));
+    if (pathwayDocs.length === 0) {
+      ui.notifications?.warn(`No pathway entries found for ${pathwayId} in ${packId}.`);
+      return;
+    }
 
     const existingSystemIds = new Set(
       this.actor.items.map((item) => item.system?.id).filter((id) => typeof id === "string")

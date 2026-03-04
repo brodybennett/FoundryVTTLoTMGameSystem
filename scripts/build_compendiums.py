@@ -29,30 +29,22 @@ def resolve_pack(entry: dict) -> str:
 
     if doc_type == "Item":
         item_type = entry["itemType"]
-        system = entry["system"]
-        pathway_id = system.get("pathwayId")
 
         if item_type in {"pathway", "sequenceNode"}:
-            slug = pathway_id.split(".")[-1] if pathway_id else "universal"
-            return f"pathways-{slug}"
+            return "pathways"
         if item_type == "ability":
             return "abilities"
         if item_type == "ritual":
             return "rituals"
         if item_type == "artifact":
             return "sealed-artifacts"
-        if item_type == "weapon":
-            return "items-weapons"
-        if item_type == "armor":
-            return "items-armor"
-        if item_type == "consumable":
-            return "items-consumables"
-        if item_type == "ingredient":
-            return "items-ingredients"
-        return "items-gear"
+        return "items"
 
     if doc_type == "RollTable":
-        return f"rolltables-{resolve_rolltable_segment(entry)}"
+        return "rolltables"
+
+    if doc_type == "Actor":
+        return "actors"
 
     return entry["pack"]
 
@@ -177,6 +169,7 @@ def make_rolltable_doc(entry: dict) -> dict:
 def make_actor_doc(entry: dict) -> dict:
     actor_type = entry["actorType"]
     system = entry["system"]
+    category = entry.get("pack") if isinstance(entry.get("pack"), str) else "actors-unknown"
 
     return {
         "_id": stable_id(entry["id"]),
@@ -203,7 +196,8 @@ def make_actor_doc(entry: dict) -> dict:
                 "maxTestedSystemVersion": entry["maxTestedSystemVersion"],
                 "dependencies": entry.get("dependencies", []),
                 "groups": {
-                    "category": resolve_pack(entry),
+                    "category": category,
+                    "pack": resolve_pack(entry),
                 },
             }
         },

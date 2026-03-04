@@ -40,11 +40,10 @@ export async function resolveTableBySegment(segment) {
     throw new Error(`Unknown roll-table segment: ${segment}`);
   }
 
-  const packName = `rolltables-${segment}`;
-  const packId = `lotm-system.${packName}`;
+  const packId = "lotm-system.rolltables";
   const pack = game.packs?.get(packId);
   if (!pack) {
-    throw new Error(`Missing roll-table pack for segment '${segment}' (${packId})`);
+    throw new Error(`Missing roll-table pack '${packId}'. Rebuild compendiums.`);
   }
 
   const docs = await resolveTableDocsFromPack(pack);
@@ -52,7 +51,12 @@ export async function resolveTableBySegment(segment) {
     throw new Error(`Roll-table pack '${packId}' is empty`);
   }
 
-  return { packId, docs };
+  const docsForSegment = docs.filter((doc) => doc.getFlag("lotm", "groups")?.segment === segment);
+  if (docsForSegment.length === 0) {
+    throw new Error(`Roll-table pack '${packId}' has no entries for segment '${segment}'`);
+  }
+
+  return { packId, docs: docsForSegment };
 }
 
 function pickTableDeterministically(docs, context = {}) {

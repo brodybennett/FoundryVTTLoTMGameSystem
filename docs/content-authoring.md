@@ -72,17 +72,13 @@ Required additional fields:
 
 `build_compendiums.py` routes source entries into final compendium packs:
 
-- `pathway` / `sequenceNode` -> `pathways-<pathway>`
+- `pathway` / `sequenceNode` -> `pathways`
 - `ability` -> `abilities`
 - `ritual` -> `rituals`
 - `artifact` -> `sealed-artifacts`
-- `weapon` -> `items-weapons`
-- `armor` -> `items-armor`
-- `consumable` -> `items-consumables`
-- `ingredient` -> `items-ingredients`
-- other item subtypes -> `items-gear`
-- roll tables -> `rolltables-<segment>`
-- actors -> source `pack` value (e.g., faction/monster/civilian)
+- all other item subtypes -> `items`
+- roll tables -> `rolltables` (segment retained in `flags.lotm.groups.segment`)
+- actors -> `actors` (source category retained in `flags.lotm.groups.category`)
 - journals -> source `pack` value (rules reference)
 
 ## Validation and Build

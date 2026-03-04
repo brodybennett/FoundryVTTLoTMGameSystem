@@ -16,27 +16,15 @@ PACK_PATH_RE = re.compile(r"^packs/[a-z0-9-]+\.db$")
 
 
 REQUIRED_EXACT_PACKS = {
+    "pathways",
     "abilities",
     "rituals",
     "sealed-artifacts",
-    "items-weapons",
-    "items-armor",
-    "items-gear",
-    "items-consumables",
-    "items-ingredients",
-    "rolltables-resources",
-    "rolltables-abilities",
-    "rolltables-rituals",
-    "rolltables-artifacts",
-    "rolltables-corruption",
-    "rolltables-encounters",
-    "actors-factions",
-    "actors-beyonder-monsters",
-    "actors-civilians",
+    "items",
+    "rolltables",
+    "actors",
     "rules-reference",
 }
-
-REQUIRED_PREFIX_PACKS = ["pathways-"]
 
 ALLOWED_PACK_TYPES = {"Item", "RollTable", "Actor", "JournalEntry"}
 
@@ -111,9 +99,6 @@ def verify_packs(manifest: dict) -> None:
 
     missing_exact = sorted(REQUIRED_EXACT_PACKS - set(names))
     ensure(not missing_exact, f"Missing required packs in manifest: {missing_exact}")
-
-    for prefix in REQUIRED_PREFIX_PACKS:
-        ensure(any(name.startswith(prefix) for name in names), f"Expected at least one pack with prefix '{prefix}'")
 
 
 def main() -> None:

@@ -28,10 +28,10 @@
   ],
   "packs": [
     {
-      "name": "pathways-seer",
-      "label": "Pathways: Seer",
+      "name": "pathways",
+      "label": "Pathways (All)",
       "type": "Item",
-      "path": "packs/pathways-seer.db"
+      "path": "packs/pathways.db"
     },
     {
       "name": "abilities",
@@ -52,88 +52,22 @@
       "path": "packs/sealed-artifacts.db"
     },
     {
-      "name": "items-weapons",
-      "label": "Items: Weapons",
+      "name": "items",
+      "label": "Items (All Types)",
       "type": "Item",
-      "path": "packs/items-weapons.db"
+      "path": "packs/items.db"
     },
     {
-      "name": "items-armor",
-      "label": "Items: Armor",
-      "type": "Item",
-      "path": "packs/items-armor.db"
-    },
-    {
-      "name": "items-gear",
-      "label": "Items: Gear and Features",
-      "type": "Item",
-      "path": "packs/items-gear.db"
-    },
-    {
-      "name": "items-consumables",
-      "label": "Items: Consumables",
-      "type": "Item",
-      "path": "packs/items-consumables.db"
-    },
-    {
-      "name": "items-ingredients",
-      "label": "Items: Ingredients",
-      "type": "Item",
-      "path": "packs/items-ingredients.db"
-    },
-    {
-      "name": "rolltables-resources",
-      "label": "Roll Tables: Resources",
+      "name": "rolltables",
+      "label": "Roll Tables (All Segments)",
       "type": "RollTable",
-      "path": "packs/rolltables-resources.db"
+      "path": "packs/rolltables.db"
     },
     {
-      "name": "rolltables-abilities",
-      "label": "Roll Tables: Abilities",
-      "type": "RollTable",
-      "path": "packs/rolltables-abilities.db"
-    },
-    {
-      "name": "rolltables-rituals",
-      "label": "Roll Tables: Rituals",
-      "type": "RollTable",
-      "path": "packs/rolltables-rituals.db"
-    },
-    {
-      "name": "rolltables-artifacts",
-      "label": "Roll Tables: Artifacts",
-      "type": "RollTable",
-      "path": "packs/rolltables-artifacts.db"
-    },
-    {
-      "name": "rolltables-corruption",
-      "label": "Roll Tables: Corruption",
-      "type": "RollTable",
-      "path": "packs/rolltables-corruption.db"
-    },
-    {
-      "name": "rolltables-encounters",
-      "label": "Roll Tables: Encounters",
-      "type": "RollTable",
-      "path": "packs/rolltables-encounters.db"
-    },
-    {
-      "name": "actors-factions",
-      "label": "Actors: Faction NPCs",
+      "name": "actors",
+      "label": "Actors (All Categories)",
       "type": "Actor",
-      "path": "packs/actors-factions.db"
-    },
-    {
-      "name": "actors-beyonder-monsters",
-      "label": "Actors: Beyonder Monsters",
-      "type": "Actor",
-      "path": "packs/actors-beyonder-monsters.db"
-    },
-    {
-      "name": "actors-civilians",
-      "label": "Actors: Civilians",
-      "type": "Actor",
-      "path": "packs/actors-civilians.db"
+      "path": "packs/actors.db"
     },
     {
       "name": "rules-reference",
