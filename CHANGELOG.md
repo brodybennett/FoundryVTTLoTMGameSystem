@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.4
+
+- Consolidated compendium packs for pathways, roll tables, items, and actors into unified top-level packs.
+- Updated pathway import and rolltable resolution logic to work against unified compendiums.
+- Updated manifest/build verification and authoring docs for the unified pack layout.
+- Published version/tag alignment fix so release automation can generate Foundry update assets.
+
 ## 1.2.2
 
 - Added strict roll-table source schema contract (`schemas/content.rolltable.schema.v1_2.json`).
