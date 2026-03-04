@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.2.13
+
+- Completed the sheet gold-standard program scope:
+  - UX baseline rubric/checklist
+  - character actor IA polish
+  - actor workflow hardening
+  - NPC divergence pass
+  - item framework polish
+  - subtype completion pass
+- Added explicit sheet QA workflow references in core docs.
+- Finalized full verification and release packaging for sheet-focused readiness.
+
 ## 1.2.12
 
 - Completed subtype-specific item authoring UX across all registered item types.

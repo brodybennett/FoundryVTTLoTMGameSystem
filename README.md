@@ -69,6 +69,20 @@ Runtime helper APIs:
 - `game.lotm.getPathwayOptions()`
 - `game.lotm.getSequenceOptions(pathwayId)`
 
+## Sheet QA Workflow
+
+For every sheet milestone/rework, use:
+
+- `docs/sheet-ux-rubric.md` for pass/fail UX quality gating.
+- `docs/sheet-review-checklist.md` for screenshot packet and manual test script.
+
+Recommended review flow:
+
+1. Update from latest tag build in Foundry.
+2. Run checklist steps in-world.
+3. Capture required screenshots + first console error (if any).
+4. Return notes on confusion/noise/friction by tab/section.
+
 ## Roll Table Automation
 
 Roll table source entries require strict `segment` and `formula` contracts. Runtime hooks map:
@@ -116,8 +130,8 @@ Typed scaffolding and metadata tooling:
 ```bash
 python scripts/content_tool.py new --type ability --id ability.example.new --name "New Ability"
 python scripts/content_tool.py new-pathway-bundle --pathway-id pathway.example --pathway-name Example --top-sequence 9 --bottom-sequence 7
-python scripts/content_tool.py bump-max-tested --version 1.2.12
-python scripts/content_tool.py bump-max-tested --version 1.2.12 --write
+python scripts/content_tool.py bump-max-tested --version 1.2.13
+python scripts/content_tool.py bump-max-tested --version 1.2.13 --write
 ```
 
 Item authoring sheet is subtype-aware and exposes:
@@ -180,3 +194,4 @@ git push origin vX.Y.Z
 - If `packs/*.db` are missing, compendium lists remain empty.
 - If compendium folders are missing or stale, run `game.lotm.organizeCompendiums()` as GM.
 - If content semver/dependencies are invalid, content validation fails.
+- If sheets feel broken after update, hard-refresh Foundry client (`Ctrl+F5`) and re-test double-click open flow.

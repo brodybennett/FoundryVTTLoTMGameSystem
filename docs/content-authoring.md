@@ -126,6 +126,15 @@ python scripts/build_compendiums.py
 
 `build_compendiums.py` generates deterministic `packs/*.db` using stable hashed `_id` values.
 
+## Sheet Authoring Review Loop
+
+When changing actor/item sheet UX:
+
+1. Use `docs/sheet-ux-rubric.md` as the acceptance gate.
+2. Use `docs/sheet-review-checklist.md` for screenshot and manual behavior checks.
+3. Require both automated verification pass and in-Foundry manual pass before release tagging.
+4. Keep changes schema-compatible unless an explicit schema migration is planned.
+
 ## Content Tool Scaffolding
 
 Generate typed skeleton entries:
@@ -139,8 +148,8 @@ python scripts/content_tool.py new-pathway-bundle --pathway-id pathway.example -
 Metadata-only compatibility bump flow (no gameplay/content semantics change):
 
 ```bash
-python scripts/content_tool.py bump-max-tested --version 1.2.12
-python scripts/content_tool.py bump-max-tested --version 1.2.12 --write
+python scripts/content_tool.py bump-max-tested --version 1.2.13
+python scripts/content_tool.py bump-max-tested --version 1.2.13 --write
 ```
 
 ## Authoring Rules
